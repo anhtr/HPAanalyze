@@ -1,0 +1,9 @@
+Package: HPAanalyze
+Type: Package
+Title: Retrieve and analyze data from the Human Protein Atlas
+Version: 0.1
+Date: 2018-05-02
+Author: Anh Nhat Tran
+Maintainer: Anh Nhat Tran <trannhatanh89@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: MIT + file LICENSE
