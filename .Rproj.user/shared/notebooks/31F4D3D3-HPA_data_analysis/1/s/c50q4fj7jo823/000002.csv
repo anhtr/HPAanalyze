@@ -1,0 +1,20 @@
+"0","```r
+# import data for normal tissues
+normal_tissue <- read_tsv('datafiles//normal_tissue.tsv')
+  # tidy column names
+  colnames(normal_tissue) <- c('ensembl', 'gene', 'tissue', 'cell_type', 'level', 'reliability')
+
+# import data for cancer tissues 
+pathology <- read_tsv('datafiles//pathology.tsv')
+  # tidy column names
+  colnames(pathology) <- c('ensembl', 'gene', 'cancer', 'high', 'medium', 'low', 'not_detected', 
+                           'prognostic_favorable', 'unprognostic_favorable',
+                           'prognostic_unfavorable', 'unprognostic_unfavorable')
+
+# import data for subcellular location of expression
+subcellular_location <- read_tsv('datafiles//subcellular_location.tsv')
+  # tidy column names
+  colnames(subcellular_location) <- c('ensembl', 'gene', 'reliability', 'enhanced', 'supported',
+                                      'approved', 'uncertain', 'single_cell_var_intensity',
+                                      'single_cell_var_spatial', 'cell_cycle_dependency', 'go_id')
+```"

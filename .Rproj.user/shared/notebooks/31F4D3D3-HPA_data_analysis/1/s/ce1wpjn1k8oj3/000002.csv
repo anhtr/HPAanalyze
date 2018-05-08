@@ -1,0 +1,7 @@
+"0","```r
+normal_tissue_subset <- normal_tissue %>%
+  filter(gene %in% target_gene) %>%
+  filter(tissue %in% target_tissue) %>%
+#  filter(cell_type %in% target_cell_type) %>%
+  print()
+```"

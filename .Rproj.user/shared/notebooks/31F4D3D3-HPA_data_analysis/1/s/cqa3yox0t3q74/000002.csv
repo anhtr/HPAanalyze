@@ -1,0 +1,8 @@
+"0","```r
+target_gene <- c('GCH1', 'PTS', 'SPR', 'DHFR')
+target_tissue <- c('cerebral cortex', 'cerebellum', 'hippocampus', 'hypothalamus')
+target_cell_type <- c('glial cells')
+#target_cancer <- c('glioma', 'prostate cancer')
+target_cancer <- cancer_list
+target_subcell_loc <- c('Cytosol')
+```"
