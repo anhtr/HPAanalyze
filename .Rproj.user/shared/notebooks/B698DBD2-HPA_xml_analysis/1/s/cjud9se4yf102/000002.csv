@@ -1,0 +1,213 @@
+"0","source(""http://bioconductor.org/biocLite.R"")
+biocLite(""biomaRt"")
+"
+"2","cannot open URL 'https://www.stats.ox.ac.uk/pub/RWin/src/contrib/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","cannot open URL 'https://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/3.4/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","trying URL 'https://bioconductor.org/packages/3.6/bioc/bin/windows/contrib/3.4/biomaRt_2.34.2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 862297 bytes (842 KB)
+"
+"2","downloaded 842 KB
+
+"
+"1","package ‘biomaRt’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1","The downloaded binary packages are in
+	C:\Users\Anh\AppData\Local\Temp\RtmpO0JPMF\downloaded_packages"
+"1","
+"
+"1","Update all/some/none? [a/s/n]: "
+"0","a"
+"1","
+"
+"1","  There are binary versions available but the source versions are later"
+"1",":
+"
+"1","          "
+"1"," binary"
+"1"," source"
+"1"," needs_compilation"
+"1","
+data.table"
+"1"," 1.11.0"
+"1"," 1.11.2"
+"1","              TRUE"
+"1","
+ggrepel   "
+"1","  0.7.0"
+"1","  0.8.0"
+"1","              TRUE"
+"1","
+stringi   "
+"1","  1.1.7"
+"1","  1.2.2"
+"1","              TRUE"
+"1","
+"
+"1","
+"
+"1","  Binaries will be installed
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/data.table_1.11.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1809750 bytes (1.7 MB)
+"
+"2","downloaded 1.7 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/DBI_1.0.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 829641 bytes (810 KB)
+"
+"2","downloaded 810 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/Formula_1.2-3.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 165228 bytes (161 KB)
+"
+"2","downloaded 161 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/ggrepel_0.7.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 986049 bytes (962 KB)
+"
+"2","downloaded 962 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/ggthemes_3.5.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 920213 bytes (898 KB)
+"
+"2","downloaded 898 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/httpuv_1.4.2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1123255 bytes (1.1 MB)
+"
+"2","downloaded 1.1 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/installr_0.20.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 266182 bytes (259 KB)
+"
+"2","downloaded 259 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/later_0.7.2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 606040 bytes (591 KB)
+"
+"2","downloaded 591 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/pbdZMQ_0.3-3.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1112275 bytes (1.1 MB)
+"
+"2","downloaded 1.1 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/psych_1.8.4.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 5740767 bytes (5.5 MB)
+"
+"2","downloaded 5.5 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/RcppArmadillo_0.8.500.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 2238918 bytes (2.1 MB)
+"
+"2","downloaded 2.1 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/rjson_0.2.18.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 565285 bytes (552 KB)
+"
+"2","downloaded 552 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/RSQLite_2.1.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 2089611 bytes (2.0 MB)
+"
+"2","downloaded 2.0 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/stringi_1.1.7.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 14295248 bytes (13.6 MB)
+"
+"2","downloaded 13.6 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/3.4/yaml_2.1.19.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 187589 bytes (183 KB)
+"
+"2","downloaded 183 KB
+
+"
+"1","package ‘data.table’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘DBI’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘Formula’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘ggrepel’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘ggthemes’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘httpuv’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘installr’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘later’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘pbdZMQ’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘psych’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘RcppArmadillo’ successfully unpacked and MD5 sums checked
+"
+"2","cannot remove prior installation of package �RcppArmadillo�"
+"1","package ‘rjson’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘RSQLite’ successfully unpacked and MD5 sums checked
+"
+"2","cannot remove prior installation of package �RSQLite�"
+"1","package ‘stringi’ successfully unpacked and MD5 sums checked
+"
+"2","cannot remove prior installation of package �stringi�"
+"1","package ‘yaml’ successfully unpacked and MD5 sums checked
+"
+"2","cannot remove prior installation of package �yaml�"
+"1","
+"
+"1","The downloaded binary packages are in
+	C:\Users\Anh\AppData\Local\Temp\RtmpO0JPMF\downloaded_packages"
+"1","
+"

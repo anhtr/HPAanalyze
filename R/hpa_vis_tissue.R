@@ -1,0 +1,38 @@
+hpa_vis_tissue <- function(data, 
+                           target_gene, 
+                           target_tissue, 
+                           target_cell_type = NULL,
+                           color = c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
+                           custom_theme = FALSE) {
+    
+    plot_data <- data$normal_tissue %>%
+        filter(gene %in% target_gene) %>%
+        filter(tissue %in% target_tissue)
+    
+    if(!is.null(target_cell_type)) {
+        plot_data <- filter(plot_data, cell_type %in% target_cell_type)
+    }
+    
+    plot_data <- mutate(plot_data,
+                        tissue_cell = paste0(tissue, ' / ', cell_type),
+                        level = factor(level, levels = c('High', 'Medium', 'Low', 'Not detected')))
+    
+    level_colors <- c('Not detected' = color[1],
+                      'Low' = color[2],
+                      'Medium' = color[3],
+                      'High' = color[4])
+    
+    plot <- ggplot(plot_data, aes(x = gene, y = tissue_cell)) +
+        geom_tile(aes(fill = level)) +
+        scale_x_discrete(limits = target_gene) +
+        scale_fill_manual(values = level_colors)
+    
+    if(!custom_theme) {
+        plot <- plot + 
+            ylab('Tissue / Cell') +
+            xlab('Genes') +
+            theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    }
+    
+    return(plot)       
+}

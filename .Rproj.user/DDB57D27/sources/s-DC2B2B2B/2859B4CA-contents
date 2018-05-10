@@ -94,6 +94,7 @@ normal_tissue_subset <- normal_tissue %>%
 
 
 # Visualize expression of target genes in tissues of interest
+
 ```{r}
 level_colors = c('Not detected' = '#ffffb2', 'Low' = '#fecc5c', 'Medium' = '#fd8d3c', 'High' = '#e31a1c')
 
@@ -123,6 +124,7 @@ pathology_subset <- pathology %>%
 
 
 # Visualize expression of target genes in cancers of interest
+
 
 ```{r message= FALSE}
 level_colors = c('Not detected' = '#ffffb2', 'Low' = '#fecc5c', 'Medium' = '#fd8d3c', 'High' = '#e31a1c')
@@ -162,6 +164,7 @@ subcellular_location_subset <- subcellular_location %>%
 ```
 
 # Visualize locations
+
 ```{r}
 subcellular_location_subset %>%
   as.tibble() %>%
