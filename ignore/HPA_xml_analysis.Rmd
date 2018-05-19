@@ -1,0 +1,195 @@
+---
+title: "Human Protein Atlas XML Analysis"
+author: "Anh Tran"
+date: "February 12, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load library
+
+```{r library, message=FALSE}
+# Install biomaRt from bioconductor to convert between gene name and ensembl id
+# source("http://bioconductor.org/biocLite.R")
+# biocLite("biomaRt")
+library('tidyverse') # tidy data workflow
+# library('biomaRt') # convert between gene name and ensembl id
+library('xml2')
+library('reshape2')
+```
+
+
+# Load XML schema
+
+```{r}
+download_xml(url = 'https://www.proteinatlas.org/download/proteinatlas.xsd',
+             file = 'hpa_xml_schema.xsd')
+raw_schema <- read_xml('hpa_xml_schema.xsd')
+```
+
+
+# Conversion between Ensembl ID and gene name (not done)
+
+```{r conversion, echo=FALSE}
+# Code for conversion between ensembl and gene name
+# from https://stackoverflow.com/questions/28543517/how-can-i-convert-ensembl-id-to-gene-symbol-in-r
+# not yet tested
+# mart <- useDataset("hsapiens_gene_ensembl", useMart("ensembl"))
+# genes <- df$genes
+# df<-df[,-4]
+# G_list <- getBM(filters= "ensembl_peptide_id", attributes= c("ensembl_peptide_id","hgnc_symbol"),values=genes,mart= mart)
+# merge(df,G_list,by.x="gene",by.y="ensembl_peptide_id")
+
+mart <- biomaRt::useDataset("hsapiens_gene_ensembl", biomaRt::useMart("ensembl"))
+
+G_list <- biomaRt::getBM(filters= "ensembl_gene_id", 
+                         attributes= c("ensembl_gene_id","hgnc_symbol"),
+                         values=target_ensembl_id,
+                         mart= mart)
+
+G_list <- biomaRt::getBM(filters= c("hgnc_symbol"), 
+                         attributes= c("ensembl_gene_id","hgnc_symbol"),
+                         values=c('GCH1', 'PTEN'),
+                         mart= mart)
+
+G_list$ensembl_gene_id
+```
+
+
+# Load XML
+```{r}
+target_ensembl_id <- c('ENSG00000134057')
+target_url <- paste0('https://www.proteinatlas.org/', target_ensembl_id, '.xml')
+target_file <- paste0(target_ensembl_id, '.xml')
+raw_xml <- read_xml(download_xml(url = target_url, file = target_file))
+```
+
+# Define a funtion to make table out of retrieved attr
+
+```{r}
+named_vector_list_to_tibble <- function(x) {
+  # define a blank tibble
+  tibble_x = tibble(index = NA, attr = NA, value = NA)
+  # loop though the list, turn vectors into tibble and bind them together
+  for (i in 1:length(x)) {
+    tibble_i <- tibble(index = i, attr = names(x[[i]]), value = x[[i]])
+    tibble_x <- bind_rows(tibble_x, tibble_i)
+  }
+  # process tibble_x into final product
+  tibble_x <- tibble_x %>%
+    # remove the NA row resulted from defining tibble_x
+    filter(!is.na(index)) %>%
+    # spead tibble_x into tidy format
+    spread(attr, value) %>%
+    # remove the index column
+    dplyr::select(-index)
+  return(tibble_x)
+}
+```
+
+
+# Protein Classes
+```{r}
+# # Parse proteinClasses the long way (?)
+# protein_classes <- raw_xml %>%
+#   # xpath to get into proteinClasses
+#   xml_find_all('//proteinClasses') %>%
+#   xml_find_all('//proteinClass') %>%
+#   # get attributes, which contains the wanted data, as a list
+#   xml_attrs() %>%
+#   # turn the list into a data frame
+#   as.data.frame(col.names = as.character(1:length(.)),
+#                 row.names = c('source', 'id', 'parent_id', 'name'),
+#                 stringsAsFactors = FALSE) %>%
+#   # replace blank cells of the table with NA
+#   apply(2, function(x) gsub("^$|^ $", NA, x)) %>%
+#   # convert data frame into tibble
+#   as.tibble(rownames = 'attr') %>%
+#   # tranpose tibble
+#   gather('key', 'value', -attr) %>%
+#   spread('attr', 'value') %>%
+#   dplyr::select(-key) %>%
+#   print()
+
+# Parse proteinClasses
+protein_classes <- raw_xml %>%
+  # xpath to get into proteinClasses
+  xml_find_all('//proteinClasses') %>%
+  xml_find_all('//proteinClass') %>%
+  # get attributes, which contains the wanted data, as a list
+  xml_attrs() %>%
+  # turn attrs into a tibble
+  named_vector_list_to_tibble() %>%
+  # replace blank cells with NA and convert the result back to tibble
+  apply(2, function(x) gsub("^$|^ $", NA, x)) %>% as.tibble() %>%
+  print()
+
+```
+
+
+# Tissue Expression
+
+```{r}
+# Parse tissueExpression
+tissue_expression <- raw_xml %>%
+  # xpath to get to tissueExpression that is not under any antibodies
+  xml_find_all('entry/tissueExpression')
+
+tissue_expression_summary <- tissue_expression %>%
+  xml_find_first('summary') %>%
+  xml_text() %>%
+  print()
+
+# Create a table of image links and info
+tissue_expression_img <- tissue_expression %>%
+  xml_find_all('image') %>%
+  as_list() %>%
+  melt() %>%
+  spread(key = 'L2', value = 'value') %>%
+  select(tissue, imageUrl) %>%
+  mutate(tissue = as.character(tissue), imageUrl = as.character(imageUrl)) %>%
+  print()
+
+# download image file
+# create the list of url
+image_url_list <- tissue_expression_img$imageUrl
+# create the list of file name to save
+image_file_list <- paste0(target_ensembl_id, '_', tissue_expression_img$tissue, '.jpg')
+# loop through the 
+Map(function(u,d) download.file(u,d, mode = 'wb'), image_url_list, image_file_list)
+```
+
+# Antibody
+
+```{r}
+# find and save all antibody nodes 
+antibody <- raw_xml %>%
+  xml_find_all('entry/antibody')
+
+antibody_info <- antibody %>%
+  # get info about antibodies, should be 'id', 'releaseDate', 'releaseVersion', 'RRID'
+  xml_attrs() %>%
+  # turn the list of attrs into tibble
+  named_vector_list_to_tibble() %>%
+  print()
+```
+
+```{r}
+hpa_xml_antibody <- function(imported_xml) {
+    # find and save all antibody nodes 
+    antibody <- imported_xml %>%
+        xml_find_all('entry/antibody')
+    
+    antibody_info <- antibody %>%
+        # get info about antibodies, should be 'id', 'releaseDate', 'releaseVersion', 'RRID'
+        xml_attrs() %>%
+        # turn the list of attrs into tibble
+        named_vector_list_to_tibble()
+    
+    return(antibody_info)
+}
+```
+
