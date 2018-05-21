@@ -20,6 +20,7 @@ Download and import individual xml file for a specified protein. This
 function calls \code{xml2::read_xml()} under the hood.
 }
 \examples{
+  print('Please run the example below in your console.')
   \dontrun{
   CCNB1_xml <- hpa_get_xml('ENSG00000134057')
   }

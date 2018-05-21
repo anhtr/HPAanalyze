@@ -32,7 +32,11 @@ recommended to only download the datasets you need, as some of them may be
 very big.
 }
 \examples{
+  data("hpa_downloaded_histology_v18")
+  summary(hpa_downloaded_histology_v18)
+  
   \dontrun{
+  
   ## download rna expression data
   rna_data <- hpa_download('rna')
   

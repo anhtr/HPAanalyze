@@ -16,6 +16,7 @@ This function return a tibble of 4 columns.
 Extract protein class information from imported xml document resulted from \code{hpa_get_xml()}.
 }
 \examples{
+  print('Please run the example below in your console.')
   \dontrun{
   CCNB1_xml <- hpa_get_xml('ENSG00000134057')
   hpa_xml_protein_classes(CCNB1_xml)

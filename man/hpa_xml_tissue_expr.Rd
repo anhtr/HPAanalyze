@@ -21,6 +21,7 @@ Extract tissue expression information and url to download images from
 imported xml document resulted from \code{hpa_get_xml()}.
 }
 \examples{
+  print('Please run the example below in your console.')
   \dontrun{
   CCNB1_xml <- hpa_get_xml('ENSG00000134057')
   hpa_xml_tissue_expr(CCNB1_xml)

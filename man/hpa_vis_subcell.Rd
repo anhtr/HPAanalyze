@@ -27,17 +27,17 @@ This function will return a ggplot2 plot object, which can be further
 Visualize the the confirmed subcellular locations of genes of interest.
 }
 \examples{
-  \dontrun{
-  downloaded_data <- hpa_download(download_list = 'Subcellular location')
+  data("hpa_downloaded_histology_v18")
   gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
   
   ## A typical function call
-  hpa_vis_subcell(data = downloaded_data,
+  hpa_vis_subcell(data = hpa_downloaded_histology_v18,
                   target_gene = gene_list)
   
+  \dontrun{
   ## With more customization
   color_list <- c('white', 'red')
-  plot <- hpa_vis_subcell(data = downloaded_data,
+  plot <- hpa_vis_subcell(data = hpa_downloaded_histology_v18,
                           target_gene = gene_list,
                           color = color_list,
                           custom_theme = TRUE)

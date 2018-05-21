@@ -1,0 +1,25 @@
+"0","gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
+tissue_list <- c('breast', 'cerebellum', 'skin 1')
+cancer_list <- c('breast cancer', 'glioma', 'melanoma')
+cell_line_list <- c('A-431', 'A549', 'AF22', 'AN3-CA')
+subset_data <- hpa_subset(data = downloaded_data,
+                          target_gene = gene_list,
+                          target_tissue = tissue_list,
+                          target_cancer = cancer_list,
+                          target_cell_line = cell_line_list)
+sapply(subset_data, nrow)
+"
+"1","       normal_tissue "
+"1","           pathology "
+"1","subcellular_location "
+"1","          rna_tissue "
+"1","       rna_cell_line "
+"1","
+"
+"1","                  70 "
+"1","                  21 "
+"1","                   7 "
+"1","                   7 "
+"1","                  28 "
+"1","
+"

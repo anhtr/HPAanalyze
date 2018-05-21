@@ -30,18 +30,18 @@ This function will return a ggplot2 plot object, which can be further
 Visualize the expression of genes of interest in each cancer.
 }
 \examples{
-  \dontrun{
-  downloaded_data <- hpa_download(download_list = 'Pathology')
-  gene_list <- c('TP53', 'EGFR')
+  data("hpa_downloaded_histology_v18")
+  gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
   cancer_list <- c('breast cancer', 'glioma', 'melanoma')
 
   ## A typical function call
-  hpa_vis_pathology(data = downloaded_data,
+  hpa_vis_pathology(data = hpa_downloaded_histology_v18,
                  target_gene = gene_list)
 
+  \dontrun{
   ## With more customization
   color_list <- c('yellow', 'red', 'green', 'blue')
-  plot <- hpa_vis_pathology(data = downloaded_data,
+  plot <- hpa_vis_pathology(data = hpa_downloaded_histology_v18,
                             target_gene = gene_list,
                             target_cancer = cancer_list,
                             color = color_list,

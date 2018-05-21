@@ -32,19 +32,19 @@ Visualize the expression of protein of interest in each target tissue by cell
 types.
 }
 \examples{
-  \dontrun{
-  downloaded_data <- hpa_download(download_list = 'Normal tissue')
-  gene_list <- c('TP53', 'EGFR')
+  data("hpa_downloaded_histology_v18")
+  gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
   tissue_list <- c('breast', 'cerebellum', 'skin 1')
 
   ## A typical function call   
-  hpa_vis_tissue(data = downloaded_data,
+  hpa_vis_tissue(data = hpa_downloaded_histology_v18,
                  target_gene = gene_list,
                  target_tissue = tissue_list)
-  
+                 
+  \dontrun{               
   ## With more customization
   color_list <- c('white', 'red', 'green', 'blue')
-  plot <- hpa_vis_tissue(data = downloaded_data,
+  plot <- hpa_vis_tissue(data = hpa_downloaded_histology_v18,
                          target_gene = gene_list,
                          target_tissue = tissue_list,
                          color = color_list,
