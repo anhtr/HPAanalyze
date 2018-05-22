@@ -14,6 +14,6 @@
 hpa_downloaded_histology_v18
 }
 \description{
-Dataset downloaded with \code{hpa_download('histology')}
+Dataset downloaded with \code{hpaDownload('histology')}
 }
 \keyword{datasets}

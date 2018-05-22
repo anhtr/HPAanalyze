@@ -25,14 +25,14 @@
 #'   tissue_list <- c('breast', 'cerebellum', 'skin 1')
 #'
 #'   ## A typical function call   
-#'   hpa_vis_tissue(data = hpa_downloaded_histology_v18,
+#'   hpaVisTissue(data = hpa_downloaded_histology_v18,
 #'                  target_gene = gene_list,
 #'                  target_tissue = tissue_list)
 #'                  
 #'   \dontrun{               
 #'   ## With more customization
 #'   color_list <- c('white', 'red', 'green', 'blue')
-#'   plot <- hpa_vis_tissue(data = hpa_downloaded_histology_v18,
+#'   plot <- hpaVisTissue(data = hpa_downloaded_histology_v18,
 #'                          target_gene = gene_list,
 #'                          target_tissue = tissue_list,
 #'                          color = color_list,
@@ -44,12 +44,12 @@
 #' @import ggplot2
 #' @export
 
-hpa_vis_tissue <- function(data, 
-                           target_gene, 
-                           target_tissue, 
-                           target_cell_type = NULL,
-                           color = c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
-                           custom_theme = FALSE) {
+hpaVisTissue <- function(data, 
+                         target_gene, 
+                         target_tissue, 
+                         target_cell_type = NULL,
+                         color = c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
+                         custom_theme = FALSE) {
     
     ## Just to pass R CMD check
     gene <- tissue <- cell_type <- level <- tissue_cell <- NULL
@@ -114,13 +114,13 @@ hpa_vis_tissue <- function(data,
 #'   cancer_list <- c('breast cancer', 'glioma', 'melanoma')
 #'
 #'   ## A typical function call
-#'   hpa_vis_pathology(data = hpa_downloaded_histology_v18,
+#'   hpaVisPatho(data = hpa_downloaded_histology_v18,
 #'                  target_gene = gene_list)
 #'
 #'   \dontrun{
 #'   ## With more customization
 #'   color_list <- c('yellow', 'red', 'green', 'blue')
-#'   plot <- hpa_vis_pathology(data = hpa_downloaded_histology_v18,
+#'   plot <- hpaVisPatho(data = hpa_downloaded_histology_v18,
 #'                             target_gene = gene_list,
 #'                             target_cancer = cancer_list,
 #'                             color = color_list,
@@ -133,11 +133,11 @@ hpa_vis_tissue <- function(data,
 #' @import ggplot2
 #' @export
 
-hpa_vis_pathology <- function(data, 
-                              target_gene, 
-                              target_cancer = NULL, 
-                              color = c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
-                              custom_theme = FALSE) {
+hpaVisPatho <- function(data, 
+                        target_gene, 
+                        target_cancer = NULL, 
+                        color = c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
+                        custom_theme = FALSE) {
     
     ## Just to pass R CMD check
     gene <- cancer <- high <- medium <- low <- not_detected <- patient_count <- level <- NULL
@@ -202,13 +202,13 @@ hpa_vis_pathology <- function(data,
 #'   gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 #'   
 #'   ## A typical function call
-#'   hpa_vis_subcell(data = hpa_downloaded_histology_v18,
+#'   hpaVisSubcell(data = hpa_downloaded_histology_v18,
 #'                   target_gene = gene_list)
 #'   
 #'   \dontrun{
 #'   ## With more customization
 #'   color_list <- c('white', 'red')
-#'   plot <- hpa_vis_subcell(data = hpa_downloaded_histology_v18,
+#'   plot <- hpaVisSubcell(data = hpa_downloaded_histology_v18,
 #'                           target_gene = gene_list,
 #'                           color = color_list,
 #'                           custom_theme = TRUE)
@@ -220,10 +220,10 @@ hpa_vis_pathology <- function(data,
 #' @import ggplot2
 #' @export
 
-hpa_vis_subcell <- function(data, 
-                            target_gene, 
-                            color = c('white', 'black'),
-                            custom_theme = FALSE) {
+hpaVisSubcell <- function(data, 
+                          target_gene, 
+                          color = c('white', 'black'),
+                          custom_theme = FALSE) {
     
     ## Just to pass R CMD check
     gene <- go_id <- NULL

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1526954407854.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3930689905",
+    "id" : "264A7961",
+    "lastKnownWriteTime" : 1526954756,
+    "last_content_update" : 1526954756640,
+    "path" : "C:/OneDrive/Informatics/HPAanalyze/vignettes/HPAanalyze_basics.Rmd",
+    "project_path" : "vignettes/HPAanalyze_basics.Rmd",
+    "properties" : {
+        "cursorPosition" : "163,16",
+        "last_setup_crc32" : "FD3E5243517415eb",
+        "scrollLine" : "139"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

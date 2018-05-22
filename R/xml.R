@@ -17,13 +17,13 @@
 #' @examples
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
-#'   CCNB1_xml <- hpa_get_xml('ENSG00000134057')
+#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
 #'   }
 #'
 #' @import xml2
 #' @export
 
-hpa_get_xml <- function(target_ensembl_id) {
+hpaXmlGet <- function(target_ensembl_id) {
     temp <- tempfile()
     target_url <- paste0('https://www.proteinatlas.org/', target_ensembl_id, '.xml')
     raw_xml <- read_xml(download_xml(url = target_url, file = temp))
@@ -38,23 +38,23 @@ hpa_get_xml <- function(target_ensembl_id) {
 
 #' Extract protein classes 
 #' 
-#' Extract protein class information from imported xml document resulted from \code{hpa_get_xml()}.
+#' Extract protein class information from imported xml document resulted from \code{hpaXmlGet()}.
 #' 
-#' @param imported_xml Input an xml document object resulted from a \code{hpa_get_xml()} call.
+#' @param imported_xml Input an xml document object resulted from a \code{hpaXmlGet()} call.
 #' 
 #' @return This function return a tibble of 4 columns.
 #' 
 #' @examples
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
-#'   CCNB1_xml <- hpa_get_xml('ENSG00000134057')
-#'   hpa_xml_protein_classes(CCNB1_xml)
+#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
+#'   hpaXmlProtClass(CCNB1_xml)
 #'   }
 #' 
 #' @import xml2
 #' @export
 
-hpa_xml_protein_classes <- function(imported_xml) {
+hpaXmlProtClass <- function(imported_xml) {
     protein_classes <- imported_xml %>%
         # xpath to get into proteinClasses
         xml_find_all('//proteinClasses') %>%
@@ -76,10 +76,10 @@ hpa_xml_protein_classes <- function(imported_xml) {
 #' Extract tissue expression and download images
 #' 
 #' Extract tissue expression information and url to download images from
-#' imported xml document resulted from \code{hpa_get_xml()}.
+#' imported xml document resulted from \code{hpaXmlGet()}.
 #'
 #' @param imported_xml Input an xml document object resulted from a
-#'   \code{hpa_get_xml()} call.
+#'   \code{hpaXmlGet()} call.
 #' @param download_img Logical argument. The function will download all image
 #'   from the extracted urls into the working folder.
 #' 
@@ -88,15 +88,15 @@ hpa_xml_protein_classes <- function(imported_xml) {
 #' @examples 
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
-#'   CCNB1_xml <- hpa_get_xml('ENSG00000134057')
-#'   hpa_xml_tissue_expr(CCNB1_xml)
+#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
+#'   hpaXmlTissueExpr(CCNB1_xml)
 #'   }
 #'   
 #' @import xml2
 #' @import dplyr
 #' @export
 
-hpa_xml_tissue_expr <- function(imported_xml, download_img = FALSE) {
+hpaXmlTissueExpr <- function(imported_xml, download_img = FALSE) {
     
     ## Just to pass R CMD check
     tissue <- imageUrl <- tissue_expression_img <- NULL
