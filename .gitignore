@@ -18,6 +18,7 @@ inst/doc
 
 # RStudio files
 .Rproj.user/
+.Rproj.user/**
 *.Rproj
 
 # produced vignettes
