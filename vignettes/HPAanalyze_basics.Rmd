@@ -102,7 +102,7 @@ sapply(subset_data, nrow)
 
 ### Export data with `hpaExport()`
 
-```{r }
+```{r eval=FALSE}
 hpaExport(subset_data, fileName = 'subset.xlsx', fileType = 'xlsx')
 ```
 

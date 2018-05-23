@@ -1,6 +1,0 @@
-"0","```r
-pathology_subset <- pathology %>%
-  filter(gene %in% target_gene) %>%
-  filter(cancer %in% target_cancer) %>%
-  print()
-```"

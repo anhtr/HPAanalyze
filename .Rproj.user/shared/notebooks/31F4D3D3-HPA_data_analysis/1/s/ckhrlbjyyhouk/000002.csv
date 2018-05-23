@@ -1,9 +1,0 @@
-"0","```r
-subcellular_location_subset <- subcellular_location %>%
-  filter(gene %in% target_gene) %>%
-  mutate(location = strsplit(go_id, ';')) %>%
-  unnest(location) %>%
-  select(location, gene) %>%
-  table() %>%
-  print()
-```"
