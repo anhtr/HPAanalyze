@@ -36,7 +36,7 @@ HPA analyze provide tools to retrive and analyze these data via a set of functio
 ### Download and import data with `hpaDownload()`
 
 ```{r downloaded_data, warning=FALSE, message=FALSE}
-downloaded_data <- hpaDownload(download_list = 'all')
+downloaded_data <- hpaDownload(downloadList = 'all')
 summary(downloaded_data)
 ```
 
@@ -93,17 +93,17 @@ cancer_list <- c('breast cancer', 'glioma', 'melanoma')
 cell_line_list <- c('A-431', 'A549', 'AF22', 'AN3-CA')
 
 subset_data <- hpaSubset(data = downloaded_data,
-                         target_gene = gene_list,
-                         target_tissue = tissue_list,
-                         target_cancer = cancer_list,
-                         target_cell_line = cell_line_list)
+                         targetGene = gene_list,
+                         targetTissue = tissue_list,
+                         targetCancer = cancer_list,
+                         targetCellLine = cell_line_list)
 sapply(subset_data, nrow)
 ```
 
 ### Export data with `hpaExport()`
 
-```{r}
-hpaExport(subset_data, file_name = 'subset.xlsx', file_type = 'xlsx')
+```{r }
+hpaExport(subset_data, fileName = 'subset.xlsx', fileType = 'xlsx')
 ```
 
 ## Visualize downloaded data
@@ -115,8 +115,8 @@ gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 tissue_list <- c('breast', 'cerebellum', 'skin 1')
 
 hpaVisTissue(downloaded_data,
-             target_gene = gene_list,
-             target_tissue = tissue_list)
+             targetGene = gene_list,
+             targetTissue = tissue_list)
 ```
 
 
@@ -128,8 +128,8 @@ cancer_list <- c('breast cancer', 'glioma', 'lymphoma', 'prostate cancer')
 color_gray <- c('slategray1', 'slategray2', 'slategray3', 'slategray4')
 
 hpaVisPatho(downloaded_data,
-            target_gene = gene_list,
-            target_cancer = cancer_list,
+            targetGene = gene_list,
+            targetCancer = cancer_list,
             color = color_gray)
 ```
 
@@ -140,7 +140,7 @@ hpaVisPatho(downloaded_data,
 gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 
 hpaVisSubcell(downloaded_data,
-              target_gene = gene_list)
+              targetGene = gene_list)
 ```
 
 
