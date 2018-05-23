@@ -4,16 +4,18 @@
 \alias{hpaXmlProtClass}
 \title{Extract protein classes}
 \usage{
-hpaXmlProtClass(imported_xml)
+hpaXmlProtClass(importedXml)
 }
 \arguments{
-\item{imported_xml}{Input an xml document object resulted from a \code{hpaXmlGet()} call.}
+\item{importedXml}{Input an xml document object resulted from a
+\code{hpaXmlGet()} call.}
 }
 \value{
 This function return a tibble of 4 columns.
 }
 \description{
-Extract protein class information from imported xml document resulted from \code{hpaXmlGet()}.
+Extract protein class information from imported xml document resulted from
+\code{hpaXmlGet()}.
 }
 \examples{
   print('Please run the example below in your console.')

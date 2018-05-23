@@ -4,11 +4,15 @@
 \alias{hpaXmlGet}
 \title{Download and import xml file}
 \usage{
-hpaXmlGet(target_ensembl_id)
+hpaXmlGet(targetEnsemblId, version = NULL)
 }
 \arguments{
-\item{target_ensembl_id}{A string of one ensembl ID, start with ESNG. For
+\item{targetEnsemblId}{A string of one ensembl ID, start with ESNG. For
 example \code{'ENSG00000134057'}}
+
+\item{version}{A string, indicate which version of data to be downloaded. The
+latest version is downloaded by default. (This option is currently under
+development.)}
 }
 \value{
 This function return an object of class \code{"xml_document"

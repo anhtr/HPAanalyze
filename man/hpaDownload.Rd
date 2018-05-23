@@ -4,10 +4,10 @@
 \alias{hpaDownload}
 \title{Download datasets}
 \usage{
-hpaDownload(download_list = "histology")
+hpaDownload(downloadList = "histology")
 }
 \arguments{
-\item{download_list}{A vector or string indicate which datasets to download. Possible value:
+\item{downloadList}{A vector or string indicate which datasets to download. Possible value:
 \itemize{
   \item \code{'Normal tissue'}
   \item \code{'Pathology'}

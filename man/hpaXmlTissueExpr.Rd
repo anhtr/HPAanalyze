@@ -4,17 +4,18 @@
 \alias{hpaXmlTissueExpr}
 \title{Extract tissue expression and download images}
 \usage{
-hpaXmlTissueExpr(imported_xml, download_img = FALSE)
+hpaXmlTissueExpr(importedXml, downloadImg = FALSE)
 }
 \arguments{
-\item{imported_xml}{Input an xml document object resulted from a
+\item{importedXml}{Input an xml document object resulted from a
 \code{hpaXmlGet()} call.}
 
-\item{download_img}{Logical argument. The function will download all image
+\item{downloadImg}{Logical argument. The function will download all image
 from the extracted urls into the working folder.}
 }
 \value{
-This function return a list consists of a summary string and a tibble of 2 columns.
+This function return a list consists of a summary string and a tibble
+  of 2 columns.
 }
 \description{
 Extract tissue expression information and url to download images from
