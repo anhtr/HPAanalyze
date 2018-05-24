@@ -83,9 +83,9 @@ hpaXmlProtClass <- function(importedXml) {
     return(protein_classes)
 }
 
-###############################
-## Extract tissue expression ##
-###############################
+#######################################
+## Extract tissue expression summary ##
+#######################################
 
 #' Extract tissue expression and download images
 #' 
@@ -104,14 +104,14 @@ hpaXmlProtClass <- function(importedXml) {
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
 #'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlTissueExpr(CCNB1_xml)
+#'   hpaXmlTissueExprSum(CCNB1_xml)
 #'   }
 #'   
 #' @import xml2
 #' @import dplyr
 #' @export
 
-hpaXmlTissueExpr <- function(importedXml, downloadImg = FALSE) {
+hpaXmlTissueExprSum <- function(importedXml, downloadImg = FALSE) {
     
     ## Just to pass R CMD check
     tissue <- imageUrl <- tissue_expression_img <- NULL
@@ -144,3 +144,46 @@ hpaXmlTissueExpr <- function(importedXml, downloadImg = FALSE) {
     
     return(output)
 }
+
+
+##################################
+## Extract antibody information ##
+##################################
+
+#' Extract antibody information
+#' 
+#' Extract information about the antibodies used for a specific protein.
+#' 
+#' @param importedXml Input an xml document object resulted from a
+#'   \code{hpaXmlGet()} call.
+#'   
+#' @return This function returns a tibble of 4 columns.
+#' 
+#' @examples
+#'   print('Please run the example below in your console.')
+#'   \dontrun{
+#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
+#'   hpaXmlAntibody(CCNB1_xml)
+#'   }
+#'   
+#' @import xml2
+#' @import dplyr
+#' @export
+
+hpaXmlAntibody <- function(importedXml) {
+    output <- importedXml %>%
+        xml_find_all('entry/antibody') %>%
+        xml_attrs() %>%
+        named_vector_list_to_tibble()
+    
+    return(output)
+}
+
+
+
+#######################################
+## Extract tissue expression details ##
+#######################################
+
+
+
