@@ -11,7 +11,7 @@ named_vector_list_to_tibble <- function(x) {
     # define a blank tibble
     tibble_x = tibble(index = NA, attr = NA, value = NA)
     # loop though the list, turn vectors into tibble and bind them together
-    for (i in 1:length(x)) {
+    for (i in seq_along(x)) {
         tibble_i <- tibble(index = i, attr = names(x[[i]]), value = x[[i]])
         tibble_x <- bind_rows(tibble_x, tibble_i)
     }
