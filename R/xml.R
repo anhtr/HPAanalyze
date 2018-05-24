@@ -10,10 +10,15 @@
 #' @param targetEnsemblId A string of one ensembl ID, start with ESNG. For
 #'   example \code{'ENSG00000134057'}
 #'
-#' @param version A string, indicate which version of data to be downloaded. The
-#'   latest version is downloaded by default. (This option is currently under
-#'   development.)
-#'
+#' @param version A string indicate which version to be downloaded. Possible
+#'   value:
+#'   \itemize{
+#'     \item \code{'latest'}: Download latest version. 
+#'     \item \code{'vn'} with 'n' is a integer: Download a specific version of
+#'     the dataset. For example: 'v18' download version 18. Currently support
+#'     version 13 and above.
+#'   }
+#'   
 #' @return This function return an object of class \code{"xml_document"
 #'   "xml_node"}. See documentations for package \code{xml2} for more
 #'   information.
@@ -27,10 +32,13 @@
 #' @import xml2
 #' @export
 
-hpaXmlGet <- function(targetEnsemblId, version = NULL) {
+hpaXmlGet <- function(targetEnsemblId, version = 'latest') {
     temp <- tempfile()
-    target_url <- paste0('https://www.proteinatlas.org/', targetEnsemblId, '.xml')
-    raw_xml <- read_xml(download_xml(url = target_url, file = temp))
+    
+    raw_xml <- read_xml(download_xml(url = version_to_xml_url(targetEnsemblId, 
+                                                              version), 
+                                     file = temp))
+    
     unlink(temp)
     
     return(raw_xml)

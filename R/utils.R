@@ -50,3 +50,11 @@ version_to_download_urls <- function(x) {
     
     return(urls)
 }
+
+version_to_xml_url <- function(id, vers) {
+    if (vers == 'latest') {
+        vers = 'www'
+    }
+    
+    return(paste0('https://', vers, '.proteinatlas.org/', id, '.xml'))
+}
