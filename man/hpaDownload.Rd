@@ -4,10 +4,11 @@
 \alias{hpaDownload}
 \title{Download datasets}
 \usage{
-hpaDownload(downloadList = "histology")
+hpaDownload(downloadList = "histology", version = "latest")
 }
 \arguments{
-\item{downloadList}{A vector or string indicate which datasets to download. Possible value:
+\item{downloadList}{A vector or string indicate which datasets to download.
+Possible value:
 \itemize{
   \item \code{'Normal tissue'}
   \item \code{'Pathology'}
@@ -17,14 +18,31 @@ hpaDownload(downloadList = "histology")
   \item \code{'RNA transcript tissue'}
   \item \code{'RNA transcript cell line'}
   \item \code{'all'}: download everything
-  \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology', 'Subcellular location')}
+  \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology',
+  'Subcellular location')}
   \item \code{'rna'}: same as \code{c('RNA tissue', 'RNA cell line')}
-  \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA transcript cell line')}
+  \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA
+  transcript cell line')}
 }
 See \url{https://www.proteinatlas.org/about/download} for more information.}
+
+\item{version}{A string indicate which version to be downloaded. Possible
+value:
+\itemize{
+  \item \code{'hpar'}: Load data from the 'hpar' package. Does not contain
+  isoform data.
+  \item \code{'latest'}: Download latest version
+  \item \code{'example'}: Load the example dataset from 'HPA
+  analyze' ('hpa_downloaded_histology_v18'). Does not contain rna or
+  isoform data.
+  \item \code{'vn'} with 'n' is a integer: Download a specific version of
+  the dataset. For example: 'v18' download version 18. Currently support
+  version 17 and above.
+}}
 }
 \value{
-This function will return a list of tibbles corresponding to requested datasets.
+This function will return a list of tibbles corresponding to
+  requested datasets.
 }
 \description{
 Download the latest version of HPA datasets and import them in R. It is

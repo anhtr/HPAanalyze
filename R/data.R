@@ -1,6 +1,6 @@
 #' HPA histology dataset
 #' 
-#' Dataset downloaded with \code{hpaDownload('histology')}
+#' Dataset downloaded with \code{hpaDownload('histology', version = 'v18')}
 #' 
 #' @format A list of 3 tibbles
 #' \describe{
