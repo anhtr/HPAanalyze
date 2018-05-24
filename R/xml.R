@@ -185,5 +185,83 @@ hpaXmlAntibody <- function(importedXml) {
 ## Extract tissue expression details ##
 #######################################
 
+#' Extract tissue expression details
+#' 
+#' Extract tissue expression information for each sample and url to download
+#' images from imported xml document resulted from \code{hpaXmlGet()}.
+#' 
+#' @param importedXml Input an xml document object resulted from a
+#'   \code{hpaXmlGet()} call.
+#'   
+#' @return This function returns a list of tibbles, each for an antibody.
+#' 
+#' @examples
+#'   print('Please run the example below in your console.')
+#'   \dontrun{
+#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
+#'   hpaXmlTissueExpr(CCNB1_xml)
+#'   }
+#' 
+#' @import xml2
+#' @import dplyr
+#' @export
 
+hpaXmlTissueExpr <- function(importedXml) {
+    antibody_nodes <- importedXml %>% xml_find_all('entry/antibody')
+    
+    lapply(antibody_nodes, function(antibody_node){
+        tissueExpression_nodes <- xml_find_all(antibody_node, 'tissueExpression')
+        lapply(tissueExpression_nodes, function(tissueExpression_node){
+            data_nodes <- xml_find_all(tissueExpression_node, 'data')
+            lapply(data_nodes, function(data_node) {
+                patient_nodes_to_tibble(xml_find_all(data_node, 'patient'))
+            })
+        }) %>% unlist(recursive = FALSE) %>% bind_rows() -> x
+        
+        if (!(0 %in% dim(x))) {
+            select(x, patientId, age, sex, staining, intensity, quantity,
+                   location, imageUrl, starts_with('snomedCode'),
+                   starts_with('tissueDescription'))
+        } else {x}
+        
+    }) -> result
 
+    return(result)
+}
+
+## Define patient_nodes_to_tibble() for simpler parsing =======================
+
+patient_nodes_to_tibble <- function(patient_nodes) {
+    lapply(patient_nodes,
+           function(patient_node) {
+               pair <- c('sex' = 'sex',
+                         'age' = 'age',
+                         'patientId' = 'patientId',
+                         'staining' = 'level[@type=\'staining\']',
+                         'intensity' = 'level[@type=\'intensity\']',
+                         'quantity' = 'quantity',
+                         'location' = 'location')
+               
+               vapply(pair,
+                      FUN.VALUE = character(1),
+                      function(x) {
+                          temp <- c()
+                          xml_find_first(patient_node, x) %>%
+                              xml_text() -> temp[names(x)]
+                      }) -> info
+               
+               sample_node <- xml_find_first(patient_node, 'sample')
+               samp <- c()
+               xml_find_all(sample_node, 'snomedParameters/snomed') %>%
+                   xml_attrs() %>% named_vector_list_to_tibble() %>%
+                   unlist() -> samp
+               xml_find_all(sample_node, 'assayImage/image/imageUrl') %>%
+                   xml_text() -> samp['imageUrl']
+               result <- c(info, samp)
+               
+               return(result)
+               
+           }) %>% named_vector_list_to_tibble() -> result
+    
+    return(result)
+}
