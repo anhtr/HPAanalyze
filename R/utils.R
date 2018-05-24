@@ -1,3 +1,5 @@
+## Data manipulation as part of xml parsing ===================================
+
 #' @import dplyr
 #' @import tibble
 
@@ -24,8 +26,8 @@ named_vector_list_to_tibble <- function(x) {
     return(tibble_x)
 }
 
-#' @import dplyr
-#' @import tibble
+
+## Generate urls to download datasets =========================================
 
 version_to_download_urls <- function(x) {
     if (x == 'latest') {
@@ -50,6 +52,9 @@ version_to_download_urls <- function(x) {
     
     return(urls)
 }
+
+
+## Generate url to download xml ===============================================
 
 version_to_xml_url <- function(id, vers) {
     if (vers == 'latest') {

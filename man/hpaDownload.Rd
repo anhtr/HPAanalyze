@@ -31,13 +31,14 @@ value:
 \itemize{
   \item \code{'hpar'}: Load data from the 'hpar' package. Does not contain
   isoform data.
-  \item \code{'latest'}: Download latest version
+  \item \code{'latest'}: Download latest version. Require Internet
+  connection.
   \item \code{'example'}: Load the example dataset from 'HPA
   analyze' ('hpa_downloaded_histology_v18'). Does not contain rna or
   isoform data.
   \item \code{'vn'} with 'n' is a integer: Download a specific version of
   the dataset. For example: 'v18' download version 18. Currently support
-  version 17 and above.
+  version 17 and above. Require Internet connection.
 }}
 }
 \value{
@@ -50,8 +51,8 @@ recommended to only download the datasets you need, as some of them may be
 very big.
 }
 \examples{
-  data("hpa_downloaded_histology_v18")
-  summary(hpa_downloaded_histology_v18)
+  downloaded_data <- hpaDownload(downloadList = 'all', version = 'example')
+  summary(downloaded_data)
   
   \dontrun{
   
