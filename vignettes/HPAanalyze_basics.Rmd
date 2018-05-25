@@ -20,22 +20,35 @@ library(tibble)
 library(dplyr)
 ```
 
-## Introduction
+## Summary
+### Keywords
+
+## Background
 ###Motivation:
 
 HPAanalyze consists of
 
-### Implementation
+Previously, another R package `hpar` was developed to...
 
-## Working with HPA Downloadable Data
+## Implementation
+
+### The different HPA data formats
 
 HPA provides downloadable data...
 
-Previously, another R package `hpar` was developed to...
+### `HPAanalyze` overview
+
+#### Obtaining `HPAanalyze`
+
+#### Primary functionality
+
+### Working with HPA Downloadable Data
+
+
 
 HPA analyze provide tools to retrive and analyze these data via a set of functions including...
 
-### Download and import data with `hpaDownload()`
+#### Download and import data with `hpaDownload()`
 
 ```{r downloaded_data, warning=FALSE, message=FALSE, eval=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'all')
@@ -104,7 +117,7 @@ tibble::glimpse(downloaded_data$transcript_rna_cell_line, give.attr = FALSE)
 #> $ value      <dbl> 29.406799, 0.000000, 0.992916, 0.398387, 0.239204,...
 ```
 
-### List available data with `hpaListParam()`
+#### List available data with `hpaListParam()`
 
 To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpa_list_param()`. The input for this function is the list object
 
@@ -121,7 +134,7 @@ str(hpaListParam(downloaded_data))
 #>  $ cell_line_rna       : chr [1:64] "A-431" "A549" "AF22" "AN3-CA" ...
 ```
 
-### Subset data with `hpaSubset()`
+#### Subset data with `hpaSubset()`
 
 ```{r subset, message=FALSE, warning=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'histology', version = 'example')
@@ -141,13 +154,13 @@ sapply(subset_data, nrow)
 
 ```
 
-### Export data with `hpaExport()`
+#### Export data with `hpaExport()`
 
 ```{r eval=FALSE}
 hpaExport(subset_data, fileName = 'subset.xlsx', fileType = 'xlsx')
 ```
 
-## Visualize downloaded data
+### Visualize downloaded data
 
 `HPAanalyze` provides the ability to quickly visualize data from downloaded HPA datasets with the `hpaVis` function family. The goal of these functions is to aid exploratory analysis of a group of target genes, which maybe particularly useful for gaining insights into pathways or gene signatures of interest.
 
@@ -160,7 +173,7 @@ downloaded_data <- hpaDownload('histology', 'example')
 ```
 
 
-### Visualize tissue data with `hpaVisTissue()`
+#### Visualize tissue data with `hpaVisTissue()`
 
 `hpaVisTissue()` generates a "heatmap", in which the expression of proteins of interest (quantified IHC staining) are plotted for each cell type of each tissue. 
 
@@ -174,7 +187,7 @@ hpaVisTissue(downloaded_data,
 ```
 
 
-### Visualize expression in cancer with `hpaVisPatho()`
+#### Visualize expression in cancer with `hpaVisPatho()`
 
 `hpaVisPatho()` generates an arrays of column graphs showing the expression of proteins of interest in each cancer. 
 
@@ -192,7 +205,7 @@ hpaVisPatho(downloaded_data,
 ```
 
 
-### Visualize subcellular location data with `hpaVisSubcell()`
+#### Visualize subcellular location data with `hpaVisSubcell()`
 
 `hpaVisSubcell()` 
 
@@ -204,27 +217,27 @@ hpaVisSubcell(downloaded_data,
 ```
 
 
-## Working with individual xml files
+### Working with individual xml files
 
-### Import xml file with `hpaXmlGet()`
+#### Import xml file with `hpaXmlGet()`
 
 ```{r}
 CCNB1_xml <- hpaXmlGet('ENSG00000134057')
 ```
 
-### View protein classes with `hpaXmlProtClass()`
+#### View protein classes with `hpaXmlProtClass()`
 
 ```{r}
 hpaXmlProtClass(CCNB1_xml)
 ```
 
-### Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
+#### Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
 
 ```{r}
 hpaXmlTissueExprSum(CCNB1_xml)
 ```
 
-### Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
+#### Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
 
 ```{r}
 hpaXmlAntibody(CCNB1_xml)
@@ -237,3 +250,16 @@ tissue_expression[[1]]
 
 ```
 
+### Future developments
+
+## Conclusion
+
+## Availability and requirements
+
+## Abbreviations
+
+## Declarations
+
+## References
+
+## Copyright
