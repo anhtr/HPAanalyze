@@ -147,6 +147,12 @@ hpaExport(subset_data, fileName = 'subset.xlsx', fileType = 'xlsx')
 
 ## Visualize downloaded data
 
+`HPAanalyze` provides the ability to quickly visualize data from downloaded HPA datasets with the `hpaVis` function family. The goal of these functions is to aid exploratory analysis of a group of target genes, which maybe particularly useful for gaining insights into pathways or gene signatures of interest.
+
+The `hpaVis` functions share a common syntax, where the input (`data` argument) is the output of `hpaDownload()` or `hpaSubset()` (although they do their own subseting so it is not necessary to use `hpaSubset()` unless you want to reduce the size of your data object). Depending on the function, the `target` arguments will let you choose to visualize your vectors of genes, tissue, cell types, etc. (See the help files for more details.) All of `hpaVis` functions generate standard `ggplot2` plots, which allow you to further customize colors and themes. Colors maybe changed via the `color` argument, while the default theme maybe overriden by setting the `customTheme` argument to `FALSE`.
+
+Currently, the `normal_tissue`, `pathology` and `subcellular_location` data can be visualized, with more functions planned for future releases.
+
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 downloaded_data <- hpaDownload('histology', 'example')
 ```
@@ -154,8 +160,9 @@ downloaded_data <- hpaDownload('histology', 'example')
 
 ### Visualize tissue data with `hpaVisTissue()`
 
-```{r fig.width=6}
+`hpaVisTissue()` generates a "heatmap", in which the expression of proteins of interest (quantified IHC staining) are plotted for each cell type of each tissue. 
 
+```{r fig.width=6}
 gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 tissue_list <- c('breast', 'cerebellum', 'skin 1')
 
@@ -166,6 +173,10 @@ hpaVisTissue(downloaded_data,
 
 
 ### Visualize expression in cancer with `hpaVisPatho()`
+
+`hpaVisPatho()` generates an arrays of column graphs showing the expression of proteins of interest in each cancer. 
+
+This example also demonstrate how the colors of the graphs could be customized, which is a common functionality of the `hpaVis` family.
 
 ```{r fig.width=6}
 gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
@@ -180,6 +191,8 @@ hpaVisPatho(downloaded_data,
 
 
 ### Visualize subcellular location data with `hpaVisSubcell()`
+
+`hpaVisSubcell()` 
 
 ```{r fig.width=6}
 gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
@@ -203,8 +216,22 @@ CCNB1_xml <- hpaXmlGet('ENSG00000134057')
 hpaXmlProtClass(CCNB1_xml)
 ```
 
-### Get information and image of tissue expression with `hpaXmlTissueExpr()`
+### Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
 
 ```{r}
 hpaXmlTissueExprSum(CCNB1_xml)
 ```
+
+### Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
+
+```{r}
+hpaXmlAntibody(CCNB1_xml)
+
+tissue_expression <- hpaXmlTissueExpr(CCNB1_xml)
+
+summary(tissue_expression)
+
+tissue_expression[[1]]
+
+```
+
