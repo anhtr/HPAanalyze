@@ -241,7 +241,7 @@ hpaVisSubcell <- function(data,
                       '1' = color[2])
     
     plot <- ggplot(plot_data, aes(x = gene, y = location)) +
-        geom_tile(aes(fill = n)) +
+        geom_tile(aes(fill = n), colour = "grey50") +
         scale_x_discrete(limits = targetGene) +
         scale_fill_manual(values = level_colors)
     
