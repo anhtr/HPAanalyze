@@ -27,14 +27,16 @@ knitr::opts_chunk$set(
   message = FALSE,
   error = FALSE
 )
+```
 
+```{r library}
 library(BiocStyle)
 library(HPAanalyze)
 library(tibble)
 library(dplyr)
-
-BiocStyle::markdown(css.files = c('styles.css'))
+library(ggplot2)
 ```
+
 
 # Summary
 
@@ -140,17 +142,18 @@ tibble::glimpse(downloaded_data$subcellular_location, give.attr = FALSE)
 
 The `rna_tissue` and `rna_cell_line` datasets contain RNA expression levels of 37 tissues and 64 cell lines based on RNA-seq. These datasets contain four columns each: `ensembl` (Ensembl gene identifier); `gene` (HGNC symbol); `tissue`/`cell_line` (type of sample); `value` + `unit` (expression level measured by transcripts per million).
 
-```{r rna, warning=FALSE, message=FALSE}
+```{r rna1, warning=FALSE, message=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'rna', version = 'hpar')
 
 tibble::glimpse(downloaded_data$rna_tissue, give.attr = FALSE)
-
+```
+```{r rna2, warning=FALSE, message=FALSE}
 tibble::glimpse(downloaded_data$rna_cell_line, give.attr = FALSE)
 ```
 
 Similarly, the `transcript_rna_tissue` and `transcript_rna_cell_line` datasets contain RNA isoform levels. These datasets contain four columns each: `ensembl` (Ensembl gene identifier); `transcript` (Ensembl transcript identifier); `tissue`/`cell_line` (type of sample); `value` (expression level measured by transcripts per million). Note that these datasets are significantly larger than others and should only be downloaded when necessary.
 
-```{r eval=FALSE}
+```{r isoform1, eval=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'isoform', version = 'v18')
 
 tibble::glimpse(downloaded_data$transcript_rna_tissue, give.attr = FALSE)
@@ -161,7 +164,8 @@ tibble::glimpse(downloaded_data$transcript_rna_tissue, give.attr = FALSE)
 #> $ transcript <chr> "ENST00000373020", "ENST00000494424", "ENST0000049...
 #> $ tissue     <chr> "adipose tissue.V1", "adipose tissue.V1", "adipose...
 #> $ value      <dbl> 27.3577003, 0.0000000, 1.9341500, 1.6059300, 0.000...
-
+```
+```{r isoform2, eval=FALSE}
 tibble::glimpse(downloaded_data$transcript_rna_cell_line, give.attr = FALSE)
 
 #> Observations: 20,972,183
@@ -176,16 +180,16 @@ Optionally, data can be imported from the *hpar* package. Please note that the *
 
 For data from *hpar*, release information can be accessed with `getHpaVersion`, `getHpaDate` and `getHpaEnsembl`.
 
-```{r hpar, eval=-1}
+```{r hpar1, eval=FALSE}
 hpaDownload('all', 'hpar')
-
+```
+```{r hpar2}
 hpar::getHpaVersion()
 
 hpar::getHpaDate()
 
 hpar::getHpaEnsembl()
 ```
-
 
 ### List available data with `hpaListParam()`
 
@@ -208,10 +212,11 @@ str(hpaListParam(downloaded_data))
 
 `hpaSubset()` filters the output of `hpaDownload()` for desirable target genes, tissues, cell types, cancer, and cell lines. The data will be subset only where applicable (i.e. `normal_tissue` will not be subset by *cancer*). The main purpose of `hpaSubset` is to prepare a manageable set of data to be exported. However, this function may also be useful for other data table manipulation purposes.
 
-```{r subset, message=FALSE, warning=FALSE}
+```{r subset1, message=FALSE, warning=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'histology', version = 'example')
 sapply(downloaded_data, nrow)
-
+```
+```{r subset2, message=FALSE, warning=FALSE}
 gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 tissue_list <- c('breast', 'cerebellum', 'skin 1')
 cancer_list <- c('breast cancer', 'glioma', 'melanoma')
@@ -240,16 +245,15 @@ The `hpaVis` functions share a common syntax, where the input (`data` argument) 
 
 Currently, the `normal_tissue`, `pathology` and `subcellular_location` data can be visualized, with more functions planned for future releases.
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
+```{r visData, echo=FALSE, warning=FALSE, message=FALSE}
 downloaded_data <- hpaDownload('histology', 'example')
 ```
-
 
 ### Visualize tissue data with `hpaVisTissue()`
 
 `hpaVisTissue()` generates a "heatmap", in which the expression of proteins of interest (quantified IHC staining) are plotted for each cell type of each tissue. 
 
-```{r fig.width=6}
+```{r visTissue, fig.wide}
 gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 tissue_list <- c('breast', 'cerebellum', 'skin 1')
 
@@ -265,7 +269,7 @@ hpaVisTissue(downloaded_data,
 
 This example also demonstrate how the colors of the graphs could be customized, which is a common functionality of the `hpaVis` family.
 
-```{r fig.width=6}
+```{r visPatho, fig.wide}
 gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 cancer_list <- c('breast cancer', 'glioma', 'lymphoma', 'prostate cancer')
 color_gray <- c('slategray1', 'slategray2', 'slategray3', 'slategray4')
@@ -279,13 +283,22 @@ hpaVisPatho(downloaded_data,
 
 ### Visualize subcellular location data with `hpaVisSubcell()`
 
-`hpaVisSubcell()` 
+`hpaVisSubcell()` generates a tile chart showing the subcellular locations (approved and supported) of proteins of interest.
 
-```{r fig.width=6}
+This example also demonstrate the customization of the output plot with ggplot2 functions, which is applicable to all `hpaVis` functions. Notice that the `customTheme` argument is set to `TRUE`.
+
+```{r visSubcell}
 gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 
 hpaVisSubcell(downloaded_data,
-              targetGene = gene_list)
+              targetGene = gene_list,
+              customTheme = TRUE) +
+    ggplot2::theme_minimal() +
+    ggplot2::ylab('Subcellular locations') +
+    ggplot2::xlab('Protein') +
+    ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1))  +
+    ggplot2::theme(legend.position="none") +
+    ggplot2::coord_equal()
 ```
 
 
@@ -293,33 +306,33 @@ hpaVisSubcell(downloaded_data,
 
 ### Import xml file with `hpaXmlGet()`
 
-```{r}
+```{r XmlGet}
 CCNB1_xml <- hpaXmlGet('ENSG00000134057')
 ```
 
 ### View protein classes with `hpaXmlProtClass()`
 
-```{r}
+```{r XmlProtClass}
 hpaXmlProtClass(CCNB1_xml)
 ```
 
 ### Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
 
-```{r}
+```{r XmlTissueExprSum}
 hpaXmlTissueExprSum(CCNB1_xml)
 ```
 
 ### Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
 
-```{r}
+```{r XmlAntibody}
 hpaXmlAntibody(CCNB1_xml)
-
+```
+```{r XmlTissueExpr1}
 tissue_expression <- hpaXmlTissueExpr(CCNB1_xml)
-
 summary(tissue_expression)
-
+```
+```{r XmlTissueExpr2}
 tissue_expression[[1]]
-
 ```
 
 ## Future developments
@@ -338,7 +351,7 @@ tissue_expression[[1]]
 
 # Abbreviations
 
-HPA: The Human Protein Atlas; 
+HPA: The Human Protein Atlas; XML: Extensible Markup Language
 
 # Declarations
 
