@@ -45,8 +45,8 @@
 #'   requested datasets.
 #'  
 #' @examples
-#'   downloaded_data <- hpaDownload(downloadList = 'all', version = 'example')
-#'   summary(downloaded_data)
+#'   downloadedData <- hpaDownload(downloadList='all', version='example')
+#'   summary(downloadedData)
 #'   
 #'   \dontrun{
 #'   
@@ -66,14 +66,9 @@
 #' @export
 #' 
 
-hpaDownload <- function(downloadList = 'histology', version = 'latest') {
+hpaDownload <- function(downloadList='histology', version='latest') {
     
-    # bypass R CMD check NOTE about binding
-    hpaNormalTissue <- hpaCancer <- Total.patients <- NULL
-    Level <- Count.patients <- NULL
-    hpaSubcellularLoc <- rnaGeneTissue <- rnaGeneCellLine <- NULL
-    
-    #generate a list of item to download
+    ## generate a list of item to download
     if(downloadList == 'all') {
         downloadList <- c('Normal tissue', 
                           'Pathology',
@@ -95,31 +90,31 @@ hpaDownload <- function(downloadList = 'histology', version = 'latest') {
     }
     
     #initiate the list to be returned
-    loaded_data <- list()
+    loadedData <- list()
     
     #create list of colnames
-    normal_tissue_colnames <- c('ensembl', 'gene', 'tissue', 
-                                'cell_type', 'level', 'reliability')
-    pathology_colnames <- c('ensembl', 'gene', 'cancer', 'high', 
-                            'medium', 'low', 'not_detected', 
-                            'prognostic_favorable', 
-                            'unprognostic_favorable', 
-                            'prognostic_unfavorable', 
-                            'unprognostic_unfavorable')
-    pathology_colnames_hpar <- c('ensembl', 'gene', 'cancer', 'high', 
-                                 'low', 'medium', 'not_detected')
-    subcellular_location_colnames <- c('ensembl', 'gene', 'reliability', 
-                                       'enhanced', 'supported', 'approved', 
-                                       'uncertain', 'single_cell_var_intensity', 
-                                       'single_cell_var_spatial', 
-                                       'cell_cycle_dependency', 'go_id')
-    rna_tissue_colnames <- c('ensembl', 'gene', 'tissue', 'value', 'unit')
-    rna_cell_line_colnames <- c('ensembl', 'gene', 'cell_line',
-                                'value', 'unit')
-    transcript_rna_tissue_colnames <- c('ensembl', 'transcript', 
-                                        'tissue', 'value')
-    transcript_rna_cell_line_colnames <- c('ensembl', 'transcript', 
-                                           'cell_line', 'value')
+    normalTissueColnames <- c('ensembl', 'gene', 'tissue', 
+                              'cell_type', 'level', 'reliability')
+    pathologyColnames <- c('ensembl', 'gene', 'cancer', 'high', 
+                           'medium', 'low', 'not_detected', 
+                           'prognostic_favorable', 
+                           'unprognostic_favorable', 
+                           'prognostic_unfavorable', 
+                           'unprognostic_unfavorable')
+    pathologyColnamesHpar <- c('ensembl', 'gene', 'cancer', 'high', 
+                               'low', 'medium', 'not_detected')
+    subcellularLocationColnames <- c('ensembl', 'gene', 'reliability', 
+                                     'enhanced', 'supported', 'approved', 
+                                     'uncertain', 'single_cell_var_intensity', 
+                                     'single_cell_var_spatial', 
+                                     'cell_cycle_dependency', 'go_id')
+    rnaTissueColnames <- c('ensembl', 'gene', 'tissue', 'value', 'unit')
+    rnaCellLineColnames <- c('ensembl', 'gene', 'cell_line',
+                             'value', 'unit')
+    transcriptRnaTissueColnames <- c('ensembl', 'transcript', 
+                                     'tissue', 'value')
+    transcriptRnaCellLineColnames <- c('ensembl', 'transcript', 
+                                       'cell_line', 'value')
     
     if (version == 'hpar') {# load 'hpar' data
         if(!('package:hpar' %in% search())) {
@@ -129,67 +124,68 @@ hpaDownload <- function(downloadList = 'histology', version = 'latest') {
         
         if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
             data('hpaNormalTissue',
-                 envir = environment())
+                 envir=environment())
             normal_tissue <- as.tibble(hpaNormalTissue)
-            colnames(normal_tissue) <- normal_tissue_colnames
-            loaded_data$normal_tissue <- normal_tissue
+            colnames(normal_tissue) <- normalTissueColnames
+            loadedData$normal_tissue <- normal_tissue
         }
         
         if('Pathology' %in% downloadList) {# load `pathology`
             data('hpaCancer',
-                 envir = environment())
+                 envir=environment())
             pathology <- as.tibble(hpaCancer) %>%
                 select(-Total.patients) %>%
                 spread(Level, Count.patients)
-            colnames(pathology) <- pathology_colnames_hpar
-            loaded_data$pathology <- pathology
+            colnames(pathology) <- pathologyColnamesHpar
+            loadedData$pathology <- pathology
         }
         
         if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
             data('hpaSubcellularLoc',
-                 envir = environment())
+                 envir=environment())
             subcellular_location <- as.tibble(hpaSubcellularLoc)
-            colnames(subcellular_location) <- subcellular_location_colnames
+            colnames(subcellular_location) <- subcellularLocationColnames
             subcellular_location$go_id <- as.character(subcellular_location$go_id)
             subcellular_location$gene <- as.character(subcellular_location$gene)
-            loaded_data$subcellular_location <- subcellular_location
+            loadedData$subcellular_location <- subcellular_location
         }
         
         if('RNA tissue' %in% downloadList) {# load 'rna_tissue'
             data('rnaGeneTissue',
-                 envir = environment())
+                 envir=environment())
             rna_tissue <- as.tibble(rnaGeneTissue)
-            colnames(rna_tissue) <- rna_tissue_colnames
-            loaded_data$rna_tissue <- rna_tissue
+            colnames(rna_tissue) <- rnaTissueColnames
+            loadedData$rna_tissue <- rna_tissue
         }
         
         if('RNA cell line' %in% downloadList) { # load 'rna_cell_line'
             data('rnaGeneCellLine',
-                 envir = environment())
+                 envir=environment())
             rna_cell_line <- as.tibble(rnaGeneCellLine)
-            colnames(rna_cell_line) <- rna_cell_line_colnames
-            loaded_data$rna_cell_line <- rna_cell_line
+            colnames(rna_cell_line) <- rnaCellLineColnames
+            loadedData$rna_cell_line <- rna_cell_line
         }   
     
     } else if (version == 'example') {# load example data
-        data('hpa_downloaded_histology_v18', package = 'HPAanalyze',
-             envir = environment())
+        data('hpa_downloaded_histology_v18', 
+             package='HPAanalyze',
+             envir=environment())
         if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
-            loaded_data$normal_tissue <- HPAanalyze::hpa_downloaded_histology_v18$normal_tissue
+            loadedData$normal_tissue <- HPAanalyze::hpa_downloaded_histology_v18$normal_tissue
         }
         
         if('Pathology' %in% downloadList) {# load `pathology`
-            loaded_data$pathology <- HPAanalyze::hpa_downloaded_histology_v18$pathology
+            loadedData$pathology <- HPAanalyze::hpa_downloaded_histology_v18$pathology
         }
         
         if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
-            loaded_data$subcellular_location <- HPAanalyze::hpa_downloaded_histology_v18$subcellular_location
+            loadedData$subcellular_location <- HPAanalyze::hpa_downloaded_histology_v18$subcellular_location
         }
         
     } else {# download data from the internet
     
         # generate a vector of urls for download
-        download_urls <- version_to_download_urls(version)
+        downloadUrls <- version_to_download_urls(version)
         
         # Check if the term is requested or not (all by default)
         # then download the file
@@ -197,86 +193,86 @@ hpaDownload <- function(downloadList = 'histology', version = 'latest') {
         # then add the tibble to the list
         if('Normal tissue' %in% downloadList) {
             temp <- tempfile()
-            download.file(url = download_urls['normal_tissue'],
-                          destfile = temp)
+            download.file(url=downloadUrls['normal_tissue'],
+                          destfile=temp)
             normal_tissue <- read_tsv(unz(temp, 'normal_tissue.tsv'))
             unlink(temp)
-            colnames(normal_tissue) <- normal_tissue_colnames
-            loaded_data$normal_tissue <- normal_tissue
+            colnames(normal_tissue) <- normalTissueColnames
+            loadedData$normal_tissue <- normal_tissue
         }
         
         if('Pathology' %in% downloadList) {
             temp <- tempfile()
-            download.file(url = download_urls['pathology'],
-                          destfile = temp)
+            download.file(url=downloadUrls['pathology'],
+                          destfile=temp)
             pathology <- read_tsv(unz(temp, 'pathology.tsv'))
             unlink(temp)
-            colnames(pathology) <- pathology_colnames
-            loaded_data$pathology <- pathology
+            colnames(pathology) <- pathologyColnames
+            loadedData$pathology <- pathology
         }
         
         if('Subcellular location' %in% downloadList) {
             temp <- tempfile()
-            download.file(url = download_urls['subcellular_location'],
-                          destfile = temp)
+            download.file(url=downloadUrls['subcellular_location'],
+                          destfile=temp)
             subcellular_location <- read_tsv(unz(temp, 'subcellular_location.tsv'))
             unlink(temp)
-            colnames(subcellular_location) <- subcellular_location_colnames
-            loaded_data$subcellular_location <- subcellular_location
+            colnames(subcellular_location) <- subcellularLocationColnames
+            loadedData$subcellular_location <- subcellular_location
         }
         
         if('RNA tissue' %in% downloadList) {
             temp <- tempfile()
-            download.file(url = download_urls['rna_tissue'],
-                          destfile = temp)
+            download.file(url=downloadUrls['rna_tissue'],
+                          destfile=temp)
             rna_tissue <- read_tsv(unz(temp, 'rna_tissue.tsv'))
             unlink(temp)
-            colnames(rna_tissue) <- rna_tissue_colnames
-            loaded_data$rna_tissue <- rna_tissue
+            colnames(rna_tissue) <- rnaTissueColnames
+            loadedData$rna_tissue <- rna_tissue
         }
         
         if('RNA cell line' %in% downloadList) {
             temp <- tempfile()
-            download.file(url = download_urls['rna_cell_line'],
-                          destfile = temp)
+            download.file(url=downloadUrls['rna_cell_line'],
+                          destfile=temp)
             rna_cell_line <- read_tsv(unz(temp, 'rna_celline.tsv'))
             unlink(temp)
-            colnames(rna_cell_line) <- rna_cell_line_colnames
-            loaded_data$rna_cell_line <- rna_cell_line
+            colnames(rna_cell_line) <- rnaCellLineColnames
+            loadedData$rna_cell_line <- rna_cell_line
         }    
         
         if('RNA transcript tissue' %in% downloadList) {
             temp <- tempfile()
-            download.file(url = download_urls['transcript_rna_tissue'],
-                          destfile = temp)
+            download.file(url=downloadUrls['transcript_rna_tissue'],
+                          destfile=temp)
             transcript_rna_tissue <- read_tsv(unz(temp, 'transcript_rna_tissue.tsv'))
             unlink(temp)
-            transcript_rna_tissue <- gather(data = transcript_rna_tissue,
-                                            key = 'tissue',
-                                            value = 'value',
+            transcript_rna_tissue <- gather(data=transcript_rna_tissue,
+                                            key='tissue',
+                                            value='value',
                                             -'ensgid', -'enstid')
-            colnames(transcript_rna_tissue) <- transcript_rna_tissue_colnames
-            loaded_data$transcript_rna_tissue <- transcript_rna_tissue
+            colnames(transcript_rna_tissue) <- transcriptRnaTissueColnames
+            loadedData$transcript_rna_tissue <- transcript_rna_tissue
         }
         
         if('RNA transcript cell line' %in% downloadList) {
             temp <- tempfile()
-            download.file(url = download_urls['transcript_rna_cell_line'],
-                          destfile = temp)
+            download.file(url=downloadUrls['transcript_rna_cell_line'],
+                          destfile=temp)
             transcript_rna_cell_line <- read_tsv(unz(temp, 'transcript_rna_celline.tsv'))
             unlink(temp)
-            transcript_rna_cell_line <- gather(data = transcript_rna_cell_line,
-                                               key = 'cell_line',
-                                               value = 'value',
+            transcript_rna_cell_line <- gather(data=transcript_rna_cell_line,
+                                               key='cell_line',
+                                               value='value',
                                                -'ensgid', -'enstid')
-            colnames(transcript_rna_cell_line) <- transcript_rna_cell_line_colnames
-            loaded_data$transcript_rna_cell_line <- transcript_rna_cell_line
+            colnames(transcript_rna_cell_line) <- transcriptRnaCellLineColnames
+            loadedData$transcript_rna_cell_line <- transcript_rna_cell_line
         }
         
         rm(temp)
     }
     
-    return(loaded_data)
+    return(loadedData)
 }
 
 
@@ -295,13 +291,13 @@ hpaDownload <- function(downloadList = 'histology', version = 'latest') {
 #' @return The output of this function is a list of vectors.
 #' 
 #' @examples
-#'   downloaded_data <- hpaDownload(downloadList = 'all', version = 'example')
-#'   params <- hpaListParam(data = downloaded_data)
+#'   downloadedData <- hpaDownload(downloadList='all', version='example')
+#'   params <- hpaListParam(data=downloadedData)
 #'   params$normal_tissue
 #'   \dontrun{
-#'   downloaded_data <- hpaDownload(downloadList = 'histology', 
-#'                                  version = 'hpar')
-#'   params <- hpaListParam(data = downloaded_data)
+#'   downloadedData <- hpaDownload(downloadList='histology', 
+#'                                 version='hpar')
+#'   params <- hpaListParam(data=downloadedData)
 #'   params$normal_tissue
 #'   }
 #'
@@ -310,32 +306,32 @@ hpaDownload <- function(downloadList = 'histology', version = 'latest') {
 #' @export
 
 hpaListParam <- function(data) {
-    avail_data <- list()
+    availData <- list()
     
     if('normal_tissue' %in% names(data)) {
-        avail_data$normal_tissue <- unique(data$normal_tissue[['tissue']])
-        avail_data$normal_cell <- unique(data$normal_tissue[['cell_type']])
+        availData$normal_tissue <- unique(data$normal_tissue[['tissue']])
+        availData$normal_cell <- unique(data$normal_tissue[['cell_type']])
     }
     
     if('pathology' %in% names(data)) {
-        avail_data$cancer <- unique(data$pathology[['cancer']])
+        availData$cancer <- unique(data$pathology[['cancer']])
     }
     
     if('subcellular_location' %in% names(data)) {
-        avail_data$subcellular_location <- unique(data$subcellular_location[['approved']])%>%
+        availData$subcellular_location <- unique(data$subcellular_location[['approved']])%>%
             strsplit(';') %>% unlist() %>% 
             unique() %>% na.omit() %>% as.vector()
     }
     
     if('rna_tissue' %in% names(data)) {
-        avail_data$normal_tissue_rna <- unique(data$rna_tissue[['tissue']])
+        availData$normal_tissue_rna <- unique(data$rna_tissue[['tissue']])
     }
     
     if('rna_cell_line' %in% names(data)) {
-        avail_data$cell_line_rna <- unique(data$rna_cell_line[['cell_line']])
+        availData$cell_line_rna <- unique(data$rna_cell_line[['cell_line']])
     }
     
-    return(avail_data)
+    return(availData)
 }
 
 
@@ -367,80 +363,87 @@ hpaListParam <- function(data) {
 #' @return This function will return a list of tibbles.
 #'
 #' @examples
-#'   downloaded_data <- hpaDownload(downloadList = 'all', version = 'example')
-#'   gene_list <- c('TP53', 'EGFR')
-#'   tissue_list <- c('breast', 'cerebellum', 'skin 1')
-#'   cancer_list <- c('breast cancer', 'glioma', 'melanoma')
+#'   downloadedData <- hpaDownload(downloadList='all', version='example')
+#'   geneList <- c('TP53', 'EGFR')
+#'   tissueList <- c('breast', 'cerebellum', 'skin 1')
+#'   cancerList <- c('breast cancer', 'glioma', 'melanoma')
 #'
-#'   subset_data <- hpaSubset(data = downloaded_data,
-#'                             targetGene = gene_list,
-#'                             targetTissue = tissue_list,
-#'                             targetCancer = cancer_list)
+#'   subsetData <- hpaSubset(data=downloadedData,
+#'                           targetGene=geneList,
+#'                           targetTissue=tissueList,
+#'                           targetCancer=cancerList)
 #'   \dontrun{
-#'   further_subset_data <- hpaSubset(data = subset_data,
-#'                                     targetGene = 'TP53')
+#'   furtherSubsetData <- hpaSubset(data=subsetData,
+#'                                  targetGene='TP53')
 #'   }
 #'
 #' @import dplyr
 #' @export
 
 hpaSubset <- function(data,
-                      targetGene = NULL,
-                      targetTissue = NULL,
-                      targetCellType = NULL,
-                      targetCancer = NULL,
-                      targetCellLine = NULL) {
-    
-    ## Just to pass the environment test in R CMD check
-    gene <- tissue <- cell_type <- cancer <- cell_line <- NULL
+                      targetGene=NULL,
+                      targetTissue=NULL,
+                      targetCellType=NULL,
+                      targetCancer=NULL,
+                      targetCellLine=NULL) {
     
     if('normal_tissue' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$normal_tissue <- filter(data$normal_tissue, gene %in% targetGene)
+            data$normal_tissue <- filter(data$normal_tissue, 
+                                         gene %in% targetGene)
         }
         
         if(!is.null(targetTissue)) {
-            data$normal_tissue <- filter(data$normal_tissue, tissue %in% targetTissue)
+            data$normal_tissue <- filter(data$normal_tissue, 
+                                         tissue %in% targetTissue)
         }
         
         if(!is.null(targetCellType)) {
-            data$normal_tissue <- filter(data$normal_tissue, cell_type %in% targetCellType)
+            data$normal_tissue <- filter(data$normal_tissue, 
+                                         cell_type %in% targetCellType)
         }
     }
     
     if('pathology' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$pathology <- filter(data$pathology, gene %in% targetGene)
+            data$pathology <- filter(data$pathology, 
+                                     gene %in% targetGene)
         }
         
         if(!is.null(targetCancer)) {
-            data$pathology <- filter(data$pathology, cancer %in% targetCancer)
+            data$pathology <- filter(data$pathology, 
+                                     cancer %in% targetCancer)
         }
     }
     
     if('subcellular_location' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$subcellular_location <- filter(data$subcellular_location, gene %in% targetGene)
+            data$subcellular_location <- filter(data$subcellular_location, 
+                                                gene %in% targetGene)
         }
     }
     
     if('rna_tissue' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$rna_tissue <- filter(data$rna_tissue, gene %in% targetGene)
+            data$rna_tissue <- filter(data$rna_tissue, 
+                                      gene %in% targetGene)
         }
         
         if(!is.null(targetTissue)) {
-            data$rna_tissue <- filter(data$rna_tissue, tissue %in% targetTissue)
+            data$rna_tissue <- filter(data$rna_tissue, 
+                                      tissue %in% targetTissue)
         }        
     }
     
     if('rna_cell_line' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$rna_cell_line <- filter(data$rna_cell_line, gene %in% targetGene)
+            data$rna_cell_line <- filter(data$rna_cell_line, 
+                                         gene %in% targetGene)
         }
         
         if(!is.null(targetCellLine)) {
-            data$rna_cell_line <- filter(data$rna_cell_line, cell_line %in% targetCellLine)
+            data$rna_cell_line <- filter(data$rna_cell_line, 
+                                         cell_line %in% targetCellLine)
         }       
     }
     
@@ -467,30 +470,30 @@ hpaSubset <- function(data,
 #'   spreadsheet for each datasets in the input list object.
 #'   
 #' @examples 
-#'   downloaded_data <- hpaDownload(downloadList = 'all', version = 'example')
-#'   gene_list <- c('TP53', 'EGFR')
-#'   tissue_list <- c('breast', 'cerebellum', 'skin 1')
-#'   cancer_list <- c('breast cancer', 'glioma', 'melanoma')
+#'   downloadedData <- hpaDownload(downloadList='all', version='example')
+#'   geneList <- c('TP53', 'EGFR')
+#'   tissueList <- c('breast', 'cerebellum', 'skin 1')
+#'   cancerList <- c('breast cancer', 'glioma', 'melanoma')
 #'
-#'   subset_data <- hpaSubset(data = downloaded_data,
-#'                            targetGene = gene_list,
-#'                            targetTissue = tissue_list,
-#'                            targetCancer = cancer_list)
-#'   hpaExport(data = subset_data,
-#'             fileName = 'TP53_EGFR_in_tissue_cancer.xlsx',
-#'             fileType = 'xlsx')
+#'   subsetData <- hpaSubset(data=downloadedData,
+#'                            targetGene=geneList,
+#'                            targetTissue=tissueList,
+#'                            targetCancer=cancerList)
+#'   hpaExport(data=subsetData,
+#'             fileName='TP53_EGFR_in_tissue_cancer.xlsx',
+#'             fileType='xlsx')
 #'
 #' @import XLConnect
 #' @export
 
-hpaExport <- function(data, fileName, fileType = 'xlsx') {
+hpaExport <- function(data, fileName, fileType='xlsx') {
     if(fileType == 'xlsx') {
-        wb <- loadWorkbook(filename = fileName, create = TRUE)
-        createSheet(wb, name = names(data))
-        sheet_index = 0
+        wb <- loadWorkbook(filename=fileName, create=TRUE)
+        createSheet(wb, name=names(data))
+        sheetIndex=0
         for (x in data) {
-            sheet_index = sheet_index + 1
-            writeWorksheet(wb, data = x, sheet = names(data)[sheet_index])
+            sheetIndex=sheetIndex + 1
+            writeWorksheet(wb, data=x, sheet=names(data)[sheetIndex])
         }
         saveWorkbook(wb)
     }
