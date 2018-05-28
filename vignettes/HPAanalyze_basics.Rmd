@@ -27,10 +27,13 @@ knitr::opts_chunk$set(
   message = FALSE,
   error = FALSE
 )
+
 library(BiocStyle)
 library(HPAanalyze)
 library(tibble)
 library(dplyr)
+
+BiocStyle::markdown(css.files = c('styles.css'))
 ```
 
 # Summary
@@ -83,9 +86,22 @@ In the first release, *HPAanalyze* includes four functions for data extraction f
 
 ### Compatibility with `hpar` Bioconductor package
 
-## Working with HPA Downloadable Data
+Functionality| hpar                            | HPAanalyze 
+------------:|:--------------------------------|:--------------------------------
+Datasets     | Included in package             | Download from server or Import from hpar
+Query        | Ensembl id                      | HCNC symbol for datasets, Ensembl id for XML
+Data version | One stable version              | Latest by default, option to download older
+Release info | Access via functions            | N/A
+View relevant browser page | Via `getHPA` function | N/A
+Visualization| N/A                             | Exploratory via `hpaVis` functions
+XML          | N/A                             | Download and import via `hpaXml` functions
+Histology image| View by loading browser page  | Extract links via `hpaXml` functions
 
-HPA analyze provide tools to retrive and analyze these data via a set of functions including...
+: (\#tab:table) Complementary functionality between hpar and HPAanalyze
+
+## Working with HPA downloadable datasets
+
+A typical workflow with HPA downloadable datasets using *HPAanalyze* consist of the following steps: (1) Download and import data into R with `hpaDownload()`; (2) View available parameter for subseting with `hpaListParam()`; (3) Subset data with `hpaSubset()`; and (4) (optional) Export data with `hpaExport`.
 
 ### Download and import data with `hpaDownload()`
 
@@ -156,11 +172,26 @@ tibble::glimpse(downloaded_data$transcript_rna_cell_line, give.attr = FALSE)
 #> $ value      <dbl> 29.406799, 0.000000, 0.992916, 0.398387, 0.239204,...
 ```
 
+Optionally, data can be imported from the *hpar* package. Please note that the *hpar* package does not contain the RNA isoform datasets, which are very large and should be downloaded only when necessary.
+
+For data from *hpar*, release information can be accessed with `getHpaVersion`, `getHpaDate` and `getHpaEnsembl`.
+
+```{r hpar, eval=-1}
+hpaDownload('all', 'hpar')
+
+hpar::getHpaVersion()
+
+hpar::getHpaDate()
+
+hpar::getHpaEnsembl()
+```
+
+
 ### List available data with `hpaListParam()`
 
-To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpa_list_param()`. The input for this function is the list object
+To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpaListParam()`. The input for this function is the output of `hpaDownload`.
 
-```{r list_param, eval= FALSE}
+```{r list_param, eval=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'all')
 str(hpaListParam(downloaded_data))
 
@@ -174,6 +205,8 @@ str(hpaListParam(downloaded_data))
 ```
 
 ### Subset data with `hpaSubset()`
+
+`hpaSubset()` filters the output of `hpaDownload()` for desirable target genes, tissues, cell types, cancer, and cell lines. The data will be subset only where applicable (i.e. `normal_tissue` will not be subset by *cancer*). The main purpose of `hpaSubset` is to prepare a manageable set of data to be exported. However, this function may also be useful for other data table manipulation purposes.
 
 ```{r subset, message=FALSE, warning=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'histology', version = 'example')
@@ -190,12 +223,12 @@ subset_data <- hpaSubset(data = downloaded_data,
                          targetCancer = cancer_list,
                          targetCellLine = cell_line_list)
 sapply(subset_data, nrow)
-
 ```
 
 ### Export data with `hpaExport()`
+As the name suggests, `hpaExport()` exports the output of `hpaSubset()` to one .xlsx file. Each dataset is placed in a separate sheet. More formats such as .csv and .tsv might be added in future release; hence, the `fileType` argument is included. 
 
-```{r eval=-1}
+```{r eval=FALSE}
 hpaExport(subset_data, fileName = 'subset.xlsx', fileType = 'xlsx')
 ```
 
@@ -321,3 +354,9 @@ ANT created the R package and drafted the manuscript. ABH supervised the project
 
 # Copyright
 © Anh Tran et al. 2018
+
+# Session info
+```{r echo=FALSE}
+sessionInfo()
+```
+
