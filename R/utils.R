@@ -9,10 +9,10 @@ named_vector_list_to_tibble <- function(x) {
     index <- value <- NULL
     
     # define a blank tibble
-    tibble_x = tibble(index = NA, attr = NA, value = NA)
+    tibble_x <- tibble(index=NA, attr=NA, value=NA)
     # loop though the list, turn vectors into tibble and bind them together
     for (i in seq_along(x)) {
-        tibble_i <- tibble(index = i, attr = names(x[[i]]), value = x[[i]])
+        tibble_i <- tibble(index=i, attr=names(x[[i]]), value=x[[i]])
         tibble_x <- bind_rows(tibble_x, tibble_i)
     }
     # process tibble_x into final product
@@ -31,16 +31,23 @@ named_vector_list_to_tibble <- function(x) {
 
 version_to_download_urls <- function(x) {
     if (x == 'latest') {
-        x = 'www'
+        x <- 'www'
     }
     
-    urls <- c(paste0('https://', x, '.proteinatlas.org/download/normal_tissue.tsv.zip'),
-              paste0('https://', x, '.proteinatlas.org/download/pathology.tsv.zip'),
-              paste0('https://', x, '.proteinatlas.org/download/subcellular_location.tsv.zip'),
-              paste0('https://', x, '.proteinatlas.org/download/rna_tissue.tsv.zip'),
-              paste0('https://', x, '.proteinatlas.org/download/rna_celline.tsv.zip'),
-              paste0('https://', x, '.proteinatlas.org/download/transcript_rna_tissue.tsv.zip'),
-              paste0('https://', x, '.proteinatlas.org/download/transcript_rna_celline.tsv.zip'))
+    urls <- c(paste0('https://', x, 
+                     '.proteinatlas.org/download/normal_tissue.tsv.zip'),
+              paste0('https://', x, 
+                     '.proteinatlas.org/download/pathology.tsv.zip'),
+              paste0('https://', x, 
+                     '.proteinatlas.org/download/subcellular_location.tsv.zip'),
+              paste0('https://', x, 
+                     '.proteinatlas.org/download/rna_tissue.tsv.zip'),
+              paste0('https://', x, 
+                     '.proteinatlas.org/download/rna_celline.tsv.zip'),
+              paste0('https://', x, 
+                     '.proteinatlas.org/download/transcript_rna_tissue.tsv.zip'),
+              paste0('https://', x, 
+                     '.proteinatlas.org/download/transcript_rna_celline.tsv.zip'))
     
     names(urls) <- c('normal_tissue',
                      'pathology',
@@ -58,7 +65,7 @@ version_to_download_urls <- function(x) {
 
 version_to_xml_url <- function(id, vers) {
     if (vers == 'latest') {
-        vers = 'www'
+        vers <- 'www'
     }
     
     return(paste0('https://', vers, '.proteinatlas.org/', id, '.xml'))
