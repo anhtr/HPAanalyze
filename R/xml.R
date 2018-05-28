@@ -26,22 +26,22 @@
 #' @examples
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
-#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
+#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
 #'   }
 #'
 #' @import xml2
 #' @export
 
-hpaXmlGet <- function(targetEnsemblId, version = 'latest') {
+hpaXmlGet <- function(targetEnsemblId, version='latest') {
     temp <- tempfile()
     
-    raw_xml <- read_xml(download_xml(url = version_to_xml_url(targetEnsemblId, 
-                                                              version), 
-                                     file = temp))
+    rawXml <- read_xml(download_xml(url=version_to_xml_url(targetEnsemblId, 
+                                                           version), 
+                                    file=temp))
     
     unlink(temp)
     
-    return(raw_xml)
+    return(rawXml)
 }
 
 #############################
@@ -61,15 +61,15 @@ hpaXmlGet <- function(targetEnsemblId, version = 'latest') {
 #' @examples
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
-#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlProtClass(CCNB1_xml)
+#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
+#'   hpaXmlProtClass(CCNB1xml)
 #'   }
 #' 
 #' @import xml2
 #' @export
 
 hpaXmlProtClass <- function(importedXml) {
-    protein_classes <- importedXml %>%
+    proteinClasses <- importedXml %>%
         # xpath to get into proteinClasses
         xml_find_all('//proteinClasses') %>%
         xml_find_all('//proteinClass') %>%
@@ -78,9 +78,9 @@ hpaXmlProtClass <- function(importedXml) {
         # turn attrs into a tibble
         named_vector_list_to_tibble() %>%
         # replace blank cells with NA and convert the result back to tibble
-        apply(2, function(x) gsub("^$|^ $", NA, x)) %>% as.tibble()
+        apply(2, function(x) gsub("^$|^ $", NA, x)) %>% as_tibble()
     
-    return(protein_classes)
+    return(proteinClasses)
 }
 
 #######################################
@@ -103,43 +103,43 @@ hpaXmlProtClass <- function(importedXml) {
 #' @examples
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
-#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlTissueExprSum(CCNB1_xml)
+#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
+#'   hpaXmlTissueExprSum(CCNB1xml)
 #'   }
 #'   
 #' @import xml2
 #' @import dplyr
+#' @import tidyr
 #' @export
 
-hpaXmlTissueExprSum <- function(importedXml, downloadImg = FALSE) {
-    
-    ## Just to pass R CMD check
-    tissue <- imageUrl <- tissue_expression_img <- NULL
+hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
     
     output <- list()
     
-    tissue_expression <- importedXml %>%
+    tissueExpression <- importedXml %>%
         # xpath to get to tissueExpression that is not under any antibodies
         xml_find_all('entry/tissueExpression')
     
-    output$summary <- tissue_expression %>%
+    output$summary <- tissueExpression %>%
         xml_find_first('summary') %>%
         xml_text()
     
-    output$img <- tissue_expression %>%
+    output$img <- tissueExpression %>%
         xml_find_all('image') %>%
         as_list() %>%
         reshape2::melt() %>%
-        spread(key = 'L2', value = 'value') %>%
+        spread(key='L2', value='value') %>%
         select(tissue, imageUrl) %>%
-        mutate(tissue = as.character(tissue), imageUrl = as.character(imageUrl))
+        mutate(tissue=as.character(tissue), 
+               imageUrl=as.character(imageUrl))
     
     if(downloadImg == TRUE) {
-        image_url_list <- output$img$imageUrl
+        imageUrlList <- output$img$imageUrl
         # create the list of file name to save
-        image_file_list <- paste0(tissue_expression_img$tissue, '.jpg')
+        imageFileList <- paste0(output$img$tissue, '.jpg')
         # loop through the 
-        Map(function(u,d) download.file(u,d, mode = 'wb'), image_url_list, image_file_list)
+        Map(function(u,d) download.file(u,d, mode='wb'), 
+            imageUrlList, imageFileList)
     }
     
     return(output)
@@ -162,8 +162,8 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg = FALSE) {
 #' @examples
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
-#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlAntibody(CCNB1_xml)
+#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
+#'   hpaXmlAntibody(CCNB1xml)
 #'   }
 #'   
 #' @import xml2
@@ -198,8 +198,8 @@ hpaXmlAntibody <- function(importedXml) {
 #' @examples
 #'   print('Please run the example below in your console.')
 #'   \dontrun{
-#'   CCNB1_xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlTissueExpr(CCNB1_xml)
+#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
+#'   hpaXmlTissueExpr(CCNB1xml)
 #'   }
 #' 
 #' @import xml2
@@ -207,16 +207,16 @@ hpaXmlAntibody <- function(importedXml) {
 #' @export
 
 hpaXmlTissueExpr <- function(importedXml) {
-    antibody_nodes <- importedXml %>% xml_find_all('entry/antibody')
+    antibodyNodes <- importedXml %>% xml_find_all('entry/antibody')
     
-    lapply(antibody_nodes, function(antibody_node){
-        tissueExpression_nodes <- xml_find_all(antibody_node, 'tissueExpression')
-        lapply(tissueExpression_nodes, function(tissueExpression_node){
-            data_nodes <- xml_find_all(tissueExpression_node, 'data')
-            lapply(data_nodes, function(data_node) {
-                patient_nodes_to_tibble(xml_find_all(data_node, 'patient'))
+    lapply(antibodyNodes, function(antibodyNode){
+        tissueExpressionNodes <- xml_find_all(antibodyNode, 'tissueExpression')
+        lapply(tissueExpressionNodes, function(tissueExpressionNode){
+            dataNodes <- xml_find_all(tissueExpressionNode, 'data')
+            lapply(dataNodes, function(dataNode) {
+                patient_nodes_to_tibble(xml_find_all(dataNode, 'patient'))
             })
-        }) %>% unlist(recursive = FALSE) %>% bind_rows() -> x
+        }) %>% unlist(recursive=FALSE) %>% bind_rows() -> x
         
         if (!(0 %in% dim(x))) {
             select(x, patientId, age, sex, staining, intensity, quantity,
@@ -231,31 +231,31 @@ hpaXmlTissueExpr <- function(importedXml) {
 
 ## Define patient_nodes_to_tibble() for simpler parsing =======================
 
-patient_nodes_to_tibble <- function(patient_nodes) {
-    lapply(patient_nodes,
-           function(patient_node) {
-               pair <- c('sex' = 'sex',
-                         'age' = 'age',
-                         'patientId' = 'patientId',
-                         'staining' = 'level[@type=\'staining\']',
-                         'intensity' = 'level[@type=\'intensity\']',
-                         'quantity' = 'quantity',
-                         'location' = 'location')
+patient_nodes_to_tibble <- function(patientNodes) {
+    lapply(patientNodes,
+           function(patientNode) {
+               pair <- c('sex'='sex',
+                         'age'='age',
+                         'patientId'='patientId',
+                         'staining'='level[@type=\'staining\']',
+                         'intensity'='level[@type=\'intensity\']',
+                         'quantity'='quantity',
+                         'location'='location')
                
                vapply(pair,
-                      FUN.VALUE = character(1),
+                      FUN.VALUE=character(1),
                       function(x) {
                           temp <- c()
-                          xml_find_first(patient_node, x) %>%
+                          xml_find_first(patientNode, x) %>%
                               xml_text() -> temp[names(x)]
                       }) -> info
                
-               sample_node <- xml_find_first(patient_node, 'sample')
+               sampleNode <- xml_find_first(patientNode, 'sample')
                samp <- c()
-               xml_find_all(sample_node, 'snomedParameters/snomed') %>%
+               xml_find_all(sampleNode, 'snomedParameters/snomed') %>%
                    xml_attrs() %>% named_vector_list_to_tibble() %>%
                    unlist() -> samp
-               xml_find_all(sample_node, 'assayImage/image/imageUrl') %>%
+               xml_find_all(sampleNode, 'assayImage/image/imageUrl') %>%
                    xml_text() -> samp['imageUrl']
                result <- c(info, samp)
                
