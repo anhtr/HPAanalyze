@@ -21,22 +21,22 @@
 #' 
 #' @examples
 #'   data("hpa_downloaded_histology_v18")
-#'   gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
-#'   tissue_list <- c('breast', 'cerebellum', 'skin 1')
+#'   geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
+#'   tissueList <- c('breast', 'cerebellum', 'skin 1')
 #'
 #'   ## A typical function call   
-#'   hpaVisTissue(data = hpa_downloaded_histology_v18,
-#'                  targetGene = gene_list,
-#'                  targetTissue = tissue_list)
+#'   hpaVisTissue(data=hpa_downloaded_histology_v18,
+#'                targetGene=geneList,
+#'                targetTissue=tissueList)
 #'                  
 #'   \dontrun{               
 #'   ## With more customization
-#'   color_list <- c('white', 'red', 'green', 'blue')
-#'   plot <- hpaVisTissue(data = hpa_downloaded_histology_v18,
-#'                          targetGene = gene_list,
-#'                          targetTissue = tissue_list,
-#'                          color = color_list,
-#'                          customTheme = TRUE)
+#'   colorList <- c('white', 'red', 'green', 'blue')
+#'   plot <- hpaVisTissue(data=hpa_downloaded_histology_v18,
+#'                          targetGene=geneList,
+#'                          targetTissue=tissueList,
+#'                          color=colorList,
+#'                          customTheme=TRUE)
 #'   plot + theme_minimal()
 #'   }
 #'
@@ -47,40 +47,39 @@
 hpaVisTissue <- function(data, 
                          targetGene, 
                          targetTissue, 
-                         targetCellType = NULL,
-                         color = c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
-                         customTheme = FALSE) {
+                         targetCellType=NULL,
+                         color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
+                         customTheme=FALSE) {
     
-    ## Just to pass R CMD check
-    gene <- tissue <- cell_type <- level <- tissue_cell <- NULL
-
-    plot_data <- data$normal_tissue %>%
+    plotData <- data$normal_tissue %>%
         filter(gene %in% targetGene) %>%
         filter(tissue %in% targetTissue)
     
     if(!is.null(targetCellType)) {
-        plot_data <- filter(plot_data, cell_type %in% targetCellType)
+        plotData <- filter(plotData, cell_type %in% targetCellType)
     }
     
-    plot_data <- mutate(plot_data,
-                        tissue_cell = paste0(tissue, ' / ', cell_type),
-                        level = factor(level, levels = c('High', 'Medium', 'Low', 'Not detected')))
+    plotData <- mutate(plotData,
+                       tissue_cell=paste0(tissue, ' / ', cell_type),
+                       level=factor(level, 
+                                    levels=c('High', 'Medium', 
+                                             'Low', 'Not detected')))
     
-    level_colors <- c('Not detected' = color[1],
-                      'Low' = color[2],
-                      'Medium' = color[3],
-                      'High' = color[4])
+    levelColors <- c('Not detected'=color[1],
+                     'Low'=color[2],
+                     'Medium'=color[3],
+                     'High'=color[4])
     
-    plot <- ggplot(plot_data, aes(x = gene, y = tissue_cell)) +
-        geom_tile(aes(fill = level)) +
-        scale_x_discrete(limits = targetGene) +
-        scale_fill_manual(values = level_colors)
+    plot <- ggplot(plotData, aes(x=gene, y=tissue_cell)) +
+        geom_tile(aes(fill=level)) +
+        scale_x_discrete(limits=targetGene) +
+        scale_fill_manual(values=levelColors)
     
     if(!customTheme) {
         plot <- plot + 
             ylab('Tissue / Cell') +
             xlab('Genes') +
-            theme(axis.text.x = element_text(angle = 90, hjust = 1))
+            theme(axis.text.x=element_text(angle=90, hjust=1))
     }
     
     return(plot)       
@@ -110,21 +109,21 @@ hpaVisTissue <- function(data,
 #'
 #' @examples
 #'   data("hpa_downloaded_histology_v18")
-#'   gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
-#'   cancer_list <- c('breast cancer', 'glioma', 'melanoma')
+#'   geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
+#'   cancerList <- c('breast cancer', 'glioma', 'melanoma')
 #'
 #'   ## A typical function call
-#'   hpaVisPatho(data = hpa_downloaded_histology_v18,
-#'                  targetGene = gene_list)
+#'   hpaVisPatho(data=hpa_downloaded_histology_v18,
+#'                  targetGene=geneList)
 #'
 #'   \dontrun{
 #'   ## With more customization
-#'   color_list <- c('yellow', 'red', 'green', 'blue')
-#'   plot <- hpaVisPatho(data = hpa_downloaded_histology_v18,
-#'                             targetGene = gene_list,
-#'                             targetCancer = cancer_list,
-#'                             color = color_list,
-#'                             customTheme = TRUE)
+#'   colorList <- c('yellow', 'red', 'green', 'blue')
+#'   plot <- hpaVisPatho(data=hpa_downloaded_histology_v18,
+#'                             targetGene=geneList,
+#'                             targetCancer=cancerList,
+#'                             color=colorList,
+#'                             customTheme=TRUE)
 #'   plot + theme_minimal()
 #'   }
 #'
@@ -135,43 +134,41 @@ hpaVisTissue <- function(data,
 
 hpaVisPatho <- function(data, 
                         targetGene, 
-                        targetCancer = NULL, 
-                        color = c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
-                        customTheme = FALSE) {
+                        targetCancer=NULL, 
+                        color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
+                        customTheme=FALSE) {
     
-    ## Just to pass R CMD check
-    gene <- cancer <- high <- medium <- low <- not_detected <- patient_count <- level <- NULL
-    
-    plot_data <- data$pathology %>%
+    plotData <- data$pathology %>%
         filter(gene %in% targetGene)
     
     if(!is.null(targetCancer)) {
-        plot_data <- filter(plot_data, cancer %in% targetCancer)
+        plotData <- filter(plotData, cancer %in% targetCancer)
     }
     
-    plot_data <- plot_data %>%
+    plotData <- plotData %>%
         select(gene, cancer, high, medium, low, not_detected) %>%
-        rename('High' = 'high', 'Medium' = 'medium', 'Low' = 'low', 'Not detected' = 'not_detected') %>%
-        reshape2::melt(measure.vars = c('High', 'Medium', 'Low', 'Not detected'),
-                       variable.name = 'level',
-                       value.name = 'patient_count')      
+        rename('High'='high', 'Medium'='medium', 
+               'Low'='low', 'Not detected'='not_detected') %>%
+        reshape2::melt(measure.vars=c('High', 'Medium', 'Low', 'Not detected'),
+                       variable.name='level',
+                       value.name='patient_count')      
     
-    level_colors <- c('Not detected' = color[1],
-                      'Low' = color[2],
-                      'Medium' = color[3],
-                      'High' = color[4])
+    levelColors <- c('Not detected'=color[1],
+                     'Low'=color[2],
+                     'Medium'=color[3],
+                     'High'=color[4])
     
-    plot <- ggplot(plot_data, aes(x = gene, y = patient_count, fill = level)) +
-        geom_bar(stat = 'identity', position = 'fill') +
-        scale_x_discrete(limits = targetGene) +
-        scale_fill_manual(values = level_colors) +
+    plot <- ggplot(plotData, aes(x=gene, y=patient_count, fill=level)) +
+        geom_bar(stat='identity', position='fill') +
+        scale_x_discrete(limits=targetGene) +
+        scale_fill_manual(values=levelColors) +
         facet_wrap(~ cancer)
     
     if(!customTheme) {
         plot <- plot + 
             ylab('Patient portions') +
             xlab('Genes') +
-            theme(axis.text.x = element_text(angle = 90, hjust = 1))
+            theme(axis.text.x=element_text(angle=90, hjust=1))
     }
     
     return(plot)       
@@ -199,19 +196,19 @@ hpaVisPatho <- function(data,
 #' 
 #' @examples
 #'   data("hpa_downloaded_histology_v18")
-#'   gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
+#'   geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 #'   
 #'   ## A typical function call
-#'   hpaVisSubcell(data = hpa_downloaded_histology_v18,
-#'                   targetGene = gene_list)
+#'   hpaVisSubcell(data=hpa_downloaded_histology_v18,
+#'                   targetGene=geneList)
 #'   
 #'   \dontrun{
 #'   ## With more customization
-#'   color_list <- c('white', 'red')
-#'   plot <- hpaVisSubcell(data = hpa_downloaded_histology_v18,
-#'                           targetGene = gene_list,
-#'                           color = color_list,
-#'                           customTheme = TRUE)
+#'   colorList <- c('white', 'red')
+#'   plot <- hpaVisSubcell(data=hpa_downloaded_histology_v18,
+#'                           targetGene=geneList,
+#'                           color=colorList,
+#'                           customTheme=TRUE)
 #'   plot + theme_minimal()
 #'   }
 #' 
@@ -222,34 +219,31 @@ hpaVisPatho <- function(data,
 
 hpaVisSubcell <- function(data, 
                           targetGene, 
-                          color = c('white', 'black'),
-                          customTheme = FALSE) {
+                          color=c('white', 'black'),
+                          customTheme=FALSE) {
     
-    ## Just to pass R CMD check
-    gene <- go_id <- NULL
-    
-    plot_data <- data$subcellular_location %>%
+    plotData <- data$subcellular_location %>%
         filter(gene %in% targetGene) %>%
-        mutate(location = strsplit(go_id, ';')) %>%
+        mutate(location=strsplit(go_id, ';')) %>%
         unnest(location) %>%
         select(location, gene) %>%
         table() %>%
-        as.tibble() %>%
-        mutate(n = factor(n, levels = c('0', '1')))
+        as_tibble() %>%
+        mutate(n=factor(n, levels=c('0', '1')))
     
-    level_colors <- c('0' = color[1],
-                      '1' = color[2])
+    levelColors <- c('0'=color[1],
+                     '1'=color[2])
     
-    plot <- ggplot(plot_data, aes(x = gene, y = location)) +
-        geom_tile(aes(fill = n), colour = "grey50") +
-        scale_x_discrete(limits = targetGene) +
-        scale_fill_manual(values = level_colors)
+    plot <- ggplot(plotData, aes(x=gene, y=location)) +
+        geom_tile(aes(fill=n), colour="grey50") +
+        scale_x_discrete(limits=targetGene) +
+        scale_fill_manual(values=levelColors)
     
     if(!customTheme) {
         plot <- plot + 
             ylab('Subcellular locations') +
             xlab('Genes') +
-            theme(axis.text.x = element_text(angle = 90, hjust = 1))  +
+            theme(axis.text.x=element_text(angle=90, hjust=1))  +
             theme(legend.position="none")
     }
     
