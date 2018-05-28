@@ -304,13 +304,27 @@ hpaVisSubcell(downloaded_data,
 
 ## Working with individual xml files
 
+`hpaXml` function family supports importing and extracting data from individual XML files provided by HPA for each protein.
+
+A typical workflow for working with XML files includes the following steps: (1) Download and import XML file with `hpaXmlGet()`; (2) Extract the desired information with other `hpaXml` functions; and (3) Download histological staining pictures, which is currently supported by the `hpaXmlTissurExpr()` and `hpaXmlTissueExprSum()` functions.
+
 ### Import xml file with `hpaXmlGet()`
+
+The `hoaXmlGet()` function takes a Ensembl gene id (start with *ENSG*) and import the perspective XML file into R. This function calls the `xml2::read_xml()` under the hood, hence the resulting object may be processed further with *xml2* functions if desired.
 
 ```{r XmlGet}
 CCNB1_xml <- hpaXmlGet('ENSG00000134057')
 ```
 
+To view the web page for the protein of interest, which contains similar information in a pretty presentation, use *hpar* function `getHPA()` with argument `type = "details"`.
+
+```{r hpar_site, eval=FALSE}
+hpar::getHpa('ENSG00000134057', type = "details")
+```
+
 ### View protein classes with `hpaXmlProtClass()`
+
+Protein class of queried protein can be extracted from the imported XML with `hpaXmlProtClass()`. The output of this function is a tibble of 4 columns: `id`, `name`, `parent_id` and `source`
 
 ```{r XmlProtClass}
 hpaXmlProtClass(CCNB1_xml)
@@ -318,19 +332,33 @@ hpaXmlProtClass(CCNB1_xml)
 
 ### Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
 
+The function `hpaXmlTissueExprSum()` extract the summary of expression of protein of interest in normal tissue. The output of this function is a list of (1) a string contains one-sentence summary and (2) a dataframe of all tissues in which the protein was stained positive and a histological stain images of those tissue.
+
 ```{r XmlTissueExprSum}
 hpaXmlTissueExprSum(CCNB1_xml)
 ```
 
+Those images can be downloaded automatically by setting the `downloadImg` argument to `TRUE`. Eg. `hpaXmlTissueExprSum(CCNB1_xml, downloadImg = TRUE)`
+
 ### Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
+
+More importantly, the XML files are the only format of HPA programmatically accesible data which contains information about each antibody and each tissue sample used in the project. 
+
+`hpaXmlAntibody()` extract the antibody information and return a tibble with one row for each antibody.
 
 ```{r XmlAntibody}
 hpaXmlAntibody(CCNB1_xml)
 ```
+
+`hpaXmlTissueExpr()` extract information about all samples for each antibody above and return a list of tibbles. If antibody has not been used for IHC staining, the returned tibble with be empty.
+
 ```{r XmlTissueExpr1}
 tissue_expression <- hpaXmlTissueExpr(CCNB1_xml)
 summary(tissue_expression)
 ```
+
+Each tibble contain clinical data (`patientid`, `age`, `sex`), tissue information (`snomedCode`, `tissueDescription`), staining results (`staining`, `intensity`, `location`) and one `imageUrl` for each sample. However, due to the large amount of data and the relatively large size of each image, `hpaXmlTissueExpr` does not provide an automated download option. 
+
 ```{r XmlTissueExpr2}
 tissue_expression[[1]]
 ```
