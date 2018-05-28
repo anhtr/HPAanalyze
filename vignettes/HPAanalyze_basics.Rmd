@@ -35,6 +35,7 @@ library(HPAanalyze)
 library(tibble)
 library(dplyr)
 library(ggplot2)
+library(hpar)
 ```
 
 
@@ -91,7 +92,7 @@ In the first release, *HPAanalyze* includes four functions for data extraction f
 Functionality| hpar                            | HPAanalyze 
 ------------:|:--------------------------------|:--------------------------------
 Datasets     | Included in package             | Download from server or Import from hpar
-Query        | Ensembl id                      | HCNC symbol for datasets, Ensembl id for XML
+Query        | Ensembl id                      | HGNC symbol for datasets, Ensembl id for XML
 Data version | One stable version              | Latest by default, option to download older
 Release info | Access via functions            | N/A
 View relevant browser page | Via `getHPA` function | N/A
@@ -191,7 +192,7 @@ hpar::getHpaDate()
 hpar::getHpaEnsembl()
 ```
 
-### List available data with `hpaListParam()`
+### List available parameter for subsetting with `hpaListParam()`
 
 To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpaListParam()`. The input for this function is the output of `hpaDownload`.
 
@@ -210,7 +211,7 @@ str(hpaListParam(downloaded_data))
 
 ### Subset data with `hpaSubset()`
 
-`hpaSubset()` filters the output of `hpaDownload()` for desirable target genes, tissues, cell types, cancer, and cell lines. The data will be subset only where applicable (i.e. `normal_tissue` will not be subset by *cancer*). The main purpose of `hpaSubset` is to prepare a manageable set of data to be exported. However, this function may also be useful for other data table manipulation purposes.
+`hpaSubset()` filters the output of `hpaDownload()` for desirable target genes, tissues, cell types, cancer, and cell lines. The data will be subset only where applicable (i.e. `normal_tissue` will not be subset by *cancer*). The main purpose of `hpaSubset` is to prepare a manageable set of data to be exported. However, this function may also be useful for other data table manipulation purposes. The input for `targetGene` argument is a vector of strings of HGNC symbols.
 
 ```{r subset1, message=FALSE, warning=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'histology', version = 'example')
@@ -229,6 +230,15 @@ subset_data <- hpaSubset(data = downloaded_data,
                          targetCellLine = cell_line_list)
 sapply(subset_data, nrow)
 ```
+
+To subset by Ensemble gene id, use `hpar::getHPA()`.
+
+```{r}
+id <- c("ENSG00000000003", "ENSG00000000005")
+hpar::getHpa(id, hpadata = "hpaNormalTissue") %>%
+    tibble::glimpse()
+```
+
 
 ### Export data with `hpaExport()`
 As the name suggests, `hpaExport()` exports the output of `hpaSubset()` to one .xlsx file. Each dataset is placed in a separate sheet. More formats such as .csv and .tsv might be added in future release; hence, the `fileType` argument is included. 
