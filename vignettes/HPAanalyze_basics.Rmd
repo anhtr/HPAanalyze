@@ -365,6 +365,8 @@ tissue_expression[[1]]
 
 ## Future developments
 
+The package will continue to follow new updates of the HPA projects to ensure compatibility and functionality. More functions of the `hpaVis` and `hpaXml` family may also be added in future releases.
+
 # Conclusion
 
 # Availability and requirements
