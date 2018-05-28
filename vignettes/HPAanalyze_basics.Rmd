@@ -1,10 +1,20 @@
 ---
 title: "Working with HPAanalyze package"
-author: "Anh N. Tran"
+author:
+- name: Anh N. Tran
+  affiliation: University of Alabama at Birmingham, Alabama, USA
+  email: trannhatanh89@gmail.com
+- name: Anita B. Hjelmeland
+  affiliation: University of Alabama at Birmingham, Alabama, USA
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+    BiocStyle::html_document:
+        toc: true
+        toc_depth: 2
+        toc_float: true
+        number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"Working with HPAanalyze package}
+  %\VignetteIndexEntry{"Working with HPAanalyze package""}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,45 +22,74 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  error = FALSE
 )
-
+library(BiocStyle)
 library(HPAanalyze)
 library(tibble)
 library(dplyr)
 ```
 
-## Summary
-### Keywords
+# Summary
 
-## Background
-###Motivation:
+* **Background:** The Human Protein Atlas is...
+* **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
+* **Conclusions:** `HPAanalyze` intergrates into the R workflow via the `tidyverse` philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.
+  
+* **Keywords:** Human Protein Atlas, Proteomics, Homo Sapiens, Visualization, Software
+
+# Background
 
 HPAanalyze consists of
 
-Previously, another R package `hpar` was developed to...
+# Implementation
 
-## Implementation
+*HPAanalyze* is and R package with a MIT licence and is designed for easy retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. 
 
-### The different HPA data formats
+## The different HPA data formats
 
-HPA provides downloadable data...
+The Human Protein Atlas project provides data via two main mechanisms: *Full datasets* in the form of downloadable compressed tab-separated files (.tsv) and *individual entries* in XML, RDF and TSV formats. The full downloadable datasets includes normal tissue, pathology (cancer), subcellular location, RNA gene and RNA isoform data. For individual entries, the XML format is the most comprehensive, providing information on the target protein, antibodies, summary for each tissue and detailed data from each sample including clinical data, IHC scoring and image download links.
 
-### `HPAanalyze` overview
+## *HPAanalyze* overview
 
-#### Obtaining `HPAanalyze`
+*HPAanalyze* is designed to fullfill 3 main tasks: (1) Import, subsetting and export downloadable datasets; (2) Visualization of downloadable datasets for exploratory analysis; and (3) Working with the individual XML files. This package aims to serve researchers with little programming experience, but also allow power users to use the imported data as desired.
 
-#### Primary functionality
+### Obtaining *HPAanalyze*
 
-### Working with HPA Downloadable Data
+The development version of *HPAanalyze* is available on Github can be installed with:  
+  
+`devtools::install_github("trannhatanh89/HPAanalyze")`
 
+### Full dataset import, subsetting and export
 
+The `hpaDownload()` function downloads full datasets from HPA and imports them into R as a list of tibbles, the standard object of *tidyverse*, which can subsequently be subset with `hpaSubset()` and export into .xmlx files with `hpaExport()`. The standard object allow the imported data to be further processed in a traditional R workflow. The ability to quickly subset and export data gives researchers the option to use other non-R downstream tools, such as GraphPad for creating publication-quality graphics, or share a subset of data containing only proteins of interest.
+
+### Visualization
+
+The `hpaVis` function family take the output of `hpaDownload()` (or `hpaSubset()`) provides quick visualization of the data, with the intention of aiding exploratory analysis. Nevertheless, the standard `ggplot` object output of these functions give users the option to further customize the plots for publication. All `hpaVis` functions share the same syntax for arguments: subsetting, specifying colors and opting to use custom themes.
+
+The first release of the *HPAanalyze* package includes three functions: `hpaVisTissue()` for the *normal tissue*, `hpaVisPatho()` for the *pathology/cancer*, and `hpaVisSubcell()` for the *subcellular location* datasets.
+
+### Individual xml import and image downloading
+
+The `hpaXml` function family import and extract data from individual XML entries from HPA. The `hpaXmlGet()` function downloads and imports data as  "xml_document"/"xml_node" object, which can subsequently be processed by other `hpaXml` functions. The XML format from HPA contains a wealth of information that may not be covered by this package. However, users can extract any data of interest from the imported XML file using the xml2 package.
+
+In the first release, *HPAanalyze* includes four functions for data extraction from HPA XML files: `hpaXmlProtClass()` for protein class information, `hpaTissueExprSum()` for summary of protein expression in tissue, `hpaXmlAntibody()` for a list of antibody used to stain for the protein of interest, and `hpaTissueExpr()` for a detailed data from each sample including clinical data and IHC scoring.
+
+`hpaTissueExprSum` and `hpaTissueExpr` provide download links to download relevant staining images, with the former function also gives the options to automate the downloading process.
+
+### Compatibility with `hpar` Bioconductor package
+
+## Working with HPA Downloadable Data
 
 HPA analyze provide tools to retrive and analyze these data via a set of functions including...
 
-#### Download and import data with `hpaDownload()`
+### Download and import data with `hpaDownload()`
 
-```{r downloaded_data, warning=FALSE, message=FALSE, eval=FALSE}
+```{r downloaded_data, eval=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'all')
 summary(downloaded_data)
 
@@ -117,7 +156,7 @@ tibble::glimpse(downloaded_data$transcript_rna_cell_line, give.attr = FALSE)
 #> $ value      <dbl> 29.406799, 0.000000, 0.992916, 0.398387, 0.239204,...
 ```
 
-#### List available data with `hpaListParam()`
+### List available data with `hpaListParam()`
 
 To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpa_list_param()`. The input for this function is the list object
 
@@ -134,7 +173,7 @@ str(hpaListParam(downloaded_data))
 #>  $ cell_line_rna       : chr [1:64] "A-431" "A549" "AF22" "AN3-CA" ...
 ```
 
-#### Subset data with `hpaSubset()`
+### Subset data with `hpaSubset()`
 
 ```{r subset, message=FALSE, warning=FALSE}
 downloaded_data <- hpaDownload(downloadList = 'histology', version = 'example')
@@ -154,13 +193,13 @@ sapply(subset_data, nrow)
 
 ```
 
-#### Export data with `hpaExport()`
+### Export data with `hpaExport()`
 
-```{r eval=FALSE}
+```{r eval=-1}
 hpaExport(subset_data, fileName = 'subset.xlsx', fileType = 'xlsx')
 ```
 
-### Visualize downloaded data
+## Visualize downloaded data
 
 `HPAanalyze` provides the ability to quickly visualize data from downloaded HPA datasets with the `hpaVis` function family. The goal of these functions is to aid exploratory analysis of a group of target genes, which maybe particularly useful for gaining insights into pathways or gene signatures of interest.
 
@@ -173,7 +212,7 @@ downloaded_data <- hpaDownload('histology', 'example')
 ```
 
 
-#### Visualize tissue data with `hpaVisTissue()`
+### Visualize tissue data with `hpaVisTissue()`
 
 `hpaVisTissue()` generates a "heatmap", in which the expression of proteins of interest (quantified IHC staining) are plotted for each cell type of each tissue. 
 
@@ -187,7 +226,7 @@ hpaVisTissue(downloaded_data,
 ```
 
 
-#### Visualize expression in cancer with `hpaVisPatho()`
+### Visualize expression in cancer with `hpaVisPatho()`
 
 `hpaVisPatho()` generates an arrays of column graphs showing the expression of proteins of interest in each cancer. 
 
@@ -205,7 +244,7 @@ hpaVisPatho(downloaded_data,
 ```
 
 
-#### Visualize subcellular location data with `hpaVisSubcell()`
+### Visualize subcellular location data with `hpaVisSubcell()`
 
 `hpaVisSubcell()` 
 
@@ -217,27 +256,27 @@ hpaVisSubcell(downloaded_data,
 ```
 
 
-### Working with individual xml files
+## Working with individual xml files
 
-#### Import xml file with `hpaXmlGet()`
+### Import xml file with `hpaXmlGet()`
 
 ```{r}
 CCNB1_xml <- hpaXmlGet('ENSG00000134057')
 ```
 
-#### View protein classes with `hpaXmlProtClass()`
+### View protein classes with `hpaXmlProtClass()`
 
 ```{r}
 hpaXmlProtClass(CCNB1_xml)
 ```
 
-#### Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
+### Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
 
 ```{r}
 hpaXmlTissueExprSum(CCNB1_xml)
 ```
 
-#### Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
+### Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
 
 ```{r}
 hpaXmlAntibody(CCNB1_xml)
@@ -250,16 +289,35 @@ tissue_expression[[1]]
 
 ```
 
-### Future developments
+## Future developments
 
-## Conclusion
+# Conclusion
 
-## Availability and requirements
+# Availability and requirements
 
-## Abbreviations
+* Project name: HPAanalysis
+* Project home page: https://github.com/trannhatanh89/HPAanalyze
+* Operating system(s): All platforms where R is available, including Windows, Linux, OS X
+* Programming language: R
+* Other requirements: R 3.5.0 or higher, and the R packages dplyr,     XLConnect, ggplot2, readr, tibble, xml2, reshape2, tidyr, stats, utils, and hpar
+* License: MIT
+* Any restrictions to use by non-academics: Freely available to everyone
 
-## Declarations
+# Abbreviations
 
-## References
+HPA: The Human Protein Atlas; 
 
-## Copyright
+# Declarations
+
+## Acknowledgements
+
+I appreciate the support of the National institutes of Health National Cancer Institute R01 CA151522 and funds from the Department of Cell, Developmental and Integrative Biology at the University of Alabama at Birmingham.
+
+## Authors' contributions
+
+ANT created the R package and drafted the manuscript. ABH supervised the project and revised the manuscript. All authors read and approved the final manuscript.
+
+# References
+
+# Copyright
+© Anh Tran et al. 2018

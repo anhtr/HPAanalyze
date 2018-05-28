@@ -23,7 +23,8 @@ Imports: dplyr,
     hpar
 Suggests: knitr,
     rmarkdown,
-    devtools
+    devtools,
+    BiocStyle
 VignetteBuilder: knitr
 LazyData: true
 biocViews:
