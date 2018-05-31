@@ -58,10 +58,10 @@
 #'   }
 #'      
 #' @import dplyr
-#' @import readr
 #' @import tidyr
 #' @import hpar
-#' @import magrittr
+#' @importFrom readr read_tsv
+#' @importFrom magrittr %<>%
 #' @importFrom utils download.file
 #' @importFrom utils data
 #' @export
@@ -377,7 +377,7 @@ hpaListParam <- function(data) {
 #'   }
 #'
 #' @import dplyr
-#' @import magrittr
+#' @importFrom magrittr %<>%
 #' @export
 
 hpaSubset <- function(data,
