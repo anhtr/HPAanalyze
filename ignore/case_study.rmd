@@ -1,0 +1,78 @@
+---
+title: "Case study"
+author: "Anh Tran"
+date: "May 28, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE,
+  comment="#>",
+  warning=FALSE,
+  message=FALSE,
+  error=FALSE
+)
+```
+
+```{r}
+library(BiocStyle)
+library(HPAanalyze)
+library(tibble)
+library(dplyr)
+library(ggplot2)
+library(hpar)
+```
+
+## R Markdown
+
+```{r idh1_download}
+data <- hpaDownload('histology', 'example')
+```
+```{r idh1_param}
+hpaListParam(data)$normal_tissue
+```
+
+```{r idh1_genelist}
+geneList <- c('IDH1', 'IDH2', 'F3', 'PROM1', 'GRIN1', 'GRIN2A', 'GFAP')
+geneList <- c('GCH1', 'PTS', 'SPR', 'DHFR')
+```
+```{r idh1_vis1}
+tissueList <- c('cerebral cortex', 'hippocampus')
+cellList <- c('glial cells', 'neuronal cells', 'endothelial cells')
+
+hpaVisTissue(data,
+             targetGene = geneList,
+             targetTissue = tissueList) +
+    coord_equal() +
+    theme_minimal() +
+    theme(axis.text.x=element_text(angle=45, hjust=1),
+          text = element_text(size = 17))
+```
+
+```{r idh1_vis2}
+cancerList = c('glioma')
+
+hpaVisPatho(data,
+            targetGene = geneList,
+            targetCancer = cancerList) +
+    theme_minimal() +
+    theme(axis.text.x=element_text(angle=45, hjust=1),
+          text = element_text(size = 17))
+```
+
+```{r idh1_vis3}
+hpaVisSubcell(data,
+              targetGene = geneList)
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

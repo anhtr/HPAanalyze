@@ -14,7 +14,7 @@
 #'   value:
 #'   \itemize{
 #'     \item \code{'latest'}: Download latest version. 
-#'     \item \code{'vn'} with 'n' is a integer: Download a specific version of
+#'     \item \code{'v?'} with '?' is a integer: Download a specific version of
 #'     the dataset. For example: 'v18' download version 18. Currently support
 #'     version 13 and above.
 #'   }

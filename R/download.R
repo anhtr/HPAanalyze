@@ -36,7 +36,7 @@
 #'     \item \code{'example'}: Load the example dataset from 'HPA
 #'     analyze' ('hpa_downloaded_histology_v18'). Does not contain rna or
 #'     isoform data.
-#'     \item \code{'vn'} with 'n' is a integer: Download a specific version of
+#'     \item \code{'v?'} with '?' being integer: Download a specific version of
 #'     the dataset. For example: 'v18' download version 18. Currently support
 #'     version 17 and above. Require Internet connection.
 #'   }
