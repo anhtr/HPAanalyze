@@ -109,7 +109,7 @@ hpaXmlProtClass <- function(importedXml) {
 #'   
 #' @import xml2
 #' @import dplyr
-#' @import tidyr
+#' @importFrom tidyr spread
 #' @export
 
 hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {

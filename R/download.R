@@ -58,12 +58,13 @@
 #'   }
 #'      
 #' @import dplyr
-#' @import tidyr
 #' @import hpar
 #' @importFrom readr read_tsv
 #' @importFrom magrittr %<>%
 #' @importFrom utils download.file
 #' @importFrom utils data
+#' @importFrom tidyr gather
+#' @importFrom tibble as_tibble
 #' @export
 #' 
 
@@ -126,7 +127,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
             data('hpaNormalTissue',
                  envir=environment())
-            normal_tissue <- as.tibble(hpaNormalTissue)
+            normal_tissue <- as_tibble(hpaNormalTissue)
             colnames(normal_tissue) <- normalTissueColnames
             loadedData$normal_tissue <- normal_tissue
         }
@@ -134,7 +135,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         if('Pathology' %in% downloadList) {# load `pathology`
             data('hpaCancer',
                  envir=environment())
-            pathology <- as.tibble(hpaCancer) %>%
+            pathology <- as_tibble(hpaCancer) %>%
                 select(-Total.patients) %>%
                 spread(Level, Count.patients)
             colnames(pathology) <- pathologyColnamesHpar
@@ -144,7 +145,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
             data('hpaSubcellularLoc',
                  envir=environment())
-            subcellular_location <- as.tibble(hpaSubcellularLoc)
+            subcellular_location <- as_tibble(hpaSubcellularLoc)
             colnames(subcellular_location) <- subcellularLocationColnames
             subcellular_location$gene %<>% as.character
             subcellular_location$go_id %<>% as.character
@@ -154,7 +155,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         if('RNA tissue' %in% downloadList) {# load 'rna_tissue'
             data('rnaGeneTissue',
                  envir=environment())
-            rna_tissue <- as.tibble(rnaGeneTissue)
+            rna_tissue <- as_tibble(rnaGeneTissue)
             colnames(rna_tissue) <- rnaTissueColnames
             loadedData$rna_tissue <- rna_tissue
         }
@@ -162,7 +163,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         if('RNA cell line' %in% downloadList) { # load 'rna_cell_line'
             data('rnaGeneCellLine',
                  envir=environment())
-            rna_cell_line <- as.tibble(rnaGeneCellLine)
+            rna_cell_line <- as_tibble(rnaGeneCellLine)
             colnames(rna_cell_line) <- rnaCellLineColnames
             loadedData$rna_cell_line <- rna_cell_line
         }   
@@ -473,7 +474,10 @@ hpaSubset <- function(data,
 #'             fileName='TP53_EGFR_in_tissue_cancer.xlsx',
 #'             fileType='xlsx')
 #'
-#' @import XLConnect
+#' @importFrom XLConnect loadWorkbook
+#' @importFrom XLConnect createSheet
+#' @importFrom XLConnect writeWorksheet
+#' @importFrom XLConnect saveWorkbook
 #' @export
 
 hpaExport <- function(data, fileName, fileType='xlsx') {
