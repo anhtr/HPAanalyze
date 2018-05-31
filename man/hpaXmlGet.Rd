@@ -14,7 +14,7 @@ example \code{'ENSG00000134057'}}
 value:
 \itemize{
   \item \code{'latest'}: Download latest version. 
-  \item \code{'vn'} with 'n' is a integer: Download a specific version of
+  \item \code{'v?'} with '?' is a integer: Download a specific version of
   the dataset. For example: 'v18' download version 18. Currently support
   version 13 and above.
 }}
@@ -31,7 +31,7 @@ function calls \code{xml2::read_xml()} under the hood.
 \examples{
   print('Please run the example below in your console.')
   \dontrun{
-  CCNB1_xml <- hpaXmlGet('ENSG00000134057')
+  CCNB1xml <- hpaXmlGet('ENSG00000134057')
   }
 
 }

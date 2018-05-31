@@ -33,22 +33,22 @@ types.
 }
 \examples{
   data("hpa_downloaded_histology_v18")
-  gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
-  tissue_list <- c('breast', 'cerebellum', 'skin 1')
+  geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
+  tissueList <- c('breast', 'cerebellum', 'skin 1')
 
   ## A typical function call   
-  hpaVisTissue(data = hpa_downloaded_histology_v18,
-                 targetGene = gene_list,
-                 targetTissue = tissue_list)
+  hpaVisTissue(data=hpa_downloaded_histology_v18,
+               targetGene=geneList,
+               targetTissue=tissueList)
                  
   \dontrun{               
   ## With more customization
-  color_list <- c('white', 'red', 'green', 'blue')
-  plot <- hpaVisTissue(data = hpa_downloaded_histology_v18,
-                         targetGene = gene_list,
-                         targetTissue = tissue_list,
-                         color = color_list,
-                         customTheme = TRUE)
+  colorList <- c('white', 'red', 'green', 'blue')
+  plot <- hpaVisTissue(data=hpa_downloaded_histology_v18,
+                         targetGene=geneList,
+                         targetTissue=tissueList,
+                         color=colorList,
+                         customTheme=TRUE)
   plot + theme_minimal()
   }
 

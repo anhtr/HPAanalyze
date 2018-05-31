@@ -19,8 +19,8 @@ Extract information about the antibodies used for a specific protein.
 \examples{
   print('Please run the example below in your console.')
   \dontrun{
-  CCNB1_xml <- hpaXmlGet('ENSG00000134057')
-  hpaXmlAntibody(CCNB1_xml)
+  CCNB1xml <- hpaXmlGet('ENSG00000134057')
+  hpaXmlAntibody(CCNB1xml)
   }
   
 }

@@ -28,19 +28,19 @@ Visualize the the confirmed subcellular locations of genes of interest.
 }
 \examples{
   data("hpa_downloaded_histology_v18")
-  gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
+  geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
   
   ## A typical function call
-  hpaVisSubcell(data = hpa_downloaded_histology_v18,
-                  targetGene = gene_list)
+  hpaVisSubcell(data=hpa_downloaded_histology_v18,
+                  targetGene=geneList)
   
   \dontrun{
   ## With more customization
-  color_list <- c('white', 'red')
-  plot <- hpaVisSubcell(data = hpa_downloaded_histology_v18,
-                          targetGene = gene_list,
-                          color = color_list,
-                          customTheme = TRUE)
+  colorList <- c('white', 'red')
+  plot <- hpaVisSubcell(data=hpa_downloaded_histology_v18,
+                          targetGene=geneList,
+                          color=colorList,
+                          customTheme=TRUE)
   plot + theme_minimal()
   }
 

@@ -37,18 +37,18 @@ of available parameters for a specific list object. Will not work on isoform
 data.
 }
 \examples{
-  downloaded_data <- hpaDownload(downloadList = 'all', version = 'example')
-  gene_list <- c('TP53', 'EGFR')
-  tissue_list <- c('breast', 'cerebellum', 'skin 1')
-  cancer_list <- c('breast cancer', 'glioma', 'melanoma')
+  downloadedData <- hpaDownload(downloadList='all', version='example')
+  geneList <- c('TP53', 'EGFR')
+  tissueList <- c('breast', 'cerebellum', 'skin 1')
+  cancerList <- c('breast cancer', 'glioma', 'melanoma')
 
-  subset_data <- hpaSubset(data = downloaded_data,
-                            targetGene = gene_list,
-                            targetTissue = tissue_list,
-                            targetCancer = cancer_list)
+  subsetData <- hpaSubset(data=downloadedData,
+                          targetGene=geneList,
+                          targetTissue=tissueList,
+                          targetCancer=cancerList)
   \dontrun{
-  further_subset_data <- hpaSubset(data = subset_data,
-                                    targetGene = 'TP53')
+  furtherSubsetData <- hpaSubset(data=subsetData,
+                                 targetGene='TP53')
   }
 
 }

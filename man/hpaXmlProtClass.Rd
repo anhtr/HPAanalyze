@@ -20,8 +20,8 @@ Extract protein class information from imported xml document resulted from
 \examples{
   print('Please run the example below in your console.')
   \dontrun{
-  CCNB1_xml <- hpaXmlGet('ENSG00000134057')
-  hpaXmlProtClass(CCNB1_xml)
+  CCNB1xml <- hpaXmlGet('ENSG00000134057')
+  hpaXmlProtClass(CCNB1xml)
   }
 
 }

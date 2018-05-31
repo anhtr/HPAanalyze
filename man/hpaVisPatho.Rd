@@ -30,21 +30,21 @@ Visualize the expression of genes of interest in each cancer.
 }
 \examples{
   data("hpa_downloaded_histology_v18")
-  gene_list <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
-  cancer_list <- c('breast cancer', 'glioma', 'melanoma')
+  geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
+  cancerList <- c('breast cancer', 'glioma', 'melanoma')
 
   ## A typical function call
-  hpaVisPatho(data = hpa_downloaded_histology_v18,
-                 targetGene = gene_list)
+  hpaVisPatho(data=hpa_downloaded_histology_v18,
+                 targetGene=geneList)
 
   \dontrun{
   ## With more customization
-  color_list <- c('yellow', 'red', 'green', 'blue')
-  plot <- hpaVisPatho(data = hpa_downloaded_histology_v18,
-                            targetGene = gene_list,
-                            targetCancer = cancer_list,
-                            color = color_list,
-                            customTheme = TRUE)
+  colorList <- c('yellow', 'red', 'green', 'blue')
+  plot <- hpaVisPatho(data=hpa_downloaded_histology_v18,
+                            targetGene=geneList,
+                            targetCancer=cancerList,
+                            color=colorList,
+                            customTheme=TRUE)
   plot + theme_minimal()
   }
 

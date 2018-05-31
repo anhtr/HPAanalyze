@@ -18,6 +18,7 @@ Imports: dplyr,
     xml2,
     reshape2,
     tidyr,
+    magrittr,
     stats,
     utils,
     hpar
