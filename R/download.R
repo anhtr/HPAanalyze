@@ -48,21 +48,11 @@
 #'   downloadedData <- hpaDownload(downloadList='all', version='example')
 #'   summary(downloadedData)
 #'   
-#'   \dontrun{
-#'   
-#'   ## download rna expression data
-#'   rna_data <- hpaDownload('rna')
-#'   
-#'   ## download normal tissue and subcellular location data
-#'   data <- hpaDownload(c('Normal tissue', 'Subcellular location'))
-#'   }
-#'      
 #' @import dplyr
 #' @import hpar
 #' @importFrom readr read_tsv
 #' @importFrom magrittr %<>%
-#' @importFrom utils download.file
-#' @importFrom utils data
+#' @importFrom utils download.file data
 #' @importFrom tidyr gather
 #' @importFrom tibble as_tibble
 #' @export
@@ -294,12 +284,6 @@ hpaDownload <- function(downloadList='histology', version='latest') {
 #'   downloadedData <- hpaDownload(downloadList='all', version='example')
 #'   params <- hpaListParam(data=downloadedData)
 #'   params$normal_tissue
-#'   \dontrun{
-#'   downloadedData <- hpaDownload(downloadList='histology', 
-#'                                 version='hpar')
-#'   params <- hpaListParam(data=downloadedData)
-#'   params$normal_tissue
-#'   }
 #'
 #' @import dplyr
 #' @importFrom stats na.omit
@@ -372,10 +356,6 @@ hpaListParam <- function(data) {
 #'                           targetGene=geneList,
 #'                           targetTissue=tissueList,
 #'                           targetCancer=cancerList)
-#'   \dontrun{
-#'   furtherSubsetData <- hpaSubset(data=subsetData,
-#'                                  targetGene='TP53')
-#'   }
 #'
 #' @import dplyr
 #' @importFrom magrittr %<>%
@@ -474,10 +454,7 @@ hpaSubset <- function(data,
 #'             fileName='TP53_EGFR_in_tissue_cancer.xlsx',
 #'             fileType='xlsx')
 #'
-#' @importFrom XLConnect loadWorkbook
-#' @importFrom XLConnect createSheet
-#' @importFrom XLConnect writeWorksheet
-#' @importFrom XLConnect saveWorkbook
+#' @importFrom XLConnect loadWorkbook createSheet writeWorksheet saveWorkbook
 #' @export
 
 hpaExport <- function(data, fileName, fileType='xlsx') {
