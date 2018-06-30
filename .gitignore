@@ -39,3 +39,5 @@ vignettes/*.pdf
 .gitattributes
 *.save
 .Rproj.user
+
+/ignore/

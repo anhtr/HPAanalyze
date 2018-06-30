@@ -63,11 +63,33 @@ knitr::include_graphics("workflow.png")
 
 ## Import, subset and export downloadable datasets
 
-```{r}
+A typical workflow with HPA downloadable datasets using *HPAanalyze* consist of the following steps: (1) Download and import data into R with `hpaDownload()`; (2) View available parameter for subseting with `hpaListParam()`; (3) Subset data with `hpaSubset()`; and (4) (optional) Export data with `hpaExport`.
 
+```{r}
+data <- hpaDownload(downloadList = 'histology',
+                    version = 'example')
+```
+```{r}
+hpaListParam(data) %>% purrr::map(head, n = 3)
+```
+```{r}
+(ki67 <- hpaSubset(data, 
+                   targetGene = 'MKI67',
+                   targetTissue = 'breast',
+                   targetCancer = 'breast cancer'))
+```
+```{r eval = FALSE}
+hpaExport(data = ki67, 
+          fileName = 'ki67.xlsx')
 ```
 
 ## Visualization
+
+`HPAanalyze` provides the ability to quickly visualize data from downloaded HPA datasets with the `hpaVis` function family. The goal of these functions is to aid exploratory analysis of a group of target genes, which maybe particularly useful for gaining insights into pathways or gene signatures of interest.
+
+The `hpaVis` functions share a common syntax, where the input (`data` argument) is the output of `hpaDownload()` or `hpaSubset()` (although they do their own subseting so it is not necessary to use `hpaSubset()` unless you want to reduce the size of your data object). Depending on the function, the `target` arguments will let you choose to visualize your vectors of genes, tissue, cell types, etc. (See the help files for more details.) All of `hpaVis` functions generate standard `ggplot2` plots, which allow you to further customize colors and themes. Colors maybe changed via the `color` argument, while the default theme maybe overriden by setting the `customTheme` argument to `FALSE`.
+
+Currently, the `normal_tissue`, `pathology` and `subcellular_location` data can be visualized, with more functions planned for future releases.
 
 ```{r}
 

@@ -215,6 +215,8 @@ hpaVisPatho <- function(data,
 #' 
 #' @import dplyr
 #' @import ggplot2
+#' @importFrom tidyr unnest
+#' @importFrom tibble as_tibble
 #' @export
 
 hpaVisSubcell <- function(data, 

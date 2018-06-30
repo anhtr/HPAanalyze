@@ -1,12 +1,10 @@
 ## Data manipulation as part of xml parsing ===================================
 
 #' @import dplyr
+#' @importFrom magrittr %<>%
 #' @importFrom tibble tibble
 
 named_vector_list_to_tibble <- function(x) {
-    
-    ## Just to pass R CMD check
-    index <- value <- NULL
     
     # define a blank tibble
     tibble_x <- tibble(index=NA, attr=NA, value=NA)
@@ -16,7 +14,7 @@ named_vector_list_to_tibble <- function(x) {
         tibble_x <- bind_rows(tibble_x, tibble_i)
     }
     # process tibble_x into final product
-    tibble_x <- tibble_x %>%
+    tibble_x %<>%
         # remove the NA row resulted from defining tibble_x
         filter(!is.na(index)) %>%
         # spead tibble_x into tidy format

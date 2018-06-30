@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2018-05-29" />
+<meta name="date" content="2018-06-06" />
 
 <title>HPAanalyze Quick Start Guide</title>
 
@@ -213,7 +213,7 @@ div.tocify {
 <p class="author-name">Anh N. Tran<span class="affil-mark">1*</span> and Anita B. Hjelmeland<span class="affil-mark">1</span></p>
 <p class="author-affiliation"><span class="affil-mark">1</span>University of Alabama at Birmingham, Alabama, USA</p>
 <p class="author-email"><span class="affil-mark">*</span><a href="mailto:trannhatanh89@gmail.com">trannhatanh89@gmail.com</a></p>
-<h4 class="date"><em>2018-05-29</em></h4>
+<h4 class="date"><em>2018-06-06</em></h4>
 
 </div>
 
@@ -246,6 +246,62 @@ library(hpar)</code></pre>
 <p class="caption">
 Figure 1: <span class="caption-title">A typical HPAanalyze workflow</span><br>
 </p>
+</div>
+<div id="import-subset-and-export-downloadable-datasets" class="section level2">
+<h2><span class="header-section-number">3.1</span> Import, subset and export downloadable datasets</h2>
+<p>A typical workflow with HPA downloadable datasets using <em>HPAanalyze</em> consist of the following steps: (1) Download and import data into R with <code>hpaDownload()</code>; (2) View available parameter for subseting with <code>hpaListParam()</code>; (3) Subset data with <code>hpaSubset()</code>; and (4) (optional) Export data with <code>hpaExport</code>.</p>
+<pre class="r"><code>data &lt;- hpaDownload(downloadList = 'histology',
+                    version = 'example')</code></pre>
+<pre class="r"><code>hpaListParam(data) %&gt;% purrr::map(head, n = 3)
+#&gt; $normal_tissue
+#&gt; [1] &quot;adrenal gland&quot; &quot;appendix&quot;      &quot;bone marrow&quot;  
+#&gt; 
+#&gt; $normal_cell
+#&gt; [1] &quot;glandular cells&quot;     &quot;lymphoid tissue&quot;     &quot;hematopoietic cells&quot;
+#&gt; 
+#&gt; $cancer
+#&gt; [1] &quot;breast cancer&quot;   &quot;carcinoid&quot;       &quot;cervical cancer&quot;
+#&gt; 
+#&gt; $subcellular_location
+#&gt; [1] &quot;Cytosol&quot;      &quot;Mitochondria&quot; &quot;Aggresome&quot;</code></pre>
+<pre class="r"><code>(ki67 &lt;- hpaSubset(data, 
+                   targetGene = 'MKI67',
+                   targetTissue = 'breast',
+                   targetCancer = 'breast cancer'))
+#&gt; $normal_tissue
+#&gt; # A tibble: 3 x 6
+#&gt;   ensembl         gene  tissue cell_type           level        reliability
+#&gt;   &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;      
+#&gt; 1 ENSG00000148773 MKI67 breast adipocytes          Not detected Enhanced   
+#&gt; 2 ENSG00000148773 MKI67 breast glandular cells     Medium       Enhanced   
+#&gt; 3 ENSG00000148773 MKI67 breast myoepithelial cells Not detected Enhanced   
+#&gt; 
+#&gt; $pathology
+#&gt; # A tibble: 1 x 11
+#&gt;   ensembl    gene  cancer   high medium   low not_detected prognostic_favor~
+#&gt;   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;  &lt;int&gt; &lt;int&gt;        &lt;int&gt;             &lt;dbl&gt;
+#&gt; 1 ENSG00000~ MKI67 breast~     2     10     0            0                NA
+#&gt; # ... with 3 more variables: unprognostic_favorable &lt;dbl&gt;,
+#&gt; #   prognostic_unfavorable &lt;dbl&gt;, unprognostic_unfavorable &lt;dbl&gt;
+#&gt; 
+#&gt; $subcellular_location
+#&gt; # A tibble: 1 x 11
+#&gt;   ensembl    gene  reliability enhanced         supported approved uncertain
+#&gt;   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    
+#&gt; 1 ENSG00000~ MKI67 Enhanced    Nuclear bodies;~ &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     
+#&gt; # ... with 4 more variables: single_cell_var_intensity &lt;chr&gt;,
+#&gt; #   single_cell_var_spatial &lt;chr&gt;, cell_cycle_dependency &lt;chr&gt;, go_id &lt;chr&gt;</code></pre>
+<pre class="r"><code>hpaExport(data = ki67, 
+          fileName = 'ki67.xlsx')</code></pre>
+</div>
+<div id="visualization" class="section level2">
+<h2><span class="header-section-number">3.2</span> Visualization</h2>
+<p><code>HPAanalyze</code> provides the ability to quickly visualize data from downloaded HPA datasets with the <code>hpaVis</code> function family. The goal of these functions is to aid exploratory analysis of a group of target genes, which maybe particularly useful for gaining insights into pathways or gene signatures of interest.</p>
+<p>The <code>hpaVis</code> functions share a common syntax, where the input (<code>data</code> argument) is the output of <code>hpaDownload()</code> or <code>hpaSubset()</code> (although they do their own subseting so it is not necessary to use <code>hpaSubset()</code> unless you want to reduce the size of your data object). Depending on the function, the <code>target</code> arguments will let you choose to visualize your vectors of genes, tissue, cell types, etc. (See the help files for more details.) All of <code>hpaVis</code> functions generate standard <code>ggplot2</code> plots, which allow you to further customize colors and themes. Colors maybe changed via the <code>color</code> argument, while the default theme maybe overriden by setting the <code>customTheme</code> argument to <code>FALSE</code>.</p>
+<p>Currently, the <code>normal_tissue</code>, <code>pathology</code> and <code>subcellular_location</code> data can be visualized, with more functions planned for future releases.</p>
+</div>
+<div id="individual-xml-extraction" class="section level2">
+<h2><span class="header-section-number">3.3</span> Individual XML extraction</h2>
 </div>
 </div>
 <div id="availability-and-requirements" class="section level1">
@@ -302,24 +358,26 @@ Figure 1: <span class="caption-title">A typical HPAanalyze workflow</span><br>
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt; [1] hpar_1.22.2       ggplot2_2.2.1     dplyr_0.7.5       tibble_1.4.2     
-#&gt; [5] HPAanalyze_0.99.9 BiocStyle_2.8.1  
+#&gt; [1] bindrcpp_0.2.2     hpar_1.22.2        ggplot2_2.2.1     
+#&gt; [4] dplyr_0.7.5        tibble_1.4.2       HPAanalyze_0.99.10
+#&gt; [7] BiocStyle_2.8.1   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;  [1] Rcpp_0.12.17         highr_0.6            compiler_3.5.0      
-#&gt;  [4] pillar_1.2.3         plyr_1.8.4           bindr_0.1.1         
+#&gt;  [1] Rcpp_0.12.17         highr_0.6            pillar_1.2.3        
+#&gt;  [4] compiler_3.5.0       plyr_1.8.4           bindr_0.1.1         
 #&gt;  [7] tools_3.5.0          digest_0.6.15        evaluate_0.10.1     
 #&gt; [10] gtable_0.2.0         pkgconfig_2.0.1      rlang_0.2.0         
-#&gt; [13] yaml_2.1.19          xfun_0.1             bindrcpp_0.2.2      
-#&gt; [16] rJava_0.9-9          xml2_1.2.0           stringr_1.3.1       
-#&gt; [19] knitr_1.20           hms_0.4.2            XLConnectJars_0.2-15
+#&gt; [13] cli_1.0.0            yaml_2.1.19          xfun_0.1            
+#&gt; [16] rJava_0.9-9          stringr_1.3.1        knitr_1.20          
+#&gt; [19] xml2_1.2.0           hms_0.4.2            XLConnectJars_0.2-15
 #&gt; [22] rprojroot_1.3-2      grid_3.5.0           tidyselect_0.2.4    
 #&gt; [25] glue_1.2.0           R6_2.2.2             rmarkdown_1.9       
 #&gt; [28] bookdown_0.7         tidyr_0.8.1          readr_1.1.1         
 #&gt; [31] purrr_0.2.4          magrittr_1.5         backports_1.1.2     
 #&gt; [34] scales_0.5.0         htmltools_0.3.6      assertthat_0.2.0    
-#&gt; [37] XLConnect_0.2-15     colorspace_1.3-2     stringi_1.1.7       
-#&gt; [40] lazyeval_0.2.1       munsell_0.4.3</code></pre>
+#&gt; [37] XLConnect_0.2-15     colorspace_1.3-2     utf8_1.1.4          
+#&gt; [40] stringi_1.1.7        lazyeval_0.2.1       munsell_0.4.3       
+#&gt; [43] crayon_1.3.4</code></pre>
 </div>
 
 

@@ -66,6 +66,7 @@ hpaXmlGet <- function(targetEnsemblId, version='latest') {
 #'   }
 #' 
 #' @import xml2
+#' @importFrom tibble as_tibble
 #' @export
 
 hpaXmlProtClass <- function(importedXml) {

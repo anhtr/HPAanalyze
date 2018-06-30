@@ -35,7 +35,8 @@ hpaListParam(data)$normal_tissue
 
 ```{r idh1_genelist}
 geneList <- c('IDH1', 'IDH2', 'F3', 'PROM1', 'GRIN1', 'GRIN2A', 'GFAP')
-geneList <- c('GCH1', 'PTS', 'SPR', 'DHFR')
+geneList <- c('GCH1', 'PTS', 'SPR', 'DHFR', 'NOS1', 'NOS2', 'NOS3')
+geneList <- c('GFAP', 'EGFR', 'PDGFRA','PIK3CA', 'PTEN', 'BRAF', 'MDM2', 'MDM4', 'CDK4')
 ```
 ```{r idh1_vis1}
 tissueList <- c('cerebral cortex', 'hippocampus')
@@ -46,8 +47,9 @@ hpaVisTissue(data,
              targetTissue = tissueList) +
     coord_equal() +
     theme_minimal() +
-    theme(axis.text.x=element_text(angle=45, hjust=1),
-          text = element_text(size = 17))
+    theme(axis.text.x=element_text(angle=90, hjust=1),
+          text = element_text(size = 17),
+          legend.position="none")
 ```
 
 ```{r idh1_vis2}
@@ -57,13 +59,21 @@ hpaVisPatho(data,
             targetGene = geneList,
             targetCancer = cancerList) +
     theme_minimal() +
-    theme(axis.text.x=element_text(angle=45, hjust=1),
+    theme(axis.text.x=element_text(angle=90, hjust=1),
           text = element_text(size = 17))
 ```
 
 ```{r idh1_vis3}
+geneList <- c('PTEN', 'H3F3A', 'DAXX', 'PML')
+geneList <- c('GCH1', 'PTS', 'SPR', 'DHFR')
+
 hpaVisSubcell(data,
-              targetGene = geneList)
+              targetGene = geneList) +
+    coord_equal() +
+    theme_minimal() +
+    theme(axis.text.x=element_text(angle=90, hjust=1),
+          text = element_text(size = 17),
+          legend.position="none")
 ```
 
 
