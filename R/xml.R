@@ -24,12 +24,9 @@
 #'   information.
 #'
 #' @examples
-#'   print('Please run the example below in your console.')
-#'   \dontrun{
 #'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
-#'   }
 #'
-#' @import xml2
+#' @importFrom xml2 read_xml download_xml
 #' @export
 
 hpaXmlGet <- function(targetEnsemblId, version='latest') {
@@ -59,13 +56,10 @@ hpaXmlGet <- function(targetEnsemblId, version='latest') {
 #' @return This function return a tibble of 4 columns.
 #'
 #' @examples
-#'   print('Please run the example below in your console.')
-#'   \dontrun{
 #'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
 #'   hpaXmlProtClass(CCNB1xml)
-#'   }
 #' 
-#' @import xml2
+#' @importFrom xml2 xml_find_all xml_attrs 
 #' @importFrom tibble as_tibble
 #' @export
 
@@ -102,13 +96,10 @@ hpaXmlProtClass <- function(importedXml) {
 #'   of 2 columns.
 #'
 #' @examples
-#'   print('Please run the example below in your console.')
-#'   \dontrun{
 #'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
 #'   hpaXmlTissueExprSum(CCNB1xml)
-#'   }
 #'   
-#' @import xml2
+#' @importFrom xml2 xml_find_all xml_find_first xml_text
 #' @import dplyr
 #' @importFrom tidyr spread
 #' @export
@@ -161,13 +152,10 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 #' @return This function returns a tibble of 4 columns.
 #' 
 #' @examples
-#'   print('Please run the example below in your console.')
-#'   \dontrun{
 #'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
 #'   hpaXmlAntibody(CCNB1xml)
-#'   }
 #'   
-#' @import xml2
+#' @importFrom xml2 xml_find_all xml_attrs
 #' @import dplyr
 #' @export
 
@@ -197,11 +185,8 @@ hpaXmlAntibody <- function(importedXml) {
 #' @return This function returns a list of tibbles, each for an antibody.
 #' 
 #' @examples
-#'   print('Please run the example below in your console.')
-#'   \dontrun{
 #'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
 #'   hpaXmlTissueExpr(CCNB1xml)
-#'   }
 #' 
 #' @import xml2
 #' @import dplyr
@@ -231,6 +216,8 @@ hpaXmlTissueExpr <- function(importedXml) {
 }
 
 ## Define patient_nodes_to_tibble() for simpler parsing =======================
+
+#' @importFrom xml2 xml_find_first xml_text xml_find_all xml_attrs 
 
 patient_nodes_to_tibble <- function(patientNodes) {
     lapply(patientNodes,
