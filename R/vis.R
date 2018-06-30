@@ -29,17 +29,6 @@
 #'                targetGene=geneList,
 #'                targetTissue=tissueList)
 #'                  
-#'   \dontrun{               
-#'   ## With more customization
-#'   colorList <- c('white', 'red', 'green', 'blue')
-#'   plot <- hpaVisTissue(data=hpa_downloaded_histology_v18,
-#'                          targetGene=geneList,
-#'                          targetTissue=tissueList,
-#'                          color=colorList,
-#'                          customTheme=TRUE)
-#'   plot + theme_minimal()
-#'   }
-#'
 #' @import dplyr
 #' @import ggplot2
 #' @export
@@ -116,18 +105,6 @@ hpaVisTissue <- function(data,
 #'   hpaVisPatho(data=hpa_downloaded_histology_v18,
 #'                  targetGene=geneList)
 #'
-#'   \dontrun{
-#'   ## With more customization
-#'   colorList <- c('yellow', 'red', 'green', 'blue')
-#'   plot <- hpaVisPatho(data=hpa_downloaded_histology_v18,
-#'                             targetGene=geneList,
-#'                             targetCancer=cancerList,
-#'                             color=colorList,
-#'                             customTheme=TRUE)
-#'   plot + theme_minimal()
-#'   }
-#'
-#'
 #' @import dplyr
 #' @import ggplot2
 #' @export
@@ -202,17 +179,6 @@ hpaVisPatho <- function(data,
 #'   hpaVisSubcell(data=hpa_downloaded_histology_v18,
 #'                   targetGene=geneList)
 #'   
-#'   \dontrun{
-#'   ## With more customization
-#'   colorList <- c('white', 'red')
-#'   plot <- hpaVisSubcell(data=hpa_downloaded_histology_v18,
-#'                           targetGene=geneList,
-#'                           color=colorList,
-#'                           customTheme=TRUE)
-#'   plot + theme_minimal()
-#'   }
-#' 
-#' 
 #' @import dplyr
 #' @import ggplot2
 #' @importFrom tidyr unnest
