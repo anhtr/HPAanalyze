@@ -34,15 +34,4 @@ Visualize the the confirmed subcellular locations of genes of interest.
   hpaVisSubcell(data=hpa_downloaded_histology_v18,
                   targetGene=geneList)
   
-  \dontrun{
-  ## With more customization
-  colorList <- c('white', 'red')
-  plot <- hpaVisSubcell(data=hpa_downloaded_histology_v18,
-                          targetGene=geneList,
-                          color=colorList,
-                          customTheme=TRUE)
-  plot + theme_minimal()
-  }
-
-
 }

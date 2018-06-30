@@ -41,15 +41,4 @@ types.
                targetGene=geneList,
                targetTissue=tissueList)
                  
-  \dontrun{               
-  ## With more customization
-  colorList <- c('white', 'red', 'green', 'blue')
-  plot <- hpaVisTissue(data=hpa_downloaded_histology_v18,
-                         targetGene=geneList,
-                         targetTissue=tissueList,
-                         color=colorList,
-                         customTheme=TRUE)
-  plot + theme_minimal()
-  }
-
 }

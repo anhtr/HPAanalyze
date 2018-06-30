@@ -54,13 +54,4 @@ very big.
   downloadedData <- hpaDownload(downloadList='all', version='example')
   summary(downloadedData)
   
-  \dontrun{
-  
-  ## download rna expression data
-  rna_data <- hpaDownload('rna')
-  
-  ## download normal tissue and subcellular location data
-  data <- hpaDownload(c('Normal tissue', 'Subcellular location'))
-  }
-     
 }

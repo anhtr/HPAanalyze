@@ -1,5 +1,6 @@
 0.99.11 Respond to Bioconductor review on Jun 11, 2018
     1. Remove '/ignore' folder
-    2. 
+    2. Import individual functions for xml2
+    3. Remove /dontrun{} on man pages
 
 0.99.10 Initital version reviewed by Bioconductor

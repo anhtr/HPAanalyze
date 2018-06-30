@@ -46,9 +46,5 @@ data.
                           targetGene=geneList,
                           targetTissue=tissueList,
                           targetCancer=cancerList)
-  \dontrun{
-  furtherSubsetData <- hpaSubset(data=subsetData,
-                                 targetGene='TP53')
-  }
 
 }

@@ -186,7 +186,8 @@ hpaXmlAntibody <- function(importedXml) {
 #' 
 #' @examples
 #'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlTissueExpr(CCNB1xml)
+#'   ## This example take an extended amount of time to run
+#'   ## hpaXmlTissueExpr(CCNB1xml)
 #' 
 #' @import xml2
 #' @import dplyr
