@@ -21,7 +21,8 @@ Imports: dplyr,
     magrittr,
     stats,
     utils,
-    hpar
+    hpar,
+    cowplot
 Suggests: knitr,
     rmarkdown,
     devtools,

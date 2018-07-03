@@ -4,7 +4,7 @@
 \alias{hpaVisSubcell}
 \title{Visualize subcellular location data}
 \usage{
-hpaVisSubcell(data, targetGene, color = c("white", "black"),
+hpaVisSubcell(data, targetGene, color = c("#ffffb2", "#e31a1c"),
   customTheme = FALSE)
 }
 \arguments{

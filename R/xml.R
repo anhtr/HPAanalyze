@@ -8,7 +8,7 @@
 #' function calls \code{xml2::read_xml()} under the hood.
 #'
 #' @param targetEnsemblId A string of one ensembl ID, start with ESNG. For
-#'   example \code{'ENSG00000134057'}
+#'   example \code{'ENSG00000131979'}
 #'
 #' @param version A string indicate which version to be downloaded. Possible
 #'   value:
@@ -24,7 +24,7 @@
 #'   information.
 #'
 #' @examples
-#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
+#'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'
 #' @importFrom xml2 read_xml download_xml
 #' @export
@@ -56,8 +56,8 @@ hpaXmlGet <- function(targetEnsemblId, version='latest') {
 #' @return This function return a tibble of 4 columns.
 #'
 #' @examples
-#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlProtClass(CCNB1xml)
+#'   GCH1xml <- hpaXmlGet('ENSG00000131979')
+#'   hpaXmlProtClass(GCH1xml)
 #' 
 #' @importFrom xml2 xml_find_all xml_attrs 
 #' @importFrom tibble as_tibble
@@ -96,8 +96,8 @@ hpaXmlProtClass <- function(importedXml) {
 #'   of 2 columns.
 #'
 #' @examples
-#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlTissueExprSum(CCNB1xml)
+#'   GCH1xml <- hpaXmlGet('ENSG00000131979')
+#'   hpaXmlTissueExprSum(GCH1xml)
 #'   
 #' @importFrom xml2 xml_find_all xml_find_first xml_text
 #' @import dplyr
@@ -152,8 +152,8 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 #' @return This function returns a tibble of 4 columns.
 #' 
 #' @examples
-#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
-#'   hpaXmlAntibody(CCNB1xml)
+#'   GCH1xml <- hpaXmlGet('ENSG00000131979')
+#'   hpaXmlAntibody(GCH1xml)
 #'   
 #' @importFrom xml2 xml_find_all xml_attrs
 #' @import dplyr
@@ -185,9 +185,8 @@ hpaXmlAntibody <- function(importedXml) {
 #' @return This function returns a list of tibbles, each for an antibody.
 #' 
 #' @examples
-#'   CCNB1xml <- hpaXmlGet('ENSG00000134057')
-#'   ## This example take an extended amount of time to run
-#'   ## hpaXmlTissueExpr(CCNB1xml)
+#'   GCH1xml <- hpaXmlGet('ENSG00000131979')
+#'   hpaXmlTissueExpr(GCH1xml)
 #' 
 #' @import xml2
 #' @import dplyr

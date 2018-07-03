@@ -22,7 +22,7 @@ Extract tissue expression information and url to download images from
 imported xml document resulted from \code{hpaXmlGet()}.
 }
 \examples{
-  CCNB1xml <- hpaXmlGet('ENSG00000134057')
-  hpaXmlTissueExprSum(CCNB1xml)
+  GCH1xml <- hpaXmlGet('ENSG00000131979')
+  hpaXmlTissueExprSum(GCH1xml)
   
 }

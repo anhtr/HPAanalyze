@@ -2,5 +2,7 @@
     1. Remove '/ignore' folder
     2. Import individual functions for xml2
     3. Remove /dontrun{} on man pages
+    4. Add the hpaVis() functions for 
+    5. Modifications to hpaVis functions for better consistency.
 
 0.99.10 Initital version reviewed by Bioconductor

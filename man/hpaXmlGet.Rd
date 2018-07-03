@@ -8,7 +8,7 @@ hpaXmlGet(targetEnsemblId, version = "latest")
 }
 \arguments{
 \item{targetEnsemblId}{A string of one ensembl ID, start with ESNG. For
-example \code{'ENSG00000134057'}}
+example \code{'ENSG00000131979'}}
 
 \item{version}{A string indicate which version to be downloaded. Possible
 value:
@@ -29,6 +29,6 @@ Download and import individual xml file for a specified protein. This
 function calls \code{xml2::read_xml()} under the hood.
 }
 \examples{
-  CCNB1xml <- hpaXmlGet('ENSG00000134057')
+  GCH1xml <- hpaXmlGet('ENSG00000131979')
 
 }

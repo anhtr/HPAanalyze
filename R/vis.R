@@ -187,22 +187,22 @@ hpaVisPatho <- function(data,
 
 hpaVisSubcell <- function(data, 
                           targetGene, 
-                          color=c('white', 'black'),
+                          color=c('#ffffb2', '#e31a1c'),
                           customTheme=FALSE) {
     
     plotData <- data$subcellular_location %>%
         filter(gene %in% targetGene) %>%
-        mutate(location=strsplit(go_id, ';')) %>%
-        unnest(location) %>%
-        select(location, gene) %>%
+        mutate(sub_location=strsplit(go_id, ';')) %>%
+        tidyr::unnest(sub_location) %>%
+        select(sub_location, gene) %>%
         table() %>%
         as_tibble() %>%
         mutate(n=factor(n, levels=c('0', '1')))
     
     levelColors <- c('0'=color[1],
-                     '1'=color[2])
+                     '1'=color[length(color)])
     
-    plot <- ggplot(plotData, aes(x=gene, y=location)) +
+    plot <- ggplot(plotData, aes(x=gene, y=sub_location)) +
         geom_tile(aes(fill=n), colour="grey50") +
         scale_x_discrete(limits=targetGene) +
         scale_fill_manual(values=levelColors)

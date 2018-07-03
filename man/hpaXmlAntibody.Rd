@@ -17,7 +17,7 @@ This function returns a tibble of 4 columns.
 Extract information about the antibodies used for a specific protein.
 }
 \examples{
-  CCNB1xml <- hpaXmlGet('ENSG00000134057')
-  hpaXmlAntibody(CCNB1xml)
+  GCH1xml <- hpaXmlGet('ENSG00000131979')
+  hpaXmlAntibody(GCH1xml)
   
 }
