@@ -166,7 +166,7 @@ hpaXml <- function(inputXml,
     xml_output <- list()
     
     # Test if input is a string or an xml object. If string, download the xml.
-    if (class(inputXml) == 'character') {
+    if (is.character(inputXml)) {
         inputXml <- hpaXmlGet(targetEnsemblId=inputXml,
                               version = 'latest')
     }
