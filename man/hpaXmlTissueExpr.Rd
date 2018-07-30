@@ -11,7 +11,13 @@ hpaXmlTissueExpr(importedXml)
 \code{hpaXmlGet()} call.}
 }
 \value{
-This function returns a list of tibbles, each for an antibody.
+This function returns a list of tibbles, each for an antibody. Each
+  tibble contains information about all individual samples and their
+  staining. Due to the variation in amount of information available for these
+  samples, the number of columns differs, but the tibble essentially
+  includes: patientId, age, sex, staining, intensity, quantity, location,
+  imageUrl, snomedCode, and tissueDescription. The last two items may have
+  more than one column each.
 }
 \description{
 Extract tissue expression information for each sample and url to download

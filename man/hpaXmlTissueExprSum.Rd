@@ -14,8 +14,10 @@ hpaXmlTissueExprSum(importedXml, downloadImg = FALSE)
 from the extracted urls into the working folder.}
 }
 \value{
-This function return a list consists of a summary string and a tibble
-  of 2 columns.
+This function return a list consists of a summary string, which is a
+  very brief description of the protein, and a tibble of 2 columns: tissue
+  (name of tissue available) and imageUrl (link to download the perspective
+  image)
 }
 \description{
 Extract tissue expression information and url to download images from
@@ -24,5 +26,5 @@ imported xml document resulted from \code{hpaXmlGet()}.
 \examples{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
   hpaXmlTissueExprSum(GCH1xml)
-  
+
 }

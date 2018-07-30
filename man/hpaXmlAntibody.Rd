@@ -11,7 +11,9 @@ hpaXmlAntibody(importedXml)
 \code{hpaXmlGet()} call.}
 }
 \value{
-This function returns a tibble of 4 columns.
+This function returns a tibble of 4 columns, containing information
+  about the antibodies used in the project for the inquired protein: id,
+  releaseDate, releaseVersion, and RRID.
 }
 \description{
 Extract information about the antibodies used for a specific protein.
@@ -19,5 +21,5 @@ Extract information about the antibodies used for a specific protein.
 \examples{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
   hpaXmlAntibody(GCH1xml)
-  
+
 }

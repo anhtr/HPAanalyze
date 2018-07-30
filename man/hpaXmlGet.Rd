@@ -21,8 +21,8 @@ value:
 }
 \value{
 This function return an object of class \code{"xml_document"
-  "xml_node"}. See documentations for package \code{xml2} for more
-  information.
+  "xml_node"} containing the content of the imported XML file. (See
+  documentations for package \code{xml2} for more information.)
 }
 \description{
 Download and import individual xml file for a specified protein. This

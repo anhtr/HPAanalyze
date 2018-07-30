@@ -16,12 +16,14 @@ hpaVisSubcell(data, targetGene, color = c("#ffffb2", "#e31a1c"),
 \item{color}{Vector of 2 colors used to depict if the protein expresses in a
 location or not.}
 
-\item{customTheme}{Logical argument. If \code{TRUE}, the function will
-return a barebone ggplot2 plot to be customized further.}
+\item{customTheme}{Logical argument. If \code{TRUE}, the function will return
+a barebone ggplot2 plot to be customized further.}
 }
 \value{
 This function will return a ggplot2 plot object, which can be further
-  modified if desirable.
+  modified if desirable. The subcellular location data is visualized as a
+  tile graph, in which the x axis includes the inquired proteins and the y
+  axis contain the subcellular locations.
 }
 \description{
 Visualize the the confirmed subcellular locations of genes of interest.
@@ -29,9 +31,9 @@ Visualize the the confirmed subcellular locations of genes of interest.
 \examples{
   data("hpa_downloaded_histology_v18")
   geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
-  
+
   ## A typical function call
   hpaVisSubcell(data=hpa_downloaded_histology_v18,
                   targetGene=geneList)
-  
+
 }

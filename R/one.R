@@ -28,9 +28,11 @@
 #'   \code{targetTissue}, \code{targetCellType}, \code{targetCancer}. See
 #'   documentation for individual hpaVis functions for more information.
 #'
-#' @return If multiple visType is chosen, this function will return If only one
-#'   visType is chosen, this function will return a ggplot2 plot object, which
-#'   can be further modified if desirable.
+#' @return If multiple visType is chosen, this function will return multiple
+#'   graphs in one panel. If only one visType is chosen, this function will
+#'   return a ggplot2 plot object, which can be further modified if desirable.
+#'   See help file for each of the hpaVis function for more information about
+#'   individual graphs.
 #'
 #' @examples
 #'   hpaVis()
@@ -148,7 +150,11 @@ hpaVis <- function(data=NULL,
 #'   functions for more information.
 #'
 #' @return This function returns a list. Each element of the list is information
-#'   extracted from the XML file specified using other hpaXml functions.
+#'   extracted from the XML file specified using other hpaXml functions. See
+#'   help file for each XML function for more information.
+#'
+#' @example hpaXml(inputXml='ENSG00000131979', extractType=c('ProtClass',
+#' 'TissueExprSum', 'Antibody'))
 #'
 #' @export
 

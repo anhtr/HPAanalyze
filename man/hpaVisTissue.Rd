@@ -20,12 +20,13 @@ hpaVisTissue(data, targetGene, targetTissue, targetCellType = NULL,
 
 \item{color}{Vector of 4 colors used to depict different expression levels.}
 
-\item{customTheme}{Logical argument. If \code{TRUE}, the function will
-return a barebone ggplot2 plot to be customized further.}
+\item{customTheme}{Logical argument. If \code{TRUE}, the function will return
+a barebone ggplot2 plot to be customized further.}
 }
 \value{
 This function will return a ggplot2 plot object, which can be further
-  modified if desirable.
+  modified if desirable. The tissue data is visualized as a heatmap: x axis
+  contains inquired protein and y axis contains tissue/cells of interest.
 }
 \description{
 Visualize the expression of protein of interest in each target tissue by cell
@@ -36,9 +37,9 @@ types.
   geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
   tissueList <- c('breast', 'cerebellum', 'skin 1')
 
-  ## A typical function call   
+  ## A typical function call
   hpaVisTissue(data=hpa_downloaded_histology_v18,
                targetGene=geneList,
                targetTissue=tissueList)
-                 
+
 }

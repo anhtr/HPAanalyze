@@ -31,9 +31,11 @@ functions being called behind the scene. These arguments includes
 documentation for individual hpaVis functions for more information.}
 }
 \value{
-If multiple visType is chosen, this function will return If only one
-  visType is chosen, this function will return a ggplot2 plot object, which
-  can be further modified if desirable.
+If multiple visType is chosen, this function will return multiple
+  graphs in one panel. If only one visType is chosen, this function will
+  return a ggplot2 plot object, which can be further modified if desirable.
+  See help file for each of the hpaVis function for more information about
+  individual graphs.
 }
 \description{
 This function is an universal visualization function that allow calling other

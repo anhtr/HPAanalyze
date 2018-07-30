@@ -21,7 +21,8 @@ functions for more information.}
 }
 \value{
 This function returns a list. Each element of the list is information
-  extracted from the XML file specified using other hpaXml functions.
+  extracted from the XML file specified using other hpaXml functions. See
+  help file for each XML function for more information.
 }
 \description{
 This function is the umbrella function for the hpaXml function family. It

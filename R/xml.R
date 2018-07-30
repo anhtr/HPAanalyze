@@ -20,8 +20,8 @@
 #'   }
 #'   
 #' @return This function return an object of class \code{"xml_document"
-#'   "xml_node"}. See documentations for package \code{xml2} for more
-#'   information.
+#'   "xml_node"} containing the content of the imported XML file. (See
+#'   documentations for package \code{xml2} for more information.)
 #'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
@@ -83,7 +83,7 @@ hpaXmlProtClass <- function(importedXml) {
 #######################################
 
 #' Extract tissue expression and download images
-#' 
+#'
 #' Extract tissue expression information and url to download images from
 #' imported xml document resulted from \code{hpaXmlGet()}.
 #'
@@ -92,13 +92,15 @@ hpaXmlProtClass <- function(importedXml) {
 #' @param downloadImg Logical argument. The function will download all image
 #'   from the extracted urls into the working folder.
 #'
-#' @return This function return a list consists of a summary string and a tibble
-#'   of 2 columns.
+#' @return This function return a list consists of a summary string, which is a
+#'   very brief description of the protein, and a tibble of 2 columns: tissue
+#'   (name of tissue available) and imageUrl (link to download the perspective
+#'   image)
 #'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlTissueExprSum(GCH1xml)
-#'   
+#'
 #' @importFrom xml2 xml_find_all xml_find_first xml_text
 #' @import dplyr
 #' @importFrom tidyr spread
@@ -143,18 +145,20 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 ##################################
 
 #' Extract antibody information
-#' 
+#'
 #' Extract information about the antibodies used for a specific protein.
-#' 
+#'
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
-#'   
-#' @return This function returns a tibble of 4 columns.
-#' 
+#'
+#' @return This function returns a tibble of 4 columns, containing information
+#'   about the antibodies used in the project for the inquired protein: id,
+#'   releaseDate, releaseVersion, and RRID.
+#'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlAntibody(GCH1xml)
-#'   
+#'
 #' @importFrom xml2 xml_find_all xml_attrs
 #' @import dplyr
 #' @export
@@ -175,19 +179,25 @@ hpaXmlAntibody <- function(importedXml) {
 #######################################
 
 #' Extract tissue expression details
-#' 
+#'
 #' Extract tissue expression information for each sample and url to download
 #' images from imported xml document resulted from \code{hpaXmlGet()}.
-#' 
+#'
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
-#'   
-#' @return This function returns a list of tibbles, each for an antibody.
-#' 
+#'
+#' @return This function returns a list of tibbles, each for an antibody. Each
+#'   tibble contains information about all individual samples and their
+#'   staining. Due to the variation in amount of information available for these
+#'   samples, the number of columns differs, but the tibble essentially
+#'   includes: patientId, age, sex, staining, intensity, quantity, location,
+#'   imageUrl, snomedCode, and tissueDescription. The last two items may have
+#'   more than one column each.
+#'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlTissueExpr(GCH1xml)
-#' 
+#'
 #' @import xml2
 #' @import dplyr
 #' @export
