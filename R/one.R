@@ -153,8 +153,9 @@ hpaVis <- function(data=NULL,
 #'   extracted from the XML file specified using other hpaXml functions. See
 #'   help file for each XML function for more information.
 #'
-#' @example hpaXml(inputXml='ENSG00000131979', extractType=c('ProtClass',
-#' 'TissueExprSum', 'Antibody'))
+#' @examples  
+#'   hpaXml(inputXml='ENSG00000131979', 
+#'          extractType=c('ProtClass', 'TissueExprSum', 'Antibody'))
 #'
 #' @export
 

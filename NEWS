@@ -1,3 +1,12 @@
+0.99.13 Respond to Bioconductor review on Aug 6, 2018
+    1. Minor changes:
+        - Re-name R/data.R to R/hpa_downloaded_histology_v18.R (issue #7)
+        
+
+0.99.12
+    1. Minor changes:
+        - Minor edit in hpaXml() function
+
 0.99.11 Respond to Bioconductor review on Jun 11, 2018
 
     1. Major changes:

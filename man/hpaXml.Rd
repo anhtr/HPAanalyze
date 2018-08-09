@@ -31,3 +31,9 @@ resulting from a \code{hpaXmlGet()} function call. By default, it will
 extract all information available for HPAanalyze user from the XML file by
 calling every hpaXml function and put all results into a list.
 }
+\examples{
+ 
+  hpaXml(inputXml='ENSG00000131979', 
+         extractType=c('ProtClass', 'TissueExprSum', 'Antibody'))
+
+}
