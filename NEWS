@@ -1,7 +1,9 @@
 0.99.13 Respond to Bioconductor review on Aug 6, 2018
     1. Minor changes:
+        - Fix example for hpaXml() (issue #5)
+        - Update documentation for hpa_downloaded_histology_v18 dataset (issue #6)
         - Re-name R/data.R to R/hpa_downloaded_histology_v18.R (issue #7)
-        
+        - 
 
 0.99.12
     1. Minor changes:
