@@ -18,12 +18,14 @@ plot all available cancer by default.}
 
 \item{color}{Vector of 4 colors used to depict different expression levels.}
 
-\item{customTheme}{Logical argument. If \code{TRUE}, the function will
-return a barebone ggplot2 plot to be customized further.}
+\item{customTheme}{Logical argument. If \code{TRUE}, the function will return
+a barebone ggplot2 plot to be customized further.}
 }
 \value{
 This function will return a ggplot2 plot object, which can be further
-  modified if desirable. The pathology data is visualized as multiple bar graphs, one for each type of cancer. For each bar graph, x axis contains the inquired protein and y axis contains the proportion of patients.
+  modified if desirable. The pathology data is visualized as multiple bar
+  graphs, one for each type of cancer. For each bar graph, x axis contains
+  the inquired protein and y axis contains the proportion of patients.
 }
 \description{
 Visualize the expression of genes of interest in each cancer.
@@ -37,4 +39,8 @@ Visualize the expression of genes of interest in each cancer.
   hpaVisPatho(data=hpa_downloaded_histology_v18,
                  targetGene=geneList)
 
+}
+\seealso{
+Other visualization functions: \code{\link{hpaVisSubcell}},
+  \code{\link{hpaVisTissue}}, \code{\link{hpaVis}}
 }

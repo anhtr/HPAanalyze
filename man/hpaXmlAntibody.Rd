@@ -23,3 +23,9 @@ Extract information about the antibodies used for a specific protein.
   hpaXmlAntibody(GCH1xml)
 
 }
+\seealso{
+Other xml functions: \code{\link{hpaXmlGet}},
+  \code{\link{hpaXmlProtClass}},
+  \code{\link{hpaXmlTissueExprSum}},
+  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+}

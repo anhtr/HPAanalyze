@@ -37,3 +37,7 @@ Visualize the the confirmed subcellular locations of genes of interest.
                   targetGene=geneList)
 
 }
+\seealso{
+Other visualization functions: \code{\link{hpaVisPatho}},
+  \code{\link{hpaVisTissue}}, \code{\link{hpaVis}}
+}

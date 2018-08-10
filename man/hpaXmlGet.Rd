@@ -11,13 +11,10 @@ hpaXmlGet(targetEnsemblId, version = "latest")
 example \code{'ENSG00000131979'}}
 
 \item{version}{A string indicate which version to be downloaded. Possible
-value:
-\itemize{
-  \item \code{'latest'}: Download latest version. 
-  \item \code{'v?'} with '?' is a integer: Download a specific version of
-  the dataset. For example: 'v18' download version 18. Currently support
-  version 13 and above.
-}}
+value: \itemize{ \item \code{'latest'}: Download latest version. \item
+\code{'v?'} with '?' is a integer: Download a specific version of the
+dataset. For example: 'v18' download version 18. Currently support version
+13 and above. }}
 }
 \value{
 This function return an object of class \code{"xml_document"
@@ -31,4 +28,10 @@ function calls \code{xml2::read_xml()} under the hood.
 \examples{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
 
+}
+\seealso{
+Other xml functions: \code{\link{hpaXmlAntibody}},
+  \code{\link{hpaXmlProtClass}},
+  \code{\link{hpaXmlTissueExprSum}},
+  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
 }

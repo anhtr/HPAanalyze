@@ -37,3 +37,9 @@ calling every hpaXml function and put all results into a list.
          extractType=c('ProtClass', 'TissueExprSum', 'Antibody'))
 
 }
+\seealso{
+Other xml functions: \code{\link{hpaXmlAntibody}},
+  \code{\link{hpaXmlGet}}, \code{\link{hpaXmlProtClass}},
+  \code{\link{hpaXmlTissueExprSum}},
+  \code{\link{hpaXmlTissueExpr}}
+}

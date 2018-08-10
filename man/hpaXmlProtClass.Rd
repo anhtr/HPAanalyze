@@ -22,3 +22,9 @@ Extract protein class information from imported xml document resulted from
   hpaXmlProtClass(GCH1xml)
 
 }
+\seealso{
+Other xml functions: \code{\link{hpaXmlAntibody}},
+  \code{\link{hpaXmlGet}},
+  \code{\link{hpaXmlTissueExprSum}},
+  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+}

@@ -16,6 +16,14 @@ hpa_downloaded_histology_v18
 \description{
 Dataset downloaded with \code{hpaDownload('histology', version = 'v18')}.
 }
+\details{
+Links to original data:
+\itemize{
+    \item {https://v18.proteinatlas.org/download/normal_tissue.tsv.zip}
+    \item {https://v18.proteinatlas.org/download/pathology.tsv.zip}
+    \item {https://v18.proteinatlas.org/download/subcellular_location.tsv.zip}
+}
+}
 \examples{
   # load data
   data("hpa_downloaded_histology_v18")
@@ -26,11 +34,6 @@ Dataset downloaded with \code{hpaDownload('histology', version = 'v18')}.
   subcell_location_data <- hpa_downloaded_histology_v18$subcellular_location
 }
 \seealso{
-Links to original data:
-\itemize{
-    \item {https://v18.proteinatlas.org/download/normal_tissue.tsv.zip}
-    \item {https://v18.proteinatlas.org/download/pathology.tsv.zip}
-    \item {https://v18.proteinatlas.org/download/subcellular_location.tsv.zip}
-}
+\code{\link{hpaDownload}}
 }
 \keyword{datasets}

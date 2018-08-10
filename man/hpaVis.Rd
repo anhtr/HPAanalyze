@@ -50,3 +50,9 @@ create the plot.
   hpaVis()
 
 }
+\seealso{
+\code{\link{hpaDownload}}, \code{\link{hpaSubset}}
+
+Other visualization functions: \code{\link{hpaVisPatho}},
+  \code{\link{hpaVisSubcell}}, \code{\link{hpaVisTissue}}
+}

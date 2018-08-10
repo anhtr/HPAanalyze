@@ -33,6 +33,9 @@
 #'   return a ggplot2 plot object, which can be further modified if desirable.
 #'   See help file for each of the hpaVis function for more information about
 #'   individual graphs.
+#'   
+#' @seealso \code{\link{hpaDownload}}, \code{\link{hpaSubset}}
+#' @family visualization functions
 #'
 #' @examples
 #'   hpaVis()
@@ -152,6 +155,8 @@ hpaVis <- function(data=NULL,
 #' @return This function returns a list. Each element of the list is information
 #'   extracted from the XML file specified using other hpaXml functions. See
 #'   help file for each XML function for more information.
+#'   
+#' @family xml functions
 #'
 #' @examples  
 #'   hpaXml(inputXml='ENSG00000131979', 

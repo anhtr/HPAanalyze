@@ -11,17 +11,16 @@
 #'   example \code{'ENSG00000131979'}
 #'
 #' @param version A string indicate which version to be downloaded. Possible
-#'   value:
-#'   \itemize{
-#'     \item \code{'latest'}: Download latest version. 
-#'     \item \code{'v?'} with '?' is a integer: Download a specific version of
-#'     the dataset. For example: 'v18' download version 18. Currently support
-#'     version 13 and above.
-#'   }
-#'   
+#'   value: \itemize{ \item \code{'latest'}: Download latest version. \item
+#'   \code{'v?'} with '?' is a integer: Download a specific version of the
+#'   dataset. For example: 'v18' download version 18. Currently support version
+#'   13 and above. }
+#'
 #' @return This function return an object of class \code{"xml_document"
 #'   "xml_node"} containing the content of the imported XML file. (See
 #'   documentations for package \code{xml2} for more information.)
+#'
+#' @family xml functions
 #'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
@@ -54,6 +53,8 @@ hpaXmlGet <- function(targetEnsemblId, version='latest') {
 #'   \code{hpaXmlGet()} call.
 #'
 #' @return This function return a tibble of 4 columns.
+#' 
+#' @family xml functions
 #'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
@@ -96,6 +97,8 @@ hpaXmlProtClass <- function(importedXml) {
 #'   very brief description of the protein, and a tibble of 2 columns: tissue
 #'   (name of tissue available) and imageUrl (link to download the perspective
 #'   image)
+#'   
+#' @family xml functions
 #'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
@@ -154,6 +157,8 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 #' @return This function returns a tibble of 4 columns, containing information
 #'   about the antibodies used in the project for the inquired protein: id,
 #'   releaseDate, releaseVersion, and RRID.
+#'   
+#' @family xml functions
 #'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
@@ -193,6 +198,8 @@ hpaXmlAntibody <- function(importedXml) {
 #'   includes: patientId, age, sex, staining, intensity, quantity, location,
 #'   imageUrl, snomedCode, and tissueDescription. The last two items may have
 #'   more than one column each.
+#'   
+#' @family xml functions
 #'
 #' @examples
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')

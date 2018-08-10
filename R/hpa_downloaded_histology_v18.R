@@ -2,19 +2,22 @@
 #' 
 #' Dataset downloaded with \code{hpaDownload('histology', version = 'v18')}.
 #' 
-#' @seealso Links to original data:
-#' \itemize{
-#'     \item {https://v18.proteinatlas.org/download/normal_tissue.tsv.zip}
-#'     \item {https://v18.proteinatlas.org/download/pathology.tsv.zip}
-#'     \item {https://v18.proteinatlas.org/download/subcellular_location.tsv.zip}
-#' }
-#' 
 #' @format A list of 3 tibbles
 #' \describe{
 #'     \item{normal_tissue}{Normal tissue IHC data}
 #'     \item{pathology}{Cancer IHC data}
 #'     \item{subcellular_location}{Subcellular location IF data}
 #' }
+#'
+#' @details Links to original data:
+#' \itemize{
+#'     \item {https://v18.proteinatlas.org/download/normal_tissue.tsv.zip}
+#'     \item {https://v18.proteinatlas.org/download/pathology.tsv.zip}
+#'     \item {https://v18.proteinatlas.org/download/subcellular_location.tsv.zip}
+#' }
+#' 
+#' @seealso
+#' \code{\link{hpaDownload}}
 #' 
 #' @examples 
 #'   # load data

@@ -43,3 +43,7 @@ types.
                targetTissue=tissueList)
 
 }
+\seealso{
+Other visualization functions: \code{\link{hpaVisPatho}},
+  \code{\link{hpaVisSubcell}}, \code{\link{hpaVis}}
+}

@@ -19,6 +19,8 @@
 #' @return This function will return a ggplot2 plot object, which can be further
 #'   modified if desirable. The tissue data is visualized as a heatmap: x axis
 #'   contains inquired protein and y axis contains tissue/cells of interest.
+#'   
+#' @family visualization functions
 #'
 #' @examples
 #'   data("hpa_downloaded_histology_v18")
@@ -91,11 +93,15 @@ hpaVisTissue <- function(data,
 #' @param targetCancer Vector of strings of normal tissues. The function will
 #'   plot all available cancer by default.
 #' @param color Vector of 4 colors used to depict different expression levels.
-#' @param customTheme Logical argument. If \code{TRUE}, the function will
-#'   return a barebone ggplot2 plot to be customized further.
+#' @param customTheme Logical argument. If \code{TRUE}, the function will return
+#'   a barebone ggplot2 plot to be customized further.
 #'
 #' @return This function will return a ggplot2 plot object, which can be further
-#'   modified if desirable. The pathology data is visualized as multiple bar graphs, one for each type of cancer. For each bar graph, x axis contains the inquired protein and y axis contains the proportion of patients.
+#'   modified if desirable. The pathology data is visualized as multiple bar
+#'   graphs, one for each type of cancer. For each bar graph, x axis contains
+#'   the inquired protein and y axis contains the proportion of patients.
+#'   
+#' @family visualization functions
 #'
 #' @examples
 #'   data("hpa_downloaded_histology_v18")
@@ -173,6 +179,8 @@ hpaVisPatho <- function(data,
 #'   modified if desirable. The subcellular location data is visualized as a
 #'   tile graph, in which the x axis includes the inquired proteins and the y
 #'   axis contain the subcellular locations.
+#'   
+#' @family visualization functions
 #'
 #' @examples
 #'   data("hpa_downloaded_histology_v18")

@@ -55,3 +55,7 @@ very big.
   summary(downloadedData)
   
 }
+\seealso{
+Other downloadable datasets functions: \code{\link{hpaExport}},
+  \code{\link{hpaSubset}}
+}

@@ -3,7 +3,8 @@
         - Fix example for hpaXml() (issue #5)
         - Update documentation for hpa_downloaded_histology_v18 dataset (issue #6)
         - Re-name R/data.R to R/hpa_downloaded_histology_v18.R (issue #7)
-        - 
+        - Cross-reference documentations (issues #8, #9)
+        - Combining hpaListParam() and hpaSubset() on one man page (issue #10)
 
 0.99.12
     1. Minor changes:

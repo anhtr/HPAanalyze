@@ -39,3 +39,7 @@ recommended.
             fileType='xlsx')
 
 }
+\seealso{
+Other downloadable datasets functions: \code{\link{hpaDownload}},
+  \code{\link{hpaSubset}}
+}

@@ -28,3 +28,8 @@ imported xml document resulted from \code{hpaXmlGet()}.
   hpaXmlTissueExprSum(GCH1xml)
 
 }
+\seealso{
+Other xml functions: \code{\link{hpaXmlAntibody}},
+  \code{\link{hpaXmlGet}}, \code{\link{hpaXmlProtClass}},
+  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+}
