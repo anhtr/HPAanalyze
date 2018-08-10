@@ -67,7 +67,7 @@ hpaVis <- function(data=NULL,
     }
     
     # Generate a list of visType if choose 'all'
-    if (visType == 'all') {
+    if (identical(visType,'all')) {
         visType <- c('Tissue', 'Patho', 'Subcell')
     }
     
@@ -159,8 +159,7 @@ hpaVis <- function(data=NULL,
 #' @family xml functions
 #'
 #' @examples  
-#'   hpaXml(inputXml='ENSG00000131979', 
-#'          extractType=c('ProtClass', 'TissueExprSum', 'Antibody'))
+#'   hpaXml(inputXml='ENSG00000131979', extractType=c('ProtClass', 'TissueExprSum', 'Antibody'))
 #'
 #' @export
 
@@ -178,7 +177,7 @@ hpaXml <- function(inputXml,
     }
     
     # Generate a list of extractType
-    if (extractType == 'all') {
+    if (identical(extractType,'all')) {
         extractType <- c('ProtClass', 'TissueExprSum', 'Antibody', 'TissueExpr')
     }
     

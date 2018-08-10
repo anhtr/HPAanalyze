@@ -1,3 +1,8 @@
+0.99.14
+    1. Minor changes:
+        - Replace visType == 'all' in hpaVis() with identical(visType, 'all')
+        - Replace extractType == 'all' in hpaXml() with identical(extractType, 'all')
+
 0.99.13 Respond to Bioconductor review on Aug 6, 2018
     1. Minor changes:
         - Fix example for hpaXml() (issue #5)
