@@ -1,10 +1,20 @@
+0.99.17
+    + Minor changes:
+        - Standardize the NEWS file
+        - Add CITATION file
+
+0.99.16
+    + Minor changes:
+        - Update License. Now use GPL-3 instead of MIT.
+
 0.99.14
-    1. Minor changes:
+    + Minor changes:
         - Replace visType == 'all' in hpaVis() with identical(visType, 'all')
         - Replace extractType == 'all' in hpaXml() with identical(extractType, 'all')
 
-0.99.13 Respond to Bioconductor review on Aug 6, 2018
-    1. Minor changes:
+0.99.13 
+    + Respond to Bioconductor review on Aug 6, 2018
+    + Minor changes:
         - Fix example for hpaXml() (issue #5)
         - Update documentation for hpa_downloaded_histology_v18 dataset (issue #6)
         - Re-name R/data.R to R/hpa_downloaded_histology_v18.R (issue #7)
@@ -12,20 +22,22 @@
         - Combining hpaListParam() and hpaSubset() on one man page (issue #10)
 
 0.99.12
-    1. Minor changes:
+    + Minor changes:
         - Minor edit in hpaXml() function
 
-0.99.11 Respond to Bioconductor review on Jun 11, 2018
+0.99.11 
+    + Respond to Bioconductor review on Jun 11, 2018
 
-    1. Major changes:
+    + Major changes:
         - Add the hpaVis() function as an umbrella for the whole function family
         - Add the hpaXml() function as an umbrella for all XML extraction
         
-    2. Minor changes:
+    + Minor changes:
         - Remove the ignore/ directory
         - Import individual functions for xml2
         - Remove /dontrun{} on man pages
         - Modifications to hpaVis functions for better consistency
         - Updated the help files with details about output of each function
 
-0.99.10 Initital version reviewed by Bioconductor
+0.99.10 
+    + Initital version reviewed by Bioconductor
