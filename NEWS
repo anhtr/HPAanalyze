@@ -1,3 +1,8 @@
+0.99.18
+    + Minor changes:
+        - Add 'journal' to CITATION
+        - Add '+ file LICENSE' to DESCRIPTION
+
 0.99.17
     + Minor changes:
         - Standardize the NEWS file

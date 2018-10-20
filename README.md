@@ -24,12 +24,22 @@ The Human Protein Atlas project provides data via two main mechanisms: *Full dat
 
 #### Obtaining *HPAanalyze*
 
-The development version of *HPAanalyze* is available on Github can be installed with:  
+The stable version of *HPAanalyze* is available via Bioconductor:
+
+```
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("HPAanalyze", version = "devel")
+```
+
+The development version of *HPAanalyze* is available on Github can be installed with: 
  
 ```
 install.packages(devtools)
 devtools::install_github("trannhatanh89/HPAanalyze")
 ```
+
+
 #### Full dataset import, subsetting and export
 
 The `hpaDownload()` function downloads full datasets from HPA and imports them into R as a list of tibbles, the standard object of *tidyverse*, which can subsequently be subset with `hpaSubset()` and export into .xmlx files with `hpaExport()`. The standard object allow the imported data to be further processed in a traditional R workflow. The ability to quickly subset and export data gives researchers the option to use other non-R downstream tools, such as GraphPad for creating publication-quality graphics, or share a subset of data containing only proteins of interest.
