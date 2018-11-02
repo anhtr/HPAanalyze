@@ -33,3 +33,4 @@ Other xml functions: \code{\link{hpaXmlAntibody}},
   \code{\link{hpaXmlGet}}, \code{\link{hpaXmlProtClass}},
   \code{\link{hpaXmlTissueExprSum}}, \code{\link{hpaXml}}
 }
+\concept{xml functions}

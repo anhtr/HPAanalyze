@@ -59,3 +59,4 @@ very big.
 Other downloadable datasets functions: \code{\link{hpaExport}},
   \code{\link{hpaSubset}}
 }
+\concept{downloadable datasets functions}

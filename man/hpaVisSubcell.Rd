@@ -41,3 +41,4 @@ Visualize the the confirmed subcellular locations of genes of interest.
 Other visualization functions: \code{\link{hpaVisPatho}},
   \code{\link{hpaVisTissue}}, \code{\link{hpaVis}}
 }
+\concept{visualization functions}

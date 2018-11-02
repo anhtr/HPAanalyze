@@ -68,3 +68,4 @@ call of \code{hpaSubset()}.
 Other downloadable datasets functions: \code{\link{hpaDownload}},
   \code{\link{hpaExport}}
 }
+\concept{downloadable datasets functions}

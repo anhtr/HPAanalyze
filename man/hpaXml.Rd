@@ -33,8 +33,7 @@ calling every hpaXml function and put all results into a list.
 }
 \examples{
  
-  hpaXml(inputXml='ENSG00000131979', 
-         extractType=c('ProtClass', 'TissueExprSum', 'Antibody'))
+  hpaXml(inputXml='ENSG00000131979', extractType=c('ProtClass', 'TissueExprSum', 'Antibody'))
 
 }
 \seealso{
@@ -43,3 +42,4 @@ Other xml functions: \code{\link{hpaXmlAntibody}},
   \code{\link{hpaXmlTissueExprSum}},
   \code{\link{hpaXmlTissueExpr}}
 }
+\concept{xml functions}

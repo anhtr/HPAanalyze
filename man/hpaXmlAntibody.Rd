@@ -29,3 +29,4 @@ Other xml functions: \code{\link{hpaXmlGet}},
   \code{\link{hpaXmlTissueExprSum}},
   \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
 }
+\concept{xml functions}

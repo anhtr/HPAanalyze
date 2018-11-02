@@ -463,18 +463,11 @@ hpaListParam <- function(data) {
 #'             fileName='TP53_EGFR_in_tissue_cancer.xlsx',
 #'             fileType='xlsx')
 #'
-#' @importFrom XLConnect loadWorkbook createSheet writeWorksheet saveWorkbook
+#' @importFrom openxlsx write.xlsx
 #' @export
 
 hpaExport <- function(data, fileName, fileType='xlsx') {
     if(fileType == 'xlsx') {
-        wb <- loadWorkbook(filename=fileName, create=TRUE)
-        createSheet(wb, name=names(data))
-        sheetIndex=0
-        for (x in data) {
-            sheetIndex=sheetIndex + 1
-            writeWorksheet(wb, data=x, sheet=names(data)[sheetIndex])
-        }
-        saveWorkbook(wb)
+        write.xlsx(data, file = fileName)
     }
 }

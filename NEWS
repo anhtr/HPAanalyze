@@ -1,52 +1,60 @@
+1.1.1
+* Major change
+    + HPAanalyze now uses openxlsx for hpaExport() instead of XLConnect.
+
+1.1.0
+* Starting devel for Bioconductor 3.9
+
+1.0.0
+* Official relase in Bioconductor 3.8
+
 0.99.19
-    + Minor change:
-        - Update CITATION
+* Minor change:
+    + Update CITATION
 
 0.99.18
-    + Minor changes:
-        - Add 'journal' to CITATION
-        - Add '+ file LICENSE' to DESCRIPTION
+* Minor changes
+    + Add 'journal' to CITATION
+    + Add '+ file LICENSE' to DESCRIPTION
 
 0.99.17
-    + Minor changes:
-        - Standardize the NEWS file
-        - Add CITATION file
+* Minor changes
+    + Standardize the NEWS file
+    + Add CITATION file
 
 0.99.16
-    + Minor changes:
-        - Update License. Now use GPL-3 instead of MIT.
+* Minor changes
+    + Update License. Now use GPL-3 instead of MIT.
 
 0.99.14
-    + Minor changes:
-        - Replace visType == 'all' in hpaVis() with identical(visType, 'all')
-        - Replace extractType == 'all' in hpaXml() with identical(extractType, 'all')
+* Minor changes
+    + Replace visType == 'all' in hpaVis() with identical(visType, 'all')
+    + Replace extractType == 'all' in hpaXml() with identical(extractType, 'all')
 
 0.99.13 
-    + Respond to Bioconductor review on Aug 6, 2018
-    + Minor changes:
-        - Fix example for hpaXml() (issue #5)
-        - Update documentation for hpa_downloaded_histology_v18 dataset (issue #6)
-        - Re-name R/data.R to R/hpa_downloaded_histology_v18.R (issue #7)
-        - Cross-reference documentations (issues #8, #9)
-        - Combining hpaListParam() and hpaSubset() on one man page (issue #10)
+* Respond to Bioconductor review on Aug 6, 2018
+* Minor changes
+    + Fix example for hpaXml() (issue #5)
+    + Update documentation for hpa_downloaded_histology_v18 dataset (issue #6)
+    + Re-name R/data.R to R/hpa_downloaded_histology_v18.R (issue #7)
+    + Cross-reference documentations (issues #8, #9)
+    + Combining hpaListParam() and hpaSubset() on one man page (issue #10)
 
 0.99.12
-    + Minor changes:
-        - Minor edit in hpaXml() function
+* Minor changes:
+    + Minor edit in hpaXml() function
 
 0.99.11 
-    + Respond to Bioconductor review on Jun 11, 2018
-
-    + Major changes:
-        - Add the hpaVis() function as an umbrella for the whole function family
-        - Add the hpaXml() function as an umbrella for all XML extraction
-        
-    + Minor changes:
-        - Remove the ignore/ directory
-        - Import individual functions for xml2
-        - Remove /dontrun{} on man pages
-        - Modifications to hpaVis functions for better consistency
-        - Updated the help files with details about output of each function
+* Respond to Bioconductor review on Jun 11, 2018
+* Major changes
+    + Add the hpaVis() function as an umbrella for the whole function family
+    + Add the hpaXml() function as an umbrella for all XML extraction
+* Minor changes
+    + Remove the ignore/ directory
+    + Import individual functions for xml2
+    + Remove /dontrun{} on man pages
+    + Modifications to hpaVis functions for better consistency
+    + Updated the help files with details about output of each function
 
 0.99.10 
     + Initital version reviewed by Bioconductor

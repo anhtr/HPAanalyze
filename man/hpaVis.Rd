@@ -56,3 +56,4 @@ create the plot.
 Other visualization functions: \code{\link{hpaVisPatho}},
   \code{\link{hpaVisSubcell}}, \code{\link{hpaVisTissue}}
 }
+\concept{visualization functions}
