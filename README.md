@@ -29,14 +29,13 @@ The stable version of *HPAanalyze* is available via Bioconductor:
 ```
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-BiocManager::install("HPAanalyze")
+BiocManager::install("HPAanalyze", version = "devel")
 ```
 
 The development version of *HPAanalyze* is available on Github can be installed with: 
  
 ```
-if (!requireNamespace("devtools", quietly = TRUE))
-    install.packages("devtools")
+install.packages(devtools)
 devtools::install_github("trannhatanh89/HPAanalyze")
 ```
 
