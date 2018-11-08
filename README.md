@@ -37,6 +37,7 @@ The development version of *HPAanalyze* is available on Github can be installed 
 ```
 if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
+devtools::install_github("trannhatanh89/HPAanalyze")
 ```
 
 #### Full dataset import, subsetting and export
