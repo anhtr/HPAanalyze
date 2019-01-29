@@ -1,6 +1,8 @@
 HPAanalyze
 ==========
 
+[![DOI](https://img.shields.io/badge/doi-10.1101%2F355032%20-brightgreen.svg)](https://doi.org/10.1101/355032)
+
 -   **Background:** The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics.
 -   **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
 -   **Conclusions:** `HPAanalyze` intergrates into the R workflow via the `tidyverse` philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.
@@ -25,11 +27,17 @@ Overview
 
 The stable version of *HPAanalyze* should be downloaded from Bioconductor:
 
-\``if (!requireNamespace("BiocManager", quietly = TRUE))     install.packages("BiocManager") BiocManager::install("HPAanalyze")`
+``` r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("HPAanalyze")
+```
 
 The development version of *HPAanalyze* is available on Github can be installed with:
 
-`devtools::install_github("trannhatanh89/HPAanalyze")`
+``` r
+devtools::install_github("trannhatanh89/HPAanalyze")
+```
 
 ### Full dataset import, subsetting and export
 
