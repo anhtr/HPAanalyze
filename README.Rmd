@@ -1,0 +1,163 @@
+---
+title: "Working with HPAanalyze package"
+author:
+- name: Anh N. Tran
+  affiliation: University of Alabama at Birmingham, Alabama, USA
+  email: trannhatanh89@gmail.com
+- name: Anita B. Hjelmeland
+  affiliation: University of Alabama at Birmingham, Alabama, USA
+date: "`r Sys.Date()`"
+output: 
+    md_document:
+        variant: markdown_github
+vignette: >
+  %\VignetteIndexEntry{"Working with HPAanalyze package"}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE,
+  comment="#>",
+  warning=FALSE,
+  message=FALSE,
+  error=FALSE
+)
+```
+
+# HPAanalyze
+
+* **Background:** The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics.
+* **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
+* **Conclusions:** `HPAanalyze` intergrates into the R workflow via the `tidyverse` philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.  
+    
+**Keywords:** Human Protein Atlas, Proteomics, Homo Sapiens, Visualization, Software
+
+## Background
+
+The Human Protein Atlas (HPA) is a comprehensive resource for exploration of human proteome which contains a vast amount of proteomics and transcriptomics data generated from antibody-based tissue micro-array profiling and RNA deep-sequencing. 
+
+The program has generated protein expression profiles in human normal tissues with cell type-specific expression patterns, cancer and cell lines via an innovative immunohistochemistry-based approach. These profiles are accompanied by a large collection of high quality histological staining images, annotated with clinical data and quantification. The database also includes classification of protein into both functional classes (such as transcription factors or kinases) and project-related classes (such as candidate genes for cancer). Starting from version 4.0, the HPA includes subcellular location profiles generated based on confocal images of immunofluorescent stained cells. Together, these data provide a detailed picture of protein expression in human cells and tissues, facilitating tissue-based diagnostis and research.
+
+Data from the HPA are freely available via proteinatlas.org, allowing scientists to access and incorporate the data into their research. Previously, the R package *hpar* has been created for fast and easy programmatic access of HPA data. Here, we introduce *HPAanalyze*, an R package aims to simplify exploratory data analysis from those data, as well as provide other complementary functionality to *hpar*.
+
+## Overview
+
+*HPAanalyze* is designed to fullfill 3 main tasks: (1) Import, subsetting and export downloadable datasets; (2) Visualization of downloadable datasets for exploratory analysis; and (3) Working with the individual XML files. This package aims to serve researchers with little programming experience, but also allow power users to use the imported data as desired.
+
+### Obtaining *HPAanalyze*
+
+The stable version of *HPAanalyze* should be downloaded from Bioconductor:
+
+````
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("HPAanalyze")
+```
+
+The development version of *HPAanalyze* is available on Github can be installed with:  
+  
+`devtools::install_github("trannhatanh89/HPAanalyze")`
+
+### Full dataset import, subsetting and export
+
+The `hpaDownload()` function downloads full datasets from HPA and imports them into R as a list of tibbles, the standard object of *tidyverse*, which can subsequently be subset with `hpaSubset()` and export into .xmlx files with `hpaExport()`. The standard object allow the imported data to be further processed in a traditional R workflow. The ability to quickly subset and export data gives researchers the option to use other non-R downstream tools, such as GraphPad for creating publication-quality graphics, or share a subset of data containing only proteins of interest.
+
+### Visualization
+
+The `hpaVis` function family take the output of `hpaDownload()` (or `hpaSubset()`) provides quick visualization of the data, with the intention of aiding exploratory analysis. Nevertheless, the standard `ggplot` object output of these functions give users the option to further customize the plots for publication. All `hpaVis` functions share the same syntax for arguments: subsetting, specifying colors and opting to use custom themes.
+
+The first release of the *HPAanalyze* package includes three functions: `hpaVisTissue()` for the *normal tissue*, `hpaVisPatho()` for the *pathology/cancer*, and `hpaVisSubcell()` for the *subcellular location* datasets.
+
+### Individual xml import and image downloading
+
+The `hpaXml` function family import and extract data from individual XML entries from HPA. The `hpaXmlGet()` function downloads and imports data as  "xml_document"/"xml_node" object, which can subsequently be processed by other `hpaXml` functions. The XML format from HPA contains a wealth of information that may not be covered by this package. However, users can extract any data of interest from the imported XML file using the xml2 package.
+
+In the first release, *HPAanalyze* includes four functions for data extraction from HPA XML files: `hpaXmlProtClass()` for protein class information, `hpaTissueExprSum()` for summary of protein expression in tissue, `hpaXmlAntibody()` for a list of antibody used to stain for the protein of interest, and `hpaTissueExpr()` for a detailed data from each sample including clinical data and IHC scoring.
+
+`hpaTissueExprSum` and `hpaTissueExpr` provide download links to download relevant staining images, with the former function also gives the options to automate the downloading process.
+
+### Compatibility with `hpar` Bioconductor package
+
+Functionality| hpar                            | HPAanalyze 
+------------:|:--------------------------------|:--------------------------------
+Datasets     | Included in package             | Download from server or Import from hpar
+Query        | Ensembl id                      | HGNC symbol for datasets, Ensembl id for XML
+Data version | One stable version              | Latest by default, option to download older
+Release info | Access via functions            | N/A
+View relevant browser page | Via `getHPA` function | N/A
+Visualization| N/A                             | Exploratory via `hpaVis` functions
+XML          | N/A                             | Download and import via `hpaXml` functions
+Histology image| View by loading browser page  | Extract links via `hpaXml` functions
+
+: (\#tab:table) Complementary functionality between hpar and HPAanalyze
+
+## Future developments
+
+The package will continue to follow new updates of the HPA projects to ensure compatibility and functionality. More functions of the `hpaVis` and `hpaXml` family may also be added in future versions.
+
+# Availability and requirements
+
+* Project name: HPAanalyze
+* Project home page: https://github.com/trannhatanh89/HPAanalyze
+* Operating system(s): All platforms where R is available, including Windows, Linux, OS X
+* Programming language: R
+* Other requirements: R 3.5.0 or higher, and the R packages dplyr, xml2, ggplot2, readr, tibble, xml2, reshape2, tidyr, stats, utils, and hpar
+* License: GPL-3
+* Any restrictions to use by non-academics: Freely available to everyone
+
+# Abbreviations
+
+HPA: The Human Protein Atlas; XML: Extensible Markup Language
+
+# Declarations
+
+## Acknowledgements
+
+We appreciate the support of the National institutes of Health National Cancer Institute R01 CA151522 and funds from the Department of Cell, Developmental and Integrative Biology at the University of Alabama at Birmingham.
+
+## Authors' contributions
+
+ANT created the R package and drafted the manuscript. ABH supervised the project and revised the manuscript. All authors read and approved the final manuscript.
+
+# References
+
+1. L. Berglund et al., A genecentric Human Protein Atlas for expression profiles based on antibodies. Mol Cell Proteomics 7, 2019-2027 (2008). 
+
+2. F. Pontén, K. Jirström, M. Uhlen, The Human Protein Atlas--a tool for pathology. J Pathol 216, 387-393 (2008). 
+
+3. P. J. Thul et al., A subcellular map of the human proteome. Science 356,  (2017). 
+
+4. M. Uhlén et al., A human protein atlas for normal and cancer tissues based on antibody proteomics. Mol Cell Proteomics 4, 1920-1932 (2005). 
+
+5. M. Uhlén et al., Proteomics. Tissue-based map of the human proteome. Science 347, 1260419 (2015). 
+
+6. M. Uhlen et al., Towards a knowledge-based Human Protein Atlas. Nat Biotechnol 28, 1248-1250 (2010). 
+
+7. M. Uhlen et al., A pathology atlas of the human cancer transcriptome. Science 357,  (2017). 
+
+8. Gatto L (2018). hpar: Human Protein Atlas in R. R package version 1.24.0. 
+
+9. H. Wickham, Ggplot2 : elegant graphics for data analysis. Use R! (Springer, New York, 2009), pp. viii, 212 p. 
+
+10. Cameron, W. Brennan et al., The Somatic Genomic Landscape of Glioblastoma. Cell 155, 462-477 (2013). 
+
+11. D. Koul, PTEN signaling pathways in glioblastoma. Cancer Biol Ther 7, 1321-1325 (2008). 
+
+12. K. R. Auger, L. A. Serunian, S. P. Soltoff, P. Libby, L. C. Cantley, PDGF-dependent tyrosine phosphorylation stimulates production of novel polyphosphoinositides in intact cells. Cell 57, 167-175 (1989). 
+
+13. J. A. Benitez et al., PTEN regulates glioblastoma oncogenesis through chromatin-associated complexes of DAXX and histone H3.3. Nat Commun 8, 15223 (2017). 
+
+14. A. N. Tran et al., Reactive species balance via GTP cyclohydrolase I regulates glioblastoma growth and tumor initiating cell maintenance. Neuro Oncol 20, 1055-1067 (2018). 
+
+15. T. A. N., B. N. H., W. Kiera, H. A. B., NOS Expression and NO Function in Glioma and Implications for Patient Therapies. Antioxidants & Redox Signaling 26, 986-999 (2017). 
+
+16. H. Haruki, M. G. Pedersen, K. I. Gorska, F. Pojer, K. Johnsson, Tetrahydrobiopterin Biosynthesis as an Off-Target of Sulfa Drugs. Science 340, 987-991 (2013). 
+
+17. M. J. Crabtree, A. L. Tatham, A. B. Hale, N. J. Alp, K. M. Channon, Critical Role for Tetrahydrobiopterin Recycling by Dihydrofolate Reductase in Regulation of Endothelial Nitric-oxide Synthase Coupling: RELATIVE IMPORTANCE OF THE DE NOVO BIOPTERIN SYNTHESIS VERSUS SALVAGE PATHWAYS. Journal of Biological Chemistry 284, 28128-28136 (2009). 
+
+# Copyright
+© Anh Tran et al. 2018
+
+

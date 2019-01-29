@@ -71,6 +71,14 @@ The Human Protein Atlas project provides data via two main mechanisms: *Full dat
 
 ### Obtaining *HPAanalyze*
 
+The stable version of *HPAanalyze* should be downloaded from Bioconductor:
+
+````
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("HPAanalyze")
+```
+
 The development version of *HPAanalyze* is available on Github can be installed with:  
   
 `devtools::install_github("trannhatanh89/HPAanalyze")`
