@@ -354,7 +354,7 @@ hpaVisTissue(downloadedData,
              targetTissue=tissueList)
 ```
 
-![](README_files/figure-markdown_github/visTissue,%20fig.wide-1.png)
+![](HPAanalyze_basics_files/figure-markdown_github/visTissue,%20fig.wide-1.png)
 
 ### Visualize expression in cancer with `hpaVisPatho()`
 
@@ -373,7 +373,7 @@ hpaVisPatho(downloadedData,
             color=colorGray)
 ```
 
-![](README_files/figure-markdown_github/visPatho,%20fig.wide-1.png)
+![](HPAanalyze_basics_files/figure-markdown_github/visPatho,%20fig.wide-1.png)
 
 ### Visualize subcellular location data with `hpaVisSubcell()`
 
@@ -395,7 +395,7 @@ hpaVisSubcell(downloadedData,
     ggplot2::coord_equal()
 ```
 
-![](README_files/figure-markdown_github/visSubcell-1.png)
+![](HPAanalyze_basics_files/figure-markdown_github/visSubcell-1.png)
 
 Working with individual xml files
 ---------------------------------
@@ -530,17 +530,17 @@ The package will continue to follow new updates of the HPA projects to ensure co
 Conclusion
 ==========
 
-TBA
+Using our R package HPAanalyze, we are able to retrieve, visualize and export data from the HPA program. Although it is a programmatic approach, which requires basic R programming skills, HPAanalyze was built with ease of use and reproducibility in mind, which makes the workflow and syntax very simple and straight-forward. With the case studies, we have also demonstrated how HPAanalyze can be easily integrated into different areas of research to identify new targets or provide more evidence for a working hypothesis. This software package is highly supportive of our research, and we plan to update it with new features and ensure future compatibility with the HPA program.
 
 Availability and requirements
 =============================
 
--   Project name: HPAanalysis
+-   Project name: HPAanalyze
 -   Project home page: <https://github.com/trannhatanh89/HPAanalyze>
 -   Operating system(s): All platforms where R is available, including Windows, Linux, OS X
 -   Programming language: R
--   Other requirements: R 3.5.0 or higher, and the R packages dplyr, XLConnect, ggplot2, readr, tibble, xml2, reshape2, tidyr, stats, utils, and hpar
--   License: MIT
+-   Other requirements: R 3.5.0 or higher, and the R packages dplyr, xml2, ggplot2, readr, tibble, xml2, reshape2, tidyr, stats, utils, and hpar
+-   License: GPL-3
 -   Any restrictions to use by non-academics: Freely available to everyone
 
 Abbreviations
@@ -564,12 +564,44 @@ ANT created the R package and drafted the manuscript. ABH supervised the project
 References
 ==========
 
-TBA
+1.  L. Berglund et al., A genecentric Human Protein Atlas for expression profiles based on antibodies. Mol Cell Proteomics 7, 2019-2027 (2008).
+
+2.  F. Pontén, K. Jirström, M. Uhlen, The Human Protein Atlas--a tool for pathology. J Pathol 216, 387-393 (2008).
+
+3.  P. J. Thul et al., A subcellular map of the human proteome. Science 356, (2017).
+
+4.  M. Uhlén et al., A human protein atlas for normal and cancer tissues based on antibody proteomics. Mol Cell Proteomics 4, 1920-1932 (2005).
+
+5.  M. Uhlén et al., Proteomics. Tissue-based map of the human proteome. Science 347, 1260419 (2015).
+
+6.  M. Uhlen et al., Towards a knowledge-based Human Protein Atlas. Nat Biotechnol 28, 1248-1250 (2010).
+
+7.  M. Uhlen et al., A pathology atlas of the human cancer transcriptome. Science 357, (2017).
+
+8.  Gatto L (2018). hpar: Human Protein Atlas in R. R package version 1.24.0.
+
+9.  H. Wickham, Ggplot2 : elegant graphics for data analysis. Use R! (Springer, New York, 2009), pp. viii, 212 p.
+
+10. Cameron, W. Brennan et al., The Somatic Genomic Landscape of Glioblastoma. Cell 155, 462-477 (2013).
+
+11. D. Koul, PTEN signaling pathways in glioblastoma. Cancer Biol Ther 7, 1321-1325 (2008).
+
+12. K. R. Auger, L. A. Serunian, S. P. Soltoff, P. Libby, L. C. Cantley, PDGF-dependent tyrosine phosphorylation stimulates production of novel polyphosphoinositides in intact cells. Cell 57, 167-175 (1989).
+
+13. J. A. Benitez et al., PTEN regulates glioblastoma oncogenesis through chromatin-associated complexes of DAXX and histone H3.3. Nat Commun 8, 15223 (2017).
+
+14. A. N. Tran et al., Reactive species balance via GTP cyclohydrolase I regulates glioblastoma growth and tumor initiating cell maintenance. Neuro Oncol 20, 1055-1067 (2018).
+
+15. T. A. N., B. N. H., W. Kiera, H. A. B., NOS Expression and NO Function in Glioma and Implications for Patient Therapies. Antioxidants & Redox Signaling 26, 986-999 (2017).
+
+16. H. Haruki, M. G. Pedersen, K. I. Gorska, F. Pojer, K. Johnsson, Tetrahydrobiopterin Biosynthesis as an Off-Target of Sulfa Drugs. Science 340, 987-991 (2013).
+
+17. M. J. Crabtree, A. L. Tatham, A. B. Hale, N. J. Alp, K. M. Channon, Critical Role for Tetrahydrobiopterin Recycling by Dihydrofolate Reductase in Regulation of Endothelial Nitric-oxide Synthase Coupling: RELATIVE IMPORTANCE OF THE DE NOVO BIOPTERIN SYNTHESIS VERSUS SALVAGE PATHWAYS. Journal of Biological Chemistry 284, 28128-28136 (2009).
 
 Copyright
 =========
 
-Â© Anh Tran et al. 2018
+© Anh Tran et al. 2018
 
 Session info
 ============
