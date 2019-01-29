@@ -8,6 +8,8 @@ author:
   affiliation: University of Alabama at Birmingham, Alabama, USA
 date: "`r Sys.Date()`"
 output: 
+    md_document:
+        variant: markdown_github
     BiocStyle::html_document:
         toc: true
         toc_depth: 2
@@ -15,8 +17,8 @@ output:
         number_sections: true
 vignette: >
   %\VignetteIndexEntry{"Working with HPAanalyze package"}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r setup, include=FALSE}
