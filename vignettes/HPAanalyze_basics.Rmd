@@ -8,8 +8,6 @@ author:
   affiliation: University of Alabama at Birmingham, Alabama, USA
 date: "`r Sys.Date()`"
 output: 
-    md_document:
-        variant: markdown_github
     BiocStyle::html_document:
         toc: true
         toc_depth: 2
