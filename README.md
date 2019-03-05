@@ -1,8 +1,6 @@
 HPAanalyze
 ==========
 
-[![Citation](https://img.shields.io/badge/doi-10.1101%2F355032%20-brightgreen.svg)](https://doi.org/10.1101/355032) [![Bioconductor](https://img.shields.io/badge/Bioconductor-10.18129%2FB9.bioc.HPAanalyze%20-brightgreen.svg)](https://doi.org/doi:10.18129/B9.bioc.HPAanalyze)
-
 -   **Background:** The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics.
 -   **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
 -   **Conclusions:** `HPAanalyze` intergrates into the R workflow via the `tidyverse` philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.
@@ -129,7 +127,7 @@ Availability and requirements
 -   Project home page: <https://github.com/trannhatanh89/HPAanalyze>
 -   Operating system(s): All platforms where R is available, including Windows, Linux, OS X
 -   Programming language: R
--   Other requirements: R 3.5.0 or higher, and the R packages dplyr, xml2, ggplot2, readr, tibble, xml2, reshape2, tidyr, stats, utils, and hpar
+-   Other requirements: R 3.5.0 or higher, and the R packages dplyr, xml2, ggplot2, readr, tibble, readxl, reshape2, tidyr, stats, utils, and hpar
 -   License: GPL-3
 -   Any restrictions to use by non-academics: Freely available to everyone
 
@@ -146,23 +144,18 @@ Acknowledgements
 
 We appreciate the support of the National institutes of Health National Cancer Institute R01 CA151522 and funds from the Department of Cell, Developmental and Integrative Biology at the University of Alabama at Birmingham.
 
-Authors' contributions
-----------------------
-
-ANT created the R package and drafted the manuscript. ABH supervised the project and revised the manuscript. All authors read and approved the final manuscript.
-
 References
 ==========
 
 1.  L. Berglund et al., A genecentric Human Protein Atlas for expression profiles based on antibodies. Mol Cell Proteomics 7, 2019-2027 (2008).
 
-2.  F. Pontén, K. Jirström, M. Uhlen, The Human Protein Atlas--a tool for pathology. J Pathol 216, 387-393 (2008).
+2.  F. Pont?n, K. Jirstr?m, M. Uhlen, The Human Protein Atlas--a tool for pathology. J Pathol 216, 387-393 (2008).
 
 3.  P. J. Thul et al., A subcellular map of the human proteome. Science 356, (2017).
 
-4.  M. Uhlén et al., A human protein atlas for normal and cancer tissues based on antibody proteomics. Mol Cell Proteomics 4, 1920-1932 (2005).
+4.  M. Uhl?n et al., A human protein atlas for normal and cancer tissues based on antibody proteomics. Mol Cell Proteomics 4, 1920-1932 (2005).
 
-5.  M. Uhlén et al., Proteomics. Tissue-based map of the human proteome. Science 347, 1260419 (2015).
+5.  M. Uhl?n et al., Proteomics. Tissue-based map of the human proteome. Science 347, 1260419 (2015).
 
 6.  M. Uhlen et al., Towards a knowledge-based Human Protein Atlas. Nat Biotechnol 28, 1248-1250 (2010).
 
@@ -191,4 +184,4 @@ References
 Copyright
 =========
 
-© Anh Tran et al. 2018
+? Anh Tran et al. 2018
