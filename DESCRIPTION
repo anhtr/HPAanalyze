@@ -10,6 +10,7 @@ Description: Provide functions for retrieving, exploratory analyzing and
 Depends: R (>= 3.5.0)
 License: GPL-3 + file LICENSE
 RoxygenNote: 6.1.1
+Encoding: UTF-8
 Imports: dplyr,
     openxlsx,
     ggplot2,
@@ -24,7 +25,6 @@ Imports: dplyr,
     hpar,
     cowplot
 Suggests: knitr,
-    rmarkdown,
     devtools,
     BiocStyle
 VignetteBuilder: knitr

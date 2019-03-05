@@ -15,7 +15,7 @@ output:
         number_sections: true
 vignette: >
   %\VignetteIndexEntry{"Working with HPAanalyze package"}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
