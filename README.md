@@ -127,7 +127,7 @@ Availability and requirements
 -   Project home page: <https://github.com/trannhatanh89/HPAanalyze>
 -   Operating system(s): All platforms where R is available, including Windows, Linux, OS X
 -   Programming language: R
--   Other requirements: R 3.5.0 or higher, and the R packages dplyr, xml2, ggplot2, readr, tibble, readxl, reshape2, tidyr, stats, utils, and hpar
+-   Other requirements: R 3.5.0 or higher, and the R packages dplyr, openxlsx, ggplot2, readr, tibble, xml2, reshape2, tidyr, magrittr, stats, utils, hpar, cowplot
 -   License: GPL-3
 -   Any restrictions to use by non-academics: Freely available to everyone
 
