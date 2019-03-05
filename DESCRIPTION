@@ -25,6 +25,7 @@ Imports: dplyr,
     hpar,
     cowplot
 Suggests: knitr,
+    rmarkdown,
     devtools,
     BiocStyle
 VignetteBuilder: knitr
