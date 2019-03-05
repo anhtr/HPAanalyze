@@ -18,8 +18,10 @@ Extract protein class information from imported xml document resulted from
 \code{hpaXmlGet()}.
 }
 \examples{
+\dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
   hpaXmlProtClass(GCH1xml)
+}
 
 }
 \seealso{

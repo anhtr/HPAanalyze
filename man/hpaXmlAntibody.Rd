@@ -19,8 +19,10 @@ This function returns a tibble of 4 columns, containing information
 Extract information about the antibodies used for a specific protein.
 }
 \examples{
+\dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
   hpaXmlAntibody(GCH1xml)
+}
 
 }
 \seealso{

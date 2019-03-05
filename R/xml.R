@@ -23,7 +23,9 @@
 #' @family xml functions
 #'
 #' @examples
+#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
+#' }
 #'
 #' @importFrom xml2 read_xml download_xml
 #' @export
@@ -45,22 +47,24 @@ hpaXmlGet <- function(targetEnsemblId, version='latest') {
 #############################
 
 #' Extract protein classes
-#'
+#' 
 #' Extract protein class information from imported xml document resulted from
 #' \code{hpaXmlGet()}.
-#'
+#' 
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
-#'
+#' 
 #' @return This function return a tibble of 4 columns.
 #' 
 #' @family xml functions
-#'
+#' 
 #' @examples
+#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlProtClass(GCH1xml)
+#' }
 #' 
-#' @importFrom xml2 xml_find_all xml_attrs 
+#' @importFrom xml2 xml_find_all xml_attrs
 #' @importFrom tibble as_tibble
 #' @export
 
@@ -101,8 +105,10 @@ hpaXmlProtClass <- function(importedXml) {
 #' @family xml functions
 #'
 #' @examples
+#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlTissueExprSum(GCH1xml)
+#' }
 #'
 #' @importFrom xml2 xml_find_all xml_find_first xml_text
 #' @import dplyr
@@ -161,8 +167,10 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 #' @family xml functions
 #'
 #' @examples
+#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlAntibody(GCH1xml)
+#' }
 #'
 #' @importFrom xml2 xml_find_all xml_attrs
 #' @import dplyr
@@ -202,8 +210,10 @@ hpaXmlAntibody <- function(importedXml) {
 #' @family xml functions
 #'
 #' @examples
+#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlTissueExpr(GCH1xml)
+#' }
 #'
 #' @import xml2
 #' @import dplyr

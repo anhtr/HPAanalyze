@@ -15,8 +15,8 @@ output:
         number_sections: true
 vignette: >
   %\VignetteIndexEntry{"Working with HPAanalyze package"}
-  %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -421,13 +421,13 @@ ANT created the R package and drafted the manuscript. ABH supervised the project
 
 1. L. Berglund et al., A genecentric Human Protein Atlas for expression profiles based on antibodies. Mol Cell Proteomics 7, 2019-2027 (2008). 
 
-2. F. Pontén, K. Jirström, M. Uhlen, The Human Protein Atlas--a tool for pathology. J Pathol 216, 387-393 (2008). 
+2. F. Pont?n, K. Jirstr?m, M. Uhlen, The Human Protein Atlas--a tool for pathology. J Pathol 216, 387-393 (2008). 
 
 3. P. J. Thul et al., A subcellular map of the human proteome. Science 356,  (2017). 
 
-4. M. Uhlén et al., A human protein atlas for normal and cancer tissues based on antibody proteomics. Mol Cell Proteomics 4, 1920-1932 (2005). 
+4. M. Uhl?n et al., A human protein atlas for normal and cancer tissues based on antibody proteomics. Mol Cell Proteomics 4, 1920-1932 (2005). 
 
-5. M. Uhlén et al., Proteomics. Tissue-based map of the human proteome. Science 347, 1260419 (2015). 
+5. M. Uhl?n et al., Proteomics. Tissue-based map of the human proteome. Science 347, 1260419 (2015). 
 
 6. M. Uhlen et al., Towards a knowledge-based Human Protein Atlas. Nat Biotechnol 28, 1248-1250 (2010). 
 
@@ -454,7 +454,7 @@ ANT created the R package and drafted the manuscript. ABH supervised the project
 17. M. J. Crabtree, A. L. Tatham, A. B. Hale, N. J. Alp, K. M. Channon, Critical Role for Tetrahydrobiopterin Recycling by Dihydrofolate Reductase in Regulation of Endothelial Nitric-oxide Synthase Coupling: RELATIVE IMPORTANCE OF THE DE NOVO BIOPTERIN SYNTHESIS VERSUS SALVAGE PATHWAYS. Journal of Biological Chemistry 284, 28128-28136 (2009). 
 
 # Copyright
-© Anh Tran et al. 2018
+? Anh Tran et al. 2018
 
 # Session info
 ```{r echo=FALSE}

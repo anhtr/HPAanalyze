@@ -24,8 +24,10 @@ Extract tissue expression information for each sample and url to download
 images from imported xml document resulted from \code{hpaXmlGet()}.
 }
 \examples{
+\dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
   hpaXmlTissueExpr(GCH1xml)
+}
 
 }
 \seealso{

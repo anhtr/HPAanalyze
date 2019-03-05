@@ -26,7 +26,9 @@ Download and import individual xml file for a specified protein. This
 function calls \code{xml2::read_xml()} under the hood.
 }
 \examples{
+\dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
+}
 
 }
 \seealso{
