@@ -44,6 +44,9 @@
 
 hpaVis <- function(data=NULL,
                    targetGene=NULL,
+                   targetTissue=NULL,
+                   targetCellType=NULL,
+                   targetCancer=NULL,
                    visType='all',
                    color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
                    customTheme=FALSE,
@@ -73,13 +76,13 @@ hpaVis <- function(data=NULL,
     
     # Make tissue plot
     if ('Tissue' %in% visType) {
-        if (!exists('targetTissue')) {
+        if (is.null(targetTissue)) {
             message('targetTissue variable not specified, default to breast.')
             targetTissue <- 'breast'
             infoDisp <- TRUE
         }
         
-        if (!exists('targetCellType')) {
+        if (is.null(targetCellType)) {
             message('targetCellType variable not specified, visualize all.')
             targetCellType <- NULL
             infoDisp <- TRUE
@@ -95,7 +98,7 @@ hpaVis <- function(data=NULL,
     
     # Make cancer plot
     if ('Patho' %in% visType | 'Cancer' %in% visType) {
-        if (!exists('targetCancer')) {
+        if (is.null(targetCancer)) {
             message('targetCancer variable not specified, default to breast cancer')
             targetCancer <- 'breast cancer'
             infoDisp <- TRUE
