@@ -17,9 +17,15 @@
 #'   bundled with HPAanalyze, which is from version 18 of the HPA program.
 #' @param targetGene Vector of strings of HGNC gene symbols. By default it is
 #'   set to \code{c('TP53', 'RB1', 'MYC', 'KRAS', 'EGFR')}.
+#' @param targetTissue Vector of strings of normal tissue names. By default it
+#'   is set to \code{"breast"}.
+#' @param targetCellType Vector of strings of normal cell types. By default
+#'   inludes all available cell types in the target tissues.
+#' @param targetCancer Vector of strings of normal tissues. By default it
+#'   is set to \code{"breast cancer"}.
 #' @param visType Vector of strings indicating which plots will be generated.
-#'   Currently available values are \code{'all'}, \code{'Tissue'},
-#'   \code{'Patho'}, \code{Cancer}, \code{Subcell}.
+#'   Currently available values are \code{"all"}, \code{"Tissue"},
+#'   \code{"Patho"}, \code{"Cancer"}, \code{"Subcell"}.
 #' @param color Vector of 4 colors used to depict different expression levels.
 #' @param customTheme Logical argument. If \code{TRUE}, the function will return
 #'   a barebone ggplot2 plot to be customized further.
@@ -33,7 +39,7 @@
 #'   return a ggplot2 plot object, which can be further modified if desirable.
 #'   See help file for each of the hpaVis function for more information about
 #'   individual graphs.
-#'   
+#'
 #' @seealso \code{\link{hpaDownload}}, \code{\link{hpaSubset}}
 #' @family visualization functions
 #'
