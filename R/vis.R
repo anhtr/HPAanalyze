@@ -252,8 +252,8 @@ hpaVisPatho <- function(data=NULL,
 #' @importFrom tibble as_tibble
 #' @export
 
-hpaVisSubcell <- function(data, 
-                          targetGene, 
+hpaVisSubcell <- function(data=NULL, 
+                          targetGene=NULL, 
                           color=c('#ffffb2', '#e31a1c'),
                           customTheme=FALSE) {
     
