@@ -14,7 +14,7 @@ output:
         toc_float: true
         number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"Working with HPAanalyze package"}
+  %\VignetteIndexEntry{"HPAanalyze quick start guide"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
