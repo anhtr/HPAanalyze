@@ -36,12 +36,46 @@
 #' @import ggplot2
 #' @export
 
-hpaVisTissue <- function(data, 
-                         targetGene, 
-                         targetTissue, 
+hpaVisTissue <- function(data=NULL, 
+                         targetGene=NULL, 
+                         targetTissue=NULL, 
                          targetCellType=NULL,
                          color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
                          customTheme=FALSE) {
+    
+    infoDisp <- FALSE
+    
+    # Check if data is provided or not
+    if (is.null(data)) {
+        message('No data provided. Use version 18.')
+        data = HPAanalyze::hpa_downloaded_histology_v18
+    }
+    
+    # Check if targetGene is provided
+    if (is.null(targetGene)) {
+        message('targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.')
+        targetGene <- c('TP53', 'RB1', 'MYC', 'KRAS', 'EGFR')
+        infoDisp <- TRUE
+    }
+    
+    # Check if targetTissue is provided
+    if (is.null(targetTissue)) {
+        message('targetTissue variable not specified, default to breast.')
+        targetTissue <- 'breast'
+        infoDisp <- TRUE
+    }
+    
+    # Check if targetCellType is provided
+    if (is.null(targetCellType)) {
+        message('targetCellType variable not specified, visualize all.')
+        targetCellType <- NULL
+        infoDisp <- TRUE
+    }
+    
+    # Show a message if any parameter is not defined
+    if (infoDisp) {
+        message('Use hpaListParam() to list possible values for target variables.')
+    }
     
     plotData <- data$normal_tissue %>%
         filter(gene %in% targetGene) %>%
@@ -73,6 +107,8 @@ hpaVisTissue <- function(data,
             xlab('Genes') +
             theme(axis.text.x=element_text(angle=90, hjust=1))
     }
+    
+    
     
     return(plot)       
 }
