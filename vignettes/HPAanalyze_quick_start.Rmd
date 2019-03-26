@@ -1,0 +1,65 @@
+---
+title: "HPAanalyze quick start guide"
+author:
+- name: Anh N. Tran
+  affiliation: University of Alabama at Birmingham, Alabama, USA
+  email: trannhatanh89@gmail.com
+- name: Anita B. Hjelmeland
+  affiliation: University of Alabama at Birmingham, Alabama, USA
+date: "`r Sys.Date()`"
+output: 
+    BiocStyle::html_document:
+        toc: true
+        toc_depth: 2
+        toc_float: true
+        number_sections: true
+vignette: >
+  %\VignetteIndexEntry{"Working with HPAanalyze package"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE,
+  comment="#>",
+  warning=FALSE,
+  error=FALSE
+)
+```
+
+```{r library}
+library(BiocStyle)
+library(HPAanalyze)
+library(tibble)
+library(dplyr)
+library(ggplot2)
+library(hpar)
+```
+
+
+# Visualize protein expression data
+
+Currently, this is available for the normal tissue, pathology (cancers) and subcellular location datasets. The fastest and easiest way is to use the defaults of `hpaVis`. Of course, we cannot visualize everything in those big datasets, so some defauts will be used and you will receive some warning messages.
+
+```{r hpaVis_eg}
+hpaVis()
+```
+
+```{r}
+functionx <- function(x = 1, ...) {
+    ls()
+}
+    
+functionx(y = 1)
+```
+
+
+# Copyright
+Anh Tran, 2018
+
+# Session info
+```{r echo=FALSE}
+sessionInfo()
+```
+
