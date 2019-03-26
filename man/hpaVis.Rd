@@ -4,7 +4,8 @@
 \alias{hpaVis}
 \title{Visualize data in one function}
 \usage{
-hpaVis(data = NULL, targetGene = NULL, visType = "all",
+hpaVis(data = NULL, targetGene = NULL, targetTissue = NULL,
+  targetCellType = NULL, targetCancer = NULL, visType = "all",
   color = c("#ffffb2", "#fecc5c", "#fd8d3c", "#e31a1c"),
   customTheme = FALSE, ...)
 }
@@ -16,9 +17,18 @@ bundled with HPAanalyze, which is from version 18 of the HPA program.}
 \item{targetGene}{Vector of strings of HGNC gene symbols. By default it is
 set to \code{c('TP53', 'RB1', 'MYC', 'KRAS', 'EGFR')}.}
 
+\item{targetTissue}{Vector of strings of normal tissue names. By default it
+is set to \code{"breast"}.}
+
+\item{targetCellType}{Vector of strings of normal cell types. By default
+inludes all available cell types in the target tissues.}
+
+\item{targetCancer}{Vector of strings of normal tissues. By default it
+is set to \code{"breast cancer"}.}
+
 \item{visType}{Vector of strings indicating which plots will be generated.
-Currently available values are \code{'all'}, \code{'Tissue'},
-\code{'Patho'}, \code{Cancer}, \code{Subcell}.}
+Currently available values are \code{"all"}, \code{"Tissue"},
+\code{"Patho"}, \code{"Cancer"}, \code{"Subcell"}.}
 
 \item{color}{Vector of 4 colors used to depict different expression levels.}
 
