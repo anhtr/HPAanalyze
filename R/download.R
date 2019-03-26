@@ -315,12 +315,18 @@ hpaDownload <- function(downloadList='histology', version='latest') {
 #' @importFrom magrittr %<>%
 #' @export
 
-hpaSubset <- function(data,
+hpaSubset <- function(data=NULL,
                       targetGene=NULL,
                       targetTissue=NULL,
                       targetCellType=NULL,
                       targetCancer=NULL,
                       targetCellLine=NULL) {
+    
+    # Check if data is provided or not
+    if (is.null(data)) {
+        message('No data provided. Use version 18.')
+        data = HPAanalyze::hpa_downloaded_histology_v18
+    }
     
     if('normal_tissue' %in% names(data)) {
         if(!is.null(targetGene)) {
@@ -399,7 +405,14 @@ hpaSubset <- function(data,
 #' @importFrom stats na.omit
 #' @export
 
-hpaListParam <- function(data) {
+hpaListParam <- function(data=NULL) {
+    
+    # Check if data is provided or not
+    if (is.null(data)) {
+        message('No data provided. Use version 18.')
+        data = HPAanalyze::hpa_downloaded_histology_v18
+    }
+    
     availData <- list()
     
     if('normal_tissue' %in% names(data)) {
