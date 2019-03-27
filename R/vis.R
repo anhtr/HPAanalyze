@@ -53,8 +53,8 @@ hpaVisTissue <- function(data=NULL,
     
     # Check if targetGene is provided
     if (is.null(targetGene)) {
-        message('targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.')
-        targetGene <- c('TP53', 'RB1', 'MYC', 'KRAS', 'EGFR')
+        message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
+        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
         infoDisp <- TRUE
     }
     
@@ -105,7 +105,10 @@ hpaVisTissue <- function(data=NULL,
         plot <- plot + 
             ylab('Tissue / Cell') +
             xlab('Genes') +
-            theme(axis.text.x=element_text(angle=90, hjust=1))
+            theme_minimal() +
+            theme(panel.grid = element_blank()) +
+            theme(axis.text.x=element_text(angle=90, hjust=1)) +
+            coord_equal()
     }
     
     
