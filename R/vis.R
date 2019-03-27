@@ -297,9 +297,10 @@ hpaVisSubcell <- function(data=NULL,
     plot <- ggplot(plotData, aes(x=gene, y=sub_location)) +
         geom_tile(aes(fill=n), colour="grey50") +
         scale_x_discrete(limits=targetGene) +
-        scale_fill_manual(values=levelColors, 
+        scale_fill_manual(values=levelColors,
+                          name="Detected",
                           breaks = c(0, 1),
-                          labels = c(" Found", " Not found"))
+                          labels = c("No", "Yes"))
     
     if(!customTheme) {
         plot <- plot + 
@@ -308,7 +309,6 @@ hpaVisSubcell <- function(data=NULL,
             theme_minimal() +
             theme(panel.grid = element_blank()) +
             theme(axis.text.x=element_text(angle=45, hjust=1)) +
-            theme(legend.title=element_blank()) +
             coord_equal()
     }
     
