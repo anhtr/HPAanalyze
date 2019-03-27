@@ -268,7 +268,7 @@ hpaVisSubcell <- function(data=NULL,
     # Check if targetGene is provided
     if (is.null(targetGene)) {
         message('targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.')
-        targetGene <- c('TP53', 'RB1', 'MYC', 'KRAS', 'EGFR')
+        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
         infoDisp <- TRUE
     }
     
@@ -292,14 +292,19 @@ hpaVisSubcell <- function(data=NULL,
     plot <- ggplot(plotData, aes(x=gene, y=sub_location)) +
         geom_tile(aes(fill=n), colour="grey50") +
         scale_x_discrete(limits=targetGene) +
-        scale_fill_manual(values=levelColors)
+        scale_fill_manual(values=levelColors, 
+                          breaks = c(0, 1),
+                          labels = c(" Found", " Not found"))
     
     if(!customTheme) {
         plot <- plot + 
             ylab('Subcellular locations') +
             xlab('Genes') +
-            theme(axis.text.x=element_text(angle=90, hjust=1))  +
-            theme(legend.position="none")
+            theme_minimal() +
+            theme(panel.grid = element_blank()) +
+            theme(axis.text.x=element_text(angle=45, hjust=1)) +
+            theme(legend.title=element_blank()) +
+            coord_equal()
     }
     
     return(plot)       
