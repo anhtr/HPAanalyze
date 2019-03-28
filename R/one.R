@@ -53,7 +53,7 @@ hpaVis <- function(data=NULL,
                    targetTissue=NULL,
                    targetCellType=NULL,
                    targetCancer=NULL,
-                   visType='all',
+                   visType=c('Tissue', 'Patho', 'Subcell'),
                    color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
                    customTheme=FALSE,
                    ...) {
@@ -173,7 +173,7 @@ hpaVis <- function(data=NULL,
 #' @export
 
 hpaXml <- function(inputXml, 
-                   extractType = 'all',
+                   extractType = c('ProtClass', 'TissueExprSum', 'Antibody', 'TissueExpr'),
                    ...) {
     
     # initate variables
