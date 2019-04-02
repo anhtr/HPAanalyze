@@ -4,7 +4,8 @@
 \alias{hpaXml}
 \title{Extract details about an individual protein from XML file in one function}
 \usage{
-hpaXml(inputXml, extractType = "all", ...)
+hpaXml(inputXml, extractType = c("ProtClass", "TissueExprSum",
+  "Antibody", "TissueExpr"), ...)
 }
 \arguments{
 \item{inputXml}{Input can be either one Ensembl gene id or a imported XML

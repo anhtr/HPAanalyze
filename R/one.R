@@ -16,7 +16,7 @@
 #'   \code{hpa_subset()}. By default this function use the example dataset
 #'   bundled with HPAanalyze, which is from version 18 of the HPA program.
 #' @param targetGene Vector of strings of HGNC gene symbols. By default it is
-#'   set to \code{c('TP53', 'RB1', 'MYC', 'KRAS', 'EGFR')}.
+#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}.
 #' @param targetTissue Vector of strings of normal tissue names. By default it
 #'   is set to \code{"breast"}.
 #' @param targetCellType Vector of strings of normal cell types. By default
@@ -71,7 +71,7 @@ hpaVis <- function(data=NULL,
     # Check if targetGene is provided
     if (is.null(targetGene)) {
         message('targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.')
-        targetGene <- c('TP53', 'RB1', 'MYC', 'KRAS', 'EGFR')
+        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
         infoDisp <- TRUE
     }
     
