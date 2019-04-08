@@ -203,7 +203,7 @@ hpaXml <- function(inputXml,
     
     # Extract antibody
     if ('Antibody' %in% extractType) {
-        xml_output$Antibody <- hpaXmlProtClass(importedXml=inputXml)
+        xml_output$Antibody <- hpaXmlAntibody(importedXml=inputXml)
     }
     
     # Extract tissue expression
