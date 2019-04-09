@@ -107,7 +107,7 @@ The last item `TissueExpr` is a list of data frame, one for each of the antibodi
 
 To better understand the output, please read the documentation for other `hpaXml` functions, which was called under the hood by `hpaXml()`.
 
-```{r doc_ex1, eval = FALSE}
+```{r doc_ex2, eval = FALSE}
 ?hpaXmlGet # import the xml file as "xml_document"
 ?hpaXmlProtClass
 ?hpaXmlTissueExprSum
