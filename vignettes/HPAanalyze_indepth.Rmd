@@ -55,23 +55,19 @@ The program has generated protein expression profiles in human normal tissues wi
 
 Data from the HPA are freely available via proteinatlas.org, allowing scientists to access and incorporate the data into their research. Previously, the R package *hpar* has been created for fast and easy programmatic access of HPA data. Here, we introduce *HPAanalyze*, an R package aims to simplify exploratory data analysis from those data, as well as provide other complementary functionality to *hpar*.
 
-# Implementation
-
-*HPAanalyze* is and R package with a MIT licence and is designed for easy retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. 
-
 ## The different HPA data formats
 
 The Human Protein Atlas project provides data via two main mechanisms: *Full datasets* in the form of downloadable compressed tab-separated files (.tsv) and *individual entries* in XML, RDF and TSV formats. The full downloadable datasets includes normal tissue, pathology (cancer), subcellular location, RNA gene and RNA isoform data. For individual entries, the XML format is the most comprehensive, providing information on the target protein, antibodies, summary for each tissue and detailed data from each sample including clinical data, IHC scoring and image download links.
 
-## *HPAanalyze* overview
+## `HPAanalyze` overview
 
-*HPAanalyze* is designed to fullfill 3 main tasks: (1) Import, subsetting and export downloadable datasets; (2) Visualization of downloadable datasets for exploratory analysis; and (3) Working with the individual XML files. This package aims to serve researchers with little programming experience, but also allow power users to use the imported data as desired.
+`HPAanalyze` is designed to fullfill 3 main tasks: (1) Import, subsetting and export downloadable datasets; (2) Visualization of downloadable datasets for exploratory analysis; and (3) Working with the individual XML files. This package aims to serve researchers with little programming experience, but also allow power users to use the imported data as desired.
 
-### Obtaining *HPAanalyze*
+### Obtaining `HPAanalyze`
 
 The stable version of *HPAanalyze* should be downloaded from Bioconductor:
 
-````
+```
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install("HPAanalyze")
@@ -79,48 +75,22 @@ BiocManager::install("HPAanalyze")
 
 The development version of *HPAanalyze* is available on Github can be installed with:  
   
-`devtools::install_github("trannhatanh89/HPAanalyze")`
+```
+devtools::install_github("trannhatanh89/HPAanalyze")
+```
 
-### Full dataset import, subsetting and export
+# Full dataset import, subsetting and export
 
-The `hpaDownload()` function downloads full datasets from HPA and imports them into R as a list of tibbles, the standard object of *tidyverse*, which can subsequently be subset with `hpaSubset()` and export into .xmlx files with `hpaExport()`. The standard object allow the imported data to be further processed in a traditional R workflow. The ability to quickly subset and export data gives researchers the option to use other non-R downstream tools, such as GraphPad for creating publication-quality graphics, or share a subset of data containing only proteins of interest.
+The `hpaDownload()` function downloads full datasets from HPA (*specifically, the .tsv format described above*) and imports them into R as a list of tibbles, the standard object of `tidyverse`, which can subsequently be subset with `hpaSubset()` and export into .xmlx files with `hpaExport()`. The standard object allow the imported data to be further processed in a traditional R workflow. The ability to quickly subset and export data gives researchers the option to use other non-R downstream tools, such as GraphPad for creating publication-quality graphics, or share a subset of data containing only proteins of interest.
 
-### Visualization
+**You can skip this whole section if you only care about visualization, unless you need a specific version of the HPA datasets, or the RNA expression datasets.**
 
-The `hpaVis` function family take the output of `hpaDownload()` (or `hpaSubset()`) provides quick visualization of the data, with the intention of aiding exploratory analysis. Nevertheless, the standard `ggplot` object output of these functions give users the option to further customize the plots for publication. All `hpaVis` functions share the same syntax for arguments: subsetting, specifying colors and opting to use custom themes.
+## Download and import data with `hpaDownload()`
 
-The first release of the *HPAanalyze* package includes three functions: `hpaVisTissue()` for the *normal tissue*, `hpaVisPatho()` for the *pathology/cancer*, and `hpaVisSubcell()` for the *subcellular location* datasets.
-
-### Individual xml import and image downloading
-
-The `hpaXml` function family import and extract data from individual XML entries from HPA. The `hpaXmlGet()` function downloads and imports data as  "xml_document"/"xml_node" object, which can subsequently be processed by other `hpaXml` functions. The XML format from HPA contains a wealth of information that may not be covered by this package. However, users can extract any data of interest from the imported XML file using the xml2 package.
-
-In the first release, *HPAanalyze* includes four functions for data extraction from HPA XML files: `hpaXmlProtClass()` for protein class information, `hpaTissueExprSum()` for summary of protein expression in tissue, `hpaXmlAntibody()` for a list of antibody used to stain for the protein of interest, and `hpaTissueExpr()` for a detailed data from each sample including clinical data and IHC scoring.
-
-`hpaTissueExprSum` and `hpaTissueExpr` provide download links to download relevant staining images, with the former function also gives the options to automate the downloading process.
-
-### Compatibility with `hpar` Bioconductor package
-
-Functionality| hpar                            | HPAanalyze 
-------------:|:--------------------------------|:--------------------------------
-Datasets     | Included in package             | Download from server or Import from hpar
-Query        | Ensembl id                      | HGNC symbol for datasets, Ensembl id for XML
-Data version | One stable version              | Latest by default, option to download older
-Release info | Access via functions            | N/A
-View relevant browser page | Via `getHPA` function | N/A
-Visualization| N/A                             | Exploratory via `hpaVis` functions
-XML          | N/A                             | Download and import via `hpaXml` functions
-Histology image| View by loading browser page  | Extract links via `hpaXml` functions
-
-: (\#tab:table) Complementary functionality between hpar and HPAanalyze
-
-## Working with HPA downloadable datasets
-
-A typical workflow with HPA downloadable datasets using *HPAanalyze* consist of the following steps: (1) Download and import data into R with `hpaDownload()`; (2) View available parameter for subseting with `hpaListParam()`; (3) Subset data with `hpaSubset()`; and (4) (optional) Export data with `hpaExport`.
-
-### Download and import data with `hpaDownload()`
+This function should be the first thing you use. It give you a list of data frames containing the datasets you specified, which you can then feed into other functions in this package.
 
 ```{r downloadedData, eval=FALSE}
+# this gives you the latest everything, which is nice to keep but not really necessary
 downloadedData <- hpaDownload(downloadList='all')
 summary(downloadedData)
 
@@ -134,10 +104,18 @@ summary(downloadedData)
 #> transcript_rna_cell_line  4     tbl_df list
 ```
 
+### The "histology" datasets
+
+Most of the time, you will only need the "histology" datasets, which contain `normal_tissue`, `pathology` (basically cancers) and `subcellular_location`.
+
+```{r histology}
+downloadedData <- hpaDownload(downloadList='histology', version='example')
+# version = "example" will load the HPA v18 datasets came with this package. That's sufficient for normal usage, and save you some time.
+```
 The `normal_tissue` dataset contains information about protein expression profiles in human tissues based on IHC staining. The datasets contain six columns: `ensembl` (Ensembl gene identifier); `gene` (HGNC symbol), `tissue` (tissue name); `cell_type` (annotated cell type); `level` (expression value); `reliability` (the gene reliability of the expression value).
 
-```{r normal_tissue}
-downloadedData <- hpaDownload(downloadList='histology', version='example')
+
+``` {r normal_tissue}
 tibble::glimpse(downloadedData$normal_tissue, give.attr=FALSE)
 ```
 
@@ -153,10 +131,13 @@ The `subcellular_location` dataset contains information about subcellular locali
 tibble::glimpse(downloadedData$subcellular_location, give.attr=FALSE)
 ```
 
+### The "RNA" datasets
+
 The `rna_tissue` and `rna_cell_line` datasets contain RNA expression levels of 37 tissues and 64 cell lines based on RNA-seq. These datasets contain four columns each: `ensembl` (Ensembl gene identifier); `gene` (HGNC symbol); `tissue`/`cell_line` (type of sample); `value` + `unit` (expression level measured by transcripts per million).
 
 ```{r rna1, warning=FALSE, message=FALSE}
 downloadedData <- hpaDownload(downloadList='rna', version='hpar')
+# version = "hpar" give you the datasets bundled with the hpar package, which is another option.
 
 tibble::glimpse(downloadedData$rna_tissue, give.attr=FALSE)
 ```
@@ -168,6 +149,7 @@ Similarly, the `transcript_rna_tissue` and `transcript_rna_cell_line` datasets c
 
 ```{r isoform1, eval=FALSE}
 downloadedData <- hpaDownload(downloadList='isoform', version='v18')
+# version = "v18" is an example of how you may download different versions of the HPA datasets. Just change the number. Note that not all versions are available from the HPA website.
 
 tibble::glimpse(downloadedData$transcript_rna_tissue, give.attr=FALSE)
 
@@ -189,9 +171,11 @@ tibble::glimpse(downloadedData$transcript_rna_cell_line, give.attr=FALSE)
 #> $ value      <dbl> 29.406799, 0.000000, 0.992916, 0.398387, 0.239204,...
 ```
 
-Optionally, data can be imported from the *hpar* package. Please note that the *hpar* package does not contain the RNA isoform datasets, which are very large and should be downloaded only when necessary.
+### Get data from the `hpar` package
 
-For data from *hpar*, release information can be accessed with `getHpaVersion`, `getHpaDate` and `getHpaEnsembl`.
+Optionally, data can be imported from the `hpar` package. Please note that the `hpar` package does not contain the RNA isoform datasets, which are very large and should be downloaded only when necessary.
+
+For data from `hpar`, release information can be accessed with `getHpaVersion`, `getHpaDate` and `getHpaEnsembl`.
 
 ```{r hpar1, eval=FALSE}
 hpaDownload('all', 'hpar')
@@ -204,11 +188,14 @@ hpar::getHpaDate()
 hpar::getHpaEnsembl()
 ```
 
-### List available parameter for subsetting with `hpaListParam()`
+## List available parameter for subsetting with `hpaListParam()`
 
-To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpaListParam()`. The input for this function is the output of `hpaDownload`.
+To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpaListParam()`. The input for this function is the output of `hpaDownload`. 
+
+*If you leave the argument blank, this function with give you the results for version 18.*
 
 ```{r list_param, eval=FALSE}
+## If you use the output from hpaDownload()
 downloadedData <- hpaDownload(downloadList='all')
 str(hpaListParam(downloadedData))
 
@@ -221,9 +208,16 @@ str(hpaListParam(downloadedData))
 #>  $ cell_line_rna       : chr [1:64] "A-431" "A549" "AF22" "AN3-CA" ...
 ```
 
-### Subset data with `hpaSubset()`
+```{r list_param_2}
+## If you use leave the argument blank
+str(hpaListParam())
+```
+
+## Subset data with `hpaSubset()`
 
 `hpaSubset()` filters the output of `hpaDownload()` for desirable target genes, tissues, cell types, cancer, and cell lines. The data will be subset only where applicable (i.e. `normal_tissue` will not be subset by *cancer*). The main purpose of `hpaSubset` is to prepare a manageable set of data to be exported. However, this function may also be useful for other data table manipulation purposes. The input for `targetGene` argument is a vector of strings of HGNC symbols.
+
+*If you leave the `data` argument blank, this function will automatically subset the bundled version 18 dataset, which may not contain all of the columns available if you download the data with `hpaDownload()`.*
 
 ```{r subset1, message=FALSE, warning=FALSE}
 downloadedData <- hpaDownload(downloadList='histology', version='example')
@@ -243,7 +237,7 @@ subsetData <- hpaSubset(data=downloadedData,
 sapply(subsetData, nrow)
 ```
 
-To subset by Ensemble gene id, use `hpar::getHPA()`.
+To subset by Ensemble gene id, use `hpar::getHPA()`. See `hpar` documentation for more information.
 
 ```{r}
 id <- c("ENSG00000000003", "ENSG00000000005")
@@ -252,14 +246,14 @@ hpar::getHpa(id, hpadata="hpaNormalTissue") %>%
 ```
 
 
-### Export data with `hpaExport()`
-As the name suggests, `hpaExport()` exports the output of `hpaSubset()` to one .xlsx file. Each dataset is placed in a separate sheet. More formats such as .csv and .tsv might be added in future release; hence, the `fileType` argument is included. 
+## Export data with `hpaExport()`
+As the name suggests, `hpaExport()` exports the output of `hpaSubset()` to one .xlsx file. Each dataset is placed in a separate sheet. More formats such as .csv and .tsv might be added in future release; hence, the `fileType` argument is included.
 
 ```{r eval=FALSE}
 hpaExport(subsetData, fileName='subset.xlsx', fileType='xlsx')
 ```
 
-## Visualize downloaded data
+# Visualization
 
 `HPAanalyze` provides the ability to quickly visualize data from downloaded HPA datasets with the `hpaVis` function family. The goal of these functions is to aid exploratory analysis of a group of target genes, which maybe particularly useful for gaining insights into pathways or gene signatures of interest.
 
@@ -271,7 +265,7 @@ Currently, the `normal_tissue`, `pathology` and `subcellular_location` data can 
 downloadedData <- hpaDownload('histology', 'example')
 ```
 
-### Visualize tissue data with `hpaVisTissue()`
+## Visualize tissue data with `hpaVisTissue()`
 
 `hpaVisTissue()` generates a "heatmap", in which the expression of proteins of interest (quantified IHC staining) are plotted for each cell type of each tissue. 
 
@@ -285,7 +279,7 @@ hpaVisTissue(downloadedData,
 ```
 
 
-### Visualize expression in cancer with `hpaVisPatho()`
+## Visualize expression in cancer with `hpaVisPatho()`
 
 `hpaVisPatho()` generates an arrays of column graphs showing the expression of proteins of interest in each cancer. 
 
@@ -303,7 +297,7 @@ hpaVisPatho(downloadedData,
 ```
 
 
-### Visualize subcellular location data with `hpaVisSubcell()`
+## Visualize subcellular location data with `hpaVisSubcell()`
 
 `hpaVisSubcell()` generates a tile chart showing the subcellular locations (approved and supported) of proteins of interest.
 
@@ -323,14 +317,13 @@ hpaVisSubcell(downloadedData,
     ggplot2::coord_equal()
 ```
 
+# Individual xml import and image downloading
 
-## Working with individual xml files
-
-`hpaXml` function family supports importing and extracting data from individual XML files provided by HPA for each protein.
+The `hpaXml` function family import and extract data from individual XML entries from HPA. The `hpaXmlGet()` function downloads and imports data as  "xml_document"/"xml_node" object, which can subsequently be processed by other `hpaXml` functions. The XML format from HPA contains a wealth of information that may not be covered by this package. However, users can extract any data of interest from the imported XML file using the xml2 package.
 
 A typical workflow for working with XML files includes the following steps: (1) Download and import XML file with `hpaXmlGet()`; (2) Extract the desired information with other `hpaXml` functions; and (3) Download histological staining pictures, which is currently supported by the `hpaXmlTissurExpr()` and `hpaXmlTissueExprSum()` functions.
 
-### Import xml file with `hpaXmlGet()`
+## Import xml file with `hpaXmlGet()`
 
 The `hoaXmlGet()` function takes a Ensembl gene id (start with *ENSG*) and import the perspective XML file into R. This function calls the `xml2::read_xml()` under the hood, hence the resulting object may be processed further with *xml2* functions if desired.
 
@@ -344,7 +337,7 @@ To view the web page for the protein of interest, which contains similar informa
 hpar::getHpa('ENSG00000134057', type="details")
 ```
 
-### View protein classes with `hpaXmlProtClass()`
+## View protein classes with `hpaXmlProtClass()`
 
 Protein class of queried protein can be extracted from the imported XML with `hpaXmlProtClass()`. The output of this function is a tibble of 4 columns: `id`, `name`, `parent_id` and `source`
 
@@ -352,7 +345,7 @@ Protein class of queried protein can be extracted from the imported XML with `hp
 hpaXmlProtClass(CCNB1xml)
 ```
 
-### Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
+## Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
 
 The function `hpaXmlTissueExprSum()` extract the summary of expression of protein of interest in normal tissue. The output of this function is a list of (1) a string contains one-sentence summary and (2) a dataframe of all tissues in which the protein was stained positive and a histological stain images of those tissue.
 
@@ -362,7 +355,7 @@ hpaXmlTissueExprSum(CCNB1xml)
 
 Those images can be downloaded automatically by setting the `downloadImg` argument to `TRUE`. Eg. `hpaXmlTissueExprSum(CCNB1xml, downloadImg=TRUE)`
 
-### Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
+## Get details of individual IHC samples with `hpaXmlAntibody()` and `hpaXmlTissueExpr()`
 
 More importantly, the XML files are the only format of HPA programmatically accesible data which contains information about each antibody and each tissue sample used in the project. 
 
@@ -385,13 +378,22 @@ Each tibble contain clinical data (`patientid`, `age`, `sex`), tissue informatio
 tissueExpression[[1]]
 ```
 
-## Future developments
+`hpaTissueExprSum` and `hpaTissueExpr` provide download links to download relevant staining images, with the former function also gives the options to automate the downloading process.
 
-The package will continue to follow new updates of the HPA projects to ensure compatibility and functionality. More functions of the `hpaVis` and `hpaXml` family may also be added in future versions.
+# Compatibility with `hpar` Bioconductor package
 
-# Conclusion
+Functionality| hpar                            | HPAanalyze 
+------------:|:--------------------------------|:--------------------------------
+Datasets     | Included in package             | Download from server or Import from hpar
+Query        | Ensembl id                      | HGNC symbol for datasets, Ensembl id for XML
+Data version | One stable version              | Latest by default, option to download older
+Release info | Access via functions            | N/A
+View relevant browser page | Via `getHPA` function | N/A
+Visualization| N/A                             | Exploratory via `hpaVis` functions
+XML          | N/A                             | Download and import via `hpaXml` functions
+Histology image| View by loading browser page  | Extract links via `hpaXml` functions
 
-Using our R package HPAanalyze, we are able to retrieve, visualize and export data from the HPA program. Although it is a programmatic approach, which requires basic R programming skills, HPAanalyze was built with ease of use and reproducibility in mind, which makes the workflow and syntax very simple and straight-forward. With the case studies, we have also demonstrated how HPAanalyze can be easily integrated into different areas of research to identify new targets or provide more evidence for a working hypothesis. This software package is highly supportive of our research, and we plan to update it with new features and ensure future compatibility with the HPA program. 
+: (\#tab:table) Complementary functionality between hpar and HPAanalyze
 
 # Availability and requirements
 
@@ -403,19 +405,9 @@ Using our R package HPAanalyze, we are able to retrieve, visualize and export da
 * License: GPL-3
 * Any restrictions to use by non-academics: Freely available to everyone
 
-# Abbreviations
-
-HPA: The Human Protein Atlas; XML: Extensible Markup Language
-
-# Declarations
-
-## Acknowledgements
+# Acknowledgements
 
 We appreciate the support of the National institutes of Health National Cancer Institute R01 CA151522 and funds from the Department of Cell, Developmental and Integrative Biology at the University of Alabama at Birmingham.
-
-## Authors' contributions
-
-ANT created the R package and drafted the manuscript. ABH supervised the project and revised the manuscript. All authors read and approved the final manuscript.
 
 # Copyright
 Anh Tran, 2018
