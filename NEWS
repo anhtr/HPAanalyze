@@ -1,3 +1,14 @@
+1.1.2
+* Major changes
+    + Fixed issues where hpaVis and hpaXml give faulty output.
+    + All hpaVis functions as well as hpaListParam and hpaSubset now use the bundled dataset by defauft if no data argument is specifed.
+    + All hpaVis functions now have default for all of their arguments and will create a warning message when the defaults are used.
+    + The in-depth vignette was rewritten, and new vignettes added for ease of use.
+* Minor changes
+    + Updated the themes of hpaVis functions for better clarity.
+    + Updated documentations.
+    + Hex sticker is now available.
+
 1.1.1
 * Major change
     + HPAanalyze now uses openxlsx for hpaExport() instead of XLConnect.
