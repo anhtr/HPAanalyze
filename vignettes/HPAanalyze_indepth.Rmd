@@ -61,6 +61,11 @@ The Human Protein Atlas project provides data via two main mechanisms: *Full dat
 
 `HPAanalyze` is designed to fullfill 3 main tasks: (1) Import, subsetting and export downloadable datasets; (2) Visualization of downloadable datasets for exploratory analysis; and (3) Working with the individual XML files. This package aims to serve researchers with little programming experience, but also allow power users to use the imported data as desired.
 
+```{r echo=FALSE, fig.cap="HPAanalyze workflow.", out.width = '120%'}
+knitr::include_graphics("figures/workflow.png")
+```
+
+
 ### Obtaining `HPAanalyze`
 
 The stable version of *HPAanalyze* should be downloaded from Bioconductor:
@@ -76,6 +81,8 @@ The development version of *HPAanalyze* is available on Github can be installed 
 ```
 devtools::install_github("trannhatanh89/HPAanalyze")
 ```
+
+Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
 
 # Full dataset import, subsetting and export
 
@@ -392,16 +399,6 @@ XML          | N/A                             | Download and import via `hpaXml
 Histology image| View by loading browser page  | Extract links via `hpaXml` functions
 
 : (\#tab:table) Complementary functionality between hpar and HPAanalyze
-
-# Availability and requirements
-
-* Project name: HPAanalyze
-* Project home page: https://github.com/trannhatanh89/HPAanalyze
-* Operating system(s): All platforms where R is available, including Windows, Linux, OS X
-* Programming language: R
-* Other requirements: R 3.5.0 or higher, and the R packages dplyr, xml2, ggplot2, readr, tibble, xml2, reshape2, tidyr, stats, utils, and hpar
-* License: GPL-3
-* Any restrictions to use by non-academics: Freely available to everyone
 
 # Acknowledgements
 
