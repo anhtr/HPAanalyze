@@ -1,11 +1,9 @@
 ---
-title: "HPAanalyze quick start guide"
+title: "HHPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas data in one function"
 author:
 - name: Anh N. Tran
   affiliation: Northwestern University, Illinois, USA
   email: trannhatanh89@gmail.com
-- name: Anita B. Hjelmeland
-  affiliation: University of Alabama at Birmingham, Alabama, USA
 date: "`r Sys.Date()`"
 output: 
     BiocStyle::html_document:
