@@ -31,7 +31,8 @@ knitr::opts_chunk$set(
 * **Background:** The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics.
 * **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
 * **Conclusions:** `HPAanalyze` intergrates into the R workflow via the `tidyverse` philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.  
-* **Citation:** Tran A, Hjelmeland A (2018). “HPAanalyze: An R Package that Facilitate the Retrieval and Analysis of The Human Protein Atlas Data.” bioRxiv. doi: 10.1101/355032.
+
+Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
 
 ## Background
 
@@ -78,16 +79,6 @@ The `hpaXml` function family import and extract data from individual XML entries
 In the first release, *HPAanalyze* includes four functions for data extraction from HPA XML files: `hpaXmlProtClass()` for protein class information, `hpaTissueExprSum()` for summary of protein expression in tissue, `hpaXmlAntibody()` for a list of antibody used to stain for the protein of interest, and `hpaTissueExpr()` for a detailed data from each sample including clinical data and IHC scoring.
 
 `hpaTissueExprSum` and `hpaTissueExpr` provide download links to download relevant staining images, with the former function also gives the options to automate the downloading process.
-
-# Availability and requirements
-
-* Project name: HPAanalyze
-* Project home page: https://github.com/trannhatanh89/HPAanalyze
-* Operating system(s): All platforms where R is available, including Windows, Linux, OS X
-* Programming language: R
-* Other requirements: R 3.5.0 or higher, and the R packages dplyr, openxlsx, ggplot2, readr, tibble, xml2, reshape2, tidyr, magrittr, stats, utils, hpar, cowplot
-* License: GPL-3
-* Any restrictions to use by non-academics: Freely available to everyone
 
 # Acknowledgements
 
