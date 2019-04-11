@@ -61,7 +61,7 @@ The Human Protein Atlas project provides data via two main mechanisms: *Full dat
 
 `HPAanalyze` is designed to fullfill 3 main tasks: (1) Import, subsetting and export downloadable datasets; (2) Visualization of downloadable datasets for exploratory analysis; and (3) Working with the individual XML files. This package aims to serve researchers with little programming experience, but also allow power users to use the imported data as desired.
 
-```{r echo=FALSE, fig.cap="HPAanalyze workflow.", out.width = '120%'}
+```{r echo=FALSE, fig.cap="HPAanalyze workflow.", out.width = '100%'}
 knitr::include_graphics("figures/workflow.png")
 ```
 
