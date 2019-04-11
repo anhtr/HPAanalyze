@@ -1,11 +1,9 @@
 ---
-title: "Working with HPAanalyze package"
+title: "HPAanalyze"
 author:
 - name: Anh N. Tran
-  affiliation: University of Alabama at Birmingham, Alabama, USA
+  affiliation: Northwestern University, IL, USA
   email: trannhatanh89@gmail.com
-- name: Anita B. Hjelmeland
-  affiliation: University of Alabama at Birmingham, Alabama, USA
 date: "`r Sys.Date()`"
 output: 
     md_document:
@@ -26,7 +24,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# HPAanalyze
+# HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="139" />
 
 [![Travis-CI](https://travis-ci.org/trannhatanh89/HPAanalyze.svg?branch=master)](https://travis-ci.org/trannhatanh89/HPAanalyze)
 

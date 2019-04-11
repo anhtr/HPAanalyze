@@ -1,5 +1,5 @@
-HPAanalyze
-==========
+HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="139" />
+=============================================================================
 
 [![Travis-CI](https://travis-ci.org/trannhatanh89/HPAanalyze.svg?branch=master)](https://travis-ci.org/trannhatanh89/HPAanalyze)
 
