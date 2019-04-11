@@ -32,7 +32,7 @@ knitr::opts_chunk$set(
 * **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
 * **Conclusions:** `HPAanalyze` intergrates into the R workflow via the `tidyverse` philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.  
 
-Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
+Please cite: **Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data. bioRxiv 355032; doi: https://doi.org/10.1101/355032 **
 
 ## Background
 
