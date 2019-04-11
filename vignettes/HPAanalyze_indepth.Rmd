@@ -197,7 +197,7 @@ hpar::getHpaEnsembl()
 
 To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpaListParam()`. The input for this function is the output of `hpaDownload`. 
 
-*If you leave the argument blank, this function with give you the results for version 18.*
+*If you leave the argument blank, this function will give you the results for version 18.*
 
 ```{r list_param, eval=FALSE}
 ## If you use the output from hpaDownload()
@@ -266,8 +266,20 @@ The `hpaVis` functions share a common syntax, where the input (`data` argument) 
 
 Currently, the `normal_tissue`, `pathology` and `subcellular_location` data can be visualized, with more functions planned for future releases.
 
+*For all functions in the `hpaVis` family, if you leave the `data` argument blank, they will plot version 18 by default.*
+
 ```{r visData, echo=FALSE, warning=FALSE, message=FALSE}
 downloadedData <- hpaDownload('histology', 'example')
+```
+
+## Unbrella function `hpaVis()`
+
+`hpaVis` will plot all available plots by default. See the quick-start vignette for details.
+
+```{r hpaVis_eg}
+hpaVis(targetGene = c("GCH1", "PTS", "SPR", "DHFR"),
+       targetTissue = c("cerebellum", "cerebral cortex", "hippocampus"),
+       targetCancer = c("glioma"))
 ```
 
 ## Visualize tissue data with `hpaVisTissue()`
@@ -328,34 +340,80 @@ The `hpaXml` function family import and extract data from individual XML entries
 
 A typical workflow for working with XML files includes the following steps: (1) Download and import XML file with `hpaXmlGet()`; (2) Extract the desired information with other `hpaXml` functions; and (3) Download histological staining pictures, which is currently supported by the `hpaXmlTissurExpr()` and `hpaXmlTissueExprSum()` functions.
 
-## Import xml file with `hpaXmlGet()`
+## The umbrella function `hpaXml`
+`hpaXml` will take an Ensembl gene id (start with *ENSG*) and extract all availble information. You can also feed the ourput of hpaXmlGet to it. See the quick-start vignette for more details.
 
-The `hoaXmlGet()` function takes a Ensembl gene id (start with *ENSG*) and import the perspective XML file into R. This function calls the `xml2::read_xml()` under the hood, hence the resulting object may be processed further with *xml2* functions if desired.
+```{r eval=FALSE}
+EGFR <- hpaXml(inputXml='ENSG00000146648')
+names(EGFR)
 
-```{r XmlGet}
-CCNB1xml <- hpaXmlGet('ENSG00000134057')
+#> [1] "ProtClass"     "TissueExprSum" "Antibody"      "TissueExpr"   
 ```
 
 To view the web page for the protein of interest, which contains similar information in a pretty presentation, use *hpar* function `getHPA()` with argument `type="details"`.
 
 ```{r hpar_site, eval=FALSE}
-hpar::getHpa('ENSG00000134057', type="details")
+hpar::getHpa('ENSG00000146648', type="details")
+```
+
+## Import xml file with `hpaXmlGet()`
+
+The `hoaXmlGet()` function takes an Ensembl gene id (start with *ENSG*) and import the perspective XML file into R. This function calls the `xml2::read_xml()` under the hood, hence the resulting object may be processed further with *xml2* functions if desired.
+
+```{r XmlGet, eval=FALSE}
+EGFRxml <- hpaXmlGet('ENSG00000146648')
 ```
 
 ## View protein classes with `hpaXmlProtClass()`
 
 Protein class of queried protein can be extracted from the imported XML with `hpaXmlProtClass()`. The output of this function is a tibble of 4 columns: `id`, `name`, `parent_id` and `source`
 
-```{r XmlProtClass}
-hpaXmlProtClass(CCNB1xml)
+```{r XmlProtClass, eval=FALSE}
+hpaXmlProtClass(EGFRxml)
+
+#> # A tibble: 40 x 4
+#>    id    name                                   parent_id source    
+#>    <chr> <chr>                                  <chr>     <chr>     
+#>  1 Ez    Enzymes                                <NA>      <NA>      
+#>  2 Ec    ENZYME proteins                        Ez        ENZYME    
+#>  3 Et    Transferases                           Ec        ENZYME    
+#>  4 Ki    Kinases                                Ez        UniProt   
+#>  5 Kt    Tyr protein kinases                    Ki        UniProt   
+#>  6 Ma    Predicted membrane proteins            <NA>      MDM       
+#>  7 Md    Membrane proteins predicted by MDM     <NA>      MDM       
+#>  8 Me    MEMSAT3 predicted membrane proteins    <NA>      MEMSAT3   
+#>  9 Mf    MEMSAT-SVM predicted membrane proteins <NA>      MEMSAT-SVM
+#> 10 Mg    Phobius predicted membrane proteins    <NA>      Phobius   
+#> # ... with 30 more rows
 ```
 
 ## Get summary and images of tissue expression with `hpaXmlTissueExprSum()`
 
 The function `hpaXmlTissueExprSum()` extract the summary of expression of protein of interest in normal tissue. The output of this function is a list of (1) a string contains one-sentence summary and (2) a dataframe of all tissues in which the protein was stained positive and a histological stain images of those tissue.
 
-```{r XmlTissueExprSum}
-hpaXmlTissueExprSum(CCNB1xml)
+```{r XmlTissueExprSum, eval=FALSE}
+hpaXmlTissueExprSum(EGFRxml)
+
+#> $summary
+#> [1] "Cytoplasmic and membranous expression in several tissues, most abundant in placenta."
+#> 
+#> $img
+#>            tissue
+#> 1 cerebral cortex
+#> 2      lymph node
+#> 3           liver
+#> 4           colon
+#> 5          kidney
+#> 6          testis
+#> 7        placenta
+#>                                                                imageUrl
+#> 1 http://v18.proteinatlas.org/images/18530/41191_B_7_5_rna_selected.jpg
+#> 2 http://v18.proteinatlas.org/images/18530/41191_A_7_8_rna_selected.jpg
+#> 3 http://v18.proteinatlas.org/images/18530/41191_A_7_4_rna_selected.jpg
+#> 4 http://v18.proteinatlas.org/images/18530/41191_A_9_3_rna_selected.jpg
+#> 5 http://v18.proteinatlas.org/images/18530/41191_A_9_5_rna_selected.jpg
+#> 6 http://v18.proteinatlas.org/images/18530/41191_A_6_6_rna_selected.jpg
+#> 7 http://v18.proteinatlas.org/images/18530/41191_A_1_7_rna_selected.jpg
 ```
 
 Those images can be downloaded automatically by setting the `downloadImg` argument to `TRUE`. Eg. `hpaXmlTissueExprSum(CCNB1xml, downloadImg=TRUE)`
@@ -366,21 +424,56 @@ More importantly, the XML files are the only format of HPA programmatically acce
 
 `hpaXmlAntibody()` extract the antibody information and return a tibble with one row for each antibody.
 
-```{r XmlAntibody}
-hpaXmlAntibody(CCNB1xml)
+```{r XmlAntibody, eval=FALSE}
+hpaXmlAntibody(EGFRxml)
+
+#> # A tibble: 5 x 4
+#>   id        releaseDate releaseVersion RRID      
+#>   <chr>     <chr>       <chr>          <chr>     
+#> 1 CAB000035 2006-03-13  1.2            <NA>      
+#> 2 HPA001200 2008-02-15  3.1            AB_1078723
+#> 3 HPA018530 2008-12-03  4.1            AB_1848044
+#> 4 CAB068186 2014-11-06  13             AB_2665679
+#> 5 CAB073534 2015-10-16  14             <NA>
 ```
 
 `hpaXmlTissueExpr()` extract information about all samples for each antibody above and return a list of tibbles. If antibody has not been used for IHC staining, the returned tibble with be empty.
 
-```{r XmlTissueExpr1}
-tissueExpression <- hpaXmlTissueExpr(CCNB1xml)
+```{r XmlTissueExpr1, eval = FALSE}
+tissueExpression <- hpaXmlTissueExpr(EGFRxml)
 summary(tissueExpression)
+
+#>      Length Class  Mode
+#> [1,] 18     tbl_df list
+#> [2,] 18     tbl_df list
+#> [3,] 18     tbl_df list
+#> [4,] 18     tbl_df list
+#> [5,] 18     tbl_df list
 ```
 
 Each tibble contain clinical data (`patientid`, `age`, `sex`), tissue information (`snomedCode`, `tissueDescription`), staining results (`staining`, `intensity`, `location`) and one `imageUrl` for each sample. However, due to the large amount of data and the relatively large size of each image, `hpaXmlTissueExpr` does not provide an automated download option. 
 
-```{r XmlTissueExpr2}
+```{r XmlTissueExpr2, eval = FALSE}
 tissueExpression[[1]]
+
+#> # A tibble: 327 x 18
+#>    patientId age   sex   staining intensity quantity location imageUrl
+#>    <chr>     <chr> <chr> <chr>    <chr>     <chr>    <chr>    <chr>   
+#>  1 1653      53    Male  <NA>     <NA>      <NA>     <NA>     http://~
+#>  2 1721      60    Fema~ <NA>     <NA>      <NA>     <NA>     http://~
+#>  3 1725      57    Male  <NA>     <NA>      <NA>     <NA>     http://~
+#>  4 4         25    Male  <NA>     <NA>      <NA>     <NA>     http://~
+#>  5 512       34    Fema~ <NA>     <NA>      <NA>     <NA>     http://~
+#>  6 2664      74    Fema~ <NA>     <NA>      <NA>     <NA>     http://~
+#>  7 2665      88    Fema~ <NA>     <NA>      <NA>     <NA>     http://~
+#>  8 1391      54    Fema~ <NA>     <NA>      <NA>     <NA>     http://~
+#>  9 1447      45    Fema~ <NA>     <NA>      <NA>     <NA>     http://~
+#> 10 1452      44    Fema~ <NA>     <NA>      <NA>     <NA>     http://~
+#> # ... with 317 more rows, and 10 more variables: snomedCode1 <chr>,
+#> #   snomedCode2 <chr>, snomedCode3 <chr>, snomedCode4 <chr>,
+#> #   snomedCode5 <chr>, tissueDescription1 <chr>, tissueDescription2 <chr>,
+#> #   tissueDescription3 <chr>, tissueDescription4 <chr>,
+#> #   tissueDescription5 <chr>
 ```
 
 `hpaTissueExprSum` and `hpaTissueExpr` provide download links to download relevant staining images, with the former function also gives the options to automate the downloading process.

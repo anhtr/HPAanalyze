@@ -86,7 +86,7 @@ If you want to know what kind of data you can visualize, use `hpaListParam`. You
 hpaListParam()
 ```
 ```{r listParam_ex2, echo= FALSE}
- hpaListParam() %>% glimpse()
+hpaListParam() %>% glimpse()
 ```
 
 # Acquiring individual sample data from the Human Protein Atlas
@@ -95,8 +95,11 @@ HPA provide data in two different formats: the more convenient summarized data t
 
 The easiest way is to use the umbrella `hpaXml()` function. Please note that at the moment this function only accept Ensembl gene id.
 
-```{r}
+```{r eval=FALSE}
 EGFR <- hpaXml(inputXml='ENSG00000146648')
+names(EGFR)
+
+#> [1] "ProtClass"     "TissueExprSum" "Antibody"      "TissueExpr"   
 ```
 
 This function will return a list. The first item `ProtClass` is the known and predicted class of the queried protein. The second item `TissueExprSum` give you the quick summary of protein expression in normal tissue and image url to download one representative image. The third item `Antibody` provide information on all antibodied used by HPA to stain for the queried protein. 
