@@ -31,6 +31,8 @@ knitr::opts_chunk$set(
 library(BiocStyle)
 library(HPAanalyze)
 library(dplyr)
+library(tibble)
+library(readr)
 ```
 
 # The case 
@@ -47,17 +49,78 @@ Have a specific goal in mind. What are you looking for? In this example, I will 
 
 2. Build your query. The most intuitive way is to click on the "Fields >>" button and use the drop-down menus.
 
+```{r echo=FALSE, eval=TRUE, fig.cap="The 'Fields >>' button.", out.width = '100%'}
+knitr::include_graphics("figures/query_fields.png")
+```
+```{r echo=FALSE, eval=TRUE, fig.cap="Build your query with the drop-down menus.", out.width = '100%'}
+knitr::include_graphics("figures/query_dropdown.png")
+```
+
 3. Click "Search". The website will show you a list of proteins that match your parameters.
 
+```{r echo=FALSE, eval=TRUE, fig.cap="Click the 'Search' button.", out.width = '100%'}
+knitr::include_graphics("figures/query_search.png")
+```
+
 4. Copy the link to the tsv file that summarizes your search. (Alternatively, you can just add `?format=tsv` to your search link.)
+
+```{r echo=FALSE, eval=TRUE, fig.cap="Copy the link to the tsv file.", out.width = '100%'}
+knitr::include_graphics("figures/query_tsvlink.png")
+```
 
 5. Import the tsv file as a data frame as below:
 
 ```{r}
+## The link to your query tsv
 my_hpa_query <- "https://www.proteinatlas.org/search/protein_class%3ACD+markers+AND+normal_expression%3ACerebral+cortex%3BAny%3BNot+detected%2CLow+AND+prognostic%3AGlioma%3BUnfavourable?format=tsv"
+
+## Create a temporary file as destination for the download
+temp <- tempfile("query", fileext=c(".tsv.gz"))
+
+## Download to the temporary file
+download.file(url=my_hpa_query, destfile = temp, method = "curl", mode = "wb")
+
+## read the file into a data frame
+query_df <- readr::read_tsv(temp)
+
+## Unlink the temp file
+unlink(temp)
 ```
 
+**Note: If you have problem downloading file in R (step 5), you can workaround by manually download the tsv.gz file from your browser, unzip with 7zip or WinRAR and import the resulting tsv file.**
 
+You will end up with a data frame that looks like this.
+
+```{r}
+tibble::glimpse(query_df)
+
+# Observations: 6
+# Variables: 22
+# $ Gene                        <chr> "CD81", "NRP1", "PRNP", "SDC1", "...
+# $ `Gene synonym`              <chr> "TAPA-1, TAPA1, TSPAN28", "CD304,...
+# $ Ensembl                     <chr> "ENSG00000110651", "ENSG000000992...
+# $ `Gene description`          <chr> "CD81 molecule", "Neuropilin 1", ...
+# $ Chromosome                  <dbl> 11, 10, 20, 2, 11, 17
+# $ Position                    <chr> "2376177-2397419", "33177492-3333...
+# $ `Protein class`             <chr> "CD markers, Disease related gene...
+# $ Evidence                    <chr> "Evidence at protein level", "Evi...
+# $ Antibody                    <chr> "CAB002507, HPA007234", "CAB00451...
+# $ `Reliability (IH)`          <chr> "Supported", "Approved", "Enhance...
+# $ `Reliability (Mouse Brain)` <lgl> NA, NA, NA, NA, NA, NA
+# $ `Reliability (IF)`          <chr> "Supported", "Uncertain", "Approv...
+# $ `Subcellular location`      <chr> "Plasma membrane", "Mitochondria"...
+# $ `Prognostic p-value`        <chr> "Glioma:5.12e-5 (unfavourable), P...
+# $ `RNA cancer category`       <chr> "Expressed in all", "Expressed in...
+# $ `RNA tissue category`       <chr> "Expressed in all", "Expressed in...
+# $ `RNA TS`                    <lgl> NA, NA, NA, NA, NA, NA
+# $ `RNA TS TPM`                <chr> NA, NA, NA, "esophagus: 250.7;ski...
+# $ `TPM max in non-specific`   <chr> "seminal vesicle: 2273.0", "place...
+# $ `RNA cell line category`    <chr> "Cell line enhanced", "Cell line ...
+# $ `RNA CS`                    <lgl> NA, NA, NA, NA, NA, NA
+# $ `RNA CS TPM`                <chr> "ASC diff: 2031.3", "U-87 MG: 437...
+```
+
+The data frame itself is somewhat informative, and is adequate if you want to see a summary of the data. However, it also provides you with a list of proteins in both "gene name" and "ensembl id" formats which you can use with `HPAanalyze` functions.
 
 # Copyright
 Anh Tran, 2018
