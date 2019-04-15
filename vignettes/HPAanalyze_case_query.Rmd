@@ -1,0 +1,71 @@
+---
+title: "HPAanalyze use case: Combine with your Human Protein Atlas queries"
+author:
+- name: Anh N. Tran
+  affiliation: Northwestern University, Illinois, USA
+  email: trannhatanh89@gmail.com
+date: "`r Sys.Date()`"
+output: 
+    BiocStyle::html_document:
+        toc: true
+        toc_depth: 2
+        toc_float: true
+        number_sections: true
+vignette: >
+  %\VignetteIndexEntry{"HPAanalyze use case: Combine with your Human Protein Atlas queries"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE,
+  comment="#>",
+  warning=FALSE,
+  error=FALSE,
+  eval=FALSE
+)
+```
+
+```{r library, message=FALSE, warning=FALSE, error=FALSE}
+library(BiocStyle)
+library(HPAanalyze)
+library(dplyr)
+```
+
+# The case 
+
+The Human Protein Atlas web interface provides a powerful way to search using specific parameters. For example, you can find proteins predicted to be secreted, expressed at low level in normal breast tissue and are predictors of poor prognosis in breast cancer. The good news: you can combine the results of your queries with HPAanalyze for easy explanatory data analysis and data retrieval of your proteins of interest. Here is how.
+
+# The solution
+
+## Create your query
+
+Have a specific goal in mind. What are you looking for? In this example, I will look for CD markers that have low expression in the cerebral cortex and correlate with unfavorable prognosis in glioma.
+
+1. Visit https://www.proteinatlas.org/search.
+
+2. Build your query. The most intuitive way is to click on the "Fields >>" button and use the drop-down menus.
+
+3. Click "Search". The website will show you a list of proteins that match your parameters.
+
+4. Copy the link to the tsv file that summarizes your search. (Alternatively, you can just add `?format=tsv` to your search link.)
+
+5. Import the tsv file as a data frame as below:
+
+```{r}
+my_hpa_query <- "https://www.proteinatlas.org/search/protein_class%3ACD+markers+AND+normal_expression%3ACerebral+cortex%3BAny%3BNot+detected%2CLow+AND+prognostic%3AGlioma%3BUnfavourable?format=tsv"
+```
+
+
+
+# Copyright
+Anh Tran, 2018
+
+Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
+
+# Session info
+```{r echo=FALSE}
+sessionInfo()
+```
+
