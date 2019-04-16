@@ -1,4 +1,7 @@
                        Changes in version 1.1
+Changes in version 1.1.4
+    + Added the query vignette.
+
 Changes in version 1.1.3
     + Fixed issues where hpaVis and hpaXml give faulty output.
     + All hpaVis functions as well as hpaListParam and hpaSubset now use the bundled dataset by defauft if no data argument is specifed.
