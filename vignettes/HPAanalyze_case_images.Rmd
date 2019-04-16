@@ -1,0 +1,53 @@
+---
+title: "HPAanalyze use case: Download histology images from the Human Protein Atlas"
+author:
+- name: Anh N. Tran
+  affiliation: Northwestern University, Illinois, USA
+  email: trannhatanh89@gmail.com
+date: "`r Sys.Date()`"
+output: 
+    BiocStyle::html_document:
+        toc: true
+        toc_depth: 2
+        toc_float: true
+        number_sections: true
+vignette: >
+  %\VignetteIndexEntry{"HPAanalyze use case: Download histology images from the Human Protein Atlas"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE,
+  comment="#>",
+  warning=FALSE,
+  error=FALSE,
+  eval=FALSE
+)
+```
+
+```{r library, message=FALSE, warning=FALSE, error=FALSE}
+library(BiocStyle)
+library(HPAanalyze)
+library(dplyr)
+library(tibble)
+library(readr)
+library(tidyr)
+```
+
+# The case 
+
+
+# The solution
+
+## Get the download links
+
+## Download the images
+
+# Copyright
+Anh Tran, 2018
+
+Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
+
+
