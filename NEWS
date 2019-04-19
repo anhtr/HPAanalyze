@@ -1,8 +1,8 @@
                        Changes in version 1.1
-Changes in version 1.1.4
+* Changes in version 1.1.4
     + Added the query vignette.
 
-Changes in version 1.1.3
+* Changes in version 1.1.3
     + Fixed issues where hpaVis and hpaXml give faulty output.
     + All hpaVis functions as well as hpaListParam and hpaSubset now use the bundled dataset by defauft if no data argument is specifed.
     + All hpaVis functions now have default for all of their arguments and will create a warning message when the defaults are used.
@@ -11,48 +11,48 @@ Changes in version 1.1.3
     + Updated documentations.
     + Hex sticker is now available.
 
-Changes in version 1.1.1
+* Changes in version 1.1.1
     + HPAanalyze now uses openxlsx for hpaExport() instead of XLConnect.
 
-Changes in version 1.1.0
+* Changes in version 1.1.0
     + Starting devel for Bioconductor 3.9
 
                        Changes in version 1.0
 
-Changes in version 1.0.0
+* Changes in version 1.0.0
     + Official relase in Bioconductor 3.8
 
                        Changes in version 0.99
 
-Changes in version 0.99.19
+* Changes in version 0.99.19
     + Update CITATION
 
-Changes in version 0.99.18
+* Changes in version 0.99.18
     + Add 'journal' to CITATION
     + Add '+ file LICENSE' to DESCRIPTION
 
-Changes in version 0.99.17
+* Changes in version 0.99.17
     + Standardize the NEWS file
     + Add CITATION file
 
-Changes in version 0.99.16
+* Changes in version 0.99.16
     + Update License. Now use GPL-3 instead of MIT.
 
-Changes in version 0.99.14
+* Changes in version 0.99.14
     + Replace visType == 'all' in hpaVis() with identical(visType, 'all')
     + Replace extractType == 'all' in hpaXml() with identical(extractType, 'all')
 
-Changes in version 0.99.13 
+* Changes in version 0.99.13 
     + Fix example for hpaXml() (issue #5)
     + Update documentation for hpa_downloaded_histology_v18 dataset (issue #6)
     + Re-name R/data.R to R/hpa_downloaded_histology_v18.R (issue #7)
     + Cross-reference documentations (issues #8, #9)
     + Combining hpaListParam() and hpaSubset() on one man page (issue #10)
 
-Changes in version 0.99.12
+* Changes in version 0.99.12
     + Minor edit in hpaXml() function
 
-Changes in version 0.99.11 
+* Changes in version 0.99.11 
     + Add the hpaVis() function as an umbrella for the whole function family
     + Add the hpaXml() function as an umbrella for all XML extraction
     + Remove the ignore/ directory
@@ -61,5 +61,5 @@ Changes in version 0.99.11
     + Modifications to hpaVis functions for better consistency
     + Updated the help files with details about output of each function
 
-Changes in version 0.99.10 
+* Changes in version 0.99.10 
     + Initital version reviewed by Bioconductor
