@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
   comment="#>",
   warning=FALSE,
   error=FALSE,
-  eval=FALSE
+  eval=TRUE
 )
 ```
 
@@ -43,7 +43,55 @@ library(tidyr)
 
 ## Get the download links
 
+```{r}
+CCNB1xml <- hpaXmlGet("ENSG00000134057")
+
+CCNB1_ab <- hpaXmlAntibody(CCNB1xml)
+CCNB1_ab
+#> # A tibble: 4 x 4
+#>   id        releaseDate releaseVersion RRID      
+#>   <chr>     <chr>       <chr>          <chr>     
+#> 1 CAB000115 2006-03-13  1.2            <NA>      
+#> 2 CAB003804 2006-10-30  2              AB_562272 
+#> 3 HPA030741 2013-12-05  12             AB_2673586
+#> 4 HPA061448 2016-12-04  16             AB_2684522
+
+CCNB1_expr <- hpaXmlTissueExpr(CCNB1xml)
+str(CCNB1_expr[[1]])
+#> Classes 'tbl_df', 'tbl' and 'data.frame':    331 obs. of  18 variables:
+#>  $ patientId         : chr  "1653" "1721" "1725" "598" ...
+#>  $ age               : chr  "53" "60" "57" "7" ...
+#>  $ sex               : chr  "Male" "Female" "Male" "Male" ...
+#>  $ staining          : chr  NA NA NA NA ...
+#>  $ intensity         : chr  NA NA NA NA ...
+#>  $ quantity          : chr  NA NA NA NA ...
+#>  $ location          : chr  NA NA NA NA ...
+#>  $ imageUrl          : chr  "http://v18.proteinatlas.org/images/115/2043_B_4_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_6_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_5_5.jpg" "http://v18.proteinatlas.org/images/115/2043_A_2_2.jpg" ...
+#>  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...
+#>  $ snomedCode2       : chr  "T-93000" "T-93000" "T-93000" "T-66000" ...
+#>  $ snomedCode3       : chr  NA NA NA NA ...
+#>  $ snomedCode4       : chr  NA NA NA NA ...
+#>  $ snomedCode5       : chr  NA NA NA NA ...
+#>  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...
+#>  $ tissueDescription2: chr  "Adrenal gland" "Adrenal gland" "Adrenal gland" "Appendix" ...
+#>  $ tissueDescription3: chr  NA NA NA NA ...
+#>  $ tissueDescription4: chr  NA NA NA NA ...
+#>  $ tissueDescription5: chr  NA NA NA NA ...
+```
+
 ## Download the images
+
+```{r eval=FALSE}
+dir.create("img")
+for (i in 1:nrow(CCNB1_expr[[1]])) {
+    download.file(CCNB1_expr[[1]]$imageUrl[i],
+                  destfile = paste0("img/", CCNB1_ab$id[1], "_",
+                                    CCNB1_expr[[1]]$patientId[i], "_",
+                                    CCNB1_expr[[1]]$tissueDescription2[i], 
+                                    ".jpg"),
+                  mode = "wb")
+}
+```
 
 # Copyright
 Anh Tran, 2018
