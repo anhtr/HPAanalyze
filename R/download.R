@@ -483,4 +483,11 @@ hpaExport <- function(data, fileName, fileType='xlsx') {
     if(fileType == 'xlsx') {
         write.xlsx(data, file = fileName)
     }
+    
+    if(fileType == 'csv') {
+        for (i in 1:length(data)) {
+            write.csv(data[[i]], 
+                      file = paste0(fileName, names(data[i]), ".csv"))
+        }
+    }
 }
