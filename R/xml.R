@@ -28,6 +28,7 @@
 #' }
 #'
 #' @importFrom xml2 read_xml download_xml
+#' @import curl
 #' @export
 
 hpaXmlGet <- function(targetEnsemblId, version='latest') {
