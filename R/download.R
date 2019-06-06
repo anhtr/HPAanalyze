@@ -495,6 +495,7 @@ hpaListParam <- function(data=NULL) {
 #'             fileType='xlsx')
 #'
 #' @importFrom openxlsx write.xlsx
+#' @importFrom utils write.csv write.table
 #' @export
 
 hpaExport <- function(data, fileName, fileType='xlsx') {
