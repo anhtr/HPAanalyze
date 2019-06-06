@@ -79,6 +79,8 @@ hpaVisTissue <- function(data=NULL,
         message('Use hpaListParam() to list possible values for target variables.')
     }
     
+    targetGene <- gene_ensembl_convert(targetGene, "gene")
+    
     plotData <- data$normal_tissue %>%
         filter(gene %in% targetGene) %>%
         filter(tissue %in% targetTissue)
@@ -192,6 +194,8 @@ hpaVisPatho <- function(data=NULL,
         plotData <- filter(plotData, cancer %in% targetCancer)
     }
     
+    targetGene <- gene_ensembl_convert(targetGene, "gene")
+    
     plotData <- plotData %>%
         select(gene, cancer, high, medium, low, not_detected) %>%
         rename('High'='high', 'Medium'='medium', 
@@ -287,6 +291,8 @@ hpaVisSubcell <- function(data=NULL,
     if (infoDisp) {
         message('Use hpaListParam() to list possible values for target variables.')
     }
+    
+    targetGene <- gene_ensembl_convert(targetGene, "gene")
     
     plotData <- data$subcellular_location %>%
         filter(gene %in% targetGene) %>%
