@@ -487,7 +487,15 @@ hpaExport <- function(data, fileName, fileType='xlsx') {
     if(fileType == 'csv') {
         for (i in 1:length(data)) {
             write.csv(data[[i]], 
-                      file = paste0(fileName, names(data[i]), ".csv"))
+                      file = paste0(fileName, "_", names(data[i]), ".csv"))
+        }
+    }
+    
+    if(fileType == 'tsv') {
+        for (i in 1:length(data)) {
+            write.table(data[[i]], 
+                       file = paste0(fileName, "_", names(data[i]), ".tsv"),
+                       sep = "\t")
         }
     }
 }
