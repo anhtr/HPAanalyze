@@ -54,7 +54,6 @@
 #' @import dplyr
 #' @import hpar
 #' @importFrom readr read_tsv
-#' @importFrom magrittr %<>%
 #' @importFrom utils download.file data
 #' @importFrom tidyr gather
 #' @importFrom tibble as_tibble
@@ -140,8 +139,8 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                  envir=environment())
             subcellular_location <- as_tibble(hpaSubcellularLoc)
             colnames(subcellular_location) <- subcellularLocationColnames
-            subcellular_location$gene %<>% as.character
-            subcellular_location$go_id %<>% as.character
+            subcellular_location$gene <- as.character(subcellular_location$gene)
+            subcellular_location$go_id <- as.character(subcellular_location$go_id)
             loadedData$subcellular_location <- subcellular_location
         }
         
@@ -242,9 +241,10 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                           destfile=temp)
             transcript_rna_tissue <- read_tsv(unz(temp, 'transcript_rna_tissue.tsv'))
             unlink(temp)
-            transcript_rna_tissue %<>% gather(key='tissue',
-                                              value='value',
-                                              -'ensgid', -'enstid')
+            transcript_rna_tissue <- gather(transcript_rna_tissue,
+                                            key='tissue',
+                                            value='value',
+                                            -'ensgid', -'enstid')
             colnames(transcript_rna_tissue) <- transcriptRnaTissueColnames
             loadedData$transcript_rna_tissue <- transcript_rna_tissue
         }
@@ -255,9 +255,10 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                           destfile=temp)
             transcript_rna_cell_line <- read_tsv(unz(temp, 'transcript_rna_celline.tsv'))
             unlink(temp)
-            transcript_rna_cell_line %<>% gather(key='cell_line',
-                                                 value='value',
-                                                 -'ensgid', -'enstid')
+            transcript_rna_cell_line <- gather(transcript_rna_cell_line,
+                                               key='cell_line',
+                                               value='value',
+                                               -'ensgid', -'enstid')
             colnames(transcript_rna_cell_line) <- transcriptRnaCellLineColnames
             loadedData$transcript_rna_cell_line <- transcript_rna_cell_line
         }
@@ -312,7 +313,6 @@ hpaDownload <- function(downloadList='histology', version='latest') {
 #'                           targetCancer=cancerList)
 #'
 #' @import dplyr
-#' @importFrom magrittr %<>%
 #' @export
 
 hpaSubset <- function(data=NULL,
@@ -330,51 +330,61 @@ hpaSubset <- function(data=NULL,
     
     if('normal_tissue' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$normal_tissue %<>% filter(gene %in% targetGene)
+            data$normal_tissue <- 
+                filter(data$normal_tissue, gene %in% targetGene)
         }
         
         if(!is.null(targetTissue)) {
-            data$normal_tissue %<>% filter(tissue %in% targetTissue)
+            data$normal_tissue <-
+                filter(data$normal_tissue, tissue %in% targetTissue)
         }
         
         if(!is.null(targetCellType)) {
-            data$normal_tissue %<>% filter(cell_type %in% targetCellType)
+            data$normal_tissue <-
+                filter(data$normal_tissue, cell_type %in% targetCellType)
         }
     }
     
     if('pathology' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$pathology %<>% filter(gene %in% targetGene)
+            data$pathology <-
+                filter(data$pathology, gene %in% targetGene)
         }
         
         if(!is.null(targetCancer)) {
-            data$pathology %<>% filter(cancer %in% targetCancer)
+            data$pathology <-
+                filter(data$pathology, cancer %in% targetCancer)
         }
     }
     
     if('subcellular_location' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$subcellular_location %<>% filter(gene %in% targetGene)
+            data$subcellular_location <-
+                filter(data$subcellular_location, gene %in% targetGene)
         }
     }
     
     if('rna_tissue' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$rna_tissue %<>% filter(gene %in% targetGene)
+            data$rna_tissue <-
+                filter(data$rna_tissue, gene %in% targetGene)
         }
         
         if(!is.null(targetTissue)) {
-            data$rna_tissue %<>% filter(tissue %in% targetTissue)
+            data$rna_tissue <-
+                filter(data$rna_tissue, tissue %in% targetTissue)
         }        
     }
     
     if('rna_cell_line' %in% names(data)) {
         if(!is.null(targetGene)) {
-            data$rna_cell_line %<>% (gene %in% targetGene)
+            data$rna_cell_line <-
+                filter(data$rna_cell_line, gene %in% targetGene)
         }
         
         if(!is.null(targetCellLine)) {
-            data$rna_cell_line %<>% filter(cell_line %in% targetCellLine)
+            data$rna_cell_line <-
+                filter(data$rna_cell_line, cell_line %in% targetCellLine)
         }       
     }
     
