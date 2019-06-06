@@ -31,6 +31,9 @@
 #' @export
 
 hpaXmlGet <- function(targetEnsemblId, version='latest') {
+    
+    targetEnsemblId <- gene_ensembl_convert(targetEnsemblId, "ensembl")
+    
     temp <- tempfile()
     
     rawXml <- read_xml(download_xml(url=version_to_xml_url(targetEnsemblId, 
