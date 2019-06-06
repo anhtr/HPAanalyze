@@ -23,8 +23,7 @@ Imports: dplyr,
     stats,
     utils,
     hpar,
-    cowplot,
-    curl
+    cowplot
 Suggests: knitr,
     rmarkdown,
     devtools,

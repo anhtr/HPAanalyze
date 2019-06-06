@@ -27,19 +27,19 @@
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #' }
 #'
-#' @importFrom xml2 read_xml download_xml
-#' @import curl
+#' @importFrom xml2 read_xml
+#' @importFrom utils download.file
 #' @export
 
-hpaXmlGet <- function(targetEnsemblId, version='latest') {
-    
+hpaXmlGet <- function(targetEnsemblId, version = 'latest') {
     targetEnsemblId <- gene_ensembl_convert(targetEnsemblId, "ensembl")
     
     temp <- tempfile()
     
-    rawXml <- read_xml(download_xml(url=version_to_xml_url(targetEnsemblId, 
-                                                           version), 
-                                    file=temp))
+    download.file(url = version_to_xml_url(targetEnsemblId, version),
+                  destfile = temp)
+    
+    rawXml <- read_xml(x = temp)
     
     unlink(temp)
     
