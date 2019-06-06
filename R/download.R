@@ -330,6 +330,7 @@ hpaSubset <- function(data=NULL,
     
     if('normal_tissue' %in% names(data)) {
         if(!is.null(targetGene)) {
+            targetGene <- gene_ensembl_convert(targetGene, "gene")
             data$normal_tissue <- 
                 filter(data$normal_tissue, gene %in% targetGene)
         }
@@ -347,6 +348,7 @@ hpaSubset <- function(data=NULL,
     
     if('pathology' %in% names(data)) {
         if(!is.null(targetGene)) {
+            targetGene <- gene_ensembl_convert(targetGene, "gene")
             data$pathology <-
                 filter(data$pathology, gene %in% targetGene)
         }
@@ -359,6 +361,7 @@ hpaSubset <- function(data=NULL,
     
     if('subcellular_location' %in% names(data)) {
         if(!is.null(targetGene)) {
+            targetGene <- gene_ensembl_convert(targetGene, "gene")
             data$subcellular_location <-
                 filter(data$subcellular_location, gene %in% targetGene)
         }
@@ -366,6 +369,7 @@ hpaSubset <- function(data=NULL,
     
     if('rna_tissue' %in% names(data)) {
         if(!is.null(targetGene)) {
+            targetGene <- gene_ensembl_convert(targetGene, "gene")
             data$rna_tissue <-
                 filter(data$rna_tissue, gene %in% targetGene)
         }
@@ -378,6 +382,7 @@ hpaSubset <- function(data=NULL,
     
     if('rna_cell_line' %in% names(data)) {
         if(!is.null(targetGene)) {
+            targetGene <- gene_ensembl_convert(targetGene, "gene")
             data$rna_cell_line <-
                 filter(data$rna_cell_line, gene %in% targetGene)
         }
