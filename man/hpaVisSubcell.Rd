@@ -12,8 +12,10 @@ hpaVisSubcell(data = NULL, targetGene = NULL, color = c("#ffffb2",
 \code{hpa_subset()}. Require the \code{subcellular_location} dataset. Use
 HPA version 18 by default.}
 
-\item{targetGene}{Vector of strings of HGNC gene symbols. Default to TP53,
-EGFR, CD44, PTEN and IDH1.}
+\item{targetGene}{Vector of strings of HGNC gene symbols. By default it is
+set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
+converted to HGNC gene symbols.}
 
 \item{color}{Vector of 2 colors used to depict if the protein expresses in a
 location or not.}

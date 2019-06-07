@@ -13,8 +13,10 @@ hpaVisTissue(data = NULL, targetGene = NULL, targetTissue = NULL,
 \code{hpa_subset()}. Require the \code{normal_tissue} dataset. Use HPA
 version 18 by default.}
 
-\item{targetGene}{Vector of strings of HGNC gene symbols. Default to TP53,
-EGFR, CD44, PTEN and IDH1.}
+\item{targetGene}{Vector of strings of HGNC gene symbols. By default it is
+set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
+converted to HGNC gene symbols.}
 
 \item{targetTissue}{Vector of strings of normal tissues. Default to breast.}
 

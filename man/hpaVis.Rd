@@ -15,7 +15,9 @@ hpaVis(data = NULL, targetGene = NULL, targetTissue = NULL,
 bundled with HPAanalyze, which is from version 18 of the HPA program.}
 
 \item{targetGene}{Vector of strings of HGNC gene symbols. By default it is
-set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}.}
+set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
+converted to HGNC gene symbols.}
 
 \item{targetTissue}{Vector of strings of normal tissue names. By default it
 is set to \code{"breast"}.}

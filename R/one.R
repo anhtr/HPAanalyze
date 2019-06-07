@@ -16,7 +16,9 @@
 #'   \code{hpa_subset()}. By default this function use the example dataset
 #'   bundled with HPAanalyze, which is from version 18 of the HPA program.
 #' @param targetGene Vector of strings of HGNC gene symbols. By default it is
-#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}.
+#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+#'   HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
+#'   converted to HGNC gene symbols.
 #' @param targetTissue Vector of strings of normal tissue names. By default it
 #'   is set to \code{"breast"}.
 #' @param targetCellType Vector of strings of normal cell types. By default
@@ -151,8 +153,9 @@ hpaVis <- function(data=NULL,
 #' extract all information available for HPAanalyze user from the XML file by
 #' calling every hpaXml function and put all results into a list.
 #'
-#' @param inputXml Input can be either one Ensembl gene id or a imported XML
-#'   object resulting from a \code{hpaXmlGet()} function call.
+#' @param inputXml Input can be either one Ensembl gene id (start with ENSG) or
+#'   a imported XML object resulting from a \code{hpaXmlGet()} function call.
+#'   You can also use HGNC gene symbol and it will be converted to ensembl id.
 #' @param extractType A vector of strings indicate which information is desired
 #'   for extraction. By default this function will call all \code{hpaXml}
 #'   functions available. Other options are \code{'ProtClass'},
