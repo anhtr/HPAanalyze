@@ -247,6 +247,9 @@ hpaVisPatho <- function(data=NULL,
 #'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
 #'   HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 #'   converted to HGNC gene symbols.
+#' @param evidence Vector of string indicate which evidences you want to plot. The
+#'   default is everything \code{c("enhanced", "supported", "approved",
+#'   "uncertain")}.
 #' @param color Vector of 2 colors used to depict if the protein expresses in a
 #'   location or not.
 #' @param customTheme Logical argument. If \code{TRUE}, the function will return
@@ -274,7 +277,8 @@ hpaVisPatho <- function(data=NULL,
 #' @export
 
 hpaVisSubcell <- function(data=NULL, 
-                          targetGene=NULL, 
+                          targetGene=NULL,
+                          evidence = c("enhanced", "supported", "approved", "uncertain"),
                           color=c('#ffffb2', '#e31a1c'),
                           customTheme=FALSE) {
     
@@ -302,9 +306,26 @@ hpaVisSubcell <- function(data=NULL,
     
     plotData <- data$subcellular_location %>%
         filter(gene %in% targetGene) %>%
-        mutate(sub_location=strsplit(go_id, ';')) %>%
+        mutate(sub_location = NA)
+    
+    if ("enhanced" %in% evidence) plotData <- 
+        mutate(plotData, 
+               sub_location =  paste(sub_location, enhanced, sep = ";"))
+    if ("supported" %in% evidence) plotData <- 
+        mutate(plotData, 
+               sub_location =  paste(sub_location, supported, sep = ";"))
+    if ("approved" %in% evidence) plotData <- 
+        mutate(plotData, 
+               sub_location =  paste(sub_location, approved, sep = ";"))
+    if ("uncertain" %in% evidence) plotData <- 
+        mutate(plotData, 
+               sub_location =  paste(sub_location, uncertain, sep = ";"))
+    
+    plotData <-  plotData %>%
+        mutate(sub_location=strsplit(sub_location, ';')) %>%
         tidyr::unnest(sub_location) %>%
         select(sub_location, gene) %>%
+        filter(sub_location != "NA") %>%
         table() %>%
         as_tibble() %>%
         mutate(n=factor(n, levels=c('0', '1')))
@@ -332,5 +353,3 @@ hpaVisSubcell <- function(data=NULL,
     
     return(plot)       
 }
-
-
