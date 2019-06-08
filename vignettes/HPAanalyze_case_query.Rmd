@@ -1,10 +1,10 @@
 ---
-title: "HPAanalyze use case: Combine with your Human Protein Atlas queries"
+title: "HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries"
 author:
 - name: Anh N. Tran
   affiliation: Northwestern University, Illinois, USA
   email: trannhatanh89@gmail.com
-date: "`r Sys.Date()`"
+date: 6/7/2019
 output: 
     BiocStyle::html_document:
         toc: true
@@ -12,7 +12,7 @@ output:
         toc_float: true
         number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"HPAanalyze use case: Combine with your Human Protein Atlas queries"}
+  %\VignetteIndexEntry{"HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

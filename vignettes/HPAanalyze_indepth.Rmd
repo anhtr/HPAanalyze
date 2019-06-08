@@ -1,10 +1,10 @@
 ---
-title: "HPAanalyze in-depth: Working Human Protein Atlas data in R"
+title: "HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R"
 author:
 - name: Anh N. Tran
   affiliation: Northwestern University, IL, USA
   email: trannhatanh89@gmail.com
-date: "`r Sys.Date()`"
+date: 6/7/2019
 output: 
     BiocStyle::html_document:
         toc: true
@@ -12,7 +12,7 @@ output:
         toc_float: true
         number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"HPAanalyze in-depth: Working Human Protein Atlas data in R"}
+  %\VignetteIndexEntry{"HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -499,9 +499,4 @@ We appreciate the support of the National institutes of Health National Cancer I
 
 # Copyright
 Anh Tran, 2018
-
-# Session info
-```{r echo=FALSE}
-sessionInfo()
-```
 
