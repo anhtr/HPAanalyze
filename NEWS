@@ -3,11 +3,11 @@
     + Starting devel for Bioconductor 3.10
     
 * Changes in version 1.3.1
-    + hpaExport is now supporting csv and tsv
-    + Support for JSON export is added via vignette
-    + Fix the error where hpaXmlGet give an error when curl is not installed
+    + hpaExport is now supporting csv and tsv.
+    + Support for JSON export is added via vignette.
+    + Fix the error where hpaXmlGet give an error when curl is not installed.
     + Most functions with now take both HGNC gene names and ensemble ids.
-    + hpaVisSubcell now allows user to choose level of evidences
+    + hpaVisSubcell now allows user to choose reliability scores.
 
                        Changes in version 1.2
 * Changes in version 1.2.0
