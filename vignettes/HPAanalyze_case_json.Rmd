@@ -1,0 +1,98 @@
+---
+title: "HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON"
+author:
+- name: Anh N. Tran
+  affiliation: Northwestern University, Illinois, USA
+  email: trannhatanh89@gmail.com
+date: 6/8/2019
+output: 
+    BiocStyle::html_document:
+        toc: true
+        toc_depth: 2
+        toc_float: true
+        number_sections: true
+vignette: >
+  %\VignetteIndexEntry{"HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE,
+  comment="#>",
+  warning=FALSE,
+  error=FALSE,
+  eval=FALSE
+)
+```
+
+```{r library, message=FALSE, warning=FALSE, error=FALSE}
+library(BiocStyle)
+library(HPAanalyze)
+library(dplyr)
+library(jsonlite)
+```
+
+# The case 
+In certain situation, users may want to export HPA downloaded data into JavaScript Object Notation (JSON) format to use for purposed such as asynchronous, real-time server-to-browser communication. To reduce package dependencies, `HPAanalyze` does not support exporting to JSON via the `hpaExport` function. However, this can be done using a short script as described below.
+
+# The solution
+Exporting data to JSON can be achieved by converting dataframes resulting from `hpaDownload`/`hpaSubset` to JSON format using the `jsonlite` package and write the files to `.json` file.
+
+## Download and subset data
+There is no special processing needed to the datasets. You can download and subset data as usual. The resulting object is a list of dataframes.
+```{r}
+data <- hpaDownload(downloadList = "histology", version = "example")
+data_subset <-
+  hpaSubset(data,
+            targetGene = c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1'))
+```
+
+## Convert dataframes to JSON
+The list of dataframes will then be converted to a list of `json` using `jsonlite::toJSON`.
+
+```{r}
+data_json <- lapply(data_subset, jsonlite::toJSON)
+
+str(data_json)
+
+# List of 3
+#  $ normal_tissue       : 'json' chr "[{\"ensembl\":\"ENSG00000026508\",\"gene\":\"CD44\",\"tissue\":\"adrenal gland\",\"cell_type\":\"glandular cell"| __truncated__
+#  $ pathology           : 'json' chr "[{\"ensembl\":\"ENSG00000026508\",\"gene\":\"CD44\",\"cancer\":\"breast cancer\",\"high\":1,\"medium\":6,\"low\"| __truncated__
+#  $ subcellular_location: 'json' chr "[{\"ensembl\":\"ENSG00000026508\",\"gene\":\"CD44\",\"reliability\":\"Enhanced\",\"enhanced\":\"Golgi apparatus"| __truncated__
+```
+
+## Write JSON file
+Finally, the `.json` file can be saved to your working folder using the follow code. Notice that there will be one `.json` file for each dataset.
+
+```{r}
+for (i in seq_along(data_json)) {
+  write(data_json[[i]], 
+        file = paste0("hpa_data_", names(data_json[i]), ".json"))
+}
+```
+
+# In one function
+If you routinely export HPA data into JSON format, the following function allow you to do so with the same syntax as `hpaExport`.
+
+```{r}
+## The function (note that you don't need to put .json into the file name)
+hpaExportJSON <- function(data, fileName) {
+  data_json <- lapply(data, jsonlite::toJSON)
+  for (i in seq_along(data_json)) {
+    write(data_json[[i]],
+          file = paste0(fileName, "_", names(data_json[i]), ".json"))
+  }
+}
+
+## Export data subset
+hpaExportJSON(data_subset, fileName = "hpa_data")
+```
+
+
+# Copyright
+Anh Tran, 2019
+
+Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
+

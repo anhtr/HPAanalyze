@@ -1,10 +1,10 @@
 ---
-title: "HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas data in one function"
+title: "HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function"
 author:
 - name: Anh N. Tran
   affiliation: Northwestern University, Illinois, USA
   email: trannhatanh89@gmail.com
-date: "`r Sys.Date()`"
+date: 6/7/2019
 output: 
     BiocStyle::html_document:
         toc: true
@@ -12,7 +12,7 @@ output:
         toc_float: true
         number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas data in one function"}
+  %\VignetteIndexEntry{"HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -136,8 +136,4 @@ Anh Tran, 2018
 
 Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
 
-# Session info
-```{r echo=FALSE}
-sessionInfo()
-```
 

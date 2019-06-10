@@ -1,7 +1,6 @@
 ## Data manipulation as part of xml parsing ===================================
 
 #' @import dplyr
-#' @importFrom magrittr %<>%
 #' @importFrom tibble tibble
 
 named_vector_list_to_tibble <- function(x) {
@@ -14,7 +13,7 @@ named_vector_list_to_tibble <- function(x) {
         tibble_x <- bind_rows(tibble_x, tibble_i)
     }
     # process tibble_x into final product
-    tibble_x %<>%
+    tibble_x <- tibble_x %>%
         # remove the NA row resulted from defining tibble_x
         filter(!is.na(index)) %>%
         # spead tibble_x into tidy format
@@ -67,4 +66,42 @@ version_to_xml_url <- function(id, vers) {
     }
     
     return(paste0('https://', vers, '.proteinatlas.org/', id, '.xml'))
+}
+
+## Convert between ensembl id and gene name ===================================
+
+gene_ensembl_convert <- function(id, convert_to) {
+    id_c <- id
+    warn <- FALSE
+    
+    for (i in seq_along(id)) {
+        if (convert_to == "ensembl") {
+            if (substr(id[i], 1, 4) != "ENSG") {
+                id_c[i] <- lookup_df$ensembl[lookup_df$gene == id[i]][1]
+                if (is.na(id_c[i])) {
+                    id_c[i] <- id[i]
+                    warn <- TRUE
+                }
+            } else {
+                id_c[i] <- id[i]
+            }
+        } else if (convert_to == "gene") {
+            if (substr(id[i], 1, 4) == "ENSG") {
+                id_c[i] <- lookup_df$gene[lookup_df$ensembl == id[i]][1]
+                if (is.na(id_c[i])) {
+                    id_c[i] <- id[i]
+                    warn <- TRUE
+                }
+            } else {
+                id_c[i] <- id[i]
+            }
+        }
+    }
+    
+    if (warn == TRUE)
+        message(
+            "Couldn't find all requested genes in lookup table. There may be typo(s) or your gene(s) may not currently be supported by HPA."
+        )
+    
+    return(id_c)
 }

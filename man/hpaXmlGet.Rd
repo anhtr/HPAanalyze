@@ -7,8 +7,9 @@
 hpaXmlGet(targetEnsemblId, version = "latest")
 }
 \arguments{
-\item{targetEnsemblId}{A string of one ensembl ID, start with ESNG. For
-example \code{'ENSG00000131979'}}
+\item{targetEnsemblId}{A string of one ensembl ID, start with ENSG. For
+example \code{'ENSG00000131979'}. You can also use HGNC gene symbol and it
+will be converted to ensembl id.}
 
 \item{version}{A string indicate which version to be downloaded. Possible
 value: \itemize{ \item \code{'latest'}: Download latest version. \item

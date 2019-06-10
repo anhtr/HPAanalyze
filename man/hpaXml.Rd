@@ -8,8 +8,9 @@ hpaXml(inputXml, extractType = c("ProtClass", "TissueExprSum",
   "Antibody", "TissueExpr"), ...)
 }
 \arguments{
-\item{inputXml}{Input can be either one Ensembl gene id or a imported XML
-object resulting from a \code{hpaXmlGet()} function call.}
+\item{inputXml}{Input can be either one Ensembl gene id (start with ENSG) or
+a imported XML object resulting from a \code{hpaXmlGet()} function call.
+You can also use HGNC gene symbol and it will be converted to ensembl id.}
 
 \item{extractType}{A vector of strings indicate which information is desired
 for extraction. By default this function will call all \code{hpaXml}
