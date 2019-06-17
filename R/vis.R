@@ -163,6 +163,7 @@ hpaVisTissue <- function(data=NULL,
 #'
 #' @import dplyr
 #' @import ggplot2
+#' @importFrom tidyr gather
 #' @export
 
 hpaVisPatho <- function(data=NULL, 
@@ -204,9 +205,7 @@ hpaVisPatho <- function(data=NULL,
         select(gene, cancer, high, medium, low, not_detected) %>%
         rename('High'='high', 'Medium'='medium', 
                'Low'='low', 'Not detected'='not_detected') %>%
-        reshape2::melt(measure.vars=c('High', 'Medium', 'Low', 'Not detected'),
-                       variable.name='level',
-                       value.name='patient_count')      
+        gather(key = "level", value = "patient_count", -gene, -cancer)    
     
     levelColors <- c('Not detected'=color[1],
                      'Low'=color[2],
