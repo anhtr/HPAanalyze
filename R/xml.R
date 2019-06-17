@@ -135,7 +135,7 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
     output$img <- tissueExpression %>%
         xml_find_all('image') %>%
         as_list() %>%
-        reshape2::melt() %>%
+        melt_list() %>%
         spread(key='L2', value='value') %>%
         select(tissue, imageUrl) %>%
         mutate(tissue=as.character(tissue), 
@@ -284,4 +284,22 @@ patient_nodes_to_tibble <- function(patientNodes) {
            }) %>% named_vector_list_to_tibble() -> result
     
     return(result)
+}
+
+## Melt a list into a data frame =============================================
+# Code from the retired package reshape2 by Hadley Wickham
+
+melt_list <- function(data, ..., level = 1) {
+    parts <- lapply(data, melt, level = level + 1, ...)
+    result <- rbind.fill(parts)
+    
+    # Add labels
+    names <- names(data) %||% seq_along(data)
+    lengths <- vapply(parts, nrow, integer(1))
+    labels <- rep(names, lengths)
+    
+    label_var <- attr(data, "varname") %||% paste("L", level, sep = "")
+    result[[label_var]] <- labels
+    
+    result
 }
