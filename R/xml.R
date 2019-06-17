@@ -117,7 +117,6 @@ hpaXmlProtClass <- function(importedXml) {
 #'
 #' @importFrom xml2 xml_find_all xml_find_first xml_text
 #' @import dplyr
-#' @importFrom tidyr spread
 #' @export
 
 hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
@@ -135,8 +134,8 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
     output$img <- tissueExpression %>%
         xml_find_all('image') %>%
         as_list() %>%
-        reshape2::melt() %>%
-        spread(key='L2', value='value') %>%
+        lapply(list_to_df) %>%
+        bind_rows() %>%
         select(tissue, imageUrl) %>%
         mutate(tissue=as.character(tissue), 
                imageUrl=as.character(imageUrl))
@@ -284,4 +283,25 @@ patient_nodes_to_tibble <- function(patientNodes) {
            }) %>% named_vector_list_to_tibble() -> result
     
     return(result)
+}
+
+## Melt a list into a data frame =============================================
+#' @importFrom tidyr spread unnest
+
+list_to_df <- function(listfordf){
+    
+    df <- list(list.element = listfordf)
+    class(df) <- c("tbl_df", "data.frame")
+    attr(df, "row.names") <- .set_row_names(length(listfordf))
+    
+    if (!is.null(names(listfordf))) {
+        df$name <- names(listfordf)
+    }
+    
+    df <- df %>% 
+        spread(key = 'name', value = 'list.element') %>% 
+        unnest() %>% 
+        unnest()
+    
+    return(df)
 }

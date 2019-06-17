@@ -134,7 +134,7 @@ hpaVis <- function(data=NULL,
     
     # return a grid if more than one plot, otherwise return the ggplot
     if (length(plot) > 1) { 
-        return(cowplot::plot_grid(plotlist = plot))
+        return(gridExtra::grid.arrange(grobs = plot, ncol = 2))
     } else {
         return(plot[[1]])
     }

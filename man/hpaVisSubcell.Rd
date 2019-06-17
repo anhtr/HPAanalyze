@@ -5,7 +5,7 @@
 \title{Visualize subcellular location data}
 \usage{
 hpaVisSubcell(data = NULL, targetGene = NULL,
-  evidence = c("enhanced", "supported", "approved", "uncertain"),
+  reliability = c("enhanced", "supported", "approved", "uncertain"),
   color = c("#ffffb2", "#e31a1c"), customTheme = FALSE)
 }
 \arguments{
@@ -18,7 +18,7 @@ set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
 HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 converted to HGNC gene symbols.}
 
-\item{evidence}{Vector of string indicate which evidences you want to plot. The
+\item{reliability}{Vector of string indicate which reliability scores you want to plot. The
 default is everything \code{c("enhanced", "supported", "approved",
 "uncertain")}.}
 
