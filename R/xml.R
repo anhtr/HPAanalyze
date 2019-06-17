@@ -117,7 +117,6 @@ hpaXmlProtClass <- function(importedXml) {
 #'
 #' @importFrom xml2 xml_find_all xml_find_first xml_text
 #' @import dplyr
-#' @importFrom tidyr spread
 #' @export
 
 hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
@@ -135,8 +134,8 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
     output$img <- tissueExpression %>%
         xml_find_all('image') %>%
         as_list() %>%
-        melt_list() %>%
-        spread(key='L2', value='value') %>%
+        lapply(list_to_df) %>%
+        bind_rows() %>%
         select(tissue, imageUrl) %>%
         mutate(tissue=as.character(tissue), 
                imageUrl=as.character(imageUrl))
@@ -287,19 +286,22 @@ patient_nodes_to_tibble <- function(patientNodes) {
 }
 
 ## Melt a list into a data frame =============================================
-# Code from the retired package reshape2 by Hadley Wickham
+#' @importFrom tidyr spread unnest
 
-melt_list <- function(data, ..., level = 1) {
-    parts <- lapply(data, melt, level = level + 1, ...)
-    result <- rbind.fill(parts)
+list_to_df <- function(listfordf){
     
-    # Add labels
-    names <- names(data) %||% seq_along(data)
-    lengths <- vapply(parts, nrow, integer(1))
-    labels <- rep(names, lengths)
+    df <- list(list.element = listfordf)
+    class(df) <- c("tbl_df", "data.frame")
+    attr(df, "row.names") <- .set_row_names(length(listfordf))
     
-    label_var <- attr(data, "varname") %||% paste("L", level, sep = "")
-    result[[label_var]] <- labels
+    if (!is.null(names(listfordf))) {
+        df$name <- names(listfordf)
+    }
     
-    result
+    df <- df %>% 
+        spread(key = 'name', value = 'list.element') %>% 
+        unnest() %>% 
+        unnest()
+    
+    return(df)
 }
