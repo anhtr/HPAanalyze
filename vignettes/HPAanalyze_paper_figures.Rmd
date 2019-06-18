@@ -1,0 +1,90 @@
+---
+title: "Code for figures from HPAanalyze paper"
+author:
+- name: Anh N. Tran
+  affiliation: Northwestern University, Illinois, USA
+  email: trannhatanh89@gmail.com
+date: 6/18/2019
+output: 
+    BiocStyle::html_document:
+        toc: true
+        toc_depth: 2
+        toc_float: true
+        number_sections: true
+vignette: >
+  %\VignetteIndexEntry{"Code for figures from HPAanalyze paper"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse=TRUE,
+  comment="#>",
+  warning=FALSE,
+  error=FALSE,
+  eval=FALSE
+)
+```
+
+```{r library, message=FALSE, warning=FALSE, error=FALSE}
+library(BiocStyle)
+library(HPAanalyze)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+data <- hpaDownload(downloadList = "histology", 
+                    version = "v18")
+```
+
+
+# Figure 2
+
+```{r}
+gene_list_2 <- c("TP53", "EGFR", "CD44", "PTEN", "IDH1", "IDH2", "CYCS")
+
+# Panel 2A
+tissue_list_2 <- c("skin 1", "cerebellum", "breast")
+
+plot_2a <-
+  hpaVisTissue(data = data,
+               targetGene = gene_list_2,
+               targetTissue = tissue_list_2,
+               color = c("#eff3ff", "#bdd7e7","#6baed6", "#2171b5"))
+
+ggsave(filename = "plot_2a.pdf",
+       plot = plot_2a,
+       device = "pdf")
+
+# Panel 2B
+cancer_list_2 <- c("breast cancer", "glioma", "lymphoma", "prostate cancer")
+
+plot_2b <-
+  hpaVisPatho(data = data,
+              targetGene = gene_list_2,
+              targetCancer = cancer_list_2)
+
+ggsave(filename = "plot_2b.pdf",
+       plot = plot_2b,
+       device = "pdf")
+
+# Panel 2C
+plot_2c <-
+  hpaVisSubcell(data = data,
+                targetGene = gene_list_2,
+                color = c("white", "black"),
+                reliability = c("enhanced", "supported", "approved"))
+
+ggsave(filename = "plot_2c.pdf",
+       plot = plot_2c,
+       device = "pdf")
+```
+
+
+# Copyright
+Anh Tran, 2019
+
+Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
+
