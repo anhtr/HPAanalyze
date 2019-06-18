@@ -68,7 +68,9 @@ plot_2b <-
 
 ggsave(filename = "plot_2b.pdf",
        plot = plot_2b,
-       device = "pdf")
+       device = "pdf",
+       width = 7,
+       height = 5)
 
 # Panel 2C
 plot_2c <-
