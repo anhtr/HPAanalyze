@@ -130,8 +130,75 @@ plot_3c <-
 ggsave(filename = "plot_3c.pdf",
        plot = plot_3c,
        device = "pdf",
-       width = "4",
-       height = "3")
+       width = 4,
+       height = 3)
+```
+
+
+# Figure 4
+
+```{r}
+gene_list_4 <- c("GCH1", "PTS", "SPR", "DHFR")
+
+# Panel 4A
+tissue_list_4 <- c("hippocampus", "cerebral cortex", "caudate")
+
+plot_4a <-
+  hpaVisTissue(data = data,
+               targetGene = gene_list_4,
+               targetTissue = tissue_list_4,
+               color = c("#eff3ff", "#bdd7e7","#6baed6", "#2171b5"))
+
+ggsave(filename = "plot_4a.pdf",
+       plot = plot_4a,
+       device = "pdf",
+       width = 5,
+       height = 4)
+
+# Panel 4B
+plot_4b <-
+  hpaVisPatho(data = data,
+              targetGene = gene_list_4,
+              targetCancer = "glioma")
+
+ggsave(filename = "plot_4b.pdf",
+       plot = plot_4b,
+       device = "pdf",
+       width = 5,
+       height = 4)
+
+# Panel 4C
+# Figure was generated with the GlioVis portal http://gliovis.bioinfo.cnio.es/
+# Accessed: June 19, 2019
+#
+# Plotting:
+# Navigate through tabs: Explore > Survival > Kaplan-Meier > Plot
+#
+# Parameters: 
+#    - Dataset: Adult Rembrandt
+#    - Gene: SPR or DHFR
+#    - Histology: All
+#    - Subtype: All
+#    - Cutoff: Median
+#    - Plot options: use default options
+#    - Download: use default options
+#
+# Retrieving plotting data: (same parameters)
+# Navigate through tabs: Explore > Survival > Kaplan-Meier > Plot
+# Buttons: Download > CSV
+
+# Panel 4D
+plot_4d <-
+  hpaVisSubcell(data = data,
+                targetGene = gene_list_4,
+                color = c("white", "black"),
+                reliability = c("enhanced", "supported", "approved"))
+
+ggsave(filename = "plot_4d.pdf",
+       plot = plot_4d,
+       device = "pdf",
+       width = 4,
+       height = 3)
 ```
 
 
