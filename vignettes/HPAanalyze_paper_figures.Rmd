@@ -85,6 +85,57 @@ ggsave(filename = "plot_2c.pdf",
 ```
 
 
+# Figure 3
+
+```{r}
+gene_list_3 <- 
+  c("GFAP", "EGFR", "PDGFRA", "PIK3CA", "PTEN", "BRAF", "MDM2", "MDM4", "CDK4")
+
+# Panel 3A
+tissue_list_3 <- c("hippocampus", "cerebral cortex")
+
+plot_3a <-
+  hpaVisTissue(data = data,
+               targetGene = gene_list_3,
+               targetTissue = tissue_list_3,
+               color = c("#eff3ff", "#bdd7e7","#6baed6", "#2171b5"))
+
+ggsave(filename = "plot_3a.pdf",
+       plot = plot_3a,
+       device = "pdf",
+       width = 7,
+       height = 5)
+
+# Panel 3B
+plot_3b <-
+  hpaVisPatho(data = data,
+              targetGene = gene_list_3,
+              targetCancer = "glioma")
+
+ggsave(filename = "plot_3b.pdf",
+       plot = plot_3b,
+       device = "pdf",
+       width = 7,
+       height = 5)
+
+# Panel 3C
+gene_list_3c <- c("PTEN", "H3F3A", "DAXX", "PML")
+
+plot_3c <-
+  hpaVisSubcell(data = data,
+                targetGene = gene_list_3c,
+                color = c("white", "black"),
+                reliability = c("enhanced", "supported", "approved"))
+
+ggsave(filename = "plot_3c.pdf",
+       plot = plot_3c,
+       device = "pdf",
+       width = "4",
+       height = "3")
+```
+
+
+
 # Copyright
 Anh Tran, 2019
 
