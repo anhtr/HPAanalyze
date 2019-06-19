@@ -205,7 +205,11 @@ hpaVisPatho <- function(data=NULL,
         select(gene, cancer, high, medium, low, not_detected) %>%
         rename('High'='high', 'Medium'='medium', 
                'Low'='low', 'Not detected'='not_detected') %>%
-        gather(key = "level", value = "patient_count", -gene, -cancer)    
+        gather(key = "level", value = "patient_count", -gene, -cancer)
+    
+    #re-level
+    plotData$level <- factor(plotData$level,
+                             levels = c("High", "Medium", "Low", "Not detected"))
     
     levelColors <- c('Not detected'=color[1],
                      'Low'=color[2],

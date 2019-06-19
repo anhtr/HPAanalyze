@@ -1,4 +1,8 @@
                        Changes in version 1.3
+* Changes in version 1.3.3
+    + Fix sn error introduced in version 1.3.2 where hpaVisPatho plotted incorrectly.
+    + Added a vignette with codes for figures in the HPAanalyze manuscript.
+
 * Changes in version 1.3.2
     + To reduce dependency, hpaVis now use gridExtra for multiple plots instead of cowplot
     + Removed dependency on reshape2
