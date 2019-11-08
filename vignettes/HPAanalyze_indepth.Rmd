@@ -1,5 +1,5 @@
 ---
-title: "HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R"
+title: "2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R"
 author:
 - name: Anh N. Tran
   affiliation: Northwestern University, IL, USA
@@ -12,7 +12,7 @@ output:
         toc_float: true
         number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R"}
+  %\VignetteIndexEntry{"2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -286,7 +286,7 @@ hpaVis(targetGene = c("GCH1", "PTS", "SPR", "DHFR"),
 
 `hpaVisTissue()` generates a "heatmap", in which the expression of proteins of interest (quantified IHC staining) are plotted for each cell type of each tissue. 
 
-```{r visTissue, fig.wide}
+```{r visTissue}
 geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 tissueList <- c('breast', 'cerebellum', 'skin 1')
 
@@ -302,7 +302,7 @@ hpaVisTissue(downloadedData,
 
 This example also demonstrate how the colors of the graphs could be customized, which is a common functionality of the `hpaVis` family.
 
-```{r visPatho, fig.wide}
+```{r visPatho}
 geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
 cancerList <- c('breast cancer', 'glioma', 'lymphoma', 'prostate cancer')
 colorGray <- c('slategray1', 'slategray2', 'slategray3', 'slategray4')

@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R • HPAanalyze</title>
+<title>2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R • HPAanalyze</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R">
+<script src="../pkgdown.js"></script><meta property="og:title" content="2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -54,6 +54,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/HPAanalyze_case_images.html">HPAanalyze use case: Download histology images from the Human Protein Atlas</a>
+    </li>
+    <li>
       <a href="../articles/HPAanalyze_case_json.html">HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
     </li>
     <li>
@@ -63,7 +66,7 @@
       <a href="../articles/HPAanalyze_case_query.html">HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
     </li>
     <li>
-      <a href="../articles/HPAanalyze_indepth.html">HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
+      <a href="../articles/HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
     </li>
     <li>
       <a href="../articles/HPAanalyze_paper_figures.html">Code for figures from HPAanalyze paper</a>
@@ -87,7 +90,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</h1>
+      <h1>2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</h1>
                         <h4 class="author">Anh N. Tran</h4>
             <address class="author_afil">
       Northwestern University, IL, USA<br><a class="author_email" href="mailto:#"></a><a href="mailto:trannhatanh89@gmail.com" class="email">trannhatanh89@gmail.com</a>
@@ -376,7 +379,7 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a class="sourceLine" id="cb22-4" title="4"><span class="kw"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span>(downloadedData,</a>
 <a class="sourceLine" id="cb22-5" title="5">             <span class="dt">targetGene=</span>geneList,</a>
 <a class="sourceLine" id="cb22-6" title="6">             <span class="dt">targetTissue=</span>tissueList)</a></code></pre></div>
-<p><img src="HPAanalyze_indepth_files/figure-html/visTissue,%20fig.wide-1.png" width="700"></p>
+<p><img src="HPAanalyze_indepth_files/figure-html/visTissue-1.png" width="700"></p>
 </div>
 <div id="visualize-expression-in-cancer-with-hpavispatho" class="section level2">
 <h2 class="hasAnchor">
@@ -392,7 +395,7 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a class="sourceLine" id="cb23-6" title="6">            <span class="dt">targetGene=</span>geneList,</a>
 <a class="sourceLine" id="cb23-7" title="7">            <span class="dt">targetCancer=</span>cancerList,</a>
 <a class="sourceLine" id="cb23-8" title="8">            <span class="dt">color=</span>colorGray)</a></code></pre></div>
-<p><img src="HPAanalyze_indepth_files/figure-html/visPatho,%20fig.wide-1.png" width="700"></p>
+<p><img src="HPAanalyze_indepth_files/figure-html/visPatho-1.png" width="700"></p>
 </div>
 <div id="visualize-subcellular-location-data-with-hpavissubcell" class="section level2">
 <h2 class="hasAnchor">
