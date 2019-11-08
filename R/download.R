@@ -55,7 +55,7 @@
 #' @import hpar
 #' @importFrom readr read_tsv
 #' @importFrom utils download.file data
-#' @importFrom tidyr gather
+#' @importFrom stats reshape
 #' @importFrom tibble as_tibble
 #' @export
 #' 
@@ -241,10 +241,25 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                           destfile=temp)
             transcript_rna_tissue <- read_tsv(unz(temp, 'transcript_rna_tissue.tsv'))
             unlink(temp)
-            transcript_rna_tissue <- gather(transcript_rna_tissue,
-                                            key='tissue',
-                                            value='value',
-                                            -'ensgid', -'enstid')
+            
+            ## Old version used tidyr::gather
+            # transcript_rna_tissue <- tidyr::gather(transcript_rna_tissue,
+            #                                 key='tissue',
+            #                                 value='value',
+            #                                 -'ensgid', -'enstid')
+            
+            ## New version use stats::reshape
+            transcript_rna_tissue <-
+                stats::reshape(
+                    transcript_rna_tissue,
+                    direction = "long",
+                    varying = list(3:ncol(transcript_rna_tissue)),
+                    v.names = "value",
+                    timevar = "tissue",
+                    times = c(colnames(stocks[, 3:ncol(transcript_rna_tissue)]))
+                ) %>%
+                subset(select = -id)
+            
             colnames(transcript_rna_tissue) <- transcriptRnaTissueColnames
             loadedData$transcript_rna_tissue <- transcript_rna_tissue
         }
@@ -255,10 +270,25 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                           destfile=temp)
             transcript_rna_cell_line <- read_tsv(unz(temp, 'transcript_rna_celline.tsv'))
             unlink(temp)
-            transcript_rna_cell_line <- gather(transcript_rna_cell_line,
-                                               key='cell_line',
-                                               value='value',
-                                               -'ensgid', -'enstid')
+            
+            ## Old version used tidyr::gather
+            # transcript_rna_cell_line <- tidyr::gather(transcript_rna_cell_line,
+            #                                    key='cell_line',
+            #                                    value='value',
+            #                                    -'ensgid', -'enstid')
+            
+            ## New version use stats::reshape
+            transcript_rna_cell_line <-
+                stats::reshape(
+                    transcript_rna_cell_line,
+                    direction = "long",
+                    varying = list(3:ncol(transcript_rna_cell_line)),
+                    v.names = "value",
+                    timevar = "cell_line",
+                    times = c(colnames(stocks[, 3:ncol(transcript_rna_cell_line)]))
+                ) %>%
+                subset(select = -id)
+            
             colnames(transcript_rna_cell_line) <- transcriptRnaCellLineColnames
             loadedData$transcript_rna_cell_line <- transcript_rna_cell_line
         }
