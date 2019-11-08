@@ -54,25 +54,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/01_HPAanalyze_quick_start.html">1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function</a>
+      <a href="../articles/a_HPAanalyze_quick_start.html">1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function</a>
     </li>
     <li>
-      <a href="../articles/02_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
+      <a href="../articles/b_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
     </li>
     <li>
-      <a href="../articles/03_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
+      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
     </li>
     <li>
-      <a href="../articles/04_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
+      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
     </li>
     <li>
-      <a href="../articles/05_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
+      <a href="../articles/e_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
     </li>
     <li>
-      <a href="../articles/06_HPAanalyze_case_images.html">6. HPAanalyze use case: Download histology images from the Human Protein Atlas</a>
+      <a href="../articles/f_HPAanalyze_case_images.html">6. HPAanalyze use case: Download histology images from the Human Protein Atlas</a>
     </li>
     <li>
-      <a href="../articles/99_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a>
+      <a href="../articles/z_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a>
     </li>
   </ul>
 </li>
@@ -99,7 +99,7 @@
             <h4 class="date">6/7/2019</h4>
       
       
-      <div class="hidden name"><code>01_HPAanalyze_quick_start.Rmd</code></div>
+      <div class="hidden name"><code>a_HPAanalyze_quick_start.Rmd</code></div>
 
     </div>
 
@@ -137,7 +137,7 @@
 <a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; targetCellType variable not specified, visualize all.</span></a>
 <a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; Use hpaListParam() to list possible values for target variables.</span></a>
 <a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; Use hpaListParam() to list possible values for target variables.</span></a></code></pre></div>
-<p><img src="01_HPAanalyze_quick_start_files/figure-html/hpaVis_eg-1.png" width="700"></p>
+<p><img src="a_HPAanalyze_quick_start_files/figure-html/hpaVis_eg-1.png" width="700"></p>
 <p>Of course, we cannot visualize everything in those big datasets, so some defauts will be used and you will receive some warning messages.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>()</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
@@ -152,11 +152,11 @@
 <a class="sourceLine" id="cb4-2" title="2">       <span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>),</a>
 <a class="sourceLine" id="cb4-3" title="3">       <span class="dt">targetCancer =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"glioma"</span>, <span class="st">"breast cancer"</span>))</a>
 <a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; No data provided. Use version 18.</span></a></code></pre></div>
-<p><img src="01_HPAanalyze_quick_start_files/figure-html/hpaVis_eg3-1.png" width="700"></p>
+<p><img src="a_HPAanalyze_quick_start_files/figure-html/hpaVis_eg3-1.png" width="700"></p>
 <p>One exception though, if you want to plot all cancers, use <code>hpaVisPatho</code> with <code>targetCancer = NULL</code> (default).</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span>(<span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>))</a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="co">#&gt; No data provided. Use version 18.</span></a></code></pre></div>
-<p><img src="01_HPAanalyze_quick_start_files/figure-html/hpaVisPatho_eg-1.png" width="700"></p>
+<p><img src="a_HPAanalyze_quick_start_files/figure-html/hpaVisPatho_eg-1.png" width="700"></p>
 <p>There are many ways you could customize your plots. Please see the documentation for more details.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">?hpaVis <span class="co"># the easy umbrella to visualize protein expression levels</span></a>
 <a class="sourceLine" id="cb6-2" title="2">?hpaVisTissue <span class="co"># in normal tissue</span></a>

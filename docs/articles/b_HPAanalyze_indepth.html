@@ -54,25 +54,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/01_HPAanalyze_quick_start.html">1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function</a>
+      <a href="../articles/a_HPAanalyze_quick_start.html">1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function</a>
     </li>
     <li>
-      <a href="../articles/02_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
+      <a href="../articles/b_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
     </li>
     <li>
-      <a href="../articles/03_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
+      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
     </li>
     <li>
-      <a href="../articles/04_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
+      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
     </li>
     <li>
-      <a href="../articles/05_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
+      <a href="../articles/e_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
     </li>
     <li>
-      <a href="../articles/06_HPAanalyze_case_images.html">6. HPAanalyze use case: Download histology images from the Human Protein Atlas</a>
+      <a href="../articles/f_HPAanalyze_case_images.html">6. HPAanalyze use case: Download histology images from the Human Protein Atlas</a>
     </li>
     <li>
-      <a href="../articles/99_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a>
+      <a href="../articles/z_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a>
     </li>
   </ul>
 </li>
@@ -99,7 +99,7 @@
             <h4 class="date">6/7/2019</h4>
       
       
-      <div class="hidden name"><code>02_HPAanalyze_indepth.Rmd</code></div>
+      <div class="hidden name"><code>b_HPAanalyze_indepth.Rmd</code></div>
 
     </div>
 
@@ -366,7 +366,7 @@ BiocManager::install("HPAanalyze")</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>(<span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>),</a>
 <a class="sourceLine" id="cb21-2" title="2">       <span class="dt">targetTissue =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cerebellum"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"hippocampus"</span>),</a>
 <a class="sourceLine" id="cb21-3" title="3">       <span class="dt">targetCancer =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"glioma"</span>))</a></code></pre></div>
-<p><img src="02_HPAanalyze_indepth_files/figure-html/hpaVis_eg-1.png" width="700"></p>
+<p><img src="b_HPAanalyze_indepth_files/figure-html/hpaVis_eg-1.png" width="700"></p>
 </div>
 <div id="visualize-tissue-data-with-hpavistissue" class="section level2">
 <h2 class="hasAnchor">
@@ -379,7 +379,7 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a class="sourceLine" id="cb22-4" title="4"><span class="kw"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span>(downloadedData,</a>
 <a class="sourceLine" id="cb22-5" title="5">             <span class="dt">targetGene=</span>geneList,</a>
 <a class="sourceLine" id="cb22-6" title="6">             <span class="dt">targetTissue=</span>tissueList)</a></code></pre></div>
-<p><img src="02_HPAanalyze_indepth_files/figure-html/visTissue-1.png" width="700"></p>
+<p><img src="b_HPAanalyze_indepth_files/figure-html/visTissue-1.png" width="700"></p>
 </div>
 <div id="visualize-expression-in-cancer-with-hpavispatho" class="section level2">
 <h2 class="hasAnchor">
@@ -395,7 +395,7 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a class="sourceLine" id="cb23-6" title="6">            <span class="dt">targetGene=</span>geneList,</a>
 <a class="sourceLine" id="cb23-7" title="7">            <span class="dt">targetCancer=</span>cancerList,</a>
 <a class="sourceLine" id="cb23-8" title="8">            <span class="dt">color=</span>colorGray)</a></code></pre></div>
-<p><img src="02_HPAanalyze_indepth_files/figure-html/visPatho-1.png" width="700"></p>
+<p><img src="b_HPAanalyze_indepth_files/figure-html/visPatho-1.png" width="700"></p>
 </div>
 <div id="visualize-subcellular-location-data-with-hpavissubcell" class="section level2">
 <h2 class="hasAnchor">
@@ -414,7 +414,7 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a class="sourceLine" id="cb24-9" title="9"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">hjust=</span><span class="dv">1</span>))  <span class="op">+</span></a>
 <a class="sourceLine" id="cb24-10" title="10"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"none"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb24-11" title="11"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a></code></pre></div>
-<p><img src="02_HPAanalyze_indepth_files/figure-html/visSubcell-1.png" width="700"></p>
+<p><img src="b_HPAanalyze_indepth_files/figure-html/visSubcell-1.png" width="700"></p>
 </div>
 </div>
 <div id="individual-xml-import-and-image-downloading" class="section level1">
