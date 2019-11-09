@@ -256,7 +256,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     varying = list(3:ncol(transcript_rna_tissue)),
                     v.names = "value",
                     timevar = "tissue",
-                    times = c(colnames(stocks[, 3:ncol(transcript_rna_tissue)]))
+                    times = c(colnames(transcript_rna_tissue[, 3:ncol(transcript_rna_tissue)]))
                 ) %>%
                 subset(select = -id)
             
@@ -285,7 +285,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     varying = list(3:ncol(transcript_rna_cell_line)),
                     v.names = "value",
                     timevar = "cell_line",
-                    times = c(colnames(stocks[, 3:ncol(transcript_rna_cell_line)]))
+                    times = c(colnames(transcript_rna_cell_line[, 3:ncol(transcript_rna_cell_line)]))
                 ) %>%
                 subset(select = -id)
             
