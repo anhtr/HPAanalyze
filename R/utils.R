@@ -12,14 +12,36 @@ named_vector_list_to_tibble <- function(x) {
         tibble_i <- tibble(index=i, attr=names(x[[i]]), value=x[[i]])
         tibble_x <- bind_rows(tibble_x, tibble_i)
     }
+    
     # process tibble_x into final product
+    ## the old way used tidyr::spread
+    # tibble_x <- tibble_x %>%
+    #     # remove the NA row resulted from defining tibble_x
+    #     filter(!is.na(index)) %>%
+    #     # spead tibble_x into tidy format
+    #     spread(attr, value) %>%
+    #     # remove the index column
+    #     select(-index)
+    
+    ## the new way used stats::reshape
     tibble_x <- tibble_x %>%
         # remove the NA row resulted from defining tibble_x
         filter(!is.na(index)) %>%
-        # spead tibble_x into tidy format
-        spread(attr, value) %>%
+        as.data.frame() %>%
+        # reshape tibble_x into tidy format
+        reshape(
+            direction = "wide",
+            timevar = "attr",
+            idvar = "index"
+        ) %>%
         # remove the index column
-        select(-index)
+        select(-index) %>%
+        # convert back to tibble
+        as_tibble()
+    
+    # remove the "value." prefix in column names
+    names(tibble_x) <- substring(names(tibble_x), 7)
+    
     return(tibble_x)
 }
 
