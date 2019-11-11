@@ -31,9 +31,6 @@ knitr::opts_chunk$set(
 library(BiocStyle)
 library(HPAanalyze)
 library(dplyr)
-library(tibble)
-library(readr)
-library(tidyr)
 ```
 
 # The case 
