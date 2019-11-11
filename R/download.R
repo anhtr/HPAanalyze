@@ -53,8 +53,7 @@
 #'   
 #' @import dplyr
 #' @import hpar
-#' @importFrom readr read_tsv
-#' @importFrom utils download.file data
+#' @importFrom utils download.file data read.delim2
 #' @importFrom stats reshape
 #' @importFrom tibble as_tibble
 #' @export
@@ -189,7 +188,14 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             temp <- tempfile()
             download.file(url=downloadUrls['normal_tissue'],
                           destfile=temp)
-            normal_tissue <- read_tsv(unz(temp, 'normal_tissue.tsv'))
+            # normal_tissue <- read_tsv(unz(temp, 'normal_tissue.tsv'))
+            normal_tissue <-
+                read.delim2(
+                    unz(temp, 'normal_tissue.tsv'),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE,
+                    strip.white = TRUE
+                ) %>% as_tibble()
             unlink(temp)
             colnames(normal_tissue) <- normalTissueColnames
             loadedData$normal_tissue <- normal_tissue
@@ -199,7 +205,14 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             temp <- tempfile()
             download.file(url=downloadUrls['pathology'],
                           destfile=temp)
-            pathology <- read_tsv(unz(temp, 'pathology.tsv'))
+            # pathology <- read_tsv(unz(temp, 'pathology.tsv'))
+            pathology <-
+                read.delim2(
+                    unz(temp, 'pathology.tsv'),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE,
+                    strip.white = TRUE
+                ) %>% as_tibble()
             unlink(temp)
             colnames(pathology) <- pathologyColnames
             loadedData$pathology <- pathology
@@ -209,7 +222,14 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             temp <- tempfile()
             download.file(url=downloadUrls['subcellular_location'],
                           destfile=temp)
-            subcellular_location <- read_tsv(unz(temp, 'subcellular_location.tsv'))
+            # subcellular_location <- read_tsv(unz(temp, 'subcellular_location.tsv'))
+            subcellular_location <-
+                read.delim2(
+                    unz(temp, 'subcellular_location.tsv'),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE,
+                    strip.white = TRUE
+                ) %>% as_tibble()
             unlink(temp)
             colnames(subcellular_location) <- subcellularLocationColnames
             loadedData$subcellular_location <- subcellular_location
@@ -219,7 +239,14 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             temp <- tempfile()
             download.file(url=downloadUrls['rna_tissue'],
                           destfile=temp)
-            rna_tissue <- read_tsv(unz(temp, 'rna_tissue.tsv'))
+            # rna_tissue <- read_tsv(unz(temp, 'rna_tissue.tsv'))
+            rna_tissue <-
+                read.delim2(
+                    unz(temp, 'rna_tissue.tsv'),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE,
+                    strip.white = TRUE
+                ) %>% as_tibble()
             unlink(temp)
             colnames(rna_tissue) <- rnaTissueColnames
             loadedData$rna_tissue <- rna_tissue
@@ -229,7 +256,14 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             temp <- tempfile()
             download.file(url=downloadUrls['rna_cell_line'],
                           destfile=temp)
-            rna_cell_line <- read_tsv(unz(temp, 'rna_celline.tsv'))
+            # rna_cell_line <- read_tsv(unz(temp, 'rna_celline.tsv'))
+            rna_cell_line <-
+                read.delim2(
+                    unz(temp, 'rna_celline.tsv'),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE,
+                    strip.white = TRUE
+                ) %>% as_tibble()
             unlink(temp)
             colnames(rna_cell_line) <- rnaCellLineColnames
             loadedData$rna_cell_line <- rna_cell_line
@@ -239,7 +273,14 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             temp <- tempfile()
             download.file(url=downloadUrls['transcript_rna_tissue'],
                           destfile=temp)
-            transcript_rna_tissue <- read_tsv(unz(temp, 'transcript_rna_tissue.tsv'))
+            # transcript_rna_tissue <- read_tsv(unz(temp, 'transcript_rna_tissue.tsv'))
+            transcript_rna_tissue <-
+                read.delim2(
+                    unz(temp, 'transcript_rna_tissue.tsv'),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE,
+                    strip.white = TRUE
+                ) %>% as_tibble()
             unlink(temp)
             
             ## Old version used tidyr::gather
@@ -268,7 +309,14 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             temp <- tempfile()
             download.file(url=downloadUrls['transcript_rna_cell_line'],
                           destfile=temp)
-            transcript_rna_cell_line <- read_tsv(unz(temp, 'transcript_rna_celline.tsv'))
+            # transcript_rna_cell_line <- read_tsv(unz(temp, 'transcript_rna_celline.tsv'))
+            transcript_rna_cell_line <-
+                read.delim2(
+                    unz(temp, 'transcript_rna_celline.tsv'),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE,
+                    strip.white = TRUE
+                ) %>% as_tibble()
             unlink(temp)
             
             ## Old version used tidyr::gather
