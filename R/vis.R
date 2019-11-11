@@ -163,7 +163,7 @@ hpaVisTissue <- function(data=NULL,
 #'
 #' @import dplyr
 #' @import ggplot2
-#' @importFrom tidyr gather
+#' @importFrom stats reshape
 #' @export
 
 hpaVisPatho <- function(data=NULL, 
@@ -205,7 +205,16 @@ hpaVisPatho <- function(data=NULL,
         select(gene, cancer, high, medium, low, not_detected) %>%
         rename('High'='high', 'Medium'='medium', 
                'Low'='low', 'Not detected'='not_detected') %>%
-        gather(key = "level", value = "patient_count", -gene, -cancer)
+        ## The old way used tidyr::gather
+        # gather(key = "level", value = "patient_count", -gene, -cancer)
+        ## The new way uses stats::reshape
+        as.data.frame() %>%
+        reshape(direction = "long",
+                varying = list(3:6),
+                v.names = "patient_count",
+                timevar = "level",
+                times = c("High", "Medium", "Low", "Not detected")
+        )
     
     #re-level
     plotData$level <- factor(plotData$level,
