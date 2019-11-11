@@ -1,7 +1,8 @@
 ## Data manipulation as part of xml parsing ===================================
 
 #' @import dplyr
-#' @importFrom tibble tibble
+#' @importFrom tibble tibble as_tibble
+#' @importFrom stats reshape
 
 named_vector_list_to_tibble <- function(x) {
     
