@@ -284,7 +284,6 @@ hpaVisPatho <- function(data=NULL,
 #'
 #' @import dplyr
 #' @import ggplot2
-#' @importFrom tidyr unnest
 #' @importFrom tibble as_tibble
 #' @export
 
@@ -333,18 +332,28 @@ hpaVisSubcell <- function(data=NULL,
         mutate(plotData, 
                sub_location =  paste(sub_location, uncertain, sep = ";"))
     
+    # plotData <-  plotData %>%
+    #     mutate(sub_location=strsplit(sub_location, ';')) %>%
+    #     tidyr::unnest(sub_location) %>%
+    #     select(sub_location, gene) %>%
+    #     filter(sub_location != "NA") %>%
+    #     table() %>%
+    #     as_tibble() %>%
+    #     mutate(n=factor(n, levels=c('0', '1')))
+    
+    ## Use apply(as_tibble) %>% bind_rows instead of unnest
     plotData <-  plotData %>%
         mutate(sub_location=strsplit(sub_location, ';')) %>%
-        tidyr::unnest(sub_location) %>%
+        apply(MARGIN = 1, FUN = as_tibble) %>% bind_rows() %>%
         select(sub_location, gene) %>%
         filter(sub_location != "NA") %>%
         table() %>%
         as_tibble() %>%
         mutate(n=factor(n, levels=c('0', '1')))
-    
+
     levelColors <- c('0'=color[1],
                      '1'=color[length(color)])
-    
+
     plot <- ggplot(plotData, aes(x=gene, y=sub_location)) +
         geom_tile(aes(fill=n), colour="grey50") +
         scale_x_discrete(limits=targetGene) +
@@ -352,9 +361,9 @@ hpaVisSubcell <- function(data=NULL,
                           name="Detected",
                           breaks = c(0, 1),
                           labels = c("No", "Yes"))
-    
+
     if(!customTheme) {
-        plot <- plot + 
+        plot <- plot +
             ylab('Subcellular locations') +
             xlab('Genes') +
             theme_minimal() +
@@ -362,6 +371,6 @@ hpaVisSubcell <- function(data=NULL,
             theme(axis.text.x=element_text(angle=45, hjust=1)) +
             coord_equal()
     }
-    
-    return(plot)       
+
+    return(plot)
 }
