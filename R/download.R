@@ -96,18 +96,25 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                            'unprognostic_unfavorable')
     pathologyColnamesHpar <- c('ensembl', 'gene', 'cancer', 'high', 
                                'low', 'medium', 'not_detected')
-    subcellularLocationColnames <- c('ensembl', 'gene', 'reliability', 
+    subcellularLocationColnames_legacy <- c('ensembl', 'gene', 'reliability', 
                                      'enhanced', 'supported', 'approved', 
                                      'uncertain', 'single_cell_var_intensity', 
                                      'single_cell_var_spatial', 
                                      'cell_cycle_dependency', 'go_id')
-    rnaTissueColnames <- c('ensembl', 'gene', 'tissue', 'value', 'unit')
+    subcellularLocationColnames <- c('ensembl', 'gene', 'reliability',
+                                     "main_location", "additional_location", 
+                                     "extracellular_location",
+                                     'enhanced', 'supported', 'approved', 
+                                     'uncertain', 'single_cell_var_intensity', 
+                                     'single_cell_var_spatial', 
+                                     'cell_cycle_dependency', 'go_id')
+    rnaTissueColnames <- c('ensembl', 'gene', 'tissue', 'nx')
     rnaCellLineColnames <- c('ensembl', 'gene', 'cell_line',
-                             'value', 'unit')
+                             'tpm', 'ptpm', "nx")
     transcriptRnaTissueColnames <- c('ensembl', 'transcript', 
-                                     'tissue', 'value')
+                                     'tissue', 'tpm')
     transcriptRnaCellLineColnames <- c('ensembl', 'transcript', 
-                                       'cell_line', 'value')
+                                       'cell_line', 'tpm')
     
     if (version == 'hpar') {# load 'hpar' data
         if(!('package:hpar' %in% search())) {
@@ -194,7 +201,8 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     unz(temp, 'normal_tissue.tsv'),
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
-                    strip.white = TRUE
+                    strip.white = TRUE,
+                    sep="\t"
                 ) %>% as_tibble()
             unlink(temp)
             colnames(normal_tissue) <- normalTissueColnames
@@ -211,10 +219,19 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     unz(temp, 'pathology.tsv'),
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
-                    strip.white = TRUE
+                    strip.white = TRUE,
+                    sep="\t"
                 ) %>% as_tibble()
             unlink(temp)
             colnames(pathology) <- pathologyColnames
+            
+            # use correct column type
+            pathology <- pathology %>%
+                mutate_at(c('prognostic_favorable', 
+                            'unprognostic_favorable', 
+                            'prognostic_unfavorable', 
+                            'unprognostic_unfavorable'), as.numeric)
+            
             loadedData$pathology <- pathology
         }
         
@@ -228,24 +245,34 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     unz(temp, 'subcellular_location.tsv'),
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
-                    strip.white = TRUE
+                    strip.white = TRUE,
+                    sep="\t"
                 ) %>% as_tibble()
             unlink(temp)
-            colnames(subcellular_location) <- subcellularLocationColnames
+            
+            if (ncol(subcellular_location) == 14) {
+                colnames(subcellular_location) <- subcellularLocationColnames
+            } else if (ncol(subcellular_location) == 11) {
+                colnames(subcellular_location) <- subcellularLocationColnames_legacy
+            }
+            
             loadedData$subcellular_location <- subcellular_location
         }
         
         if('RNA tissue' %in% downloadList) {
+            message("NOTE: HPAanalyze does not previous version of RNA tissue data. 
+Download the 'RNA consensus tissue gene data' of the current version.")
             temp <- tempfile()
-            download.file(url=downloadUrls['rna_tissue'],
+            download.file(url="https://www.proteinatlas.org/download/rna_tissue_consensus.tsv.zip",
                           destfile=temp)
             # rna_tissue <- read_tsv(unz(temp, 'rna_tissue.tsv'))
             rna_tissue <-
                 read.delim2(
-                    unz(temp, 'rna_tissue.tsv'),
+                    unz(temp, 'rna_tissue_consensus.tsv'),
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
-                    strip.white = TRUE
+                    strip.white = TRUE,
+                    sep="\t"
                 ) %>% as_tibble()
             unlink(temp)
             colnames(rna_tissue) <- rnaTissueColnames
@@ -253,8 +280,10 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         }
         
         if('RNA cell line' %in% downloadList) {
+            message("NOTE: HPAanalyze does not previous version of RNA cell line data. 
+Download the 'RNA HPA cell line gene data' of the current version.")
             temp <- tempfile()
-            download.file(url=downloadUrls['rna_cell_line'],
+            download.file(url="https://www.proteinatlas.org/download/rna_celline.tsv.zip",
                           destfile=temp)
             # rna_cell_line <- read_tsv(unz(temp, 'rna_celline.tsv'))
             rna_cell_line <-
@@ -262,7 +291,8 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     unz(temp, 'rna_celline.tsv'),
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
-                    strip.white = TRUE
+                    strip.white = TRUE,
+                    sep="\t"
                 ) %>% as_tibble()
             unlink(temp)
             colnames(rna_cell_line) <- rnaCellLineColnames
@@ -279,7 +309,8 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     unz(temp, 'transcript_rna_tissue.tsv'),
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
-                    strip.white = TRUE
+                    strip.white = TRUE,
+                    sep="\t"
                 ) %>% as_tibble()
             unlink(temp)
             
@@ -315,7 +346,8 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     unz(temp, 'transcript_rna_celline.tsv'),
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
-                    strip.white = TRUE
+                    strip.white = TRUE,
+                    sep="\t"
                 ) %>% as_tibble()
             unlink(temp)
             
