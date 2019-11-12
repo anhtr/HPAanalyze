@@ -30,8 +30,8 @@
 #' @param version A string indicate which version to be downloaded. Possible
 #'   value:
 #'   \itemize{
-#'     \item \code{'hpar'}: Load data from the 'hpar' package. Does not contain
-#'     isoform data.
+#      \item \code{'hpar'}: Load data from the 'hpar' package. Does not contain
+#isoform data.
 #'     \item \code{'latest'}: Download latest version. Require Internet
 #'     connection.
 #'     \item \code{'example'}: Load the example dataset from 'HPA
@@ -52,7 +52,7 @@
 #'   summary(downloadedData)
 #'   
 #' @import dplyr
-#' @import hpar
+#  @import hpar
 #' @importFrom utils download.file data read.delim2
 #' @importFrom stats reshape
 #' @importFrom tibble as_tibble
@@ -116,57 +116,59 @@ hpaDownload <- function(downloadList='histology', version='latest') {
     transcriptRnaCellLineColnames <- c('ensembl', 'transcript', 
                                        'cell_line', 'tpm')
     
-    if (version == 'hpar') {# load 'hpar' data
-        if(!('package:hpar' %in% search())) {
-            attachNamespace('hpar')
-            # stop('Please load "hpar" package')
-        }
-        
-        if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
-            data('hpaNormalTissue',
-                 envir=environment())
-            normal_tissue <- as_tibble(hpaNormalTissue)
-            colnames(normal_tissue) <- normalTissueColnames
-            loadedData$normal_tissue <- normal_tissue
-        }
-        
-        if('Pathology' %in% downloadList) {# load `pathology`
-            data('hpaCancer',
-                 envir=environment())
-            pathology <- as_tibble(hpaCancer) %>%
-                select(-Total.patients) %>%
-                spread(Level, Count.patients)
-            colnames(pathology) <- pathologyColnamesHpar
-            loadedData$pathology <- pathology
-        }
-        
-        if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
-            data('hpaSubcellularLoc',
-                 envir=environment())
-            subcellular_location <- as_tibble(hpaSubcellularLoc)
-            colnames(subcellular_location) <- subcellularLocationColnames
-            subcellular_location$gene <- as.character(subcellular_location$gene)
-            subcellular_location$go_id <- as.character(subcellular_location$go_id)
-            loadedData$subcellular_location <- subcellular_location
-        }
-        
-        if('RNA tissue' %in% downloadList) {# load 'rna_tissue'
-            data('rnaGeneTissue',
-                 envir=environment())
-            rna_tissue <- as_tibble(rnaGeneTissue)
-            colnames(rna_tissue) <- rnaTissueColnames
-            loadedData$rna_tissue <- rna_tissue
-        }
-        
-        if('RNA cell line' %in% downloadList) { # load 'rna_cell_line'
-            data('rnaGeneCellLine',
-                 envir=environment())
-            rna_cell_line <- as_tibble(rnaGeneCellLine)
-            colnames(rna_cell_line) <- rnaCellLineColnames
-            loadedData$rna_cell_line <- rna_cell_line
-        }   
+    # if (version == 'hpar') {# load 'hpar' data
+    #     if(!('package:hpar' %in% search())) {
+    #         attachNamespace('hpar')
+    #         # stop('Please load "hpar" package')
+    #     }
+    #     
+    #     if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
+    #         data('hpaNormalTissue',
+    #              envir=environment())
+    #         normal_tissue <- as_tibble(hpaNormalTissue)
+    #         colnames(normal_tissue) <- normalTissueColnames
+    #         loadedData$normal_tissue <- normal_tissue
+    #     }
+    #     
+    #     if('Pathology' %in% downloadList) {# load `pathology`
+    #         data('hpaCancer',
+    #              envir=environment())
+    #         pathology <- as_tibble(hpaCancer) %>%
+    #             select(-Total.patients) %>%
+    #             spread(Level, Count.patients)
+    #         colnames(pathology) <- pathologyColnamesHpar
+    #         loadedData$pathology <- pathology
+    #     }
+    #     
+    #     if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
+    #         data('hpaSubcellularLoc',
+    #              envir=environment())
+    #         subcellular_location <- as_tibble(hpaSubcellularLoc)
+    #         colnames(subcellular_location) <- subcellularLocationColnames
+    #         subcellular_location$gene <- as.character(subcellular_location$gene)
+    #         subcellular_location$go_id <- as.character(subcellular_location$go_id)
+    #         loadedData$subcellular_location <- subcellular_location
+    #     }
+    #     
+    #     if('RNA tissue' %in% downloadList) {# load 'rna_tissue'
+    #         data('rnaGeneTissue',
+    #              envir=environment())
+    #         rna_tissue <- as_tibble(rnaGeneTissue)
+    #         colnames(rna_tissue) <- rnaTissueColnames
+    #         loadedData$rna_tissue <- rna_tissue
+    #     }
+    #     
+    #     if('RNA cell line' %in% downloadList) { # load 'rna_cell_line'
+    #         data('rnaGeneCellLine',
+    #              envir=environment())
+    #         rna_cell_line <- as_tibble(rnaGeneCellLine)
+    #         colnames(rna_cell_line) <- rnaCellLineColnames
+    #         loadedData$rna_cell_line <- rna_cell_line
+    #     }   
     
-    } else if (version == 'example') {# load example data
+    # } else if (version == 'example') {# load example data
+    
+    if (version == 'example') {# load example data
         data('hpa_downloaded_histology_v18', 
              package='HPAanalyze',
              envir=environment())

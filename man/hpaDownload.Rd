@@ -29,8 +29,6 @@ See \url{https://www.proteinatlas.org/about/download} for more information.}
 \item{version}{A string indicate which version to be downloaded. Possible
 value:
 \itemize{
-  \item \code{'hpar'}: Load data from the 'hpar' package. Does not contain
-  isoform data.
   \item \code{'latest'}: Download latest version. Require Internet
   connection.
   \item \code{'example'}: Load the example dataset from 'HPA
