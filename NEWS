@@ -1,3 +1,17 @@
+                       Changes in version 1.5
+* Changes in version 1.5.1
+    + Add documentation with pkgdown. Minor updates to documentation.
+    + tidyr and readr dependencies have been replaced with base R solutions.
+    + Importing data fron hapr is no longer supported.
+    + hpaDownload function was updated to correctly download data in HPA version 19.
+    
+* Changes in version 1.5.0
+    + Starting devel for Bioconductor 3.10
+                       
+                       Changes in version 1.4
+* Changes in version 1.4.0
+    + Official relase in Bioconductor 3.10
+
                        Changes in version 1.3
 * Changes in version 1.3.3
     + Fix sn error introduced in version 1.3.2 where hpaVisPatho plotted incorrectly.

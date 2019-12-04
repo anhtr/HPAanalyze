@@ -1,8 +1,8 @@
 Package: HPAanalyze
 Type: Package
 Title: Retrieve and analyze data from the Human Protein Atlas
-Version: 1.5.0
-Date: 2019-06-19
+Version: 1.5.1
+Date: 2019-12-04
 Authors@R: person("Anh Nhat", "Tran", email = "trannhatanh89@gmail.com",
                   role = c("aut", "cre"))
 Description: Provide functions for retrieving, exploratory analyzing and 
@@ -18,7 +18,6 @@ Imports: dplyr,
     xml2,
     stats,
     utils,
-    hpar,
     gridExtra
 Suggests: knitr,
     rmarkdown,
