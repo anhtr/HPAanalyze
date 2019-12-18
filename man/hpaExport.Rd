@@ -42,12 +42,13 @@ recommended.
                            targetTissue=tissueList,
                            targetCancer=cancerList)
   hpaExport(data=subsetData,
-            fileName='TP53_EGFR_in_tissue_cancer.xlsx',
+            fileName='TP53_EGFR_in_tissue_cancer',
             fileType='xlsx')
 
 }
 \seealso{
-Other downloadable datasets functions: \code{\link{hpaDownload}},
-  \code{\link{hpaSubset}}
+Other downloadable datasets functions: 
+\code{\link{hpaDownload}()},
+\code{\link{hpaSubset}()}
 }
 \concept{downloadable datasets functions}

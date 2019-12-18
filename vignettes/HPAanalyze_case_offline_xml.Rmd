@@ -4,7 +4,7 @@ author:
 - name: Anh N. Tran
   affiliation: Northwestern University, Illinois, USA
   email: trannhatanh89@gmail.com
-date: 6/7/2019
+date: 12/17/2019
 output: 
     BiocStyle::html_document:
         toc: true
@@ -30,7 +30,6 @@ knitr::opts_chunk$set(
 ```{r library, message=FALSE, warning=FALSE, error=FALSE}
 library(BiocStyle)
 library(HPAanalyze)
-library(dplyr)
 library(xml2)
 ```
 
@@ -62,10 +61,11 @@ CCNB1_parsed <- hpaXml(CCNB1xml)
 You can obviously use other `hpaXml` functions as well.
 
 ```{r}
-hpaXmlProtClass(CCNB1xml)
-hpaXmlTissueExprSum(CCNB1xml)
-hpaXmlAntibody(CCNB1xml)
-hpaXmlTissueExpr(CCNB1xml)
+protein_df <- hpaXmlProtClass(CCNB1xml)
+tissue_df <- hpaXmlTissueExprSum(CCNB1xml)
+antibody <- hpaXmlAntibody(CCNB1xml)
+tissue_details_list <- hpaXmlTissueExpr(CCNB1xml)
+rna_df <- hpaXmlRNAExpr(CCNB1xml)
 ```
 
 ## Save your parsed objects

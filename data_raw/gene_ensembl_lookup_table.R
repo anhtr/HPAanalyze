@@ -3,7 +3,8 @@ download.file(url="https://www.proteinatlas.org/search?format=tsv", destfile = t
 query_df <- readr::read_tsv(temp)
 unlink(temp)
 
-lookup_df <- dplyr::select(query_df, "gene" = Gene, "ensembl" = Ensembl)
+#lookup_df <- dplyr::select(query_df, "gene" = Gene, "ensembl" = Ensembl)
+lookup_df <- setNames(query_df[,c("Gene", "Ensembl")], c("gene", "ensembl"))
 
 usethis::use_data(lookup_df,  internal = TRUE, overwrite = TRUE)
 

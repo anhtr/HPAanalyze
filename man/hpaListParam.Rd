@@ -5,8 +5,14 @@
 \alias{hpaListParam}
 \title{Subset downloaded data}
 \usage{
-hpaSubset(data = NULL, targetGene = NULL, targetTissue = NULL,
-  targetCellType = NULL, targetCancer = NULL, targetCellLine = NULL)
+hpaSubset(
+  data = NULL,
+  targetGene = NULL,
+  targetTissue = NULL,
+  targetCellType = NULL,
+  targetCancer = NULL,
+  targetCellLine = NULL
+)
 
 hpaListParam(data = NULL)
 }
@@ -32,7 +38,7 @@ the \code{pathology} dataset.}
 the \code{rna_cell_line} dataset.}
 }
 \value{
-\code{hpaSubset} will return a list of tibbles as the result of
+\code{hpaSubset} will return a list of data frames as the result of
   subsetting, depending on the input data.
 
 The output of \code{hpaListParam()} is a list of vectors containing
@@ -67,7 +73,8 @@ call of \code{hpaSubset()}.
 
 }
 \seealso{
-Other downloadable datasets functions: \code{\link{hpaDownload}},
-  \code{\link{hpaExport}}
+Other downloadable datasets functions: 
+\code{\link{hpaDownload}()},
+\code{\link{hpaExport}()}
 }
 \concept{downloadable datasets functions}

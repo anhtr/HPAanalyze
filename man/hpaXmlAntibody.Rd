@@ -11,7 +11,7 @@ hpaXmlAntibody(importedXml)
 \code{hpaXmlGet()} call.}
 }
 \value{
-This function returns a tibble of 4 columns, containing information
+This function returns a data frame of 4 columns, containing information
   about the antibodies used in the project for the inquired protein: id,
   releaseDate, releaseVersion, and RRID.
 }
@@ -21,14 +21,17 @@ Extract information about the antibodies used for a specific protein.
 \examples{
 \dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
-  hpaXmlAntibody(GCH1xml)
+  antibody_df <- hpaXmlAntibody(GCH1xml)
 }
 
 }
 \seealso{
-Other xml functions: \code{\link{hpaXmlGet}},
-  \code{\link{hpaXmlProtClass}},
-  \code{\link{hpaXmlTissueExprSum}},
-  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+Other xml functions: 
+\code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlProtClass}()},
+\code{\link{hpaXmlRNAExpr}()},
+\code{\link{hpaXmlTissueExprSum}()},
+\code{\link{hpaXmlTissueExpr}()},
+\code{\link{hpaXml}()}
 }
 \concept{xml functions}

@@ -11,7 +11,7 @@ hpaXmlProtClass(importedXml)
 \code{hpaXmlGet()} call.}
 }
 \value{
-This function return a tibble of 4 columns.
+This function return a data frame of 4 columns.
 }
 \description{
 Extract protein class information from imported xml document resulted from
@@ -20,14 +20,17 @@ Extract protein class information from imported xml document resulted from
 \examples{
 \dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
-  hpaXmlProtClass(GCH1xml)
+  protein_df <- hpaXmlProtClass(GCH1xml)
 }
 
 }
 \seealso{
-Other xml functions: \code{\link{hpaXmlAntibody}},
-  \code{\link{hpaXmlGet}},
-  \code{\link{hpaXmlTissueExprSum}},
-  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+Other xml functions: 
+\code{\link{hpaXmlAntibody}()},
+\code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlRNAExpr}()},
+\code{\link{hpaXmlTissueExprSum}()},
+\code{\link{hpaXmlTissueExpr}()},
+\code{\link{hpaXml}()}
 }
 \concept{xml functions}

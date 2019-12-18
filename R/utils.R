@@ -1,29 +1,3 @@
-## Data manipulation as part of xml parsing ===================================
-
-#' @import dplyr
-#' @importFrom tibble tibble
-
-named_vector_list_to_tibble <- function(x) {
-    
-    # define a blank tibble
-    tibble_x <- tibble(index=NA, attr=NA, value=NA)
-    # loop though the list, turn vectors into tibble and bind them together
-    for (i in seq_along(x)) {
-        tibble_i <- tibble(index=i, attr=names(x[[i]]), value=x[[i]])
-        tibble_x <- bind_rows(tibble_x, tibble_i)
-    }
-    # process tibble_x into final product
-    tibble_x <- tibble_x %>%
-        # remove the NA row resulted from defining tibble_x
-        filter(!is.na(index)) %>%
-        # spead tibble_x into tidy format
-        spread(attr, value) %>%
-        # remove the index column
-        select(-index)
-    return(tibble_x)
-}
-
-
 ## Generate urls to download datasets =========================================
 
 version_to_download_urls <- function(x) {
@@ -104,4 +78,36 @@ gene_ensembl_convert <- function(id, convert_to) {
         )
     
     return(id_c)
+}
+
+
+gene_ensembl_convert_ <- function(id, convert_to) {
+  id_c <- switch(convert_to,
+                 ensembl = ifelse(id %in% lookup_df$gene, lookup_df$ensembl[lookup_df$gene %in% id], id),
+                 gene = ifelse(id %in% lookup_df$ensembl, lookup_df$gene[lookup_df$ensembl %in% id], id)
+                )
+  
+  warn <- identical(id_c, id)
+
+  if (warn == FALSE)
+    message(
+      paste("Couldn't find requested gene in lookup table.",
+            "There may be typo(s) or your gene(s) may not currently be supported by HPA.")
+    )
+  
+  return(id_c)
+}
+
+
+## Reshape wide data to long with base R===================================
+
+matrix_melt <- function(df1, key, indName, valName) {
+  value_cols <- names(df1)[ !(names(df1) %in% key)]
+  mat_inds <- matrix(matrix(value_cols, nrow=nrow(df1), ncol=ncol(df1)-2, byrow=TRUE), ncol=1)
+  mat_vals <- matrix(df1[value_cols], ncol= 1, byrow = TRUE)
+  
+  df2 <- setNames(data.frame(df1[key], unlist(mat_inds), unlist(mat_vals), 
+                             row.names = NULL, stringsAsFactors = FALSE),
+                  c(key, indName, valName))
+  return(df2)
 }

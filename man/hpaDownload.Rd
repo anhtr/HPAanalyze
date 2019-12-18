@@ -42,7 +42,7 @@ value:
 }}
 }
 \value{
-This function will return a list of tibbles corresponding to
+This function will return a list of data frames corresponding to
   requested datasets.
 }
 \description{
@@ -56,7 +56,8 @@ very big.
   
 }
 \seealso{
-Other downloadable datasets functions: \code{\link{hpaExport}},
-  \code{\link{hpaSubset}}
+Other downloadable datasets functions: 
+\code{\link{hpaExport}()},
+\code{\link{hpaSubset}()}
 }
 \concept{downloadable datasets functions}

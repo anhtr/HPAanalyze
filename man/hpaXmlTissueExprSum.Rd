@@ -15,7 +15,7 @@ from the extracted urls into the working folder.}
 }
 \value{
 This function return a list consists of a summary string, which is a
-  very brief description of the protein, and a tibble of 2 columns: tissue
+  very brief description of the protein, and a data frame of 2 columns: tissue
   (name of tissue available) and imageUrl (link to download the perspective
   image)
 }
@@ -26,13 +26,17 @@ imported xml document resulted from \code{hpaXmlGet()}.
 \examples{
 \dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
-  hpaXmlTissueExprSum(GCH1xml)
+  tissue_list <- hpaXmlTissueExprSum(GCH1xml)
 }
 
 }
 \seealso{
-Other xml functions: \code{\link{hpaXmlAntibody}},
-  \code{\link{hpaXmlGet}}, \code{\link{hpaXmlProtClass}},
-  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+Other xml functions: 
+\code{\link{hpaXmlAntibody}()},
+\code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlProtClass}()},
+\code{\link{hpaXmlRNAExpr}()},
+\code{\link{hpaXmlTissueExpr}()},
+\code{\link{hpaXml}()}
 }
 \concept{xml functions}
