@@ -11,10 +11,10 @@ hpaXmlTissueExpr(importedXml)
 \code{hpaXmlGet()} call.}
 }
 \value{
-This function returns a list of tibbles, each for an antibody. Each
-  tibble contains information about all individual samples and their
+This function returns a list of data frames, each for an antibody. 
+  Each data frame contains information about all individual samples and their
   staining. Due to the variation in amount of information available for these
-  samples, the number of columns differs, but the tibble essentially
+  samples, the number of columns differs, but the data frame essentially
   includes: patientId, age, sex, staining, intensity, quantity, location,
   imageUrl, snomedCode, and tissueDescription. The last two items may have
   more than one column each.
@@ -26,13 +26,17 @@ images from imported xml document resulted from \code{hpaXmlGet()}.
 \examples{
 \dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
-  hpaXmlTissueExpr(GCH1xml)
+  tissue_details_df_list <- hpaXmlTissueExpr(GCH1xml)
 }
 
 }
 \seealso{
-Other xml functions: \code{\link{hpaXmlAntibody}},
-  \code{\link{hpaXmlGet}}, \code{\link{hpaXmlProtClass}},
-  \code{\link{hpaXmlTissueExprSum}}, \code{\link{hpaXml}}
+Other xml functions: 
+\code{\link{hpaXmlAntibody}()},
+\code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlProtClass}()},
+\code{\link{hpaXmlRNAExpr}()},
+\code{\link{hpaXmlTissueExprSum}()},
+\code{\link{hpaXml}()}
 }
 \concept{xml functions}

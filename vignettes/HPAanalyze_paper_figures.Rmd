@@ -4,7 +4,7 @@ author:
 - name: Anh N. Tran
   affiliation: Northwestern University, Illinois, USA
   email: trannhatanh89@gmail.com
-date: 6/18/2019
+date: 12/17/2019
 output: 
     BiocStyle::html_document:
         toc: true
@@ -30,7 +30,6 @@ knitr::opts_chunk$set(
 ```{r library, message=FALSE, warning=FALSE, error=FALSE}
 library(BiocStyle)
 library(HPAanalyze)
-library(dplyr)
 library(ggplot2)
 ```
 
@@ -211,28 +210,20 @@ hpaSubset(data = data,
           targetCancer = "glioma")
 
 # $normal_tissue
-# # A tibble: 3 x 6
 #   ensembl         gene   tissue          cell_type   level        reliability
-#   <chr>           <chr>  <chr>           <chr>       <chr>        <chr>      
 # 1 ENSG00000059804 SLC2A3 caudate         glial cells Not detected Approved   
 # 2 ENSG00000059804 SLC2A3 cerebral cortex glial cells Not detected Approved   
 # 3 ENSG00000059804 SLC2A3 hippocampus     glial cells Not detected Approved   
 # 
 # $pathology
-# # A tibble: 1 x 11
 #   ensembl gene  cancer  high medium   low not_detected prognostic_favo~
-#   <chr>   <chr> <chr>  <dbl>  <dbl> <dbl>        <dbl>            <dbl>
 # 1 ENSG00~ SLC2~ glioma     1      2     1            8               NA
-# # ... with 3 more variables: unprognostic_favorable <dbl>,
-# #   prognostic_unfavorable <dbl>, unprognostic_unfavorable <dbl>
+# # ... 
 # 
 # $subcellular_location
-# # A tibble: 1 x 11
 #   ensembl gene  reliability enhanced supported approved uncertain single_cell_var~
-#   <chr>   <chr> <chr>       <chr>    <chr>     <chr>    <chr>     <chr>           
 # 1 ENSG00~ SLC2~ Approved    NA       NA        Plasma ~ NA        NA              
-# # ... with 3 more variables: single_cell_var_spatial <chr>,
-# #   cell_cycle_dependency <chr>, go_id <chr>
+# # ... 
 
 
 SLC2A3xml <- hpaXmlGet("SLC2A3", version = "v18")
@@ -269,9 +260,10 @@ str(SLC2A3_expr[[1]])
 dir.create("img")
 
 SLC2A3_norm <-
-  SLC2A3_expr[[1]] %>%
-  filter(tissueDescription1 == "Normal tissue, NOS") %>%
-  filter(tissueDescription2 %in% c("Cerebral cortex", "Hippocampus", "Lateral ventricle wall"))
+  subset(
+     subset(SLC2A3_expr[[1]], tissueDescription1 == "Normal tissue, NOS"),
+     tissueDescription2 %in% c("Cerebral cortex", "Hippocampus", "Lateral ventricle wall")
+)
 
 for (i in 1:nrow(SLC2A3_norm)) {
     download.file(SLC2A3_norm$imageUrl[i],
@@ -284,8 +276,10 @@ for (i in 1:nrow(SLC2A3_norm)) {
 }
 
 SLC2A3_glioma <-
-  SLC2A3_expr[[1]] %>%
-  filter(tissueDescription1 %in% c("Glioma, malignant, High grade", "Glioma, malignant, Low grade", "Glioma, malignant, NOS"))
+  subset(SLC2A3_expr[[1]], tissueDescription1 %in% c("Glioma, malignant, High grade", 
+                                                     "Glioma, malignant, Low grade", 
+                                                     "Glioma, malignant, NOS")
+)
 
 for (i in 1:nrow(SLC2A3_glioma)) {
     download.file(SLC2A3_glioma$imageUrl[i],
@@ -298,3 +292,7 @@ for (i in 1:nrow(SLC2A3_glioma)) {
 }
 ```
 
+# Copyright
+Anh Tran, 2019
+
+Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __

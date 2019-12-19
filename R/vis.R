@@ -36,7 +36,6 @@
 #'                targetGene=geneList,
 #'                targetTissue=tissueList)
 #'
-#' @import dplyr
 #' @import ggplot2
 #' @export
 
@@ -46,79 +45,78 @@ hpaVisTissue <- function(data=NULL,
                          targetCellType=NULL,
                          color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
                          customTheme=FALSE) {
-    
+  
     infoDisp <- FALSE
-    
+  
     # Check if data is provided or not
     if (is.null(data)) {
-        message('No data provided. Use version 18.')
-        data = HPAanalyze::hpa_downloaded_histology_v18
+      message('No data provided. Use version 18.')
+      data <- HPAanalyze::hpa_downloaded_histology_v18
     }
-    
+  
     # Check if targetGene is provided
     if (is.null(targetGene)) {
-        message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
-        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
-        infoDisp <- TRUE
+      message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
+      targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
+      infoDisp <- TRUE
     }
-    
+  
     # Check if targetTissue is provided
     if (is.null(targetTissue)) {
-        message('targetTissue variable not specified, default to breast.')
-        targetTissue <- 'breast'
-        infoDisp <- TRUE
+      message('targetTissue variable not specified, default to breast.')
+      targetTissue <- 'breast'
+      infoDisp <- TRUE
     }
-    
+  
     # Check if targetCellType is provided
     if (is.null(targetCellType)) {
-        message('targetCellType variable not specified, visualize all.')
-        targetCellType <- NULL
-        infoDisp <- TRUE
+      message('targetCellType variable not specified, visualize all.')
+      targetCellType <- NULL
+      infoDisp <- TRUE
     }
-    
+  
     # Show a message if any parameter is not defined
     if (infoDisp) {
-        message('Use hpaListParam() to list possible values for target variables.')
+      message('Use hpaListParam() to list possible values for target variables.')
     }
-    
+  
     targetGene <- gene_ensembl_convert(targetGene, "gene")
     
-    plotData <- data$normal_tissue %>%
-        filter(gene %in% targetGene) %>%
-        filter(tissue %in% targetTissue)
+    plotData <- subset(data$normal_tissue, 
+                       gene %in% targetGene & tissue %in% targetTissue)
     
     if(!is.null(targetCellType)) {
-        plotData <- filter(plotData, cell_type %in% targetCellType)
+      plotData <- subset(plotData, cell_type %in% targetCellType)
     }
-    
-    plotData <- mutate(plotData,
-                       tissue_cell=paste0(tissue, ' / ', cell_type),
-                       level=factor(level, 
-                                    levels=c('High', 'Medium', 
-                                             'Low', 'Not detected')))
-    
+  
+    plotData <- within(plotData, {
+                          tissue_cell <- as.character(paste0(tissue, ' / ', cell_type))
+                          level <- factor(level, 
+                                         levels=c('High', 'Medium', 
+                                                  'Low', 'Not detected'))
+                })
+
     levelColors <- c('Not detected'=color[1],
                      'Low'=color[2],
                      'Medium'=color[3],
                      'High'=color[4])
     
     plot <- ggplot(plotData, aes(x=gene, y=tissue_cell)) +
-        geom_tile(aes(fill=level)) +
-        scale_x_discrete(limits=targetGene) +
-        scale_fill_manual(values=levelColors)
-    
+      geom_tile(aes(fill=level)) +
+      scale_x_discrete(limits=targetGene) +
+      scale_fill_manual(values=levelColors)
+  
     if(!customTheme) {
-        plot <- plot + 
-            ylab('Tissue / Cell') +
-            xlab('Genes') +
-            theme_minimal() +
-            theme(panel.grid = element_blank()) +
-            theme(axis.text.x=element_text(angle=90, hjust=1)) +
-            coord_equal()
+      plot <- plot + 
+        ylab('Tissue / Cell') +
+        xlab('Genes') +
+        theme_minimal() +
+        theme(panel.grid = element_blank()) +
+        theme(axis.text.x=element_text(angle=90, hjust=1)) +
+        coord_equal()
     }
-    
-    
-    
+  
+  
     return(plot)       
 }
 
@@ -161,9 +159,7 @@ hpaVisTissue <- function(data=NULL,
 #'   hpaVisPatho(data=hpa_downloaded_histology_v18,
 #'                  targetGene=geneList)
 #'
-#' @import dplyr
 #' @import ggplot2
-#' @importFrom tidyr gather
 #' @export
 
 hpaVisPatho <- function(data=NULL, 
@@ -171,42 +167,43 @@ hpaVisPatho <- function(data=NULL,
                         targetCancer=NULL, 
                         color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
                         customTheme=FALSE) {
-    
+  
     infoDisp <- FALSE
     
     # Check if data is provided or not
     if (is.null(data)) {
-        message('No data provided. Use version 18.')
-        data = HPAanalyze::hpa_downloaded_histology_v18
+      message('No data provided. Use version 18.')
+      data <- HPAanalyze::hpa_downloaded_histology_v18
     }
-    
+  
     # Check if targetGene is provided
     if (is.null(targetGene)) {
-        message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
-        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
-        infoDisp <- TRUE
+      message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
+      targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
+      infoDisp <- TRUE
     }
-    
+  
     # Show a message if any parameter is not defined
     if (infoDisp) {
-        message('Use hpaListParam() to list possible values for target variables.')
+      message('Use hpaListParam() to list possible values for target variables.')
     }
-    
-    plotData <- data$pathology %>%
-        filter(gene %in% targetGene)
+  
+    plotData <- data$pathology[data$pathology$gene %in% targetGene,]
     
     if(!is.null(targetCancer)) {
-        plotData <- filter(plotData, cancer %in% targetCancer)
+      plotData <- plotDat[plotData$cancer %in% targetCancer,]
     }
-    
+  
     targetGene <- gene_ensembl_convert(targetGene, "gene")
-    
-    plotData <- plotData %>%
-        select(gene, cancer, high, medium, low, not_detected) %>%
-        rename('High'='high', 'Medium'='medium', 
-               'Low'='low', 'Not detected'='not_detected') %>%
-        gather(key = "level", value = "patient_count", -gene, -cancer)
-    
+  
+    plotData <- setNames(plotData[c("gene", "cancer", "high", "medium", "low", "not_detected")],
+                         c("gene", "cancer", "High", "Medium", "Low", "Not detected"))
+  
+    plotData <- matrix_melt(df1 = plotData, 
+                            key = c("gene", "cancer"), 
+                            indName = "level", 
+                            valName = "patient_count")
+  
     #re-level
     plotData$level <- factor(plotData$level,
                              levels = c("High", "Medium", "Low", "Not detected"))
@@ -215,22 +212,22 @@ hpaVisPatho <- function(data=NULL,
                      'Low'=color[2],
                      'Medium'=color[3],
                      'High'=color[4])
-    
+  
     plot <- ggplot(plotData, aes(x=gene, y=patient_count, fill=level)) +
-        geom_bar(stat='identity', position='fill') +
-        scale_x_discrete(limits=targetGene) +
-        scale_fill_manual(values=levelColors) +
-        facet_wrap(~ cancer)
-    
+      geom_bar(stat='identity', position='fill') +
+      scale_x_discrete(limits=targetGene) +
+      scale_fill_manual(values=levelColors) +
+      facet_wrap(~ cancer)
+  
     if(!customTheme) {
-        plot <- plot + 
-            ylab('Patient proportions') +
-            xlab('Genes') +
-            theme_minimal() +
-            theme(panel.grid = element_blank()) +
-            theme(axis.text.x=element_text(angle=90, hjust=1))
+      plot <- plot + 
+        ylab('Patient proportions') +
+        xlab('Genes') +
+        theme_minimal() +
+        theme(panel.grid = element_blank()) +
+        theme(axis.text.x=element_text(angle=90, hjust=1))
     }
-    
+  
     return(plot)       
 }
 
@@ -273,10 +270,7 @@ hpaVisPatho <- function(data=NULL,
 #'   hpaVisSubcell(data=hpa_downloaded_histology_v18,
 #'                   targetGene=geneList)
 #'
-#' @import dplyr
 #' @import ggplot2
-#' @importFrom tidyr unnest
-#' @importFrom tibble as_tibble
 #' @export
 
 hpaVisSubcell <- function(data=NULL, 
@@ -284,75 +278,85 @@ hpaVisSubcell <- function(data=NULL,
                           reliability = c("enhanced", "supported", "approved", "uncertain"),
                           color=c('#ffffb2', '#e31a1c'),
                           customTheme=FALSE) {
-    
+  
     infoDisp <- FALSE
-    
+  
     # Check if data is provided or not
     if (is.null(data)) {
-        message('No data provided. Use version 18.')
-        data = HPAanalyze::hpa_downloaded_histology_v18
+      message('No data provided. Use version 18.')
+      data <- HPAanalyze::hpa_downloaded_histology_v18
     }
-    
+  
     # Check if targetGene is provided
     if (is.null(targetGene)) {
-        message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
-        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
-        infoDisp <- TRUE
+      message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
+      targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
+      infoDisp <- TRUE
     }
-    
+  
     # Show a message if any parameter is not defined
     if (infoDisp) {
-        message('Use hpaListParam() to list possible values for target variables.')
+      message('Use hpaListParam() to list possible values for target variables.')
     }
-    
+  
     targetGene <- gene_ensembl_convert(targetGene, "gene")
-    
-    plotData <- data$subcellular_location %>%
-        filter(gene %in% targetGene) %>%
-        mutate(sub_location = NA)
-    
-    if ("enhanced" %in% reliability) plotData <- 
-        mutate(plotData, 
-               sub_location =  paste(sub_location, enhanced, sep = ";"))
-    if ("supported" %in% reliability) plotData <- 
-        mutate(plotData, 
-               sub_location =  paste(sub_location, supported, sep = ";"))
-    if ("approved" %in% reliability) plotData <- 
-        mutate(plotData, 
-               sub_location =  paste(sub_location, approved, sep = ";"))
-    if ("uncertain" %in% reliability) plotData <- 
-        mutate(plotData, 
-               sub_location =  paste(sub_location, uncertain, sep = ";"))
-    
-    plotData <-  plotData %>%
-        mutate(sub_location=strsplit(sub_location, ';')) %>%
-        tidyr::unnest(sub_location) %>%
-        select(sub_location, gene) %>%
-        filter(sub_location != "NA") %>%
-        table() %>%
-        as_tibble() %>%
-        mutate(n=factor(n, levels=c('0', '1')))
+  
+    plotData <- transform(data$subcellular_location[data$subcellular_location$gene %in% targetGene,],
+                          sub_location = NA)
+  
+    if ("enhanced" %in% reliability) 
+      plotData <- transform(plotData, 
+                            sub_location =  paste(sub_location, enhanced, sep = ";"))
+    if ("supported" %in% reliability) 
+      plotData <- transform(plotData, 
+                            sub_location =  paste(sub_location, supported, sep = ";"))
+    if ("approved" %in% reliability) 
+      plotData <- transform(plotData, 
+                            sub_location =  paste(sub_location, approvffed, sep = ";"))
+    if ("uncertain" %in% reliability) 
+      plotData <- transform(plotData, 
+                              sub_location =  paste(sub_location, uncertain, sep = ";"))
+  
+    plotData <- do.call(rbind,
+                        Map(function(x,y) data.frame(sub_location = strsplit(x, split=";")[[1]], 
+                                                     gene = y,
+                                                     stringsAsFactors = FALSE),
+                            plotData$sub_location, plotData$gene)
+    )
+  
+    plotData <- setNames(
+      data.frame(
+        table(subset(plotData, sub_location != "NA")), 
+        stringsAsFactors = FALSE
+      ), c("sub_location", "gene", "n")
+    )
+  
+    plotData <- within(plotData, {
+      gene <- as.character(gene)
+      sub_location <- as.character(sub_location)
+      n  <- factor(n, levels=c('0', '1'))
+    })
     
     levelColors <- c('0'=color[1],
                      '1'=color[length(color)])
-    
+  
     plot <- ggplot(plotData, aes(x=gene, y=sub_location)) +
-        geom_tile(aes(fill=n), colour="grey50") +
-        scale_x_discrete(limits=targetGene) +
-        scale_fill_manual(values=levelColors,
-                          name="Detected",
-                          breaks = c(0, 1),
-                          labels = c("No", "Yes"))
-    
+      geom_tile(aes(fill=n), colour="grey50") +
+      scale_x_discrete(limits=targetGene) +
+      scale_fill_manual(values=levelColors,
+                        name="Detected",
+                        breaks = c(0, 1),
+                        labels = c("No", "Yes"))
+  
     if(!customTheme) {
-        plot <- plot + 
-            ylab('Subcellular locations') +
-            xlab('Genes') +
-            theme_minimal() +
-            theme(panel.grid = element_blank()) +
-            theme(axis.text.x=element_text(angle=45, hjust=1)) +
-            coord_equal()
+      plot <- plot + 
+        ylab('Subcellular locations') +
+        xlab('Genes') +
+        theme_minimal() +
+        theme(panel.grid = element_blank()) +
+        theme(axis.text.x=element_text(angle=45, hjust=1)) +
+        coord_equal()
     }
-    
-    return(plot)       
+  
+    return(plot)  
 }

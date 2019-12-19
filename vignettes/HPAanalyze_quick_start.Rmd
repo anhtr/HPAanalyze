@@ -4,7 +4,7 @@ author:
 - name: Anh N. Tran
   affiliation: Northwestern University, Illinois, USA
   email: trannhatanh89@gmail.com
-date: 6/7/2019
+date: 12/17/2019
 output: 
     BiocStyle::html_document:
         toc: true
@@ -29,7 +29,6 @@ knitr::opts_chunk$set(
 ```{r library, message=FALSE, warning=FALSE, error=FALSE}
 library(BiocStyle)
 library(HPAanalyze)
-library(dplyr)
 ```
 
 # Background 
@@ -101,7 +100,7 @@ If you want to know what kind of data you can visualize, use `hpaListParam`. You
 hpaListParam()
 ```
 ```{r listParam_ex2, echo= FALSE}
-hpaListParam() %>% glimpse()
+str(hpaListParam())
 ```
 
 # Acquiring individual sample data from the Human Protein Atlas
@@ -129,10 +128,11 @@ To better understand the output, please read the documentation for other `hpaXml
 ?hpaXmlTissueExprSum
 ?hpaXmlAntibody
 ?hpaXmlTissueExpr
+?hpaXmlRNAExpr
 ```
 
 # Copyright
-Anh Tran, 2018
+Anh Tran, 2019
 
 Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
 

@@ -47,6 +47,9 @@ hpaXmlGet <- function(targetEnsemblId, version = 'latest') {
     return(rawXml)
 }
 
+
+
+
 #############################
 ## Extract protein classes ##
 #############################
@@ -59,34 +62,36 @@ hpaXmlGet <- function(targetEnsemblId, version = 'latest') {
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
 #' 
-#' @return This function return a tibble of 4 columns.
+#' @return This function return a data frame of 4 columns.
 #' 
 #' @family xml functions
 #' 
 #' @examples
 #' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
-#'   hpaXmlProtClass(GCH1xml)
+#'   protein_df <- hpaXmlProtClass(GCH1xml)
 #' }
 #' 
 #' @importFrom xml2 xml_find_all xml_attrs
-#' @importFrom tibble as_tibble
 #' @export
 
-hpaXmlProtClass <- function(importedXml) {
-    proteinClasses <- importedXml %>%
-        # xpath to get into proteinClasses
-        xml_find_all('//proteinClasses') %>%
-        xml_find_all('//proteinClass') %>%
-        # get attributes, which contains the wanted data, as a list
-        xml_attrs() %>%
-        # turn attrs into a tibble
-        named_vector_list_to_tibble() %>%
-        # replace blank cells with NA and convert the result back to tibble
-        apply(2, function(x) gsub("^$|^ $", NA, x)) %>% as_tibble()
+hpaXmlProtClass <- function(importedXml) {   
+    proteinClasses <- xml_attrs(
+                          xml_find_all(
+                             xml_find_all(importedXml, '//proteinClasses'), 
+                             '//proteinClass')
+                          )
+
+    proteinClasses <- data.frame(t(sapply(proteinClasses, identity)),
+                                 stringsAsFactors = FALSE)
+    proteinClasses <- proteinClasses[c("id", "name", "parent_id", "source")]
+    proteinClasses[proteinClasses == ''] <- NA
     
     return(proteinClasses)
 }
+
+
+
 
 #######################################
 ## Extract tissue expression summary ##
@@ -103,7 +108,7 @@ hpaXmlProtClass <- function(importedXml) {
 #'   from the extracted urls into the working folder.
 #'
 #' @return This function return a list consists of a summary string, which is a
-#'   very brief description of the protein, and a tibble of 2 columns: tissue
+#'   very brief description of the protein, and a data frame of 2 columns: tissue
 #'   (name of tissue available) and imageUrl (link to download the perspective
 #'   image)
 #'   
@@ -112,45 +117,39 @@ hpaXmlProtClass <- function(importedXml) {
 #' @examples
 #' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
-#'   hpaXmlTissueExprSum(GCH1xml)
+#'   tissue_list <- hpaXmlTissueExprSum(GCH1xml)
 #' }
 #'
 #' @importFrom xml2 xml_find_all xml_find_first xml_text
-#' @import dplyr
 #' @export
 
 hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
-    
-    output <- list()
-    
-    tissueExpression <- importedXml %>%
-        # xpath to get to tissueExpression that is not under any antibodies
-        xml_find_all('entry/tissueExpression')
-    
-    output$summary <- tissueExpression %>%
-        xml_find_first('summary') %>%
-        xml_text()
-    
-    output$img <- tissueExpression %>%
-        xml_find_all('image') %>%
-        as_list() %>%
-        lapply(list_to_df) %>%
-        bind_rows() %>%
-        select(tissue, imageUrl) %>%
-        mutate(tissue=as.character(tissue), 
-               imageUrl=as.character(imageUrl))
-    
-    if(downloadImg == TRUE) {
-        imageUrlList <- output$img$imageUrl
-        # create the list of file name to save
-        imageFileList <- paste0(output$img$tissue, '.jpg')
-        # loop through the 
-        Map(function(u,d) download.file(u,d, mode='wb'), 
-            imageUrlList, imageFileList)
-    }
-    
-    return(output)
+  
+  output <- list(summary=NA, img=NA)
+  
+  # xpath to get to tissueExpression that is not under any antibodies
+  tissueExpression <- xml_find_all(importedXml, 'entry/tissueExpression')
+  
+  output$summary <- xml_text(xml_find_first(tissueExpression, 'summary'))
+  
+  output$img <- data.frame(tissue = xml_text(xml_find_all(importedXml, 
+                                  '//entry/tissueExpression/image/tissue')),
+                           imageUrl = xml_text(xml_find_all(importedXml, 
+                                    '//entry/tissueExpression/image/imageUrl')),
+                           stringsAsFactors = FALSE)
+  
+  if(downloadImg == TRUE) {
+    imageUrlList <- output$img$imageUrl
+    # create the list of file name to save
+    imageFileList <- paste0(output$img$tissue, '.jpg')
+    # loop through each tissue and image URL
+    mapply(function(u,d) download.file(u,d, mode='wb'), 
+           imageUrlList, imageFileList)
+  }
+  
+  return(output)
 }
+
 
 
 ##################################
@@ -164,7 +163,7 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
 #'
-#' @return This function returns a tibble of 4 columns, containing information
+#' @return This function returns a data frame of 4 columns, containing information
 #'   about the antibodies used in the project for the inquired protein: id,
 #'   releaseDate, releaseVersion, and RRID.
 #'   
@@ -173,20 +172,25 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 #' @examples
 #' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
-#'   hpaXmlAntibody(GCH1xml)
+#'   antibody_df <- hpaXmlAntibody(GCH1xml)
 #' }
 #'
 #' @importFrom xml2 xml_find_all xml_attrs
-#' @import dplyr
+#' @importFrom stats setNames
 #' @export
 
 hpaXmlAntibody <- function(importedXml) {
-    output <- importedXml %>%
-        xml_find_all('entry/antibody') %>%
-        xml_attrs() %>%
-        named_vector_list_to_tibble()
-    
-    return(output)
+  
+  hpa_attrs <- xml_attrs(xml_find_all(importedXml, 
+                                     '//entry/antibody'))[[1]]
+  hpa_attrs <- hpa_attrs[order(names(hpa_attrs))]
+  
+  output <- data.frame(setNames(rbind(hpa_attrs),
+                                names(hpa_attrs)), 
+                       row.names = NULL,
+                       stringsAsFactors = FALSE)
+  
+  return(output)
 }
 
 
@@ -203,10 +207,10 @@ hpaXmlAntibody <- function(importedXml) {
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
 #'
-#' @return This function returns a list of tibbles, each for an antibody. Each
-#'   tibble contains information about all individual samples and their
+#' @return This function returns a list of data frames, each for an antibody. 
+#'   Each data frame contains information about all individual samples and their
 #'   staining. Due to the variation in amount of information available for these
-#'   samples, the number of columns differs, but the tibble essentially
+#'   samples, the number of columns differs, but the data frame essentially
 #'   includes: patientId, age, sex, staining, intensity, quantity, location,
 #'   imageUrl, snomedCode, and tissueDescription. The last two items may have
 #'   more than one column each.
@@ -216,92 +220,123 @@ hpaXmlAntibody <- function(importedXml) {
 #' @examples
 #' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
-#'   hpaXmlTissueExpr(GCH1xml)
+#'   tissue_details_df_list <- hpaXmlTissueExpr(GCH1xml)
 #' }
 #'
 #' @import xml2
-#' @import dplyr
+#' @import xslt
+#' @importFrom stats setNames
 #' @export
 
 hpaXmlTissueExpr <- function(importedXml) {
-    antibodyNodes <- importedXml %>% xml_find_all('entry/antibody')
-    
-    lapply(antibodyNodes, function(antibodyNode){
-        tissueExpressionNodes <- xml_find_all(antibodyNode, 'tissueExpression')
-        lapply(tissueExpressionNodes, function(tissueExpressionNode){
-            dataNodes <- xml_find_all(tissueExpressionNode, 'data')
-            lapply(dataNodes, function(dataNode) {
-                patient_nodes_to_tibble(xml_find_all(dataNode, 'patient'))
-            })
-        }) %>% unlist(recursive=FALSE) %>% bind_rows() -> x
-        
-        if (!(0 %in% dim(x))) {
-            select(x, patientId, age, sex, staining, intensity, quantity,
-                   location, imageUrl, starts_with('snomedCode'),
-                   starts_with('tissueDescription'))
-        } else {x}
-        
-    }) -> result
 
-    return(result)
+    # load xslt script
+    xsl_file <- system.file("xsl", "hpaXmlTissueExpr.xsl", package="HPAanalyze")
+    style <- read_xml(xsl_file, package = "xslt")
+
+    # transform input
+    new_xml <- xml_xslt(importedXml, style)
+
+    # retrieve all patient nodes
+    recs <- xml_find_all(new_xml, "//patient")
+
+    # bind each node child text and node name to data frames
+    df_list <- lapply(recs, function(r) 
+          data.frame(rbind(setNames(xml_text(xml_children(r)), 
+                                    xml_name(xml_children(r)))),
+                     stringsAsFactors = FALSE)
+  
+    )
+
+    # normalize and re-order columns
+    nms <- unique(unlist(lapply(df_list, names)))
+
+    df_list <- lapply(df_list, function(df) {
+        df[nms[!(nms %in% names(df))]] <- NA
+
+        df <- df[c("patientId", "age", "sex", "staining", "intensity", 
+                   "quantity", "location", "imageUrl", 
+                 names(df)[grep("snomedCode", names(df))],
+                 names(df)[grep("tissueDescription", names(df))])]
+
+        return(df)
+    })
+
+    return(df_list)
 }
 
-## Define patient_nodes_to_tibble() for simpler parsing =======================
 
-#' @importFrom xml2 xml_find_first xml_text xml_find_all xml_attrs 
 
-patient_nodes_to_tibble <- function(patientNodes) {
-    lapply(patientNodes,
-           function(patientNode) {
-               pair <- c('sex'='sex',
-                         'age'='age',
-                         'patientId'='patientId',
-                         'staining'='level[@type=\'staining\']',
-                         'intensity'='level[@type=\'intensity\']',
-                         'quantity'='quantity',
-                         'location'='location')
-               
-               vapply(pair,
-                      FUN.VALUE=character(1),
-                      function(x) {
-                          temp <- c()
-                          xml_find_first(patientNode, x) %>%
-                              xml_text() -> temp[names(x)]
-                      }) -> info
-               
-               sampleNode <- xml_find_first(patientNode, 'sample')
-               samp <- c()
-               xml_find_all(sampleNode, 'snomedParameters/snomed') %>%
-                   xml_attrs() %>% named_vector_list_to_tibble() %>%
-                   unlist() -> samp
-               xml_find_all(sampleNode, 'assayImage/image/imageUrl') %>%
-                   xml_text() -> samp['imageUrl']
-               result <- c(info, samp)
-               
-               return(result)
-               
-           }) %>% named_vector_list_to_tibble() -> result
-    
-    return(result)
-}
+#######################################
+## Extract RNA expression details ##
+#######################################
 
-## Melt a list into a data frame =============================================
-#' @importFrom tidyr spread unnest
+#' Extract RNA expression details
+#'
+#' Extract RNA expression information for each sample and url to download
+#' images from imported xml document resulted from \code{hpaXmlGet()}.
+#'
+#' @param importedXml Input an xml document object resulted from a
+#'   \code{hpaXmlGet()} call.
+#'
+#' @param section Select the section to be extracted from xml including:
+#'   tissue, cellLine, or bloodCell.
+#'
+#' @param child Select the multiple child nodes to extract from section
+#'   including: level or RNASample.
+#'
+#' @return This function returns a data frame of listed RNA expressions. 
+#'   Each data frame contains information about all entries' RNA expression.
+#'   Due to the variation in amount of information different parameters
+#'   return different data frames by section (tissue, cellLine, or 
+#'   bloodCell) with either level or RNASample information.
+#'   
+#' @family xml functions
+#'
+#' @examples
+#' \dontrun{
+#'   GCH1xml <- hpaXmlGet('ENSG00000131979')
+#'   rna_df <- hpaXmlRNAExpr(GCH1xml)
+#'   rna_df <- hpaXmlRNAExpr(GCH1xml, section="cellLine", child="level")
+#'   rna_df <- hpaXmlRNAExpr(GCH1xml, section="bloodCell", child="RNASample")
+#' }
+#'
+#' @import xml2
+#' @import xslt
+#' @importFrom stats setNames
+#' @export
 
-list_to_df <- function(listfordf){
+hpaXmlRNAExpr <- function(importedXml, section="tissue", child="level") {
+  
+  # load xslt script
+  xsl_file <- system.file("xsl", "hpaXmlRNAExpr.xsl", package="HPAanalyze")
+  style <- read_xml(xsl_file, package = "xslt")
+  
+  # transform input
+  new_xml <- xml_xslt(importedXml, style, 
+                      params = list(section_type=section, 
+                                    multi_child=child))
+  
+  # retrieve all patient nodes
+  recs <- xml_find_all(new_xml, "//data")
+  
+  # bind each node child text and node name to data frames
+  df_list <- lapply(recs, function(r) 
+    data.frame(rbind(setNames(xml_text(xml_children(r)), 
+                              xml_name(xml_children(r)))),
+               stringsAsFactors = FALSE)
     
-    df <- list(list.element = listfordf)
-    class(df) <- c("tbl_df", "data.frame")
-    attr(df, "row.names") <- .set_row_names(length(listfordf))
-    
-    if (!is.null(names(listfordf))) {
-        df$name <- names(listfordf)
-    }
-    
-    df <- df %>% 
-        spread(key = 'name', value = 'list.element') %>% 
-        unnest() %>% 
-        unnest()
-    
+  )
+  
+  # normalize and re-order columns
+  nms <- unique(unlist(lapply(df_list, names)))
+  
+  df_list <- lapply(df_list, function(df) {
+    df[nms[!(nms %in% names(df))]] <- NA
     return(df)
+  })
+  
+  final_df <- do.call(rbind, df_list)
+  return(final_df)
 }
+
