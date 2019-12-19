@@ -1,0 +1,12 @@
+pandoc: '2.6'
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  a_HPAanalyze_quick_start: ../../../../../P:/Bioinformatics/HPAanalyze/vignettes/a_HPAanalyze_quick_start.html
+  b_HPAanalyze_indepth: ../../../../../P:/Bioinformatics/HPAanalyze/vignettes/b_HPAanalyze_indepth.html
+  c_HPAanalyze_case_query: ../../../../../P:/Bioinformatics/HPAanalyze/vignettes/c_HPAanalyze_case_query.html
+  d_HPAanalyze_case_offline_xml: ../../../../../P:/Bioinformatics/HPAanalyze/vignettes/d_HPAanalyze_case_offline_xml.html
+  e_HPAanalyze_case_json: ../../../../../P:/Bioinformatics/HPAanalyze/vignettes/e_HPAanalyze_case_json.html
+  f_HPAanalyze_case_images: ../../../../../P:/Bioinformatics/HPAanalyze/vignettes/f_HPAanalyze_case_images.html
+  z_HPAanalyze_paper_figures: ../../../../../P:/Bioinformatics/HPAanalyze/vignettes/z_HPAanalyze_paper_figures.html
+
