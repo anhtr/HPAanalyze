@@ -204,7 +204,8 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
                     strip.white = TRUE,
-                    sep="\t"
+                    sep="\t",
+                    na.strings = c("", " ")
                 ) %>% as_tibble()
             unlink(temp)
             colnames(normal_tissue) <- normalTissueColnames
@@ -222,7 +223,8 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
                     strip.white = TRUE,
-                    sep="\t"
+                    sep="\t",
+                    na.strings = c("", " ")
                 ) %>% as_tibble()
             unlink(temp)
             colnames(pathology) <- pathologyColnames
@@ -248,7 +250,8 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
                     strip.white = TRUE,
-                    sep="\t"
+                    sep="\t",
+                    na.strings = c("", " ")
                 ) %>% as_tibble()
             unlink(temp)
             
@@ -274,7 +277,8 @@ Download the 'RNA consensus tissue gene data' of the current version.")
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
                     strip.white = TRUE,
-                    sep="\t"
+                    sep="\t",
+                    na.strings = c("", " ")
                 ) %>% as_tibble()
             unlink(temp)
             colnames(rna_tissue) <- rnaTissueColnames
@@ -294,7 +298,8 @@ Download the 'RNA HPA cell line gene data' of the current version.")
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
                     strip.white = TRUE,
-                    sep="\t"
+                    sep="\t",
+                    na.strings = c("", " ")
                 ) %>% as_tibble()
             unlink(temp)
             colnames(rna_cell_line) <- rnaCellLineColnames
@@ -312,7 +317,8 @@ Download the 'RNA HPA cell line gene data' of the current version.")
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
                     strip.white = TRUE,
-                    sep="\t"
+                    sep="\t",
+                    na.strings = c("", " ")
                 ) %>% as_tibble()
             unlink(temp)
             
@@ -349,7 +355,8 @@ Download the 'RNA HPA cell line gene data' of the current version.")
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
                     strip.white = TRUE,
-                    sep="\t"
+                    sep="\t",
+                    na.strings = c("", " ")
                 ) %>% as_tibble()
             unlink(temp)
             
