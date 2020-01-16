@@ -4,8 +4,11 @@
 \alias{hpaXml}
 \title{Extract details about an individual protein from XML file in one function}
 \usage{
-hpaXml(inputXml, extractType = c("ProtClass", "TissueExprSum",
-  "Antibody", "TissueExpr"), ...)
+hpaXml(
+  inputXml,
+  extractType = c("ProtClass", "TissueExprSum", "Antibody", "TissueExpr"),
+  ...
+)
 }
 \arguments{
 \item{inputXml}{Input can be either one Ensembl gene id (start with ENSG) or
@@ -39,9 +42,11 @@ calling every hpaXml function and put all results into a list.
 
 }
 \seealso{
-Other xml functions: \code{\link{hpaXmlAntibody}},
-  \code{\link{hpaXmlGet}}, \code{\link{hpaXmlProtClass}},
-  \code{\link{hpaXmlTissueExprSum}},
-  \code{\link{hpaXmlTissueExpr}}
+Other xml functions: 
+\code{\link{hpaXmlAntibody}()},
+\code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlProtClass}()},
+\code{\link{hpaXmlTissueExprSum}()},
+\code{\link{hpaXmlTissueExpr}()}
 }
 \concept{xml functions}

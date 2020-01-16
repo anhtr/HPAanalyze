@@ -31,8 +31,11 @@ imported xml document resulted from \code{hpaXmlGet()}.
 
 }
 \seealso{
-Other xml functions: \code{\link{hpaXmlAntibody}},
-  \code{\link{hpaXmlGet}}, \code{\link{hpaXmlProtClass}},
-  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+Other xml functions: 
+\code{\link{hpaXmlAntibody}()},
+\code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlProtClass}()},
+\code{\link{hpaXmlTissueExpr}()},
+\code{\link{hpaXml}()}
 }
 \concept{xml functions}

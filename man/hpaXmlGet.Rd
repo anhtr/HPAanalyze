@@ -33,9 +33,11 @@ function calls \code{xml2::read_xml()} under the hood.
 
 }
 \seealso{
-Other xml functions: \code{\link{hpaXmlAntibody}},
-  \code{\link{hpaXmlProtClass}},
-  \code{\link{hpaXmlTissueExprSum}},
-  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+Other xml functions: 
+\code{\link{hpaXmlAntibody}()},
+\code{\link{hpaXmlProtClass}()},
+\code{\link{hpaXmlTissueExprSum}()},
+\code{\link{hpaXmlTissueExpr}()},
+\code{\link{hpaXml}()}
 }
 \concept{xml functions}

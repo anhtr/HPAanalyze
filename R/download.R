@@ -35,7 +35,7 @@
 #'     \item \code{'latest'}: Download latest version. Require Internet
 #'     connection.
 #'     \item \code{'example'}: Load the example dataset from 'HPA
-#'     analyze' ('hpa_downloaded_histology_v18'). Does not contain rna or
+#'     analyze' ('hpa_histology_data'). Does not contain rna or
 #'     isoform data.
 #'     \item \code{'v?'} with '?' is a integer: Download a specific version of
 #'     the dataset. For example: 'v18' download version 18. Currently support
@@ -46,6 +46,10 @@
 #' 
 #' @return This function will return a list of tibbles corresponding to
 #'   requested datasets.
+#'   
+#' @seealso
+#' \code{\link{hpaDownload}}
+#' \code{\link{hpa_histology_data}}
 #'  
 #' @examples
 #'   downloadedData <- hpaDownload(downloadList='all', version='example')
@@ -169,19 +173,19 @@ hpaDownload <- function(downloadList='histology', version='latest') {
     # } else if (version == 'example') {# load example data
     
     if (version == 'example') {# load example data
-        data('hpa_downloaded_histology_v18', 
+        data('hpa_histology_data', 
              package='HPAanalyze',
              envir=environment())
         if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
-            loadedData$normal_tissue <- HPAanalyze::hpa_downloaded_histology_v18$normal_tissue
+            loadedData$normal_tissue <- HPAanalyze::hpa_histology_data$normal_tissue
         }
         
         if('Pathology' %in% downloadList) {# load `pathology`
-            loadedData$pathology <- HPAanalyze::hpa_downloaded_histology_v18$pathology
+            loadedData$pathology <- HPAanalyze::hpa_histology_data$pathology
         }
         
         if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
-            loadedData$subcellular_location <- HPAanalyze::hpa_downloaded_histology_v18$subcellular_location
+            loadedData$subcellular_location <- HPAanalyze::hpa_histology_data$subcellular_location
         }
         
     } else {# download data from the internet
@@ -445,8 +449,10 @@ hpaSubset <- function(data=NULL,
     
     # Check if data is provided or not
     if (is.null(data)) {
-        message('No data provided. Use version 18.')
-        data = HPAanalyze::hpa_downloaded_histology_v18
+        message(paste0('No data provided. Use version ', 
+                       hpa_histology_data$metadata$HPAversion,
+                       "."))
+        data = HPAanalyze::hpa_histology_data
     }
     
     if('normal_tissue' %in% names(data)) {
@@ -545,8 +551,10 @@ hpaListParam <- function(data=NULL) {
     
     # Check if data is provided or not
     if (is.null(data)) {
-        message('No data provided. Use version 18.')
-        data = HPAanalyze::hpa_downloaded_histology_v18
+        message(paste0('No data provided. Use version ', 
+                       hpa_histology_data$metadata$HPAversion,
+                       "."))
+        data = HPAanalyze::hpa_histology_data
     }
     
     availData <- list()

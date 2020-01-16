@@ -32,7 +32,7 @@ value:
   \item \code{'latest'}: Download latest version. Require Internet
   connection.
   \item \code{'example'}: Load the example dataset from 'HPA
-  analyze' ('hpa_downloaded_histology_v18'). Does not contain rna or
+  analyze' ('hpa_histology_data'). Does not contain rna or
   isoform data.
   \item \code{'v?'} with '?' is a integer: Download a specific version of
   the dataset. For example: 'v18' download version 18. Currently support
@@ -54,7 +54,11 @@ very big.
   
 }
 \seealso{
-Other downloadable datasets functions: \code{\link{hpaExport}},
-  \code{\link{hpaSubset}}
+\code{\link{hpaDownload}}
+\code{\link{hpa_histology_data}}
+
+Other downloadable datasets functions: 
+\code{\link{hpaExport}()},
+\code{\link{hpaSubset}()}
 }
 \concept{downloadable datasets functions}

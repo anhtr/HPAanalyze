@@ -26,9 +26,11 @@ Extract information about the antibodies used for a specific protein.
 
 }
 \seealso{
-Other xml functions: \code{\link{hpaXmlGet}},
-  \code{\link{hpaXmlProtClass}},
-  \code{\link{hpaXmlTissueExprSum}},
-  \code{\link{hpaXmlTissueExpr}}, \code{\link{hpaXml}}
+Other xml functions: 
+\code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlProtClass}()},
+\code{\link{hpaXmlTissueExprSum}()},
+\code{\link{hpaXmlTissueExpr}()},
+\code{\link{hpaXml}()}
 }
 \concept{xml functions}

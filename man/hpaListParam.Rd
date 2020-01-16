@@ -5,8 +5,14 @@
 \alias{hpaListParam}
 \title{Subset downloaded data}
 \usage{
-hpaSubset(data = NULL, targetGene = NULL, targetTissue = NULL,
-  targetCellType = NULL, targetCancer = NULL, targetCellLine = NULL)
+hpaSubset(
+  data = NULL,
+  targetGene = NULL,
+  targetTissue = NULL,
+  targetCellType = NULL,
+  targetCancer = NULL,
+  targetCellLine = NULL
+)
 
 hpaListParam(data = NULL)
 }
@@ -67,7 +73,8 @@ call of \code{hpaSubset()}.
 
 }
 \seealso{
-Other downloadable datasets functions: \code{\link{hpaDownload}},
-  \code{\link{hpaExport}}
+Other downloadable datasets functions: 
+\code{\link{hpaDownload}()},
+\code{\link{hpaExport}()}
 }
 \concept{downloadable datasets functions}

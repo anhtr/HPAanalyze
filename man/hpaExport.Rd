@@ -47,7 +47,8 @@ recommended.
 
 }
 \seealso{
-Other downloadable datasets functions: \code{\link{hpaDownload}},
-  \code{\link{hpaSubset}}
+Other downloadable datasets functions: 
+\code{\link{hpaDownload}()},
+\code{\link{hpaSubset}()}
 }
 \concept{downloadable datasets functions}
