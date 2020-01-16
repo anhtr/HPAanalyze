@@ -23,7 +23,8 @@ knitr::opts_chunk$set(
   comment="#>",
   warning=FALSE,
   error=FALSE,
-  eval=FALSE
+  eval=FALSE,
+  crop = NULL
 )
 ```
 

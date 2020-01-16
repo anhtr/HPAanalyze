@@ -22,7 +22,8 @@ knitr::opts_chunk$set(
   collapse=TRUE,
   comment="#>",
   warning=FALSE,
-  error=FALSE
+  error=FALSE,
+  crop = NULL
 )
 ```
 
