@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 # HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200" />
 
-[![Travis-CI](https://travis-ci.org/trannhatanh89/HPAanalyze.svg?branch=master)](https://travis-ci.org/trannhatanh89/HPAanalyze)
+[![TravisCI](https://travis-ci.com/trannhatanh89/HPAanalyze.svg?branch=master)](https://travis-ci.com/trannhatanh89/HPAanalyze)
 
 * **Background:** The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics.
 * **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
@@ -94,6 +94,6 @@ In the first release, *HPAanalyze* includes four functions for data extraction f
 We appreciate the support of the National institutes of Health National Cancer Institute R01 CA151522 and funds from the Department of Cell, Developmental and Integrative Biology at the University of Alabama at Birmingham.
 
 # Copyright
-Anh N Tran, 2018
+Anh N Tran, 2018-2020
 
 
