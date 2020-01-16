@@ -1,8 +1,11 @@
                        Changes in version 1.5
+* Changes in version 1.5.2
+    + Minor bug fixes.
+
 * Changes in version 1.5.1
     + Add documentation with pkgdown. Minor updates to documentation.
     + tidyr and readr dependencies have been replaced with base R solutions.
-    + Importing data fron hapr is no longer supported.
+    + Importing data from hpar is no longer supported.
     + hpaDownload function was updated to correctly download data in HPA version 19.
     
 * Changes in version 1.5.0
