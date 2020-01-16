@@ -3,5 +3,3 @@ language: r
 cache: packages
 
 r: bioc-release
-
-r-packages: magick
