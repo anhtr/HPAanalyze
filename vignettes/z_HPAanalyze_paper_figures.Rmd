@@ -298,3 +298,6 @@ for (i in 1:nrow(SLC2A3_glioma)) {
 }
 ```
 
+# Copyright
+```{r child = 'data/copyright', eval = TRUE}
+```

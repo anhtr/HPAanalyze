@@ -133,8 +133,5 @@ To better understand the output, please read the documentation for other `hpaXml
 ```
 
 # Copyright
-Anh Tran, 2018
-
-Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
-
-
+```{r child = 'data/copyright'}
+```

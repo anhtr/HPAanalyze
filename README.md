@@ -16,10 +16,11 @@ HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200" />
     the `tidyverse` philosophy and data structures, and can be used in
     combination with Bioconductor packages for easy analysis of HPA
     data.  
--   **Citation:** Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A.
-    *HPAanalyze: An R Package that Facilitates the Retrieval and
-    Analysis of The Human Protein Atlas Data*. bioRxiv 355032; doi:
-    <a href="https://doi.org/10.1101/355032" class="uri">https://doi.org/10.1101/355032</a>
+-   **Citation:** Tran, A.N., Dussaq, A.M., Kennell, T. et
+    al. HPAanalyze: an R package that facilitates the retrieval and
+    analysis of the Human Protein Atlas data. BMC Bioinformatics 20,
+    463 (2019)
+    <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a>
 
 Background
 ----------
@@ -153,4 +154,10 @@ Birmingham.
 Copyright
 =========
 
-Anh N Tran, 2018-2020
+**Anh Tran, 2018-2020 **
+
+Please cite: **Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze:
+an R package that facilitates the retrieval and analysis of the Human
+Protein Atlas data. BMC Bioinformatics 20, 463 (2019)
+<a href="doi:10.1186/s12859-019-3059-z" class="uri">doi:10.1186/s12859-019-3059-z</a>
+**

@@ -466,5 +466,5 @@ Histology image| View by loading browser page  | Extract links via `hpaXml` func
 We appreciate the support of the National institutes of Health National Cancer Institute R01 CA151522 and funds from the Department of Cell, Developmental and Integrative Biology at the University of Alabama at Birmingham.
 
 # Copyright
-Anh Tran, 2018
-
+```{r child = 'data/copyright'}
+```
