@@ -8,11 +8,13 @@
 
 <title>Extract details about an individual protein from XML file in one function — hpaXml • HPAanalyze</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,14 +34,15 @@
 
 
 
-<meta property="og:title" content="Extract details about an individual protein from XML file in one function — hpaXml" />
 
+<meta property="og:title" content="Extract details about an individual protein from XML file in one function — hpaXml" />
 <meta property="og:description" content="This function is the umbrella function for the hpaXml function family. It
 take the input of either one Ensembl gene id or a imported XML object
 resulting from a hpaXmlGet() function call. By default, it will
 extract all information available for HPAanalyze user from the XML file by
 calling every hpaXml function and put all results into a list." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -70,7 +73,7 @@ calling every hpaXml function and put all results into a list." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -116,7 +119,6 @@ calling every hpaXml function and put all results into a list." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -138,18 +140,19 @@ calling every hpaXml function and put all results into a list." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function is the umbrella function for the hpaXml function family. It
 take the input of either one Ensembl gene id or a imported XML object
 resulting from a <code><a href='hpaXmlGet.html'>hpaXmlGet()</a></code> function call. By default, it will
 extract all information available for HPAanalyze user from the XML file by
 calling every hpaXml function and put all results into a list.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>hpaXml</span>(<span class='no'>inputXml</span>, <span class='kw'>extractType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ProtClass"</span>, <span class='st'>"TissueExprSum"</span>,
-  <span class='st'>"Antibody"</span>, <span class='st'>"TissueExpr"</span>), <span class='no'>...</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>hpaXml</span>(
+  <span class='no'>inputXml</span>,
+  <span class='kw'>extractType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ProtClass"</span>, <span class='st'>"TissueExprSum"</span>, <span class='st'>"Antibody"</span>, <span class='st'>"TissueExpr"</span>),
+  <span class='no'>...</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -173,38 +176,38 @@ functions being called behind the scene. See help files of other hpaXml
 functions for more information.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>This function returns a list. Each element of the list is information
   extracted from the XML file specified using other hpaXml functions. See
   help file for each XML function for more information.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other xml functions: <code><a href='hpaXmlAntibody.html'>hpaXmlAntibody</a></code>,
-  <code><a href='hpaXmlGet.html'>hpaXmlGet</a></code>, <code><a href='hpaXmlProtClass.html'>hpaXmlProtClass</a></code>,
-  <code><a href='hpaXmlTissueExprSum.html'>hpaXmlTissueExprSum</a></code>,
-  <code><a href='hpaXmlTissueExpr.html'>hpaXmlTissueExpr</a></code></p></div>
-    
+    <div class='dont-index'><p>Other xml functions: 
+<code><a href='hpaXmlAntibody.html'>hpaXmlAntibody</a>()</code>,
+<code><a href='hpaXmlGet.html'>hpaXmlGet</a>()</code>,
+<code><a href='hpaXmlProtClass.html'>hpaXmlProtClass</a>()</code>,
+<code><a href='hpaXmlTissueExprSum.html'>hpaXmlTissueExprSum</a>()</code>,
+<code><a href='hpaXmlTissueExpr.html'>hpaXmlTissueExpr</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
   <span class='fu'>hpaXml</span>(<span class='kw'>inputXml</span><span class='kw'>=</span><span class='st'>'ENSG00000131979'</span>, <span class='kw'>extractType</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'ProtClass'</span>, <span class='st'>'TissueExprSum'</span>, <span class='st'>'Antibody'</span>))</div><div class='output co'>#&gt; $ProtClass
 #&gt; <span style='color: #555555;'># A tibble: 11 x 4</span><span>
-#&gt;    id    name                                              parent_id source     
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                             </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
-#&gt; </span><span style='color: #555555;'> 1</span><span> Ez    Enzymes                                           </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>         
-#&gt; </span><span style='color: #555555;'> 2</span><span> Ec    ENZYME proteins                                   Ez        ENZYME     
-#&gt; </span><span style='color: #555555;'> 3</span><span> Eh    Hydrolases                                        Ec        ENZYME     
-#&gt; </span><span style='color: #555555;'> 4</span><span> Za    Predicted intracellular proteins                  </span><span style='color: #BB0000;'>NA</span><span>        HPA        
-#&gt; </span><span style='color: #555555;'> 5</span><span> Zm    Intracellular proteins predicted by MDM and MDSEC Za        HPA        
-#&gt; </span><span style='color: #555555;'> 6</span><span> Dr    Disease related genes                             </span><span style='color: #BB0000;'>NA</span><span>        UniProt    
-#&gt; </span><span style='color: #555555;'> 7</span><span> Pd    Potential drug targets                            </span><span style='color: #BB0000;'>NA</span><span>        HPA        
-#&gt; </span><span style='color: #555555;'> 8</span><span> Ua    UniProt - Evidence at protein level               </span><span style='color: #BB0000;'>NA</span><span>        UniProt    
-#&gt; </span><span style='color: #555555;'> 9</span><span> Nx    Mapped to neXtProt                                </span><span style='color: #BB0000;'>NA</span><span>        neXtProt   
-#&gt; </span><span style='color: #555555;'>10</span><span> Na    neXtProt - Evidence at protein level              Nx        neXtProt   
-#&gt; </span><span style='color: #555555;'>11</span><span> Ep    Protein evidence (Peptideatlas)                   </span><span style='color: #BB0000;'>NA</span><span>        Peptideatl~
+#&gt;    source       id    parent_id name                                            
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                           
+#&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>           Ez    </span><span style='color: #BB0000;'>NA</span><span>        Enzymes                                         
+#&gt; </span><span style='color: #555555;'> 2</span><span> ENZYME       Ec    Ez        ENZYME proteins                                 
+#&gt; </span><span style='color: #555555;'> 3</span><span> ENZYME       Eh    Ec        Hydrolases                                      
+#&gt; </span><span style='color: #555555;'> 4</span><span> HPA          Za    </span><span style='color: #BB0000;'>NA</span><span>        Predicted intracellular proteins                
+#&gt; </span><span style='color: #555555;'> 5</span><span> HPA          Zm    Za        Intracellular proteins predicted by MDM and MDS~
+#&gt; </span><span style='color: #555555;'> 6</span><span> UniProt      Dr    </span><span style='color: #BB0000;'>NA</span><span>        Disease related genes                           
+#&gt; </span><span style='color: #555555;'> 7</span><span> HPA          Pd    </span><span style='color: #BB0000;'>NA</span><span>        Potential drug targets                          
+#&gt; </span><span style='color: #555555;'> 8</span><span> UniProt      Ua    </span><span style='color: #BB0000;'>NA</span><span>        UniProt - Evidence at protein level             
+#&gt; </span><span style='color: #555555;'> 9</span><span> neXtProt     Nx    </span><span style='color: #BB0000;'>NA</span><span>        Mapped to neXtProt                              
+#&gt; </span><span style='color: #555555;'>10</span><span> neXtProt     Na    Nx        neXtProt - Evidence at protein level            
+#&gt; </span><span style='color: #555555;'>11</span><span> Peptideatlas Ep    </span><span style='color: #BB0000;'>NA</span><span>        Protein evidence (Peptideatlas)                 
 #&gt; 
 #&gt; $TissueExprSum
 #&gt; $TissueExprSum$summary
@@ -225,9 +228,9 @@ functions for more information.</p></td>
 #&gt; 
 #&gt; $Antibody
 #&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
-#&gt;   id        releaseDate releaseVersion RRID       
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
-#&gt; </span><span style='color: #555555;'>1</span><span> HPA028612 2010-03-26  6              AB_10602135
+#&gt;   id        releaseVersion releaseDate RRID       
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
+#&gt; </span><span style='color: #555555;'>1</span><span> HPA028612 6              2010-03-26  AB_10602135
 #&gt; </div><div class='input'>
 </div></span></pre>
   </div>
@@ -235,11 +238,8 @@ functions for more information.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="a_HPAanalyze_quick_start_files/jquery-1.11.3/jquery.min.js"></script><script src="a_HPAanalyze_quick_start_files/elevate-section-attrs-2.0/elevate-section-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function</h1>
@@ -105,9 +105,9 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BiocStyle)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(HPAanalyze)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BiocStyle)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(HPAanalyze)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span></code></pre></div>
 <div id="background" class="section level1">
 <h1 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h1>
@@ -129,81 +129,83 @@
 <h1 class="hasAnchor">
 <a href="#visualize-protein-expression-data" class="anchor"></a>Visualize protein expression data</h1>
 <p>Currently, this is available for the normal tissue, pathology (cancers) and subcellular location datasets. The fastest and easiest way is to use the defaults of <code>hpaVis</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>(<span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>),</a>
-<a class="sourceLine" id="cb2-2" title="2">       <span class="dt">targetTissue =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cerebellum"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"hippocampus"</span>),</a>
-<a class="sourceLine" id="cb2-3" title="3">       <span class="dt">targetCancer =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"glioma"</span>))</a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; No data provided. Use version 18.</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; targetCellType variable not specified, visualize all.</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; targetCellType variable not specified, visualize all.</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; Use hpaListParam() to list possible values for target variables.</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; Use hpaListParam() to list possible values for target variables.</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>(<span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>),</span>
+<span id="cb2-2"><a href="#cb2-2"></a>       <span class="dt">targetTissue =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cerebellum"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"hippocampus"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3"></a>       <span class="dt">targetCancer =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"glioma"</span>))</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; No data provided. Use version 19.</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; targetCellType variable not specified, visualize all.</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; targetCellType variable not specified, visualize all.</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; Use hpaListParam() to list possible values for target variables.</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; Use hpaListParam() to list possible values for target variables.</span></span></code></pre></div>
 <p><img src="a_HPAanalyze_quick_start_files/figure-html/hpaVis_eg-1.png" width="700"></p>
 <p>Of course, we cannot visualize everything in those big datasets, so some defauts will be used and you will receive some warning messages.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>()</a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co"># No data provided. Use version 18.</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co"># targetTissue variable not specified, default to breast.</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co"># targetCellType variable not specified, visualize all.</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co"># targetCancer variable not specified, default to breast cancer</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co"># Use hpaListParam() to list possible values for target variables.</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>()</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># No data provided. Use version 18.</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># targetTissue variable not specified, default to breast.</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co"># targetCellType variable not specified, visualize all.</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># targetCancer variable not specified, default to breast cancer</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># Use hpaListParam() to list possible values for target variables.</span></span></code></pre></div>
 <p>You can also use <code>hpaVis</code> to show just one or two of the three graphs.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>(<span class="dt">visType =</span> <span class="st">"Patho"</span>,</a>
-<a class="sourceLine" id="cb4-2" title="2">       <span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>),</a>
-<a class="sourceLine" id="cb4-3" title="3">       <span class="dt">targetCancer =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"glioma"</span>, <span class="st">"breast cancer"</span>))</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; No data provided. Use version 18.</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>(<span class="dt">visType =</span> <span class="st">"Patho"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2"></a>       <span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>),</span>
+<span id="cb4-3"><a href="#cb4-3"></a>       <span class="dt">targetCancer =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"glioma"</span>, <span class="st">"breast cancer"</span>))</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; No data provided. Use version 19.</span></span></code></pre></div>
 <p><img src="a_HPAanalyze_quick_start_files/figure-html/hpaVis_eg3-1.png" width="700"></p>
 <p>One exception though, if you want to plot all cancers, use <code>hpaVisPatho</code> with <code>targetCancer = NULL</code> (default).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span>(<span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>))</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co">#&gt; No data provided. Use version 18.</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span>(<span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; No data provided. Use version 19.</span></span></code></pre></div>
 <p><img src="a_HPAanalyze_quick_start_files/figure-html/hpaVisPatho_eg-1.png" width="700"></p>
 <p>There are many ways you could customize your plots. Please see the documentation for more details.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">?hpaVis <span class="co"># the easy umbrella to visualize protein expression levels</span></a>
-<a class="sourceLine" id="cb6-2" title="2">?hpaVisTissue <span class="co"># in normal tissue</span></a>
-<a class="sourceLine" id="cb6-3" title="3">?hpaVisSubcell <span class="co"># in subcellular compartments</span></a>
-<a class="sourceLine" id="cb6-4" title="4">?hpaVisPatho <span class="co"># in cancers</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>?hpaVis <span class="co"># the easy umbrella to visualize protein expression levels</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>?hpaVisTissue <span class="co"># in normal tissue</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>?hpaVisSubcell <span class="co"># in subcellular compartments</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>?hpaVisPatho <span class="co"># in cancers</span></span></code></pre></div>
 <p>If you want to know what kind of data you can visualize, use <code>hpaListParam</code>. You will receive a list of parameters you can use. Please note that if you ask the functions to plot anything that is not on this list, they will just ignore it and plot what are available.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/hpaListParam.html">hpaListParam</a></span>()</a></code></pre></div>
-<pre><code>#&gt; No data provided. Use version 18.
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../reference/hpaListParam.html">hpaListParam</a></span>()</span></code></pre></div>
+<pre><code>#&gt; No data provided. Use version 19.
 #&gt; List of 4
-#&gt;  $ normal_tissue       : chr [1:58] "adrenal gland" "appendix" "bone marrow" "breast" ...
-#&gt;  $ normal_cell         : chr [1:82] "glandular cells" "lymphoid tissue" "hematopoietic cells" "adipocytes" ...
+#&gt;  $ normal_tissue       : chr [1:63] "adipose tissue" "adrenal gland" "appendix" "bone marrow" ...
+#&gt;  $ normal_cell         : chr [1:84] "adipocytes" "glandular cells" "lymphoid tissue" "hematopoietic cells" ...
 #&gt;  $ cancer              : chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...
-#&gt;  $ subcellular_location: chr [1:32] "Cytosol" "Mitochondria" "Aggresome" "Plasma membrane" ...</code></pre>
+#&gt;  $ subcellular_location: chr [1:31] "Cell Junctions" "Cytosol" "Nucleoli fibrillar center" "Mitochondria" ...</code></pre>
 </div>
 <div id="acquiring-individual-sample-data-from-the-human-protein-atlas" class="section level1">
 <h1 class="hasAnchor">
 <a href="#acquiring-individual-sample-data-from-the-human-protein-atlas" class="anchor"></a>Acquiring individual sample data from the Human Protein Atlas</h1>
 <p>HPA provide data in two different formats: the more convenient summarized data tables that are used for the <code>hpaVis</code> functions above, and detailed annotated data for every sample and every antibody in the xml format. There is one xml for each protein, which contain all data generated by HPA. However, extracting information from these xml files into a tidy format is a challenge. The <code>hpaXml</code> functions are designed to help you easily access this.</p>
 <p>The easiest way is to use the umbrella <code><a href="../reference/hpaXml.html">hpaXml()</a></code> function. Please note that at the moment this function only accept Ensembl gene id.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">EGFR &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXml.html">hpaXml</a></span>(<span class="dt">inputXml=</span><span class="st">'ENSG00000146648'</span>)</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(EGFR)</a>
-<a class="sourceLine" id="cb9-3" title="3"></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; [1] "ProtClass"     "TissueExprSum" "Antibody"      "TissueExpr"   </span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>EGFR &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXml.html">hpaXml</a></span>(<span class="dt">inputXml=</span><span class="st">'ENSG00000146648'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(EGFR)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; [1] "ProtClass"     "TissueExprSum" "Antibody"      "TissueExpr"   </span></span></code></pre></div>
 <p>This function will return a list. The first item <code>ProtClass</code> is the known and predicted class of the queried protein. The second item <code>TissueExprSum</code> give you the quick summary of protein expression in normal tissue and image url to download one representative image. The third item <code>Antibody</code> provide information on all antibodied used by HPA to stain for the queried protein.</p>
 <p>The last item <code>TissueExpr</code> is a list of data frame, one for each of the antibodies. Each row will have everything available regarding a sample stained with an antibody (clinical data, protein expression via IHC and the Url to download the original image). If you find an empty data frame, that means the antibody was used only for IF staining to determine subcellular locations. Currently HPAanalyze does not support extraction of that data.</p>
 <p>To better understand the output, please read the documentation for other <code>hpaXml</code> functions, which was called under the hood by <code><a href="../reference/hpaXml.html">hpaXml()</a></code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">?hpaXmlGet <span class="co"># import the xml file as "xml_document"</span></a>
-<a class="sourceLine" id="cb10-2" title="2">?hpaXmlProtClass</a>
-<a class="sourceLine" id="cb10-3" title="3">?hpaXmlTissueExprSum</a>
-<a class="sourceLine" id="cb10-4" title="4">?hpaXmlAntibody</a>
-<a class="sourceLine" id="cb10-5" title="5">?hpaXmlTissueExpr</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>?hpaXmlGet <span class="co"># import the xml file as "xml_document"</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>?hpaXmlProtClass</span>
+<span id="cb10-3"><a href="#cb10-3"></a>?hpaXmlTissueExprSum</span>
+<span id="cb10-4"><a href="#cb10-4"></a>?hpaXmlAntibody</span>
+<span id="cb10-5"><a href="#cb10-5"></a>?hpaXmlTissueExpr</span></code></pre></div>
 </div>
 <div id="copyright" class="section level1">
 <h1 class="hasAnchor">
 <a href="#copyright" class="anchor"></a>Copyright</h1>
-<p>Anh Tran, 2018</p>
-<p>Please cite: <strong>Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. <em>HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data</em>. bioRxiv 355032; doi: <a href="https://doi.org/10.1101/355032" class="uri">https://doi.org/10.1101/355032</a> </strong></p>
+<p><strong>Anh Tran, 2018-2020 </strong></p>
+<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li>
-<a href="#background">Background</a><ul class="nav nav-pills nav-stacked">
+<a href="#background">Background</a>
+      <ul class="nav nav-pills nav-stacked">
 <li><a href="#the-different-hpa-data-formats">The different HPA data formats</a></li>
       <li><a href="#hpaanalyze-overview"><code>HPAanalyze</code> overview</a></li>
       </ul>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="f_HPAanalyze_case_images_files/jquery-1.11.3/jquery.min.js"></script><script src="f_HPAanalyze_case_images_files/elevate-section-attrs-2.0/elevate-section-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>6. HPAanalyze use case: Download histology images from the Human Protein Atlas</h1>
@@ -96,7 +96,7 @@
       Northwestern University, Illinois, USA<br><a class="author_email" href="mailto:#"></a><a href="mailto:trannhatanh89@gmail.com" class="email">trannhatanh89@gmail.com</a>
       </address>
                   
-            <h4 class="date">2019-11-08</h4>
+            <h4 class="date">2020-01-17</h4>
       
       
       <div class="hidden name"><code>f_HPAanalyze_case_images.Rmd</code></div>
@@ -105,12 +105,9 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BiocStyle)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(HPAanalyze)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tibble)</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(readr)</a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyr)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BiocStyle)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(HPAanalyze)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span></code></pre></div>
 <div id="the-case" class="section level1">
 <h1 class="hasAnchor">
 <a href="#the-case" class="anchor"></a>The case</h1>
@@ -121,96 +118,98 @@
 <div id="get-the-download-links" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-the-download-links" class="anchor"></a>Get the download links</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">CCNB1xml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span>(<span class="st">"ENSG00000134057"</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"></a>
-<a class="sourceLine" id="cb2-3" title="3">CCNB1_ab &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody</a></span>(CCNB1xml)</a>
-<a class="sourceLine" id="cb2-4" title="4">CCNB1_ab</a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; # A tibble: 4 x 4</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt;   id        releaseDate releaseVersion RRID      </span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; 1 CAB000115 2006-03-13  1.2            &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; 2 CAB003804 2006-10-30  2              AB_562272 </span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; 3 HPA030741 2013-12-05  12             AB_2673586</span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; 4 HPA061448 2016-12-04  16             AB_2684522</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; # A tibble: 4 x 4</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt;   id        releaseDate releaseVersion RRID      </span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; 1 CAB000115 2006-03-13  1.2            &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; 2 CAB003804 2006-10-30  2              AB_562272 </span></a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; 3 HPA030741 2013-12-05  12             AB_2673586</span></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; 4 HPA061448 2016-12-04  16             AB_2684522</span></a>
-<a class="sourceLine" id="cb2-19" title="19"></a>
-<a class="sourceLine" id="cb2-20" title="20">CCNB1_expr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr</a></span>(CCNB1xml)</a>
-<a class="sourceLine" id="cb2-21" title="21"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(CCNB1_expr[[<span class="dv">1</span>]])</a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    337 obs. of  18 variables:</span></a>
-<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt;  $ patientId         : chr  "1447" "1452" "1470" "1647" ...</span></a>
-<a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt;  $ age               : chr  "45" "44" "65" "63" ...</span></a>
-<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt;  $ sex               : chr  "Female" "Female" "Male" "Male" ...</span></a>
-<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt;  $ staining          : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt;  $ intensity         : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt;  $ quantity          : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-29" title="29"><span class="co">#&gt;  $ location          : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-30" title="30"><span class="co">#&gt;  $ imageUrl          : chr  "http://images.proteinatlas.org/115/2043_B_2_8.jpg" "http://images.proteinatlas.org/115/2043_B_1_8.jpg" "http://images.proteinatlas.org/115/2043_B_3_8.jpg" "http://images.proteinatlas.org/115/2043_B_1_7.jpg" ...</span></a>
-<a class="sourceLine" id="cb2-31" title="31"><span class="co">#&gt;  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...</span></a>
-<a class="sourceLine" id="cb2-32" title="32"><span class="co">#&gt;  $ snomedCode2       : chr  "T-04000" "T-04000" "T-1X700" "T-64300" ...</span></a>
-<a class="sourceLine" id="cb2-33" title="33"><span class="co">#&gt;  $ snomedCode3       : chr  NA NA "T-28000" NA ...</span></a>
-<a class="sourceLine" id="cb2-34" title="34"><span class="co">#&gt;  $ snomedCode4       : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-35" title="35"><span class="co">#&gt;  $ snomedCode5       : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-36" title="36"><span class="co">#&gt;  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...</span></a>
-<a class="sourceLine" id="cb2-37" title="37"><span class="co">#&gt;  $ tissueDescription2: chr  "Breast" "Breast" "Cartilage tissue" "Duodenum" ...</span></a>
-<a class="sourceLine" id="cb2-38" title="38"><span class="co">#&gt;  $ tissueDescription3: chr  NA NA "Lung" NA ...</span></a>
-<a class="sourceLine" id="cb2-39" title="39"><span class="co">#&gt;  $ tissueDescription4: chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-40" title="40"><span class="co">#&gt;  $ tissueDescription5: chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-41" title="41"><span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    331 obs. of  18 variables:</span></a>
-<a class="sourceLine" id="cb2-42" title="42"><span class="co">#&gt;  $ patientId         : chr  "1653" "1721" "1725" "598" ...</span></a>
-<a class="sourceLine" id="cb2-43" title="43"><span class="co">#&gt;  $ age               : chr  "53" "60" "57" "7" ...</span></a>
-<a class="sourceLine" id="cb2-44" title="44"><span class="co">#&gt;  $ sex               : chr  "Male" "Female" "Male" "Male" ...</span></a>
-<a class="sourceLine" id="cb2-45" title="45"><span class="co">#&gt;  $ staining          : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-46" title="46"><span class="co">#&gt;  $ intensity         : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-47" title="47"><span class="co">#&gt;  $ quantity          : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-48" title="48"><span class="co">#&gt;  $ location          : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-49" title="49"><span class="co">#&gt;  $ imageUrl          : chr  "http://v18.proteinatlas.org/images/115/2043_B_4_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_6_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_5_5.jpg" "http://v18.proteinatlas.org/images/115/2043_A_2_2.jpg" ...</span></a>
-<a class="sourceLine" id="cb2-50" title="50"><span class="co">#&gt;  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...</span></a>
-<a class="sourceLine" id="cb2-51" title="51"><span class="co">#&gt;  $ snomedCode2       : chr  "T-93000" "T-93000" "T-93000" "T-66000" ...</span></a>
-<a class="sourceLine" id="cb2-52" title="52"><span class="co">#&gt;  $ snomedCode3       : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-53" title="53"><span class="co">#&gt;  $ snomedCode4       : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-54" title="54"><span class="co">#&gt;  $ snomedCode5       : chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-55" title="55"><span class="co">#&gt;  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...</span></a>
-<a class="sourceLine" id="cb2-56" title="56"><span class="co">#&gt;  $ tissueDescription2: chr  "Adrenal gland" "Adrenal gland" "Adrenal gland" "Appendix" ...</span></a>
-<a class="sourceLine" id="cb2-57" title="57"><span class="co">#&gt;  $ tissueDescription3: chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-58" title="58"><span class="co">#&gt;  $ tissueDescription4: chr  NA NA NA NA ...</span></a>
-<a class="sourceLine" id="cb2-59" title="59"><span class="co">#&gt;  $ tissueDescription5: chr  NA NA NA NA ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>CCNB1xml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span>(<span class="st">"ENSG00000134057"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>CCNB1_ab &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody</a></span>(CCNB1xml)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>CCNB1_ab</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; # A tibble: 4 x 4</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;   id        releaseVersion releaseDate RRID      </span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt;     </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; 1 CAB000115 1.2            2006-03-13  &lt;NA&gt;      </span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 2 CAB003804 2              2006-10-30  AB_562272 </span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 3 HPA030741 12             2013-12-05  AB_2673586</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 4 HPA061448 16             2016-12-04  AB_2684522</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; # A tibble: 4 x 4</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt;   id        releaseDate releaseVersion RRID      </span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; 1 CAB000115 2006-03-13  1.2            &lt;NA&gt;      </span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; 2 CAB003804 2006-10-30  2              AB_562272 </span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; 3 HPA030741 2013-12-05  12             AB_2673586</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; 4 HPA061448 2016-12-04  16             AB_2684522</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a></span>
+<span id="cb2-20"><a href="#cb2-20"></a>CCNB1_expr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr</a></span>(CCNB1xml)</span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(CCNB1_expr[[<span class="dv">1</span>]])</span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    337 obs. of  18 variables:</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt;  $ patientId         : chr  "1447" "1452" "1470" "1647" ...</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt;  $ age               : chr  "45" "44" "65" "63" ...</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#&gt;  $ sex               : chr  "Female" "Female" "Male" "Male" ...</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="co">#&gt;  $ staining          : chr  NA NA NA NA ...</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#&gt;  $ intensity         : chr  NA NA NA NA ...</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt;  $ quantity          : chr  NA NA NA NA ...</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt;  $ location          : chr  NA NA NA NA ...</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt;  $ imageUrl          : chr  "http://images.proteinatlas.org/115/2043_B_2_8.jpg" "http://images.proteinatlas.org/115/2043_B_1_8.jpg" "http://images.proteinatlas.org/115/2043_B_3_8.jpg" "http://images.proteinatlas.org/115/2043_B_1_7.jpg" ...</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt;  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="co">#&gt;  $ snomedCode2       : chr  "T-04000" "T-04000" "T-1X700" "T-64300" ...</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a><span class="co">#&gt;  $ snomedCode3       : chr  NA NA "T-28000" NA ...</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="co">#&gt;  $ snomedCode4       : chr  NA NA NA NA ...</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="co">#&gt;  $ snomedCode5       : chr  NA NA NA NA ...</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a><span class="co">#&gt;  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a><span class="co">#&gt;  $ tissueDescription2: chr  "Breast" "Breast" "Cartilage tissue" "Duodenum" ...</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="co">#&gt;  $ tissueDescription3: chr  NA NA "Lung" NA ...</span></span>
+<span id="cb2-39"><a href="#cb2-39"></a><span class="co">#&gt;  $ tissueDescription4: chr  NA NA NA NA ...</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="co">#&gt;  $ tissueDescription5: chr  NA NA NA NA ...</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a><span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    331 obs. of  18 variables:</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a><span class="co">#&gt;  $ patientId         : chr  "1653" "1721" "1725" "598" ...</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a><span class="co">#&gt;  $ age               : chr  "53" "60" "57" "7" ...</span></span>
+<span id="cb2-44"><a href="#cb2-44"></a><span class="co">#&gt;  $ sex               : chr  "Male" "Female" "Male" "Male" ...</span></span>
+<span id="cb2-45"><a href="#cb2-45"></a><span class="co">#&gt;  $ staining          : chr  NA NA NA NA ...</span></span>
+<span id="cb2-46"><a href="#cb2-46"></a><span class="co">#&gt;  $ intensity         : chr  NA NA NA NA ...</span></span>
+<span id="cb2-47"><a href="#cb2-47"></a><span class="co">#&gt;  $ quantity          : chr  NA NA NA NA ...</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a><span class="co">#&gt;  $ location          : chr  NA NA NA NA ...</span></span>
+<span id="cb2-49"><a href="#cb2-49"></a><span class="co">#&gt;  $ imageUrl          : chr  "http://v18.proteinatlas.org/images/115/2043_B_4_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_6_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_5_5.jpg" "http://v18.proteinatlas.org/images/115/2043_A_2_2.jpg" ...</span></span>
+<span id="cb2-50"><a href="#cb2-50"></a><span class="co">#&gt;  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...</span></span>
+<span id="cb2-51"><a href="#cb2-51"></a><span class="co">#&gt;  $ snomedCode2       : chr  "T-93000" "T-93000" "T-93000" "T-66000" ...</span></span>
+<span id="cb2-52"><a href="#cb2-52"></a><span class="co">#&gt;  $ snomedCode3       : chr  NA NA NA NA ...</span></span>
+<span id="cb2-53"><a href="#cb2-53"></a><span class="co">#&gt;  $ snomedCode4       : chr  NA NA NA NA ...</span></span>
+<span id="cb2-54"><a href="#cb2-54"></a><span class="co">#&gt;  $ snomedCode5       : chr  NA NA NA NA ...</span></span>
+<span id="cb2-55"><a href="#cb2-55"></a><span class="co">#&gt;  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a><span class="co">#&gt;  $ tissueDescription2: chr  "Adrenal gland" "Adrenal gland" "Adrenal gland" "Appendix" ...</span></span>
+<span id="cb2-57"><a href="#cb2-57"></a><span class="co">#&gt;  $ tissueDescription3: chr  NA NA NA NA ...</span></span>
+<span id="cb2-58"><a href="#cb2-58"></a><span class="co">#&gt;  $ tissueDescription4: chr  NA NA NA NA ...</span></span>
+<span id="cb2-59"><a href="#cb2-59"></a><span class="co">#&gt;  $ tissueDescription5: chr  NA NA NA NA ...</span></span></code></pre></div>
 </div>
 <div id="download-the-images" class="section level2">
 <h2 class="hasAnchor">
 <a href="#download-the-images" class="anchor"></a>Download the images</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="st">"img"</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(CCNB1_expr[[<span class="dv">1</span>]])) {</a>
-<a class="sourceLine" id="cb3-3" title="3">    <span class="kw"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(CCNB1_expr[[<span class="dv">1</span>]]<span class="op">$</span>imageUrl[i],</a>
-<a class="sourceLine" id="cb3-4" title="4">                  <span class="dt">destfile =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"img/"</span>, CCNB1_ab<span class="op">$</span>id[<span class="dv">1</span>], <span class="st">"_"</span>,</a>
-<a class="sourceLine" id="cb3-5" title="5">                                    CCNB1_expr[[<span class="dv">1</span>]]<span class="op">$</span>patientId[i], <span class="st">"_"</span>,</a>
-<a class="sourceLine" id="cb3-6" title="6">                                    CCNB1_expr[[<span class="dv">1</span>]]<span class="op">$</span>tissueDescription2[i], </a>
-<a class="sourceLine" id="cb3-7" title="7">                                    <span class="st">".jpg"</span>),</a>
-<a class="sourceLine" id="cb3-8" title="8">                  <span class="dt">mode =</span> <span class="st">"wb"</span>)</a>
-<a class="sourceLine" id="cb3-9" title="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="st">"img"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(CCNB1_expr[[<span class="dv">1</span>]])) {</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="kw"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(CCNB1_expr[[<span class="dv">1</span>]]<span class="op">$</span>imageUrl[i],</span>
+<span id="cb3-4"><a href="#cb3-4"></a>                  <span class="dt">destfile =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"img/"</span>, CCNB1_ab<span class="op">$</span>id[<span class="dv">1</span>], <span class="st">"_"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>                                    CCNB1_expr[[<span class="dv">1</span>]]<span class="op">$</span>patientId[i], <span class="st">"_"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>                                    CCNB1_expr[[<span class="dv">1</span>]]<span class="op">$</span>tissueDescription2[i], </span>
+<span id="cb3-7"><a href="#cb3-7"></a>                                    <span class="st">".jpg"</span>),</span>
+<span id="cb3-8"><a href="#cb3-8"></a>                  <span class="dt">mode =</span> <span class="st">"wb"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>}</span></code></pre></div>
 </div>
 </div>
 <div id="copyright" class="section level1">
 <h1 class="hasAnchor">
 <a href="#copyright" class="anchor"></a>Copyright</h1>
-<p>Anh Tran, 2018</p>
-<p>Please cite: <strong>Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. <em>HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data</em>. bioRxiv 355032; doi: <a href="https://doi.org/10.1101/355032" class="uri">https://doi.org/10.1101/355032</a> </strong></p>
+<p><strong>Anh Tran, 2018-2020 </strong></p>
+<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#the-case">The case</a></li>
       <li>
-<a href="#the-solution">The solution</a><ul class="nav nav-pills nav-stacked">
+<a href="#the-solution">The solution</a>
+      <ul class="nav nav-pills nav-stacked">
 <li><a href="#get-the-download-links">Get the download links</a></li>
       <li><a href="#download-the-images">Download the images</a></li>
       </ul>

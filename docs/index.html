@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -102,9 +102,10 @@
 <li>
 <strong>Results:</strong> <code>HPAanalyze</code> is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.</li>
 <li>
-<strong>Conclusions:</strong> <code>HPAanalyze</code> intergrates into the R workflow via the <code>tidyverse</code> philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.</li>
+<strong>Conclusions:</strong> <code>HPAanalyze</code> intergrates into the R workflow via the <code>tidyverse</code> philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.<br>
+</li>
 <li>
-<strong>Citation:</strong> Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. <em>HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data</em>. bioRxiv 355032; doi: <a href="https://doi.org/10.1101/355032" class="uri">https://doi.org/10.1101/355032</a>
+<strong>Citation:</strong> Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a>
 </li>
 </ul>
 <div id="background" class="section level2">
@@ -123,11 +124,11 @@
 <a href="#obtaining-hpaanalyze" class="anchor"></a>Obtaining <em>HPAanalyze</em>
 </h3>
 <p>The stable version of <em>HPAanalyze</em> should be downloaded from Bioconductor:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb1-2" title="2">    <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3">BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"HPAanalyze"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>BiocManager<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="st">"HPAanalyze"</span>)</span></code></pre></div>
 <p>The development version of <em>HPAanalyze</em> is available on Github can be installed with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"trannhatanh89/HPAanalyze"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"trannhatanh89/HPAanalyze"</span>)</span></code></pre></div>
 </div>
 <div id="full-dataset-import-subsetting-and-export" class="section level3">
 <h3 class="hasAnchor">
@@ -171,7 +172,8 @@
 <div id="copyright" class="section level1">
 <h1 class="hasAnchor">
 <a href="#copyright" class="anchor"></a>Copyright</h1>
-<p>Anh N Tran, 2018</p>
+<p><strong>Anh Tran, 2018-2020 </strong></p>
+<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="doi:10.1186/s12859-019-3059-z" class="uri">doi:10.1186/s12859-019-3059-z</a> </strong></p>
 </div>
 
   </div>
@@ -208,7 +210,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/trannhatanh89/HPAanalyze"><img src="https://travis-ci.org/trannhatanh89/HPAanalyze.svg?branch=master" alt="Travis-CI"></a></li>
+<li><a href="https://travis-ci.com/trannhatanh89/HPAanalyze"><img src="https://travis-ci.com/trannhatanh89/HPAanalyze.svg?branch=master" alt="TravisCI"></a></li>
 </ul>
 </div>
 </div>

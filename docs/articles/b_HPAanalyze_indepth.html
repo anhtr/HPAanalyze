@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="b_HPAanalyze_indepth_files/jquery-1.11.3/jquery.min.js"></script><script src="b_HPAanalyze_indepth_files/elevate-section-attrs-2.0/elevate-section-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</h1>
@@ -105,12 +105,11 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BiocStyle)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(HPAanalyze)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tibble)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(hpar)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(BiocStyle)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(HPAanalyze)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tibble)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</span></code></pre></div>
 <div id="summary" class="section level1">
 <h1 class="hasAnchor">
 <a href="#summary" class="anchor"></a>Summary</h1>
@@ -153,7 +152,7 @@ HPAanalyze workflow.
     install.packages("BiocManager")
 BiocManager::install("HPAanalyze")</code></pre>
 <p>The development version of <em>HPAanalyze</em> is available on Github can be installed with:</p>
-<pre><code><a href="https://rdrr.io/pkg/devtools/man/reexports.html">devtools::install_github("trannhatanh89/HPAanalyze")</a></code></pre>
+<pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github("trannhatanh89/HPAanalyze")</a></code></pre>
 <p>Please cite: <strong>Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. <em>HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data</em>. bioRxiv 355032; doi: <a href="https://doi.org/10.1101/355032" class="uri">https://doi.org/10.1101/355032</a> </strong></p>
 </div>
 </div>
@@ -168,118 +167,110 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a href="#download-and-import-data-with-hpadownload" class="anchor"></a>Download and import data with <code>hpaDownload()</code>
 </h2>
 <p>This function should be the first thing you use. It give you a list of data frames containing the datasets you specified, which you can then feed into other functions in this package.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># this gives you the latest everything, which is nice to keep but not really necessary</span></a>
-<a class="sourceLine" id="cb4-2" title="2">downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'all'</span>)</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(downloadedData)</a>
-<a class="sourceLine" id="cb4-4" title="4"></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt;                          Length Class  Mode</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; normal_tissue             6     tbl_df list</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; pathology                11     tbl_df list</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; subcellular_location     11     tbl_df list</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; rna_tissue                5     tbl_df list</span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; rna_cell_line             5     tbl_df list</span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; transcript_rna_tissue     4     tbl_df list</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; transcript_rna_cell_line  4     tbl_df list</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># this gives you the latest everything, which is nice to keep but not really necessary</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'all'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(downloadedData)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;                          Length Class  Mode</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; normal_tissue             6     tbl_df list</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; pathology                11     tbl_df list</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; subcellular_location     11     tbl_df list</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; rna_tissue                5     tbl_df list</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; rna_cell_line             5     tbl_df list</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; transcript_rna_tissue     4     tbl_df list</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; transcript_rna_cell_line  4     tbl_df list</span></span></code></pre></div>
 <div id="the-histology-datasets" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-histology-datasets" class="anchor"></a>The “histology” datasets</h3>
 <p>Most of the time, you will only need the “histology” datasets, which contain <code>normal_tissue</code>, <code>pathology</code> (basically cancers) and <code>subcellular_location</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'histology'</span>, <span class="dt">version=</span><span class="st">'example'</span>)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># version = "example" will load the HPA v18 datasets came with this package. That's sufficient for normal usage, and save you some time.</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'histology'</span>, <span class="dt">version=</span><span class="st">'example'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># version = "example" will load the HPA v18 datasets came with this package. That's sufficient for normal usage, and save you some time.</span></span></code></pre></div>
 <p>The <code>normal_tissue</code> dataset contains information about protein expression profiles in human tissues based on IHC staining. The datasets contain six columns: <code>ensembl</code> (Ensembl gene identifier); <code>gene</code> (HGNC symbol), <code>tissue</code> (tissue name); <code>cell_type</code> (annotated cell type); <code>level</code> (expression value); <code>reliability</code> (the gene reliability of the expression value).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>normal_tissue, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; Observations: 1,053,330</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; Variables: 5</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; $ ensembl   &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG000000000...</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; $ gene      &lt;chr&gt; "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "T...</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; $ tissue    &lt;chr&gt; "adrenal gland", "appendix", "appendix", "bone marro...</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; $ cell_type &lt;chr&gt; "glandular cells", "glandular cells", "lymphoid tiss...</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; $ level     &lt;chr&gt; "Not detected", "Medium", "Not detected", "Not detec...</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>normal_tissue, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; Observations: 1,056,061</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Variables: 6</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; $ ensembl     &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG00000000003"...</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; $ gene        &lt;chr&gt; "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "TSPA...</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; $ tissue      &lt;chr&gt; "adipose tissue", "adrenal gland", "appendix", "appendi...</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; $ cell_type   &lt;chr&gt; "adipocytes", "glandular cells", "glandular cells", "ly...</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; $ level       &lt;chr&gt; "Not detected", "Not detected", "Medium", "Not detected...</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; $ reliability &lt;chr&gt; "Approved", "Approved", "Approved", "Approved", "Approv...</span></span></code></pre></div>
 <p>The <code>pathology</code> dataset contains information about protein expression profiles in human tumor tissue based on IHC staining. The datasets contain eleven columns: <code>ensembl</code> (Ensembl gene identifier); <code>gene</code> (HGNC symbol); <code>cancer</code> (cancer type); <code>high</code>, <code>medium</code>, <code>low</code>, <code>not_detected</code> (number of patients annotated for different staining levels); <code>prognostic_favorable</code>, <code>unprognostic_favorable</code>, <code>prognostic_unfavorable</code>, <code>unprognostic_unfavorable</code> (log-rank p values for patient survival and mRNA correlation).</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>pathology, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; Observations: 392,260</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; Variables: 7</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; $ ensembl      &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG000000...</span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; $ gene         &lt;chr&gt; "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6",...</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; $ cancer       &lt;chr&gt; "breast cancer", "carcinoid", "cervical cancer", ...</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; $ high         &lt;int&gt; 1, 0, 11, 0, 10, 0, 0, 4, 8, 0, 0, 8, 11, 5, 2, 9...</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; $ medium       &lt;int&gt; 7, 1, 1, 6, 2, 0, 3, 5, 4, 0, 1, 3, 1, 6, 4, 2, 1...</span></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; $ low          &lt;int&gt; 2, 1, 0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0...</span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt; $ not_detected &lt;int&gt; 2, 2, 0, 2, 0, 11, 0, 0, 0, 11, 9, 0, 0, 0, 5, 0,...</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>pathology, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; Observations: 393,400</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; Variables: 11</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; $ ensembl                  &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENS...</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; $ gene                     &lt;chr&gt; "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "T...</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; $ cancer                   &lt;chr&gt; "breast cancer", "carcinoid", "cervical ca...</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; $ high                     &lt;int&gt; 1, 0, 11, 0, 10, 0, 0, 4, 8, 0, 0, 8, 11, ...</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; $ medium                   &lt;int&gt; 7, 1, 1, 6, 2, 0, 3, 5, 4, 0, 1, 3, 1, 6, ...</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; $ low                      &lt;int&gt; 2, 1, 0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0, ...</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; $ not_detected             &lt;int&gt; 2, 2, 0, 2, 0, 11, 0, 0, 0, 11, 9, 0, 0, 0...</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; $ prognostic_favorable     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; $ unprognostic_favorable   &lt;dbl&gt; 0.077120, NA, 0.089670, 0.035620, NA, 0.00...</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; $ prognostic_unfavorable   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; $ unprognostic_unfavorable &lt;dbl&gt; NA, NA, NA, NA, 0.256700, NA, 0.059320, NA...</span></span></code></pre></div>
 <p>The <code>subcellular_location</code> dataset contains information about subcellular localization of proteins based on IF stanings of normal cells. The datasets contain eleven columns: <code>ensembl</code> (Ensembl gene identifier); <code>gene</code> (HGNC symbol); <code>reliability</code> (gene reliability score); <code>enhanced</code> (enhanced locations); <code>supported</code> (supported locations); <code>approved</code> (approved locations); <code>uncertain</code> (uncertain locations); <code>single_cell_var_intensity</code> (locations with single-cell variation in intensity); <code>single_cell_var_spatial</code> (locations with spatial single-cell variation); <code>cell_cycle_dependency</code> (locations with observed cell cycle dependency); <code>go_id</code> (Gene Ontology Cellular Component term identifier).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>subcellular_location, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; Observations: 12,073</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; Variables: 8</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; $ ensembl     &lt;chr&gt; "ENSG00000000003", "ENSG00000000457", "ENSG0000000...</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; $ gene        &lt;chr&gt; "TSPAN6", "SCYL3", "C1orf112", "FGR", "CFH", "GCLC...</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; $ reliability &lt;chr&gt; "Approved", "Uncertain", "Approved", "Approved", "...</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; $ enhanced    &lt;chr&gt; NA, NA, NA, NA, NA, NA, "Nucleoplasm", NA, NA, NA,...</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; $ supported   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, "Nucleoplasm",...</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; $ approved    &lt;chr&gt; "Cytosol", NA, "Mitochondria", "Aggresome;Plasma m...</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; $ uncertain   &lt;chr&gt; NA, "Microtubules;Nuclear bodies", NA, NA, NA, NA,...</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; $ go_id       &lt;chr&gt; "Cytosol (GO:0005829)", "Microtubules (GO:0015630)...</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>subcellular_location, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; Observations: 12,390</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; Variables: 14</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; $ ensembl                   &lt;chr&gt; "ENSG00000000003", "ENSG00000000457", "EN...</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; $ gene                      &lt;chr&gt; "TSPAN6", "SCYL3", "C1orf112", "FGR", "CF...</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; $ reliability               &lt;chr&gt; "Approved", "Uncertain", "Approved", "App...</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; $ main_location             &lt;chr&gt; "Cell Junctions;Cytosol", "Microtubules",...</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; $ additional_location       &lt;chr&gt; "Nucleoli fibrillar center", "Nuclear bod...</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; $ extracellular_location    &lt;chr&gt; NA, NA, NA, NA, "Predicted to be secreted...</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; $ enhanced                  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; $ supported                 &lt;chr&gt; NA, NA, NA, NA, NA, NA, "Nucleoplasm", NA...</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; $ approved                  &lt;chr&gt; "Cell Junctions;Cytosol;Nucleoli fibrilla...</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; $ uncertain                 &lt;chr&gt; NA, "Microtubules;Nuclear bodies", NA, NA...</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; $ single_cell_var_intensity &lt;chr&gt; "Cytosol", NA, NA, NA, NA, NA, NA, NA, NA...</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; $ single_cell_var_spatial   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; $ cell_cycle_dependency     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; $ go_id                     &lt;chr&gt; "Cell Junctions (GO:0030054);Cytosol (GO:...</span></span></code></pre></div>
 </div>
 <div id="the-rna-datasets" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-rna-datasets" class="anchor"></a>The “RNA” datasets</h3>
 <p>The <code>rna_tissue</code> and <code>rna_cell_line</code> datasets contain RNA expression levels of 37 tissues and 64 cell lines based on RNA-seq. These datasets contain four columns each: <code>ensembl</code> (Ensembl gene identifier); <code>gene</code> (HGNC symbol); <code>tissue</code>/<code>cell_line</code> (type of sample); <code>value</code> + <code>unit</code> (expression level measured by transcripts per million).</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'rna'</span>, <span class="dt">version=</span><span class="st">'hpar'</span>)</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="co"># version = "hpar" give you the datasets bundled with the hpar package, which is another option.</span></a>
-<a class="sourceLine" id="cb9-3" title="3"></a>
-<a class="sourceLine" id="cb9-4" title="4">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>rna_tissue, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; Observations: 725,681</span></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt; Variables: 5</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; $ ensembl &lt;fct&gt; ENSG00000000003, ENSG00000000003, ENSG00000000003, ENS...</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; $ gene    &lt;fct&gt; TSPAN6, TSPAN6, TSPAN6, TSPAN6, TSPAN6, TSPAN6, TSPAN6...</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; $ tissue  &lt;fct&gt; "adipose tissue", "adrenal gland", "appendix", "bone m...</span></a>
-<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; $ value   &lt;dbl&gt; 31.5, 26.4, 9.2, 0.7, 53.4, 18.5, 54.2, 48.5, 27.1, 38...</span></a>
-<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; $ unit    &lt;fct&gt; TPM, TPM, TPM, TPM, TPM, TPM, TPM, TPM, TPM, TPM, TPM,...</span></a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>rna_cell_line, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt; Observations: 1,255,232</span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt; Variables: 5</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; $ ensembl   &lt;fct&gt; ENSG00000000003, ENSG00000000003, ENSG00000000003, E...</span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; $ gene      &lt;fct&gt; TSPAN6, TSPAN6, TSPAN6, TSPAN6, TSPAN6, TSPAN6, TSPA...</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; $ cell_line &lt;fct&gt; A-431, A549, AF22, AN3-CA, ASC diff, ASC TERT1, BEWO...</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; $ value     &lt;dbl&gt; 27.8, 37.6, 108.1, 51.8, 32.3, 17.7, 42.7, 14.9, 22....</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; $ unit      &lt;fct&gt; TPM, TPM, TPM, TPM, TPM, TPM, TPM, TPM, TPM, TPM, TP...</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'rna'</span>, <span class="dt">version=</span><span class="st">'v18'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>rna_tissue, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; Observations: 1,193,055</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; Variables: 4</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; $ ensembl &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG00000000003", "E...</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; $ gene    &lt;chr&gt; "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6",...</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; $ tissue  &lt;chr&gt; "adipose tissue", "adrenal gland", "amygdala", "appendix", ...</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; $ nx      &lt;chr&gt; "27.0", "9.8", "7.0", "4.4", "0.3", "6.6", "0.1", "33.0", "...</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>rna_cell_line, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Observations: 1,258,880</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Variables: 6</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; $ ensembl   &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG00000000003", ...</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; $ gene      &lt;chr&gt; "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6", "TSPAN6...</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; $ cell_line &lt;chr&gt; "A-431", "A549", "AF22", "AN3-CA", "ASC diff", "ASC TERT1...</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; $ tpm       &lt;chr&gt; "27.8", "37.6", "108.1", "51.8", "32.3", "17.7", "42.7", ...</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; $ ptpm      &lt;chr&gt; "33.9", "45.5", "134.5", "64.4", "37.4", "20.8", "53.5", ...</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; $ nx        &lt;chr&gt; "7.8", "10.5", "28.3", "14.3", "12.4", "6.7", "11.5", "4....</span></span></code></pre></div>
 <p>Similarly, the <code>transcript_rna_tissue</code> and <code>transcript_rna_cell_line</code> datasets contain RNA isoform levels. These datasets contain four columns each: <code>ensembl</code> (Ensembl gene identifier); <code>transcript</code> (Ensembl transcript identifier); <code>tissue</code>/<code>cell_line</code> (type of sample); <code>value</code> (expression level measured by transcripts per million). Note that these datasets are significantly larger than others and should only be downloaded when necessary.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'isoform'</span>, <span class="dt">version=</span><span class="st">'v18'</span>)</a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="co"># version = "v18" is an example of how you may download different versions of the HPA datasets. Just change the number. Note that not all versions are available from the HPA website.</span></a>
-<a class="sourceLine" id="cb11-3" title="3"></a>
-<a class="sourceLine" id="cb11-4" title="4">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>transcript_rna_tissue, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb11-5" title="5"></a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="co">#&gt; Observations: 27,535,996</span></a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt; Variables: 4</span></a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt; $ ensembl    &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG0000000...</span></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="co">#&gt; $ transcript &lt;chr&gt; "ENST00000373020", "ENST00000494424", "ENST0000049...</span></a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt; $ tissue     &lt;chr&gt; "adipose tissue.V1", "adipose tissue.V1", "adipose...</span></a>
-<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&gt; $ value      &lt;dbl&gt; 27.3577003, 0.0000000, 1.9341500, 1.6059300, 0.000...</span></a></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>transcript_rna_cell_line, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb12-2" title="2"></a>
-<a class="sourceLine" id="cb12-3" title="3"><span class="co">#&gt; Observations: 20,972,183</span></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="co">#&gt; Variables: 4</span></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; $ ensembl    &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG0000000...</span></a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; $ transcript &lt;chr&gt; "ENST00000373020", "ENST00000494424", "ENST0000049...</span></a>
-<a class="sourceLine" id="cb12-7" title="7"><span class="co">#&gt; $ cell_line  &lt;chr&gt; "A-431.C35", "A-431.C35", "A-431.C35", "A-431.C35"...</span></a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="co">#&gt; $ value      &lt;dbl&gt; 29.406799, 0.000000, 0.992916, 0.398387, 0.239204,...</span></a></code></pre></div>
-</div>
-<div id="get-data-from-the-hpar-package" class="section level3">
-<h3 class="hasAnchor">
-<a href="#get-data-from-the-hpar-package" class="anchor"></a>Get data from the <code>hpar</code> package</h3>
-<p>Optionally, data can be imported from the <code>hpar</code> package. Please note that the <code>hpar</code> package does not contain the RNA isoform datasets, which are very large and should be downloaded only when necessary.</p>
-<p>For data from <code>hpar</code>, release information can be accessed with <code>getHpaVersion</code>, <code>getHpaDate</code> and <code>getHpaEnsembl</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="st">'all'</span>, <span class="st">'hpar'</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">hpar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/hpar/man/getHpaDate.html">getHpaVersion</a></span>()</a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="co">#&gt; version </span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="co">#&gt;    "18"</span></a>
-<a class="sourceLine" id="cb14-4" title="4"></a>
-<a class="sourceLine" id="cb14-5" title="5">hpar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/hpar/man/getHpaDate.html">getHpaDate</a></span>()</a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="co">#&gt;         date </span></a>
-<a class="sourceLine" id="cb14-7" title="7"><span class="co">#&gt; "2017.12.01"</span></a>
-<a class="sourceLine" id="cb14-8" title="8"></a>
-<a class="sourceLine" id="cb14-9" title="9">hpar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/hpar/man/getHpaDate.html">getHpaEnsembl</a></span>()</a>
-<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; ensembl </span></a>
-<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt; "88.38"</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'isoform'</span>, <span class="dt">version=</span><span class="st">'v18'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># version = "v18" is an example of how you may download different versions of the HPA datasets. Just change the number. Note that not all versions are available from the HPA website.</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>transcript_rna_tissue, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; Observations: 27,535,996</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; Variables: 4</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; $ ensembl    &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG0000000...</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; $ transcript &lt;chr&gt; "ENST00000373020", "ENST00000494424", "ENST0000049...</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; $ tissue     &lt;chr&gt; "adipose tissue.V1", "adipose tissue.V1", "adipose...</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; $ value      &lt;dbl&gt; 27.3577003, 0.0000000, 1.9341500, 1.6059300, 0.000...</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>(downloadedData<span class="op">$</span>transcript_rna_cell_line, <span class="dt">give.attr=</span><span class="ot">FALSE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Observations: 20,972,183</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; Variables: 4</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; $ ensembl    &lt;chr&gt; "ENSG00000000003", "ENSG00000000003", "ENSG0000000...</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; $ transcript &lt;chr&gt; "ENST00000373020", "ENST00000494424", "ENST0000049...</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; $ cell_line  &lt;chr&gt; "A-431.C35", "A-431.C35", "A-431.C35", "A-431.C35"...</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; $ value      &lt;dbl&gt; 29.406799, 0.000000, 0.992916, 0.398387, 0.239204,...</span></span></code></pre></div>
 </div>
 </div>
 <div id="list-available-parameter-for-subsetting-with-hpalistparam" class="section level2">
@@ -288,24 +279,24 @@ BiocManager::install("HPAanalyze")</code></pre>
 </h2>
 <p>To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function <code><a href="../reference/hpaListParam.html">hpaListParam()</a></code>. The input for this function is the output of <code>hpaDownload</code>.</p>
 <p><em>If you leave the argument blank, this function will give you the results for version 18.</em></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co">## If you use the output from hpaDownload()</span></a>
-<a class="sourceLine" id="cb15-2" title="2">downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'all'</span>)</a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw"><a href="../reference/hpaListParam.html">hpaListParam</a></span>(downloadedData))</a>
-<a class="sourceLine" id="cb15-4" title="4"></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; List of 6</span></a>
-<a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt;  $ normal_tissue       : chr [1:58] "adrenal gland" "appendix" "bone marrow" "breast" ...</span></a>
-<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt;  $ normal_cell         : chr [1:82] "glandular cells" "lymphoid tissue" "hematopoietic cells" "adipocytes" ...</span></a>
-<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt;  $ cancer              : chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...</span></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt;  $ subcellular_location: chr [1:32] "Cytosol" "Mitochondria" "Aggresome" "Plasma membrane" ...</span></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="co">#&gt;  $ normal_tissue_rna   : chr [1:37] "adipose tissue" "adrenal gland" "appendix" "bone marrow" ...</span></a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="co">#&gt;  $ cell_line_rna       : chr [1:64] "A-431" "A549" "AF22" "AN3-CA" ...</span></a></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co">## If you use leave the argument blank</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw"><a href="../reference/hpaListParam.html">hpaListParam</a></span>())</a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="co">#&gt; List of 4</span></a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="co">#&gt;  $ normal_tissue       : chr [1:58] "adrenal gland" "appendix" "bone marrow" "breast" ...</span></a>
-<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt;  $ normal_cell         : chr [1:82] "glandular cells" "lymphoid tissue" "hematopoietic cells" "adipocytes" ...</span></a>
-<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt;  $ cancer              : chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...</span></a>
-<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt;  $ subcellular_location: chr [1:32] "Cytosol" "Mitochondria" "Aggresome" "Plasma membrane" ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">## If you use the output from hpaDownload()</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'all'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw"><a href="../reference/hpaListParam.html">hpaListParam</a></span>(downloadedData))</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; List of 6</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt;  $ normal_tissue       : chr [1:58] "adrenal gland" "appendix" "bone marrow" "breast" ...</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt;  $ normal_cell         : chr [1:82] "glandular cells" "lymphoid tissue" "hematopoietic cells" "adipocytes" ...</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt;  $ cancer              : chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt;  $ subcellular_location: chr [1:32] "Cytosol" "Mitochondria" "Aggresome" "Plasma membrane" ...</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;  $ normal_tissue_rna   : chr [1:37] "adipose tissue" "adrenal gland" "appendix" "bone marrow" ...</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;  $ cell_line_rna       : chr [1:64] "A-431" "A549" "AF22" "AN3-CA" ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">## If you use leave the argument blank</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw"><a href="../reference/hpaListParam.html">hpaListParam</a></span>())</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; List of 4</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;  $ normal_tissue       : chr [1:63] "adipose tissue" "adrenal gland" "appendix" "bone marrow" ...</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt;  $ normal_cell         : chr [1:84] "adipocytes" "glandular cells" "lymphoid tissue" "hematopoietic cells" ...</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt;  $ cancer              : chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt;  $ subcellular_location: chr [1:31] "Cell Junctions" "Cytosol" "Nucleoli fibrillar center" "Mitochondria" ...</span></span></code></pre></div>
 </div>
 <div id="subset-data-with-hpasubset" class="section level2">
 <h2 class="hasAnchor">
@@ -313,42 +304,30 @@ BiocManager::install("HPAanalyze")</code></pre>
 </h2>
 <p><code><a href="../reference/hpaListParam.html">hpaSubset()</a></code> filters the output of <code><a href="../reference/hpaDownload.html">hpaDownload()</a></code> for desirable target genes, tissues, cell types, cancer, and cell lines. The data will be subset only where applicable (i.e. <code>normal_tissue</code> will not be subset by <em>cancer</em>). The main purpose of <code>hpaSubset</code> is to prepare a manageable set of data to be exported. However, this function may also be useful for other data table manipulation purposes. The input for <code>targetGene</code> argument is a vector of strings of HGNC symbols.</p>
 <p><em>If you leave the <code>data</code> argument blank, this function will automatically subset the bundled version 18 dataset, which may not contain all of the columns available if you download the data with <code><a href="../reference/hpaDownload.html">hpaDownload()</a></code>.</em></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'histology'</span>, <span class="dt">version=</span><span class="st">'example'</span>)</a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(downloadedData, nrow)</a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="co">#&gt;        normal_tissue            pathology subcellular_location </span></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="co">#&gt;              1053330               392260                12073</span></a></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">geneList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'TP53'</span>, <span class="st">'EGFR'</span>, <span class="st">'CD44'</span>, <span class="st">'PTEN'</span>, <span class="st">'IDH1'</span>, <span class="st">'IDH2'</span>, <span class="st">'CYCS'</span>)</a>
-<a class="sourceLine" id="cb18-2" title="2">tissueList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'breast'</span>, <span class="st">'cerebellum'</span>, <span class="st">'skin 1'</span>)</a>
-<a class="sourceLine" id="cb18-3" title="3">cancerList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'breast cancer'</span>, <span class="st">'glioma'</span>, <span class="st">'melanoma'</span>)</a>
-<a class="sourceLine" id="cb18-4" title="4">cellLineList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A-431'</span>, <span class="st">'A549'</span>, <span class="st">'AF22'</span>, <span class="st">'AN3-CA'</span>)</a>
-<a class="sourceLine" id="cb18-5" title="5"></a>
-<a class="sourceLine" id="cb18-6" title="6">subsetData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaListParam.html">hpaSubset</a></span>(<span class="dt">data=</span>downloadedData,</a>
-<a class="sourceLine" id="cb18-7" title="7">                         <span class="dt">targetGene=</span>geneList,</a>
-<a class="sourceLine" id="cb18-8" title="8">                         <span class="dt">targetTissue=</span>tissueList,</a>
-<a class="sourceLine" id="cb18-9" title="9">                         <span class="dt">targetCancer=</span>cancerList,</a>
-<a class="sourceLine" id="cb18-10" title="10">                         <span class="dt">targetCellLine=</span>cellLineList)</a>
-<a class="sourceLine" id="cb18-11" title="11"><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(subsetData, nrow)</a>
-<a class="sourceLine" id="cb18-12" title="12"><span class="co">#&gt;        normal_tissue            pathology subcellular_location </span></a>
-<a class="sourceLine" id="cb18-13" title="13"><span class="co">#&gt;                   70                   21                    7</span></a></code></pre></div>
-<p>To subset by Ensemble gene id, use <code>hpar::getHPA()</code>. See <code>hpar</code> documentation for more information.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">id &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ENSG00000000003"</span>, <span class="st">"ENSG00000000005"</span>)</a>
-<a class="sourceLine" id="cb19-2" title="2">hpar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/hpar/man/getHpa.html">getHpa</a></span>(id, <span class="dt">hpadata=</span><span class="st">"hpaNormalTissue"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb19-3" title="3"><span class="st">    </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/glimpse.html">glimpse</a></span>()</a>
-<a class="sourceLine" id="cb19-4" title="4"><span class="co">#&gt; Observations: 80</span></a>
-<a class="sourceLine" id="cb19-5" title="5"><span class="co">#&gt; Variables: 6</span></a>
-<a class="sourceLine" id="cb19-6" title="6"><span class="co">#&gt; $ Gene        &lt;fct&gt; ENSG00000000003, ENSG00000000003, ENSG00000000003,...</span></a>
-<a class="sourceLine" id="cb19-7" title="7"><span class="co">#&gt; $ Gene.name   &lt;fct&gt; TSPAN6, TSPAN6, TSPAN6, TSPAN6, TSPAN6, TSPAN6, TS...</span></a>
-<a class="sourceLine" id="cb19-8" title="8"><span class="co">#&gt; $ Tissue      &lt;fct&gt; "adrenal gland", "appendix", "appendix", "bone mar...</span></a>
-<a class="sourceLine" id="cb19-9" title="9"><span class="co">#&gt; $ Cell.type   &lt;fct&gt; glandular cells, glandular cells, lymphoid tissue,...</span></a>
-<a class="sourceLine" id="cb19-10" title="10"><span class="co">#&gt; $ Level       &lt;fct&gt; Not detected, Medium, Not detected, Not detected, ...</span></a>
-<a class="sourceLine" id="cb19-11" title="11"><span class="co">#&gt; $ Reliability &lt;fct&gt; Approved, Approved, Approved, Approved, Approved, ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>downloadedData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaDownload.html">hpaDownload</a></span>(<span class="dt">downloadList=</span><span class="st">'histology'</span>, <span class="dt">version=</span><span class="st">'example'</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(downloadedData, nrow)</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co">#&gt;        normal_tissue            pathology subcellular_location </span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt;              1056061               393400                12390</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>geneList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'TP53'</span>, <span class="st">'EGFR'</span>, <span class="st">'CD44'</span>, <span class="st">'PTEN'</span>, <span class="st">'IDH1'</span>, <span class="st">'IDH2'</span>, <span class="st">'CYCS'</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>tissueList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'breast'</span>, <span class="st">'cerebellum'</span>, <span class="st">'skin 1'</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a>cancerList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'breast cancer'</span>, <span class="st">'glioma'</span>, <span class="st">'melanoma'</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a>cellLineList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A-431'</span>, <span class="st">'A549'</span>, <span class="st">'AF22'</span>, <span class="st">'AN3-CA'</span>)</span>
+<span id="cb16-5"><a href="#cb16-5"></a></span>
+<span id="cb16-6"><a href="#cb16-6"></a>subsetData &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaListParam.html">hpaSubset</a></span>(<span class="dt">data=</span>downloadedData,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>                         <span class="dt">targetGene=</span>geneList,</span>
+<span id="cb16-8"><a href="#cb16-8"></a>                         <span class="dt">targetTissue=</span>tissueList,</span>
+<span id="cb16-9"><a href="#cb16-9"></a>                         <span class="dt">targetCancer=</span>cancerList,</span>
+<span id="cb16-10"><a href="#cb16-10"></a>                         <span class="dt">targetCellLine=</span>cellLineList)</span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(subsetData, nrow)</span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="co">#&gt;        normal_tissue            pathology subcellular_location </span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="co">#&gt;                   70                   21                    7</span></span></code></pre></div>
 </div>
 <div id="export-data-with-hpaexport" class="section level2">
 <h2 class="hasAnchor">
 <a href="#export-data-with-hpaexport" class="anchor"></a>Export data with <code>hpaExport()</code>
 </h2>
 <p>As the name suggests, <code><a href="../reference/hpaExport.html">hpaExport()</a></code> exports the output of <code><a href="../reference/hpaListParam.html">hpaSubset()</a></code> to one .xlsx file. Each dataset is placed in a separate sheet. More formats such as .csv and .tsv might be added in future release; hence, the <code>fileType</code> argument is included.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw"><a href="../reference/hpaExport.html">hpaExport</a></span>(subsetData, <span class="dt">fileName=</span><span class="st">'subset.xlsx'</span>, <span class="dt">fileType=</span><span class="st">'xlsx'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="../reference/hpaExport.html">hpaExport</a></span>(subsetData, <span class="dt">fileName=</span><span class="st">'subset.xlsx'</span>, <span class="dt">fileType=</span><span class="st">'xlsx'</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="visualization" class="section level1">
@@ -363,9 +342,9 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a href="#unbrella-function-hpavis" class="anchor"></a>Unbrella function <code>hpaVis()</code>
 </h2>
 <p><code>hpaVis</code> will plot all available plots by default. See the quick-start vignette for details.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>(<span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>),</a>
-<a class="sourceLine" id="cb21-2" title="2">       <span class="dt">targetTissue =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cerebellum"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"hippocampus"</span>),</a>
-<a class="sourceLine" id="cb21-3" title="3">       <span class="dt">targetCancer =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"glioma"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw"><a href="../reference/hpaVis.html">hpaVis</a></span>(<span class="dt">targetGene =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span>),</span>
+<span id="cb18-2"><a href="#cb18-2"></a>       <span class="dt">targetTissue =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cerebellum"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"hippocampus"</span>),</span>
+<span id="cb18-3"><a href="#cb18-3"></a>       <span class="dt">targetCancer =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"glioma"</span>))</span></code></pre></div>
 <p><img src="b_HPAanalyze_indepth_files/figure-html/hpaVis_eg-1.png" width="700"></p>
 </div>
 <div id="visualize-tissue-data-with-hpavistissue" class="section level2">
@@ -373,12 +352,12 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a href="#visualize-tissue-data-with-hpavistissue" class="anchor"></a>Visualize tissue data with <code>hpaVisTissue()</code>
 </h2>
 <p><code><a href="../reference/hpaVisTissue.html">hpaVisTissue()</a></code> generates a “heatmap”, in which the expression of proteins of interest (quantified IHC staining) are plotted for each cell type of each tissue.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">geneList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'TP53'</span>, <span class="st">'EGFR'</span>, <span class="st">'CD44'</span>, <span class="st">'PTEN'</span>, <span class="st">'IDH1'</span>, <span class="st">'IDH2'</span>, <span class="st">'CYCS'</span>)</a>
-<a class="sourceLine" id="cb22-2" title="2">tissueList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'breast'</span>, <span class="st">'cerebellum'</span>, <span class="st">'skin 1'</span>)</a>
-<a class="sourceLine" id="cb22-3" title="3"></a>
-<a class="sourceLine" id="cb22-4" title="4"><span class="kw"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span>(downloadedData,</a>
-<a class="sourceLine" id="cb22-5" title="5">             <span class="dt">targetGene=</span>geneList,</a>
-<a class="sourceLine" id="cb22-6" title="6">             <span class="dt">targetTissue=</span>tissueList)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>geneList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'TP53'</span>, <span class="st">'EGFR'</span>, <span class="st">'CD44'</span>, <span class="st">'PTEN'</span>, <span class="st">'IDH1'</span>, <span class="st">'IDH2'</span>, <span class="st">'CYCS'</span>)</span>
+<span id="cb19-2"><a href="#cb19-2"></a>tissueList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'breast'</span>, <span class="st">'cerebellum'</span>, <span class="st">'skin 1'</span>)</span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span>(downloadedData,</span>
+<span id="cb19-5"><a href="#cb19-5"></a>             <span class="dt">targetGene=</span>geneList,</span>
+<span id="cb19-6"><a href="#cb19-6"></a>             <span class="dt">targetTissue=</span>tissueList)</span></code></pre></div>
 <p><img src="b_HPAanalyze_indepth_files/figure-html/visTissue-1.png" width="700"></p>
 </div>
 <div id="visualize-expression-in-cancer-with-hpavispatho" class="section level2">
@@ -387,14 +366,14 @@ BiocManager::install("HPAanalyze")</code></pre>
 </h2>
 <p><code><a href="../reference/hpaVisPatho.html">hpaVisPatho()</a></code> generates an arrays of column graphs showing the expression of proteins of interest in each cancer.</p>
 <p>This example also demonstrate how the colors of the graphs could be customized, which is a common functionality of the <code>hpaVis</code> family.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">geneList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'TP53'</span>, <span class="st">'EGFR'</span>, <span class="st">'CD44'</span>, <span class="st">'PTEN'</span>, <span class="st">'IDH1'</span>, <span class="st">'IDH2'</span>, <span class="st">'CYCS'</span>)</a>
-<a class="sourceLine" id="cb23-2" title="2">cancerList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'breast cancer'</span>, <span class="st">'glioma'</span>, <span class="st">'lymphoma'</span>, <span class="st">'prostate cancer'</span>)</a>
-<a class="sourceLine" id="cb23-3" title="3">colorGray &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'slategray1'</span>, <span class="st">'slategray2'</span>, <span class="st">'slategray3'</span>, <span class="st">'slategray4'</span>)</a>
-<a class="sourceLine" id="cb23-4" title="4"></a>
-<a class="sourceLine" id="cb23-5" title="5"><span class="kw"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span>(downloadedData,</a>
-<a class="sourceLine" id="cb23-6" title="6">            <span class="dt">targetGene=</span>geneList,</a>
-<a class="sourceLine" id="cb23-7" title="7">            <span class="dt">targetCancer=</span>cancerList,</a>
-<a class="sourceLine" id="cb23-8" title="8">            <span class="dt">color=</span>colorGray)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>geneList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'TP53'</span>, <span class="st">'EGFR'</span>, <span class="st">'CD44'</span>, <span class="st">'PTEN'</span>, <span class="st">'IDH1'</span>, <span class="st">'IDH2'</span>, <span class="st">'CYCS'</span>)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>cancerList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'breast cancer'</span>, <span class="st">'glioma'</span>, <span class="st">'lymphoma'</span>, <span class="st">'prostate cancer'</span>)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>colorGray &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'slategray1'</span>, <span class="st">'slategray2'</span>, <span class="st">'slategray3'</span>, <span class="st">'slategray4'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="kw"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span>(downloadedData,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>            <span class="dt">targetGene=</span>geneList,</span>
+<span id="cb20-7"><a href="#cb20-7"></a>            <span class="dt">targetCancer=</span>cancerList,</span>
+<span id="cb20-8"><a href="#cb20-8"></a>            <span class="dt">color=</span>colorGray)</span></code></pre></div>
 <p><img src="b_HPAanalyze_indepth_files/figure-html/visPatho-1.png" width="700"></p>
 </div>
 <div id="visualize-subcellular-location-data-with-hpavissubcell" class="section level2">
@@ -403,17 +382,17 @@ BiocManager::install("HPAanalyze")</code></pre>
 </h2>
 <p><code><a href="../reference/hpaVisSubcell.html">hpaVisSubcell()</a></code> generates a tile chart showing the subcellular locations (approved and supported) of proteins of interest.</p>
 <p>This example also demonstrate the customization of the output plot with ggplot2 functions, which is applicable to all <code>hpaVis</code> functions. Notice that the <code>customTheme</code> argument is set to <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">geneList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'TP53'</span>, <span class="st">'EGFR'</span>, <span class="st">'CD44'</span>, <span class="st">'PTEN'</span>, <span class="st">'IDH1'</span>, <span class="st">'IDH2'</span>, <span class="st">'CYCS'</span>)</a>
-<a class="sourceLine" id="cb24-2" title="2"></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="kw"><a href="../reference/hpaVisSubcell.html">hpaVisSubcell</a></span>(downloadedData,</a>
-<a class="sourceLine" id="cb24-4" title="4">              <span class="dt">targetGene=</span>geneList,</a>
-<a class="sourceLine" id="cb24-5" title="5">              <span class="dt">customTheme=</span><span class="ot">TRUE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-7" title="7"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">'Subcellular locations'</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-8" title="8"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">'Protein'</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-9" title="9"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">hjust=</span><span class="dv">1</span>))  <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-10" title="10"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"none"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb24-11" title="11"><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>geneList &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'TP53'</span>, <span class="st">'EGFR'</span>, <span class="st">'CD44'</span>, <span class="st">'PTEN'</span>, <span class="st">'IDH1'</span>, <span class="st">'IDH2'</span>, <span class="st">'CYCS'</span>)</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw"><a href="../reference/hpaVisSubcell.html">hpaVisSubcell</a></span>(downloadedData,</span>
+<span id="cb21-4"><a href="#cb21-4"></a>              <span class="dt">targetGene=</span>geneList,</span>
+<span id="cb21-5"><a href="#cb21-5"></a>              <span class="dt">customTheme=</span><span class="ot">TRUE</span>) <span class="op">+</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() <span class="op">+</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">'Subcellular locations'</span>) <span class="op">+</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">'Protein'</span>) <span class="op">+</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">hjust=</span><span class="dv">1</span>))  <span class="op">+</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"none"</span>) <span class="op">+</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="st">    </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</span></code></pre></div>
 <p><img src="b_HPAanalyze_indepth_files/figure-html/visSubcell-1.png" width="700"></p>
 </div>
 </div>
@@ -427,69 +406,67 @@ BiocManager::install("HPAanalyze")</code></pre>
 <a href="#the-umbrella-function-hpaxml" class="anchor"></a>The umbrella function <code>hpaXml</code>
 </h2>
 <p><code>hpaXml</code> will take an Ensembl gene id (start with <em>ENSG</em>) and extract all availble information. You can also feed the ourput of hpaXmlGet to it. See the quick-start vignette for more details.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">EGFR &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXml.html">hpaXml</a></span>(<span class="dt">inputXml=</span><span class="st">'ENSG00000146648'</span>)</a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(EGFR)</a>
-<a class="sourceLine" id="cb25-3" title="3"></a>
-<a class="sourceLine" id="cb25-4" title="4"><span class="co">#&gt; [1] "ProtClass"     "TissueExprSum" "Antibody"      "TissueExpr"   </span></a></code></pre></div>
-<p>To view the web page for the protein of interest, which contains similar information in a pretty presentation, use <em>hpar</em> function <code>getHPA()</code> with argument <code>type="details"</code>.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">hpar<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/hpar/man/getHpa.html">getHpa</a></span>(<span class="st">'ENSG00000146648'</span>, <span class="dt">type=</span><span class="st">"details"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>EGFR &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXml.html">hpaXml</a></span>(<span class="dt">inputXml=</span><span class="st">'ENSG00000146648'</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(EGFR)</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co">#&gt; [1] "ProtClass"     "TissueExprSum" "Antibody"      "TissueExpr"   </span></span></code></pre></div>
 </div>
 <div id="import-xml-file-with-hpaxmlget" class="section level2">
 <h2 class="hasAnchor">
 <a href="#import-xml-file-with-hpaxmlget" class="anchor"></a>Import xml file with <code>hpaXmlGet()</code>
 </h2>
-<p>The <code>hoaXmlGet()</code> function takes an Ensembl gene id (start with <em>ENSG</em>) and import the perspective XML file into R. This function calls the <code><a href="https://rdrr.io/pkg/xml2/man/read_xml.html">xml2::read_xml()</a></code> under the hood, hence the resulting object may be processed further with <em>xml2</em> functions if desired.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">EGFRxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span>(<span class="st">'ENSG00000146648'</span>)</a></code></pre></div>
+<p>The <code>hoaXmlGet()</code> function takes an Ensembl gene id (start with <em>ENSG</em>) and import the perspective XML file into R. This function calls the <code><a href="http://xml2.r-lib.org/reference/read_xml.html">xml2::read_xml()</a></code> under the hood, hence the resulting object may be processed further with <em>xml2</em> functions if desired.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>EGFRxml &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span>(<span class="st">'ENSG00000146648'</span>)</span></code></pre></div>
 </div>
 <div id="view-protein-classes-with-hpaxmlprotclass" class="section level2">
 <h2 class="hasAnchor">
 <a href="#view-protein-classes-with-hpaxmlprotclass" class="anchor"></a>View protein classes with <code>hpaXmlProtClass()</code>
 </h2>
 <p>Protein class of queried protein can be extracted from the imported XML with <code><a href="../reference/hpaXmlProtClass.html">hpaXmlProtClass()</a></code>. The output of this function is a tibble of 4 columns: <code>id</code>, <code>name</code>, <code>parent_id</code> and <code>source</code></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw"><a href="../reference/hpaXmlProtClass.html">hpaXmlProtClass</a></span>(EGFRxml)</a>
-<a class="sourceLine" id="cb28-2" title="2"></a>
-<a class="sourceLine" id="cb28-3" title="3"><span class="co">#&gt; # A tibble: 40 x 4</span></a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="co">#&gt;    id    name                                   parent_id source    </span></a>
-<a class="sourceLine" id="cb28-5" title="5"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;                                  &lt;chr&gt;     &lt;chr&gt;     </span></a>
-<a class="sourceLine" id="cb28-6" title="6"><span class="co">#&gt;  1 Ez    Enzymes                                &lt;NA&gt;      &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb28-7" title="7"><span class="co">#&gt;  2 Ec    ENZYME proteins                        Ez        ENZYME    </span></a>
-<a class="sourceLine" id="cb28-8" title="8"><span class="co">#&gt;  3 Et    Transferases                           Ec        ENZYME    </span></a>
-<a class="sourceLine" id="cb28-9" title="9"><span class="co">#&gt;  4 Ki    Kinases                                Ez        UniProt   </span></a>
-<a class="sourceLine" id="cb28-10" title="10"><span class="co">#&gt;  5 Kt    Tyr protein kinases                    Ki        UniProt   </span></a>
-<a class="sourceLine" id="cb28-11" title="11"><span class="co">#&gt;  6 Ma    Predicted membrane proteins            &lt;NA&gt;      MDM       </span></a>
-<a class="sourceLine" id="cb28-12" title="12"><span class="co">#&gt;  7 Md    Membrane proteins predicted by MDM     &lt;NA&gt;      MDM       </span></a>
-<a class="sourceLine" id="cb28-13" title="13"><span class="co">#&gt;  8 Me    MEMSAT3 predicted membrane proteins    &lt;NA&gt;      MEMSAT3   </span></a>
-<a class="sourceLine" id="cb28-14" title="14"><span class="co">#&gt;  9 Mf    MEMSAT-SVM predicted membrane proteins &lt;NA&gt;      MEMSAT-SVM</span></a>
-<a class="sourceLine" id="cb28-15" title="15"><span class="co">#&gt; 10 Mg    Phobius predicted membrane proteins    &lt;NA&gt;      Phobius   </span></a>
-<a class="sourceLine" id="cb28-16" title="16"><span class="co">#&gt; # ... with 30 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw"><a href="../reference/hpaXmlProtClass.html">hpaXmlProtClass</a></span>(EGFRxml)</span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="co">#&gt; # A tibble: 40 x 4</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co">#&gt;    id    name                                   parent_id source    </span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;                                  &lt;chr&gt;     &lt;chr&gt;     </span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="co">#&gt;  1 Ez    Enzymes                                &lt;NA&gt;      &lt;NA&gt;      </span></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co">#&gt;  2 Ec    ENZYME proteins                        Ez        ENZYME    </span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="co">#&gt;  3 Et    Transferases                           Ec        ENZYME    </span></span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="co">#&gt;  4 Ki    Kinases                                Ez        UniProt   </span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="co">#&gt;  5 Kt    Tyr protein kinases                    Ki        UniProt   </span></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="co">#&gt;  6 Ma    Predicted membrane proteins            &lt;NA&gt;      MDM       </span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="co">#&gt;  7 Md    Membrane proteins predicted by MDM     &lt;NA&gt;      MDM       </span></span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="co">#&gt;  8 Me    MEMSAT3 predicted membrane proteins    &lt;NA&gt;      MEMSAT3   </span></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="co">#&gt;  9 Mf    MEMSAT-SVM predicted membrane proteins &lt;NA&gt;      MEMSAT-SVM</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a><span class="co">#&gt; 10 Mg    Phobius predicted membrane proteins    &lt;NA&gt;      Phobius   </span></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="co">#&gt; # ... with 30 more rows</span></span></code></pre></div>
 </div>
 <div id="get-summary-and-images-of-tissue-expression-with-hpaxmltissueexprsum" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-summary-and-images-of-tissue-expression-with-hpaxmltissueexprsum" class="anchor"></a>Get summary and images of tissue expression with <code>hpaXmlTissueExprSum()</code>
 </h2>
 <p>The function <code><a href="../reference/hpaXmlTissueExprSum.html">hpaXmlTissueExprSum()</a></code> extract the summary of expression of protein of interest in normal tissue. The output of this function is a list of (1) a string contains one-sentence summary and (2) a dataframe of all tissues in which the protein was stained positive and a histological stain images of those tissue.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw"><a href="../reference/hpaXmlTissueExprSum.html">hpaXmlTissueExprSum</a></span>(EGFRxml)</a>
-<a class="sourceLine" id="cb29-2" title="2"></a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="co">#&gt; $summary</span></a>
-<a class="sourceLine" id="cb29-4" title="4"><span class="co">#&gt; [1] "Cytoplasmic and membranous expression in several tissues, most abundant in placenta."</span></a>
-<a class="sourceLine" id="cb29-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb29-6" title="6"><span class="co">#&gt; $img</span></a>
-<a class="sourceLine" id="cb29-7" title="7"><span class="co">#&gt;            tissue</span></a>
-<a class="sourceLine" id="cb29-8" title="8"><span class="co">#&gt; 1 cerebral cortex</span></a>
-<a class="sourceLine" id="cb29-9" title="9"><span class="co">#&gt; 2      lymph node</span></a>
-<a class="sourceLine" id="cb29-10" title="10"><span class="co">#&gt; 3           liver</span></a>
-<a class="sourceLine" id="cb29-11" title="11"><span class="co">#&gt; 4           colon</span></a>
-<a class="sourceLine" id="cb29-12" title="12"><span class="co">#&gt; 5          kidney</span></a>
-<a class="sourceLine" id="cb29-13" title="13"><span class="co">#&gt; 6          testis</span></a>
-<a class="sourceLine" id="cb29-14" title="14"><span class="co">#&gt; 7        placenta</span></a>
-<a class="sourceLine" id="cb29-15" title="15"><span class="co">#&gt;                                                                imageUrl</span></a>
-<a class="sourceLine" id="cb29-16" title="16"><span class="co">#&gt; 1 http://v18.proteinatlas.org/images/18530/41191_B_7_5_rna_selected.jpg</span></a>
-<a class="sourceLine" id="cb29-17" title="17"><span class="co">#&gt; 2 http://v18.proteinatlas.org/images/18530/41191_A_7_8_rna_selected.jpg</span></a>
-<a class="sourceLine" id="cb29-18" title="18"><span class="co">#&gt; 3 http://v18.proteinatlas.org/images/18530/41191_A_7_4_rna_selected.jpg</span></a>
-<a class="sourceLine" id="cb29-19" title="19"><span class="co">#&gt; 4 http://v18.proteinatlas.org/images/18530/41191_A_9_3_rna_selected.jpg</span></a>
-<a class="sourceLine" id="cb29-20" title="20"><span class="co">#&gt; 5 http://v18.proteinatlas.org/images/18530/41191_A_9_5_rna_selected.jpg</span></a>
-<a class="sourceLine" id="cb29-21" title="21"><span class="co">#&gt; 6 http://v18.proteinatlas.org/images/18530/41191_A_6_6_rna_selected.jpg</span></a>
-<a class="sourceLine" id="cb29-22" title="22"><span class="co">#&gt; 7 http://v18.proteinatlas.org/images/18530/41191_A_1_7_rna_selected.jpg</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw"><a href="../reference/hpaXmlTissueExprSum.html">hpaXmlTissueExprSum</a></span>(EGFRxml)</span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="co">#&gt; $summary</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="co">#&gt; [1] "Cytoplasmic and membranous expression in several tissues, most abundant in placenta."</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="co">#&gt; </span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="co">#&gt; $img</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="co">#&gt;            tissue</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="co">#&gt; 1 cerebral cortex</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="co">#&gt; 2      lymph node</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="co">#&gt; 3           liver</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="co">#&gt; 4           colon</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="co">#&gt; 5          kidney</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="co">#&gt; 6          testis</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="co">#&gt; 7        placenta</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a><span class="co">#&gt;                                                                imageUrl</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a><span class="co">#&gt; 1 http://v18.proteinatlas.org/images/18530/41191_B_7_5_rna_selected.jpg</span></span>
+<span id="cb25-17"><a href="#cb25-17"></a><span class="co">#&gt; 2 http://v18.proteinatlas.org/images/18530/41191_A_7_8_rna_selected.jpg</span></span>
+<span id="cb25-18"><a href="#cb25-18"></a><span class="co">#&gt; 3 http://v18.proteinatlas.org/images/18530/41191_A_7_4_rna_selected.jpg</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a><span class="co">#&gt; 4 http://v18.proteinatlas.org/images/18530/41191_A_9_3_rna_selected.jpg</span></span>
+<span id="cb25-20"><a href="#cb25-20"></a><span class="co">#&gt; 5 http://v18.proteinatlas.org/images/18530/41191_A_9_5_rna_selected.jpg</span></span>
+<span id="cb25-21"><a href="#cb25-21"></a><span class="co">#&gt; 6 http://v18.proteinatlas.org/images/18530/41191_A_6_6_rna_selected.jpg</span></span>
+<span id="cb25-22"><a href="#cb25-22"></a><span class="co">#&gt; 7 http://v18.proteinatlas.org/images/18530/41191_A_1_7_rna_selected.jpg</span></span></code></pre></div>
 <p>Those images can be downloaded automatically by setting the <code>downloadImg</code> argument to <code>TRUE</code>. Eg. <code><a href="../reference/hpaXmlTissueExprSum.html">hpaXmlTissueExprSum(CCNB1xml, downloadImg=TRUE)</a></code></p>
 </div>
 <div id="get-details-of-individual-ihc-samples-with-hpaxmlantibody-and-hpaxmltissueexpr" class="section level2">
@@ -498,47 +475,47 @@ BiocManager::install("HPAanalyze")</code></pre>
 </h2>
 <p>More importantly, the XML files are the only format of HPA programmatically accesible data which contains information about each antibody and each tissue sample used in the project.</p>
 <p><code><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody()</a></code> extract the antibody information and return a tibble with one row for each antibody.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw"><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody</a></span>(EGFRxml)</a>
-<a class="sourceLine" id="cb30-2" title="2"></a>
-<a class="sourceLine" id="cb30-3" title="3"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb30-4" title="4"><span class="co">#&gt;   id        releaseDate releaseVersion RRID      </span></a>
-<a class="sourceLine" id="cb30-5" title="5"><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span></a>
-<a class="sourceLine" id="cb30-6" title="6"><span class="co">#&gt; 1 CAB000035 2006-03-13  1.2            &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb30-7" title="7"><span class="co">#&gt; 2 HPA001200 2008-02-15  3.1            AB_1078723</span></a>
-<a class="sourceLine" id="cb30-8" title="8"><span class="co">#&gt; 3 HPA018530 2008-12-03  4.1            AB_1848044</span></a>
-<a class="sourceLine" id="cb30-9" title="9"><span class="co">#&gt; 4 CAB068186 2014-11-06  13             AB_2665679</span></a>
-<a class="sourceLine" id="cb30-10" title="10"><span class="co">#&gt; 5 CAB073534 2015-10-16  14             &lt;NA&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw"><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody</a></span>(EGFRxml)</span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="co">#&gt; # A tibble: 5 x 4</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co">#&gt;   id        releaseDate releaseVersion RRID      </span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="co">#&gt; 1 CAB000035 2006-03-13  1.2            &lt;NA&gt;      </span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="co">#&gt; 2 HPA001200 2008-02-15  3.1            AB_1078723</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="co">#&gt; 3 HPA018530 2008-12-03  4.1            AB_1848044</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="co">#&gt; 4 CAB068186 2014-11-06  13             AB_2665679</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co">#&gt; 5 CAB073534 2015-10-16  14             &lt;NA&gt;</span></span></code></pre></div>
 <p><code><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr()</a></code> extract information about all samples for each antibody above and return a list of tibbles. If antibody has not been used for IHC staining, the returned tibble with be empty.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">tissueExpression &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr</a></span>(EGFRxml)</a>
-<a class="sourceLine" id="cb31-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(tissueExpression)</a>
-<a class="sourceLine" id="cb31-3" title="3"></a>
-<a class="sourceLine" id="cb31-4" title="4"><span class="co">#&gt;      Length Class  Mode</span></a>
-<a class="sourceLine" id="cb31-5" title="5"><span class="co">#&gt; [1,] 18     tbl_df list</span></a>
-<a class="sourceLine" id="cb31-6" title="6"><span class="co">#&gt; [2,] 18     tbl_df list</span></a>
-<a class="sourceLine" id="cb31-7" title="7"><span class="co">#&gt; [3,] 18     tbl_df list</span></a>
-<a class="sourceLine" id="cb31-8" title="8"><span class="co">#&gt; [4,] 18     tbl_df list</span></a>
-<a class="sourceLine" id="cb31-9" title="9"><span class="co">#&gt; [5,] 18     tbl_df list</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>tissueExpression &lt;-<span class="st"> </span><span class="kw"><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr</a></span>(EGFRxml)</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(tissueExpression)</span>
+<span id="cb27-3"><a href="#cb27-3"></a></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="co">#&gt;      Length Class  Mode</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="co">#&gt; [1,] 18     tbl_df list</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="co">#&gt; [2,] 18     tbl_df list</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="co">#&gt; [3,] 18     tbl_df list</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a><span class="co">#&gt; [4,] 18     tbl_df list</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="co">#&gt; [5,] 18     tbl_df list</span></span></code></pre></div>
 <p>Each tibble contain clinical data (<code>patientid</code>, <code>age</code>, <code>sex</code>), tissue information (<code>snomedCode</code>, <code>tissueDescription</code>), staining results (<code>staining</code>, <code>intensity</code>, <code>location</code>) and one <code>imageUrl</code> for each sample. However, due to the large amount of data and the relatively large size of each image, <code>hpaXmlTissueExpr</code> does not provide an automated download option.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">tissueExpression[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb32-2" title="2"></a>
-<a class="sourceLine" id="cb32-3" title="3"><span class="co">#&gt; # A tibble: 327 x 18</span></a>
-<a class="sourceLine" id="cb32-4" title="4"><span class="co">#&gt;    patientId age   sex   staining intensity quantity location imageUrl</span></a>
-<a class="sourceLine" id="cb32-5" title="5"><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   </span></a>
-<a class="sourceLine" id="cb32-6" title="6"><span class="co">#&gt;  1 1653      53    Male  &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-7" title="7"><span class="co">#&gt;  2 1721      60    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-8" title="8"><span class="co">#&gt;  3 1725      57    Male  &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-9" title="9"><span class="co">#&gt;  4 4         25    Male  &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-10" title="10"><span class="co">#&gt;  5 512       34    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-11" title="11"><span class="co">#&gt;  6 2664      74    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-12" title="12"><span class="co">#&gt;  7 2665      88    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-13" title="13"><span class="co">#&gt;  8 1391      54    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-14" title="14"><span class="co">#&gt;  9 1447      45    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-15" title="15"><span class="co">#&gt; 10 1452      44    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></a>
-<a class="sourceLine" id="cb32-16" title="16"><span class="co">#&gt; # ... with 317 more rows, and 10 more variables: snomedCode1 &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb32-17" title="17"><span class="co">#&gt; #   snomedCode2 &lt;chr&gt;, snomedCode3 &lt;chr&gt;, snomedCode4 &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb32-18" title="18"><span class="co">#&gt; #   snomedCode5 &lt;chr&gt;, tissueDescription1 &lt;chr&gt;, tissueDescription2 &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb32-19" title="19"><span class="co">#&gt; #   tissueDescription3 &lt;chr&gt;, tissueDescription4 &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb32-20" title="20"><span class="co">#&gt; #   tissueDescription5 &lt;chr&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>tissueExpression[[<span class="dv">1</span>]]</span>
+<span id="cb28-2"><a href="#cb28-2"></a></span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="co">#&gt; # A tibble: 327 x 18</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="co">#&gt;    patientId age   sex   staining intensity quantity location imageUrl</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   </span></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="co">#&gt;  1 1653      53    Male  &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="co">#&gt;  2 1721      60    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="co">#&gt;  3 1725      57    Male  &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="co">#&gt;  4 4         25    Male  &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a><span class="co">#&gt;  5 512       34    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a><span class="co">#&gt;  6 2664      74    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-12"><a href="#cb28-12"></a><span class="co">#&gt;  7 2665      88    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-13"><a href="#cb28-13"></a><span class="co">#&gt;  8 1391      54    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-14"><a href="#cb28-14"></a><span class="co">#&gt;  9 1447      45    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-15"><a href="#cb28-15"></a><span class="co">#&gt; 10 1452      44    Fema~ &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     http://~</span></span>
+<span id="cb28-16"><a href="#cb28-16"></a><span class="co">#&gt; # ... with 317 more rows, and 10 more variables: snomedCode1 &lt;chr&gt;,</span></span>
+<span id="cb28-17"><a href="#cb28-17"></a><span class="co">#&gt; #   snomedCode2 &lt;chr&gt;, snomedCode3 &lt;chr&gt;, snomedCode4 &lt;chr&gt;,</span></span>
+<span id="cb28-18"><a href="#cb28-18"></a><span class="co">#&gt; #   snomedCode5 &lt;chr&gt;, tissueDescription1 &lt;chr&gt;, tissueDescription2 &lt;chr&gt;,</span></span>
+<span id="cb28-19"><a href="#cb28-19"></a><span class="co">#&gt; #   tissueDescription3 &lt;chr&gt;, tissueDescription4 &lt;chr&gt;,</span></span>
+<span id="cb28-20"><a href="#cb28-20"></a><span class="co">#&gt; #   tissueDescription5 &lt;chr&gt;</span></span></code></pre></div>
 <p><code>hpaTissueExprSum</code> and <code>hpaTissueExpr</code> provide download links to download relevant staining images, with the former function also gives the options to automate the downloading process.</p>
 </div>
 </div>
@@ -561,7 +538,7 @@ BiocManager::install("HPAanalyze")</code></pre>
 <tr class="odd">
 <td align="right">Datasets</td>
 <td align="left">Included in package</td>
-<td align="left">Download from server or Import from hpar</td>
+<td align="left">Download from server or use built-in dataset</td>
 </tr>
 <tr class="even">
 <td align="right">Query</td>
@@ -609,24 +586,28 @@ BiocManager::install("HPAanalyze")</code></pre>
 <div id="copyright" class="section level1">
 <h1 class="hasAnchor">
 <a href="#copyright" class="anchor"></a>Copyright</h1>
-<p>Anh Tran, 2018</p>
+<p><strong>Anh Tran, 2018-2020 </strong></p>
+<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#summary">Summary</a></li>
       <li>
-<a href="#background">Background</a><ul class="nav nav-pills nav-stacked">
+<a href="#background">Background</a>
+      <ul class="nav nav-pills nav-stacked">
 <li><a href="#the-different-hpa-data-formats">The different HPA data formats</a></li>
       <li><a href="#hpaanalyze-overview"><code>HPAanalyze</code> overview</a></li>
       </ul>
 </li>
       <li>
-<a href="#full-dataset-import-subsetting-and-export">Full dataset import, subsetting and export</a><ul class="nav nav-pills nav-stacked">
+<a href="#full-dataset-import-subsetting-and-export">Full dataset import, subsetting and export</a>
+      <ul class="nav nav-pills nav-stacked">
 <li><a href="#download-and-import-data-with-hpadownload">Download and import data with <code>hpaDownload()</code></a></li>
       <li><a href="#list-available-parameter-for-subsetting-with-hpalistparam">List available parameter for subsetting with <code>hpaListParam()</code></a></li>
       <li><a href="#subset-data-with-hpasubset">Subset data with <code>hpaSubset()</code></a></li>
@@ -634,7 +615,8 @@ BiocManager::install("HPAanalyze")</code></pre>
       </ul>
 </li>
       <li>
-<a href="#visualization">Visualization</a><ul class="nav nav-pills nav-stacked">
+<a href="#visualization">Visualization</a>
+      <ul class="nav nav-pills nav-stacked">
 <li><a href="#unbrella-function-hpavis">Unbrella function <code>hpaVis()</code></a></li>
       <li><a href="#visualize-tissue-data-with-hpavistissue">Visualize tissue data with <code>hpaVisTissue()</code></a></li>
       <li><a href="#visualize-expression-in-cancer-with-hpavispatho">Visualize expression in cancer with <code>hpaVisPatho()</code></a></li>
@@ -642,7 +624,8 @@ BiocManager::install("HPAanalyze")</code></pre>
       </ul>
 </li>
       <li>
-<a href="#individual-xml-import-and-image-downloading">Individual xml import and image downloading</a><ul class="nav nav-pills nav-stacked">
+<a href="#individual-xml-import-and-image-downloading">Individual xml import and image downloading</a>
+      <ul class="nav nav-pills nav-stacked">
 <li><a href="#the-umbrella-function-hpaxml">The umbrella function <code>hpaXml</code></a></li>
       <li><a href="#import-xml-file-with-hpaxmlget">Import xml file with <code>hpaXmlGet()</code></a></li>
       <li><a href="#view-protein-classes-with-hpaxmlprotclass">View protein classes with <code>hpaXmlProtClass()</code></a></li>

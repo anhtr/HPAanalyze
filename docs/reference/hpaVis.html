@@ -8,11 +8,13 @@
 
 <title>Visualize data in one function — hpaVis • HPAanalyze</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Visualize data in one function — hpaVis" />
 
+<meta property="og:title" content="Visualize data in one function — hpaVis" />
 <meta property="og:description" content="This function is an universal visualization function that allow calling other
 hpaVis functions via a single function call. By default, this function will
 use the dataset bundled with HPAanalyze, and provide a grid of all available
@@ -42,6 +44,7 @@ visType argument. If only one plot type is specified, this function
 will return the exact same output as the specific hpaVis function used to
 create the plot." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -72,7 +75,7 @@ create the plot." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
       </span>
     </div>
 
@@ -118,7 +121,6 @@ create the plot." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -140,7 +142,6 @@ create the plot." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function is an universal visualization function that allow calling other
 hpaVis functions via a single function call. By default, this function will
 use the dataset bundled with HPAanalyze, and provide a grid of all available
@@ -148,14 +149,20 @@ plots. The types of plots in the output can be specified via the
 <code>visType</code> argument. If only one plot type is specified, this function
 will return the exact same output as the specific hpaVis function used to
 create the plot.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>hpaVis</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>targetGene</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>targetTissue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>targetCellType</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>targetCancer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>visType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Tissue"</span>,
-  <span class='st'>"Patho"</span>, <span class='st'>"Subcell"</span>), <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#ffffb2"</span>, <span class='st'>"#fecc5c"</span>, <span class='st'>"#fd8d3c"</span>,
-  <span class='st'>"#e31a1c"</span>), <span class='kw'>customTheme</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>hpaVis</span>(
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>targetGene</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>targetTissue</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>targetCellType</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>targetCancer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>visType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Tissue"</span>, <span class='st'>"Patho"</span>, <span class='st'>"Subcell"</span>),
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#ffffb2"</span>, <span class='st'>"#fecc5c"</span>, <span class='st'>"#fd8d3c"</span>, <span class='st'>"#e31a1c"</span>),
+  <span class='kw'>customTheme</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -163,7 +170,7 @@ create the plot.</p>
       <th>data</th>
       <td><p>Input the list object generated by <code>hpa_download()</code> or
 <code>hpa_subset()</code>. By default this function use the example dataset
-bundled with HPAanalyze, which is from version 18 of the HPA program.</p></td>
+bundled with HPAanalyze.</p></td>
     </tr>
     <tr>
       <th>targetGene</th>
@@ -210,7 +217,7 @@ functions being called behind the scene. These arguments includes
 documentation for individual hpaVis functions for more information.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>If multiple visType is chosen, this function will return multiple
@@ -218,27 +225,24 @@ documentation for individual hpaVis functions for more information.</p></td>
   return a ggplot2 plot object, which can be further modified if desirable.
   See help file for each of the hpaVis function for more information about
   individual graphs.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='hpaDownload.html'>hpaDownload</a></code>, <code><a href='hpaListParam.html'>hpaSubset</a></code></p>
-<p>Other visualization functions: <code><a href='hpaVisPatho.html'>hpaVisPatho</a></code>,
-  <code><a href='hpaVisSubcell.html'>hpaVisSubcell</a></code>, <code><a href='hpaVisTissue.html'>hpaVisTissue</a></code></p></div>
-    
+<p>Other visualization functions: 
+<code><a href='hpaVisPatho.html'>hpaVisPatho</a>()</code>,
+<code><a href='hpaVisSubcell.html'>hpaVisSubcell</a>()</code>,
+<code><a href='hpaVisTissue.html'>hpaVisTissue</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'>hpaVis</span>()</div><div class='output co'>#&gt; <span class='message'>No data provided. Use version 18.</span></div><div class='output co'>#&gt; <span class='message'>targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.</span></div><div class='output co'>#&gt; <span class='message'>targetTissue variable not specified, default to breast.</span></div><div class='output co'>#&gt; <span class='message'>targetCellType variable not specified, visualize all.</span></div><div class='output co'>#&gt; <span class='message'>targetCellType variable not specified, visualize all.</span></div><div class='output co'>#&gt; <span class='message'>Use hpaListParam() to list possible values for target variables.</span></div><div class='output co'>#&gt; <span class='message'>targetCancer variable not specified, default to breast cancer</span></div><div class='output co'>#&gt; <span class='message'>Use hpaListParam() to list possible values for target variables.</span></div><div class='img'><img src='hpaVis-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'>  <span class='fu'>hpaVis</span>()</div><div class='output co'>#&gt; <span class='message'>No data provided. Use version 19.</span></div><div class='output co'>#&gt; <span class='message'>targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.</span></div><div class='output co'>#&gt; <span class='message'>targetTissue variable not specified, default to breast.</span></div><div class='output co'>#&gt; <span class='message'>targetCellType variable not specified, visualize all.</span></div><div class='output co'>#&gt; <span class='message'>targetCellType variable not specified, visualize all.</span></div><div class='output co'>#&gt; <span class='message'>Use hpaListParam() to list possible values for target variables.</span></div><div class='output co'>#&gt; <span class='message'>targetCancer variable not specified, default to breast cancer</span></div><div class='output co'>#&gt; <span class='message'>Use hpaListParam() to list possible values for target variables.</span></div><div class='img'><img src='hpaVis-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
