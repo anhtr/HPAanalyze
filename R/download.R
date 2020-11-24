@@ -277,7 +277,7 @@ Download the 'RNA consensus tissue gene data' of the current version.")
             # rna_tissue <- read_tsv(unz(temp, 'rna_tissue.tsv'))
             rna_tissue <-
                 read.delim2(
-                    unz(temp, 'rna_tissue_consensus.tsv'),
+                    unz(temp, 'rna_consensus.tsv'),
                     stringsAsFactors = FALSE,
                     check.names = FALSE,
                     strip.white = TRUE,

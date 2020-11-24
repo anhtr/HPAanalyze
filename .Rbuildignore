@@ -4,3 +4,5 @@
 ^/.Rproj/.user$
 ^/.travis.yml
 ^/README.Rmd
+^.*\.Rproj$
+^\.Rproj\.user$
