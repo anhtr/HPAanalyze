@@ -9,7 +9,7 @@ Description: Provide functions for retrieving, exploratory analyzing and
     visualizing the Human Protein Atlas data.
 Depends: R (>= 3.5.0)
 License: GPL-3 + file LICENSE
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 Encoding: UTF-8
 Imports: dplyr,
     openxlsx,

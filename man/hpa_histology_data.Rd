@@ -4,9 +4,11 @@
 \name{hpa_histology_data}
 \alias{hpa_histology_data}
 \title{HPA histology dataset}
-\format{A list of 3 tibbles \describe{ \item{normal_tissue}{Normal tissue IHC
+\format{
+A list of 3 tibbles \describe{ \item{normal_tissue}{Normal tissue IHC
   data} \item{pathology}{Cancer IHC data}
-  \item{subcellular_location}{Subcellular location IF data} }}
+  \item{subcellular_location}{Subcellular location IF data} }
+}
 \usage{
 hpa_histology_data
 }

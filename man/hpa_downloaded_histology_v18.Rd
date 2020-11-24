@@ -4,12 +4,14 @@
 \name{hpa_downloaded_histology_v18}
 \alias{hpa_downloaded_histology_v18}
 \title{HPA histology dataset version 18}
-\format{A list of 3 tibbles
+\format{
+A list of 3 tibbles
 \describe{
     \item{normal_tissue}{Normal tissue IHC data}
     \item{pathology}{Cancer IHC data}
     \item{subcellular_location}{Subcellular location IF data}
-}}
+}
+}
 \usage{
 hpa_downloaded_histology_v18
 }
