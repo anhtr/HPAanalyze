@@ -59,21 +59,59 @@
 #' 
 
 hpaDownload <- function(downloadList='histology', version='latest') {
+
+    ## generate a list of item to download    
+    allDatasets <- c('Normal tissue', 
+                     'Pathology',
+                     'Subcellular location',
+                     'RNA consensus tissue',
+                     'RNA HPA tissue',
+                     'RNA GTEx tissue',
+                     'RNA FANTOM tissue',
+                     'RNA single cell type',
+                     'RNA single cell type tissue cluster',
+                     'RNA GTEx brain region',
+                     'RNA FANTOM brain region',
+                     'RNA pig brain region',
+                     'RNA pig brain subregion sample',
+                     'RNA mouse brain region',
+                     'RNA mouse brain subregion sample',
+                     'RNA Allen mouse brain region',
+                     'RNA HPA blood cell',
+                     'RNA HPA blood cell sample',
+                     'RNA Monaco blood cell',
+                     'RNA Schmiedel blood cell',
+                     'RNA HPA cell line',
+                     'RNA TCGA cancer sample',
+                     'RNA transcript tissue',
+                     'RNA transcript cell line',
+                     'RNA transcript pig brain',
+                     'RNA transcript mouse brain'
+                     )
     
-    ## generate a list of item to download
     if(downloadList == 'all') {
-        downloadList <- c('Normal tissue', 
-                          'Pathology',
-                          'Subcellular location',
-                          'RNA tissue',
-                          'RNA cell line',
-                          'RNA transcript tissue',
-                          'RNA transcript cell line')        
-    } else if(downloadList == 'histology') {
-        downloadList <- c('Normal tissue', 
-                          'Pathology',
-                          'Subcellular location')  
+        downloadList <- allDatasets
+        
+    } else if(downloadList == 'histology') { 
+        downloadList <- allDatasets[1:3]
+        
+    } else if(downloadList == 'rna tissue') {
+        downloadList <- allDatasets[4:7]
+        
+    } else if(downloadList == 'rna single cell type') {
+        downloadList <- allDatasets[8:9]
+        
+    } else if(downloadList == 'rna brain region') {
+        downloadList <- allDatasets[10:16]
+        
+    } else if(downloadList == 'rna blood cell') {
+        downloadList <- allDatasets[17:20]
+        
+    } else if(downloadList == 'rna blood cell') {
+        downloadList <- allDatasets[23:26]
+        
     } 
+    
     
     #initiate the list to be returned
     loadedData <- list()
