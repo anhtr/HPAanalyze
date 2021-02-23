@@ -34,9 +34,6 @@ value:
   \item \code{'example'}: Load the example dataset from 'HPA
   analyze' ('hpa_histology_data'). Does not contain rna or
   isoform data.
-  \item \code{'v?'} with '?' is a integer: Download a specific version of
-  the dataset. For example: 'v18' download version 18. Currently support
-  version 17 and above. Require Internet connection.
 }}
 }
 \value{
@@ -49,8 +46,12 @@ recommended to only download the datasets you need, as some of them may be
 very big.
 }
 \examples{
-  downloadedData <- hpaDownload(downloadList='all', version='example')
+  downloadedData <- hpaDownload(downloadList='histology', version='example')
   summary(downloadedData)
+  
+  downloadedDataRna <- hpaDownload(downloadList='rna tissue', version='latest')
+  summary(downloadedDataRna)
+  
   
 }
 \seealso{
