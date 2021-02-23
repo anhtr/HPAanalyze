@@ -47,8 +47,12 @@
 #' \code{\link{hpa_histology_data}}
 #'  
 #' @examples
-#'   downloadedData <- hpaDownload(downloadList='all', version='example')
+#'   downloadedData <- hpaDownload(downloadList='histology', version='example')
 #'   summary(downloadedData)
+#'   
+#'   downloadedDataRna <- hpaDownload(downloadList='rna tissue', version='latest')
+#'   summary(downloadedDataRna)
+#'   
 #'   
 #' @import dplyr
 #  @import hpar
@@ -277,8 +281,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         download.file(url = downloadDatasets$urls[[i]],
                       destfile = temp)
         loadedData[[i]] <- read.delim2(
-                unz(temp, gsub('.zip|https://www.proteinatlas.org/download/', '', 
-                               downloadDatasets$urls[[i]])),
+                unz(temp, unzip(temp, list = TRUE)$Name[1]),
                 stringsAsFactors = FALSE,
                 check.names = FALSE,
                 strip.white = TRUE,
