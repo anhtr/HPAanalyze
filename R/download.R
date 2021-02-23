@@ -433,7 +433,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
 #' @rdname hpaListParam
 #'
 #' @examples
-#'   downloadedData <- hpaDownload(downloadList='all', version='example')
+#'   downloadedData <- hpaDownload(downloadList='histology', version='example')
 #'   geneList <- c('TP53', 'EGFR')
 #'   tissueList <- c('breast', 'cerebellum', 'skin 1')
 #'   cancerList <- c('breast cancer', 'glioma', 'melanoma')
@@ -545,7 +545,7 @@ hpaSubset <- function(data=NULL,
 #'   all subset parameter for the downloaded data.
 #'
 #' @examples
-#'   downloadedData <- hpaDownload(downloadList='all', version='example')
+#'   downloadedData <- hpaDownload(downloadList='histology', version='example')
 #'   params <- hpaListParam(data=downloadedData)
 #'   params$normal_tissue
 #'
@@ -621,7 +621,7 @@ hpaListParam <- function(data=NULL) {
 #' @family downloadable datasets functions
 #'
 #' @examples
-#'   downloadedData <- hpaDownload(downloadList='all', version='example')
+#'   downloadedData <- hpaDownload(downloadList='histology', version='example')
 #'   geneList <- c('TP53', 'EGFR')
 #'   tissueList <- c('breast', 'cerebellum', 'skin 1')
 #'   cancerList <- c('breast cancer', 'glioma', 'melanoma')
