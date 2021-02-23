@@ -266,224 +266,131 @@ hpaDownload <- function(downloadList='histology', version='latest') {
     } 
     
     ## filter the datasets to download
-    downloadDatasets <- filter(allDatasets, names %in% downloadList)
+    downloadDatasets <- filter(allDatasets, datasetnames %in% downloadList)
     
     
     #initiate the list of processed data to be returned
     loadedData <- list()
-
-    #create list of colnames
     
-
-        if (version == 'example') {# load example data
-        data('hpa_histology_data', 
-             package='HPAanalyze',
-             envir=environment())
-        if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
-            loadedData$normal_tissue <- HPAanalyze::hpa_histology_data$normal_tissue
-        }
+    for (i in seq_along(downloadDatasets$urls)) {
+        temp <- tempfile()
+        download.file(url = downloadDatasets$urls[[i]],
+                      destfile = temp)
+        loadedData[[i]] <- read.delim2(
+                unz(temp, gsub('.zip|https://www.proteinatlas.org/download/', '', 
+                               downloadDatasets$urls[[i]])),
+                stringsAsFactors = FALSE,
+                check.names = FALSE,
+                strip.white = TRUE,
+                sep="\t",
+                na.strings = c("", " ")
+            ) %>% as_tibble()
+        unlink(temp)
         
-        if('Pathology' %in% downloadList) {# load `pathology`
-            loadedData$pathology <- HPAanalyze::hpa_histology_data$pathology
-        }
-        
-        if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
-            loadedData$subcellular_location <- HPAanalyze::hpa_histology_data$subcellular_location
-        }
-        
-    } else {# download data from the internet
-
-        # Check if the term is requested or not (all by default)
-        # then download the file
-        # then unzip and make a tibble out of data
-        # then add the tibble to the list
-        if('Normal tissue' %in% downloadList) {
-            temp <- tempfile()
-            download.file(url = "https://www.proteinatlas.org/download/normal_tissue.tsv.zip",
-                          destfile = temp)
-            # normal_tissue <- read_tsv(unz(temp, 'normal_tissue.tsv'))
-            normal_tissue <-
-                read.delim2(
-                    unz(temp, 'normal_tissue.tsv'),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE,
-                    strip.white = TRUE,
-                    sep="\t",
-                    na.strings = c("", " ")
-                ) %>% as_tibble()
-            unlink(temp)
-            colnames(normal_tissue) <- normalTissueColnames
-            loadedData$normal_tissue <- normal_tissue
-        }
-        
-        if('Pathology' %in% downloadList) {
-            temp <- tempfile()
-            download.file(url = "https://www.proteinatlas.org/download/pathology.tsv.zip",
-                          destfile = temp)
-            # pathology <- read_tsv(unz(temp, 'pathology.tsv'))
-            pathology <-
-                read.delim2(
-                    unz(temp, 'pathology.tsv'),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE,
-                    strip.white = TRUE,
-                    sep="\t",
-                    na.strings = c("", " ")
-                ) %>% as_tibble()
-            unlink(temp)
-            colnames(pathology) <- pathologyColnames
-            
-            # use correct column type
-            pathology <- pathology %>%
-                mutate_at(c('prognostic_favorable', 
-                            'unprognostic_favorable', 
-                            'prognostic_unfavorable', 
-                            'unprognostic_unfavorable'), as.numeric)
-            
-            loadedData$pathology <- pathology
-        }
-        
-        if('Subcellular location' %in% downloadList) {
-            temp <- tempfile()
-            download.file(url="https://www.proteinatlas.org/download/subcellular_location.tsv.zip",
-                          destfile=temp)
-            # subcellular_location <- read_tsv(unz(temp, 'subcellular_location.tsv'))
-            subcellular_location <-
-                read.delim2(
-                    unz(temp, 'subcellular_location.tsv'),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE,
-                    strip.white = TRUE,
-                    sep="\t",
-                    na.strings = c("", " ")
-                ) %>% as_tibble()
-            unlink(temp)
-            
-            if (ncol(subcellular_location) == 14) {
-                colnames(subcellular_location) <- subcellularLocationColnames
-            } else if (ncol(subcellular_location) == 11) {
-                colnames(subcellular_location) <- subcellularLocationColnames_legacy
-            }
-            
-            loadedData$subcellular_location <- subcellular_location
-        }
-        
-        if('RNA tissue' %in% downloadList) {
-            temp <- tempfile()
-            download.file(url="https://www.proteinatlas.org/download/rna_tissue_consensus.tsv.zip",
-                          destfile=temp)
-            # rna_tissue <- read_tsv(unz(temp, 'rna_tissue.tsv'))
-            rna_tissue <-
-                read.delim2(
-                    unz(temp, 'rna_consensus.tsv'),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE,
-                    strip.white = TRUE,
-                    sep="\t",
-                    na.strings = c("", " ")
-                ) %>% as_tibble()
-            unlink(temp)
-            colnames(rna_tissue) <- rnaTissueColnames
-            loadedData$rna_tissue <- rna_tissue
-        }
-        
-        if('RNA cell line' %in% downloadList) {
-            temp <- tempfile()
-            download.file(url="https://www.proteinatlas.org/download/rna_celline.tsv.zip",
-                          destfile=temp)
-            # rna_cell_line <- read_tsv(unz(temp, 'rna_celline.tsv'))
-            rna_cell_line <-
-                read.delim2(
-                    unz(temp, 'rna_celline.tsv'),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE,
-                    strip.white = TRUE,
-                    sep="\t",
-                    na.strings = c("", " ")
-                ) %>% as_tibble()
-            unlink(temp)
-            colnames(rna_cell_line) <- rnaCellLineColnames
-            loadedData$rna_cell_line <- rna_cell_line
-        }    
-        
-        if('RNA transcript tissue' %in% downloadList) {
-            temp <- tempfile()
-            download.file(url=downloadUrls['transcript_rna_tissue'],
-                          destfile=temp)
-            # transcript_rna_tissue <- read_tsv(unz(temp, 'transcript_rna_tissue.tsv'))
-            transcript_rna_tissue <-
-                read.delim2(
-                    unz(temp, 'transcript_rna_tissue.tsv'),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE,
-                    strip.white = TRUE,
-                    sep="\t",
-                    na.strings = c("", " ")
-                ) %>% as_tibble()
-            unlink(temp)
-            
-            ## Old version used tidyr::gather
-            # transcript_rna_tissue <- tidyr::gather(transcript_rna_tissue,
-            #                                 key='tissue',
-            #                                 value='value',
-            #                                 -'ensgid', -'enstid')
-            
-            ## New version use stats::reshape
-            transcript_rna_tissue <-
-                stats::reshape(
-                    transcript_rna_tissue,
-                    direction = "long",
-                    varying = list(3:ncol(transcript_rna_tissue)),
-                    v.names = "value",
-                    timevar = "tissue",
-                    times = c(colnames(transcript_rna_tissue[, 3:ncol(transcript_rna_tissue)]))
-                ) %>%
-                subset(select = -id)
-            
-            colnames(transcript_rna_tissue) <- transcriptRnaTissueColnames
-            loadedData$transcript_rna_tissue <- transcript_rna_tissue
-        }
-        
-        if('RNA transcript cell line' %in% downloadList) {
-            temp <- tempfile()
-            download.file(url=downloadUrls['transcript_rna_cell_line'],
-                          destfile=temp)
-            # transcript_rna_cell_line <- read_tsv(unz(temp, 'transcript_rna_celline.tsv'))
-            transcript_rna_cell_line <-
-                read.delim2(
-                    unz(temp, 'transcript_rna_celline.tsv'),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE,
-                    strip.white = TRUE,
-                    sep="\t",
-                    na.strings = c("", " ")
-                ) %>% as_tibble()
-            unlink(temp)
-            
-            ## Old version used tidyr::gather
-            # transcript_rna_cell_line <- tidyr::gather(transcript_rna_cell_line,
-            #                                    key='cell_line',
-            #                                    value='value',
-            #                                    -'ensgid', -'enstid')
-            
-            ## New version use stats::reshape
-            transcript_rna_cell_line <-
-                stats::reshape(
-                    transcript_rna_cell_line,
-                    direction = "long",
-                    varying = list(3:ncol(transcript_rna_cell_line)),
-                    v.names = "value",
-                    timevar = "cell_line",
-                    times = c(colnames(transcript_rna_cell_line[, 3:ncol(transcript_rna_cell_line)]))
-                ) %>%
-                subset(select = -id)
-            
-            colnames(transcript_rna_cell_line) <- transcriptRnaCellLineColnames
-            loadedData$transcript_rna_cell_line <- transcript_rna_cell_line
-        }
-        
-        rm(temp)
+        colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
     }
+    
+    names(loadedData) <- 
+        downloadDatasets$urls %>% 
+        gsub('.tsv.zip|https://www.proteinatlas.org/download/', '', .)
+
+
+
+    #     if (version == 'example') {# load example data
+    #     data('hpa_histology_data', 
+    #          package='HPAanalyze',
+    #          envir=environment())
+    #     if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
+    #         loadedData$normal_tissue <- HPAanalyze::hpa_histology_data$normal_tissue
+    #     }
+    #     
+    #     if('Pathology' %in% downloadList) {# load `pathology`
+    #         loadedData$pathology <- HPAanalyze::hpa_histology_data$pathology
+    #     }
+    #     
+    #     if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
+    #         loadedData$subcellular_location <- HPAanalyze::hpa_histology_data$subcellular_location
+    #     }
+    #     
+    # } 
+    #     if('RNA transcript tissue' %in% downloadList) {
+    #         temp <- tempfile()
+    #         download.file(url=downloadUrls['transcript_rna_tissue'],
+    #                       destfile=temp)
+    #         # transcript_rna_tissue <- read_tsv(unz(temp, 'transcript_rna_tissue.tsv'))
+    #         transcript_rna_tissue <-
+    #             read.delim2(
+    #                 unz(temp, 'transcript_rna_tissue.tsv'),
+    #                 stringsAsFactors = FALSE,
+    #                 check.names = FALSE,
+    #                 strip.white = TRUE,
+    #                 sep="\t",
+    #                 na.strings = c("", " ")
+    #             ) %>% as_tibble()
+    #         unlink(temp)
+    #         
+    #         ## Old version used tidyr::gather
+    #         # transcript_rna_tissue <- tidyr::gather(transcript_rna_tissue,
+    #         #                                 key='tissue',
+    #         #                                 value='value',
+    #         #                                 -'ensgid', -'enstid')
+    #         
+    #         ## New version use stats::reshape
+    #         transcript_rna_tissue <-
+    #             stats::reshape(
+    #                 transcript_rna_tissue,
+    #                 direction = "long",
+    #                 varying = list(3:ncol(transcript_rna_tissue)),
+    #                 v.names = "value",
+    #                 timevar = "tissue",
+    #                 times = c(colnames(transcript_rna_tissue[, 3:ncol(transcript_rna_tissue)]))
+    #             ) %>%
+    #             subset(select = -id)
+    #         
+    #         colnames(transcript_rna_tissue) <- transcriptRnaTissueColnames
+    #         loadedData$transcript_rna_tissue <- transcript_rna_tissue
+    #     }
+    #     
+    #     if('RNA transcript cell line' %in% downloadList) {
+    #         temp <- tempfile()
+    #         download.file(url=downloadUrls['transcript_rna_cell_line'],
+    #                       destfile=temp)
+    #         # transcript_rna_cell_line <- read_tsv(unz(temp, 'transcript_rna_celline.tsv'))
+    #         transcript_rna_cell_line <-
+    #             read.delim2(
+    #                 unz(temp, 'transcript_rna_celline.tsv'),
+    #                 stringsAsFactors = FALSE,
+    #                 check.names = FALSE,
+    #                 strip.white = TRUE,
+    #                 sep="\t",
+    #                 na.strings = c("", " ")
+    #             ) %>% as_tibble()
+    #         unlink(temp)
+    #         
+    #         ## Old version used tidyr::gather
+    #         # transcript_rna_cell_line <- tidyr::gather(transcript_rna_cell_line,
+    #         #                                    key='cell_line',
+    #         #                                    value='value',
+    #         #                                    -'ensgid', -'enstid')
+    #         
+    #         ## New version use stats::reshape
+    #         transcript_rna_cell_line <-
+    #             stats::reshape(
+    #                 transcript_rna_cell_line,
+    #                 direction = "long",
+    #                 varying = list(3:ncol(transcript_rna_cell_line)),
+    #                 v.names = "value",
+    #                 timevar = "cell_line",
+    #                 times = c(colnames(transcript_rna_cell_line[, 3:ncol(transcript_rna_cell_line)]))
+    #             ) %>%
+    #             subset(select = -id)
+    #         
+    #         colnames(transcript_rna_cell_line) <- transcriptRnaCellLineColnames
+    #         loadedData$transcript_rna_cell_line <- transcript_rna_cell_line
+    #     }
+    #     
+    #     rm(temp)
+    # }
     
     return(loadedData)
 }
