@@ -60,87 +60,222 @@
 
 hpaDownload <- function(downloadList='histology', version='latest') {
 
+    ## Create a data frame with information to filter and download datasets
+    allDatasets <- tibble(
+        datasetnames = c(
+            'Normal tissue', 
+            'Pathology',
+            'Subcellular location',
+            'RNA consensus tissue',
+            'RNA HPA tissue',
+            'RNA GTEx tissue',
+            'RNA FANTOM tissue',
+            'RNA single cell type',
+            'RNA single cell type tissue cluster',
+            'RNA GTEx brain region',
+            'RNA FANTOM brain region',
+            'RNA pig brain region',
+            'RNA pig brain subregion sample',
+            'RNA mouse brain region',
+            'RNA mouse brain subregion sample',
+            'RNA Allen mouse brain region',
+            'RNA HPA blood cell',
+            'RNA HPA blood cell sample',
+            'RNA Monaco blood cell',
+            'RNA Schmiedel blood cell',
+            'RNA HPA cell line',
+            'RNA TCGA cancer sample',
+            'RNA transcript tissue',
+            'RNA transcript cell line',
+            'RNA transcript pig brain',
+            'RNA transcript mouse brain'),
+    
+        tidycols = list(
+            
+            normal_tissue = 
+                c('ensembl', 'gene', 'tissue', 'cell_type', 'level', 'reliability'),
+            
+            pathology = 
+                c('ensembl', 'gene', 'cancer', 'high', 
+                  'medium', 'low', 'not_detected', 
+                  'prognostic_favorable', 
+                  'unprognostic_favorable', 
+                  'prognostic_unfavorable', 
+                  'unprognostic_unfavorable'),
+            
+            subcellular_location = 
+                c('ensembl', 'gene', 'reliability',
+                  'main_location', 'additional_location', 
+                  'extracellular_location',
+                  'enhanced', 'supported', 'approved', 
+                  'uncertain', 'single_cell_var_intensity', 
+                  'single_cell_var_spatial', 
+                  'cell_cycle_dependency', 'go_id'),
+            
+            rna_tissue_consensus = 
+                c('ensembl', 'gene', 'tissue', 'nx'),
+            
+            rna_tissue_hpa = 
+                c('ensembl', 'gene', 'tissue', 'tpm', 'ptpm', "nx"),
+            
+            rna_tissue_gtex = 
+                c('ensembl', 'gene', 'tissue', 'tpm', 'ptpm', "nx"),
+            
+            rna_tissue_fantom = 
+                c('ensembl', 'gene', 'tissue', 'tags_per_million', 
+                  'scaled_tags_per_million', "nx"),
+            
+            rna_single_cell_type = 
+                c('ensembl', 'gene', 'cell_type', 'nx'),
+            
+            rna_single_cell_type_tissue = 
+                c('ensembl', 'gene', 'tissue', 'cluster',
+                  'cell_type', 'read_count', 'ptpm'),
+            
+            rna_brain_gtex = 
+                c('ensembl', 'gene', 'brain_region', 'tpm', 'ptpm', 'nx'),
+            
+            rna_brain_fantom = 
+                c('ensembl', 'gene', 'brain_region', 'tags_per_million', 
+                  'scaled_tags_per_million', "nx"),
+            
+            rna_pig_brain_hpa = 
+                c('ensembl', 'gene', 'brain_region', 'tpm', 'ptpm', 'nx'),
+            
+            rna_pig_brain_sample_hpa = 
+                c('ensembl', 'id', 'main_region', 'subregion',
+                  'animal', 'tpm', 'ptpm'),
+            
+            rna_mouse_brain_hpa = 
+                c('ensembl', 'gene', 'brain_region', 'tpm', 'ptpm', 'nx'),
+            
+            rna_mouse_brain_sample_hpa = 
+                c('ensembl', 'id', 'main_region', 'subregion',
+                  'animal', 'tpm', 'ptpm'),
+            
+            rna_mouse_brain_allen = 
+                c('ensembl', 'gene', 'brain_region', 'expression_energy'),
+            
+            rna_blood_cell = 
+                c('ensembl', 'gene', 'blood_cell', 'tpm', 'ptpm', 'nx'),
+            
+            rna_blood_cell_sample = 
+                c('ensembl', 'blood_cell_type', 'donor', 'ptpm', 'nx'),
+            
+            rna_blood_cell_monaco = 
+                c('ensembl', 'gene', 'blood_cell', 'tpm', 'ptpm'),
+            
+            rna_blood_cell_schmiedel = 
+                c('ensembl', 'gene', 'blood_cell', 'tpm'),
+            
+            rna_celline = 
+                c('ensembl', 'gene', 'cell_line', 'tpm', 'ptpm', "nx"),
+            
+            rna_cancer_sample = 
+                c('ensembl', 'sample', 'cancer', 'fpkm'),
+            
+            transcript_rna_tissue = NULL,
+            
+            transcript_rna_celline = NULL,
+            
+            transcript_rna_pigbrain = NULL,
+            
+            transcript_rna_mousebrain = NULL
+            
+            ),
+        
+        urls = c(
+            normal_tissue = 
+                'https://www.proteinatlas.org/download/normal_tissue.tsv.zip',
+            pathology = 
+                'https://www.proteinatlas.org/download/pathology.tsv.zip',
+            subcellular_location = 
+                'https://www.proteinatlas.org/download/subcellular_location.tsv.zip',
+            rna_tissue_consensus = 
+                'https://www.proteinatlas.org/download/rna_tissue_consensus.tsv.zip',
+            rna_tissue_hpa = 
+                'https://www.proteinatlas.org/download/rna_tissue_hpa.tsv.zip',
+            rna_tissue_gtex = 
+                'https://www.proteinatlas.org/download/rna_tissue_gtex.tsv.zip',
+            rna_tissue_fantom = 
+                'https://www.proteinatlas.org/download/rna_tissue_fantom.tsv.zip',
+            rna_single_cell_type = 
+                'https://www.proteinatlas.org/download/rna_single_cell_type.tsv.zip',
+            rna_single_cell_type_tissue = 
+                'https://www.proteinatlas.org/download/rna_single_cell_type_tissue.tsv.zip',
+            rna_brain_gtex = 
+                'https://www.proteinatlas.org/download/rna_brain_gtex.tsv.zip',
+            rna_brain_fantom = 
+                'https://www.proteinatlas.org/download/rna_brain_fantom.tsv.zip',
+            rna_pig_brain_hpa = 
+                'https://www.proteinatlas.org/download/rna_pig_brain_hpa.tsv.zip',
+            rna_pig_brain_sample_hpa = 
+                'https://www.proteinatlas.org/download/rna_pig_brain_sample_hpa.tsv.zip',
+            rna_mouse_brain_hpa = 
+                'https://www.proteinatlas.org/download/rna_mouse_brain_hpa.tsv.zip',
+            rna_mouse_brain_sample_hpa = 
+                'https://www.proteinatlas.org/download/rna_mouse_brain_sample_hpa.tsv.zip',
+            rna_mouse_brain_allen = 
+                'https://www.proteinatlas.org/download/rna_mouse_brain_allen.tsv.zip',
+            rna_blood_cell = 
+                'https://www.proteinatlas.org/download/rna_blood_cell.tsv.zip',
+            rna_blood_cell_sample = 
+                'https://www.proteinatlas.org/download/rna_blood_cell_sample.tsv.zip',
+            rna_blood_cell_monaco = 
+                'https://www.proteinatlas.org/download/rna_blood_cell_monaco.tsv.zip',
+            rna_blood_cell_schmiedel = 
+                'https://www.proteinatlas.org/download/rna_blood_cell_schmiedel.tsv.zip',
+            rna_celline = 
+                'https://www.proteinatlas.org/download/rna_celline.tsv.zip',
+            rna_cancer_sample = 
+                'https://www.proteinatlas.org/download/rna_cancer_sample.tsv.zip',
+            transcript_rna_tissue = 
+                'https://www.proteinatlas.org/download/transcript_rna_tissue.tsv.zip',
+            transcript_rna_celline = 
+                'https://www.proteinatlas.org/download/transcript_rna_celline.tsv.zip',
+            transcript_rna_pigbrain = 
+                'https://www.proteinatlas.org/download/transcript_rna_pigbrain.tsv.zip',
+            transcript_rna_mousebrain = 
+                'https://www.proteinatlas.org/download/transcript_rna_mousebrain.tsv.zip'
+        )
+    )
+    
     ## generate a list of item to download    
-    allDatasets <- c('Normal tissue', 
-                     'Pathology',
-                     'Subcellular location',
-                     'RNA consensus tissue',
-                     'RNA HPA tissue',
-                     'RNA GTEx tissue',
-                     'RNA FANTOM tissue',
-                     'RNA single cell type',
-                     'RNA single cell type tissue cluster',
-                     'RNA GTEx brain region',
-                     'RNA FANTOM brain region',
-                     'RNA pig brain region',
-                     'RNA pig brain subregion sample',
-                     'RNA mouse brain region',
-                     'RNA mouse brain subregion sample',
-                     'RNA Allen mouse brain region',
-                     'RNA HPA blood cell',
-                     'RNA HPA blood cell sample',
-                     'RNA Monaco blood cell',
-                     'RNA Schmiedel blood cell',
-                     'RNA HPA cell line',
-                     'RNA TCGA cancer sample',
-                     'RNA transcript tissue',
-                     'RNA transcript cell line',
-                     'RNA transcript pig brain',
-                     'RNA transcript mouse brain'
-                     )
     
     if(downloadList == 'all') {
-        downloadList <- allDatasets
+        downloadList <- allDatasets$datasetnames
         
     } else if(downloadList == 'histology') { 
-        downloadList <- allDatasets[1:3]
+        downloadList <- allDatasets$datasetnames[1:3]
         
     } else if(downloadList == 'rna tissue') {
-        downloadList <- allDatasets[4:7]
+        downloadList <- allDatasets$datasetnames[4:7]
         
     } else if(downloadList == 'rna single cell type') {
-        downloadList <- allDatasets[8:9]
+        downloadList <- allDatasets$datasetnames[8:9]
         
     } else if(downloadList == 'rna brain region') {
-        downloadList <- allDatasets[10:16]
+        downloadList <- allDatasets$datasetnames[10:16]
         
     } else if(downloadList == 'rna blood cell') {
-        downloadList <- allDatasets[17:20]
+        downloadList <- allDatasets$datasetnames[17:20]
         
-    } else if(downloadList == 'rna blood cell') {
-        downloadList <- allDatasets[23:26]
+    } else if(downloadList == 'isoform') {
+        downloadList <- allDatasets$datasetnames[23:26]
         
     } 
     
+    ## filter the datasets to download
+    downloadDatasets <- filter(allDatasets, names %in% downloadList)
     
-    #initiate the list to be returned
+    
+    #initiate the list of processed data to be returned
     loadedData <- list()
-    
+
     #create list of colnames
-    normalTissueColnames <- c('ensembl', 'gene', 'tissue', 
-                              'cell_type', 'level', 'reliability')
-    pathologyColnames <- c('ensembl', 'gene', 'cancer', 'high', 
-                           'medium', 'low', 'not_detected', 
-                           'prognostic_favorable', 
-                           'unprognostic_favorable', 
-                           'prognostic_unfavorable', 
-                           'unprognostic_unfavorable')
-    subcellularLocationColnames <- c('ensembl', 'gene', 'reliability',
-                                     "main_location", "additional_location", 
-                                     "extracellular_location",
-                                     'enhanced', 'supported', 'approved', 
-                                     'uncertain', 'single_cell_var_intensity', 
-                                     'single_cell_var_spatial', 
-                                     'cell_cycle_dependency', 'go_id')
-    rnaTissueColnames <- c('ensembl', 'gene', 'tissue', 'nx')
-    rnaCellLineColnames <- c('ensembl', 'gene', 'cell_line',
-                             'tpm', 'ptpm', "nx")
-    transcriptRnaTissueColnames <- c('ensembl', 'transcript', 
-                                     'tissue', 'tpm')
-    transcriptRnaCellLineColnames <- c('ensembl', 'transcript', 
-                                       'cell_line', 'tpm')
     
-    if (version == 'example') {# load example data
+
+        if (version == 'example') {# load example data
         data('hpa_histology_data', 
              package='HPAanalyze',
              envir=environment())
