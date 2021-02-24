@@ -178,13 +178,17 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             rna_cancer_sample = 
                 c('ensembl', 'sample', 'cancer', 'fpkm'),
             
-            transcript_rna_tissue = NULL,
+            transcript_rna_tissue = 
+                c('ensgid', 'enstid', 'sample', 'tpm'),
             
-            transcript_rna_celline = NULL,
+            transcript_rna_celline = 
+                c('ensgid', 'enstid', 'sample', 'tpm'),
             
-            transcript_rna_pigbrain = NULL,
+            transcript_rna_pigbrain = 
+                c('ensgid', 'enstid', 'sample', 'tpm'),
             
-            transcript_rna_mousebrain = NULL
+            transcript_rna_mousebrain = 
+                c('ensgid', 'enstid', 'sample', 'tpm')
             
             ),
         
@@ -287,11 +291,33 @@ hpaDownload <- function(downloadList='histology', version='latest') {
                 strip.white = TRUE,
                 sep="\t",
                 na.strings = c("", " ")
-            ) %>% as_tibble()
+            )
         unlink(temp)
         
-        colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
+        if (downloadDatasets$datasetnames[[i]] %in% c('RNA transcript tissue',
+                                                      'RNA transcript cell line',
+                                                      'RNA transcript pig brain',
+                                                      'RNA transcript mouse brain')) {
+        loadedData[[i]] <-
+            stats::reshape(
+                loadedData[[i]],
+                direction = "long",
+                varying = list(3:ncol(loadedData[[i]])),
+                v.names = "tpm",
+                timevar = "sample",
+                times = c(colnames(loadedData[[i]][, 3:ncol(loadedData[[i]])]))
+            ) %>%
+            subset(select = -id)
+
+        } 
+    
+    ## assign tidy colnames    
+    colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
+
     }
+    
+    ## convert to tibbles
+    loadedData <- lapply(loadedData, as_tibble)
     
     names(loadedData) <- 
         downloadDatasets$urls %>% 
