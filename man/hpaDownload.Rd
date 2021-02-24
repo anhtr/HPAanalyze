@@ -81,7 +81,6 @@ very big.
   downloadedDataRna <- hpaDownload(downloadList='rna tissue', version='latest')
   summary(downloadedDataRna)
   
-  
 }
 \seealso{
 \code{\link{hpaDownload}}
