@@ -11,19 +11,49 @@
 #' @param downloadList A vector or string indicate which datasets to download.
 #'   Possible value:
 #'   \itemize{
-#'     \item \code{'Normal tissue'}
+#'     \item \code{'Normal tissue'} 
 #'     \item \code{'Pathology'}
 #'     \item \code{'Subcellular location'}
-#'     \item \code{'RNA tissue'}
-#'     \item \code{'RNA cell line'}
-#'     \item \code{'RNA transcript tissue'}
+#'     \item \code{'RNA consensus tissue'} 
+#'     \item \code{'RNA HPA tissue'}
+#'     \item \code{'RNA GTEx tissue'}
+#'     \item \code{'RNA FANTOM tissue'} 
+#'     \item \code{'RNA single cell type'}
+#'     \item \code{'RNA single cell type tissue cluster'}
+#'     \item \code{'RNA GTEx brain region'} 
+#'     \item \code{'RNA FANTOM brain region'}
+#'     \item \code{'RNA pig brain region'}
+#'     \item \code{'RNA pig brain subregion sample'} 
+#'     \item \code{'RNA mouse brain region'}
+#'     \item \code{'RNA mouse brain subregion sample'}
+#'     \item \code{'RNA Allen mouse brain region'} 
+#'     \item \code{'RNA HPA blood cell'}
+#'     \item \code{'RNA HPA blood cell sample'}
+#'     \item \code{'RNA Monaco blood cell'} 
+#'     \item \code{'RNA Schmiedel blood cell'}
+#'     \item \code{'RNA HPA cell line'}
+#'     \item \code{'RNA TCGA cancer sample'}
+#'     \item \code{'RNA transcript tissue'} 
 #'     \item \code{'RNA transcript cell line'}
+#'     \item \code{'RNA transcript pig brain'}
+#'     \item \code{'RNA transcript mouse brain'} 
 #'     \item \code{'all'}: download everything
 #'     \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology',
 #'     'Subcellular location')}
-#'     \item \code{'rna'}: same as \code{c('RNA tissue', 'RNA cell line')}
+#'     \item \code{'rna tissue'}: same as \code{c('RNA consensus tissue', 'RNA
+#'     HPA tissue', 'RNA GTEx tissue', 'RNA FANTOM tissue')}
+#'     \item \code{'rna single cell type'}: same as \code{c('RNA single cell
+#'     type', 'RNA single cell type tissue cluster')} 
+#'     \item \code{'rna brain region'}: same as \code{c('RNA GTEx brain region',
+#'     'RNA FANTOM brain region', 'RNA pig brain region', 'RNA pig brain
+#'     subregion sample', 'RNA mouse brain region', 'RNA mouse brain subregion
+#'     sample', 'RNA Allen mouse brain region')}
+#'     \item \code{'rna single cell type'}: same as \code{c('RNA HPA blood
+#'     cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
+#'     Schmiedel blood cell')}
 #'     \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA
-#'     transcript cell line')}
+#'     transcript cell line', 'RNA transcript pig brain', 'RNA transcript mouse
+#'     brain')}
 #'   }
 #'   See \url{https://www.proteinatlas.org/about/download} for more information.
 #'   
@@ -32,9 +62,8 @@
 #'   \itemize{
 #'     \item \code{'latest'}: Download latest version. Require Internet
 #'     connection.
-#'     \item \code{'example'}: Load the example dataset from 'HPA
-#'     analyze' ('hpa_histology_data'). Does not contain rna or
-#'     isoform data.
+#'     \item \code{'example'} or \code{'built-in'}: Load the built-in dataset
+#'     from 'HPAanalyze' ('hpa_histology_data').
 #'   }
 #' 
 #' @family downloadable datasets functions
@@ -56,7 +85,7 @@
 #'   
 #' @import dplyr
 #  @import hpar
-#' @importFrom utils download.file data read.delim2
+#' @importFrom utils download.file data read.delim2 unzip
 #' @importFrom stats reshape
 #' @importFrom tibble as_tibble
 #' @export
@@ -280,6 +309,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
     #initiate the list of processed data to be returned
     loadedData <- list()
     
+    ## Download the requested datasets
     for (i in seq_along(downloadDatasets$urls)) {
         temp <- tempfile()
         download.file(url = downloadDatasets$urls[[i]],
@@ -323,104 +353,6 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         downloadDatasets$urls %>% 
         gsub('.tsv.zip|https://www.proteinatlas.org/download/', '', .)
 
-
-
-    #     if (version == 'example') {# load example data
-    #     data('hpa_histology_data', 
-    #          package='HPAanalyze',
-    #          envir=environment())
-    #     if('Normal tissue' %in% downloadList) {# load 'normal_tissue'
-    #         loadedData$normal_tissue <- HPAanalyze::hpa_histology_data$normal_tissue
-    #     }
-    #     
-    #     if('Pathology' %in% downloadList) {# load `pathology`
-    #         loadedData$pathology <- HPAanalyze::hpa_histology_data$pathology
-    #     }
-    #     
-    #     if('Subcellular location' %in% downloadList) {# load 'subcellular_location'
-    #         loadedData$subcellular_location <- HPAanalyze::hpa_histology_data$subcellular_location
-    #     }
-    #     
-    # } 
-    #     if('RNA transcript tissue' %in% downloadList) {
-    #         temp <- tempfile()
-    #         download.file(url=downloadUrls['transcript_rna_tissue'],
-    #                       destfile=temp)
-    #         # transcript_rna_tissue <- read_tsv(unz(temp, 'transcript_rna_tissue.tsv'))
-    #         transcript_rna_tissue <-
-    #             read.delim2(
-    #                 unz(temp, 'transcript_rna_tissue.tsv'),
-    #                 stringsAsFactors = FALSE,
-    #                 check.names = FALSE,
-    #                 strip.white = TRUE,
-    #                 sep="\t",
-    #                 na.strings = c("", " ")
-    #             ) %>% as_tibble()
-    #         unlink(temp)
-    #         
-    #         ## Old version used tidyr::gather
-    #         # transcript_rna_tissue <- tidyr::gather(transcript_rna_tissue,
-    #         #                                 key='tissue',
-    #         #                                 value='value',
-    #         #                                 -'ensgid', -'enstid')
-    #         
-    #         ## New version use stats::reshape
-    #         transcript_rna_tissue <-
-    #             stats::reshape(
-    #                 transcript_rna_tissue,
-    #                 direction = "long",
-    #                 varying = list(3:ncol(transcript_rna_tissue)),
-    #                 v.names = "value",
-    #                 timevar = "tissue",
-    #                 times = c(colnames(transcript_rna_tissue[, 3:ncol(transcript_rna_tissue)]))
-    #             ) %>%
-    #             subset(select = -id)
-    #         
-    #         colnames(transcript_rna_tissue) <- transcriptRnaTissueColnames
-    #         loadedData$transcript_rna_tissue <- transcript_rna_tissue
-    #     }
-    #     
-    #     if('RNA transcript cell line' %in% downloadList) {
-    #         temp <- tempfile()
-    #         download.file(url=downloadUrls['transcript_rna_cell_line'],
-    #                       destfile=temp)
-    #         # transcript_rna_cell_line <- read_tsv(unz(temp, 'transcript_rna_celline.tsv'))
-    #         transcript_rna_cell_line <-
-    #             read.delim2(
-    #                 unz(temp, 'transcript_rna_celline.tsv'),
-    #                 stringsAsFactors = FALSE,
-    #                 check.names = FALSE,
-    #                 strip.white = TRUE,
-    #                 sep="\t",
-    #                 na.strings = c("", " ")
-    #             ) %>% as_tibble()
-    #         unlink(temp)
-    #         
-    #         ## Old version used tidyr::gather
-    #         # transcript_rna_cell_line <- tidyr::gather(transcript_rna_cell_line,
-    #         #                                    key='cell_line',
-    #         #                                    value='value',
-    #         #                                    -'ensgid', -'enstid')
-    #         
-    #         ## New version use stats::reshape
-    #         transcript_rna_cell_line <-
-    #             stats::reshape(
-    #                 transcript_rna_cell_line,
-    #                 direction = "long",
-    #                 varying = list(3:ncol(transcript_rna_cell_line)),
-    #                 v.names = "value",
-    #                 timevar = "cell_line",
-    #                 times = c(colnames(transcript_rna_cell_line[, 3:ncol(transcript_rna_cell_line)]))
-    #             ) %>%
-    #             subset(select = -id)
-    #         
-    #         colnames(transcript_rna_cell_line) <- transcriptRnaCellLineColnames
-    #         loadedData$transcript_rna_cell_line <- transcript_rna_cell_line
-    #     }
-    #     
-    #     rm(temp)
-    # }
-    
     return(loadedData)
 }
 
