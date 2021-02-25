@@ -47,40 +47,6 @@ named_vector_list_to_tibble <- function(x) {
 }
 
 
-## Generate urls to download datasets =========================================
-
-version_to_download_urls <- function(x) {
-    if (x == 'latest') {
-        x <- 'www'
-    }
-    
-    urls <- c(paste0('https://', x, 
-                     '.proteinatlas.org/download/normal_tissue.tsv.zip'),
-              paste0('https://', x, 
-                     '.proteinatlas.org/download/pathology.tsv.zip'),
-              paste0('https://', x, 
-                     '.proteinatlas.org/download/subcellular_location.tsv.zip'),
-              paste0('https://', x, 
-                     '.proteinatlas.org/download/rna_tissue.tsv.zip'),
-              paste0('https://', x, 
-                     '.proteinatlas.org/download/rna_celline.tsv.zip'),
-              paste0('https://', x, 
-                     '.proteinatlas.org/download/transcript_rna_tissue.tsv.zip'),
-              paste0('https://', x, 
-                     '.proteinatlas.org/download/transcript_rna_celline.tsv.zip'))
-    
-    names(urls) <- c('normal_tissue',
-                     'pathology',
-                     'subcellular_location',
-                     'rna_tissue',
-                     'rna_cell_line',
-                     'transcript_rna_tissue',
-                     'transcript_rna_cell_line')
-    
-    return(urls)
-}
-
-
 ## Generate url to download xml ===============================================
 
 version_to_xml_url <- function(id, vers) {
