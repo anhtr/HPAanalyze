@@ -236,7 +236,8 @@ jobs:
               `quit-with-status` = TRUE,
               `no-check-R-ver` = TRUE,
               `no-check-bioc-help` = TRUE,
-              `no-check-library-calls` = TRUE
+              `no-check-pkg-size` = TRUE,
+              `no-check-man-doc` = TRUE
           )
         shell: Rscript {0}
 
