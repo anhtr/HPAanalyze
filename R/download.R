@@ -62,8 +62,9 @@
 #'   \itemize{
 #'     \item \code{'latest'}: Download latest version. Require Internet
 #'     connection.
-#'     \item \code{'example'} or \code{'built-in'}: Load the built-in dataset
-#'     from 'HPAanalyze' ('hpa_histology_data').
+#'     \item \code{'example'} or \code{'built-in'}: Load the built-in histology
+#'     dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
+#'     connection.
 #'   }
 #' 
 #' @family downloadable datasets functions
@@ -84,7 +85,6 @@
 #'   
 #'   
 #' @import dplyr
-#  @import hpar
 #' @importFrom utils download.file data read.delim2 unzip
 #' @importFrom stats reshape
 #' @importFrom tibble as_tibble
@@ -302,57 +302,77 @@ hpaDownload <- function(downloadList='histology', version='latest') {
         
     } 
     
-    ## filter the datasets to download
+    # filter the datasets to download
     downloadDatasets <- filter(allDatasets, datasetnames %in% downloadList)
-    
     
     #initiate the list of processed data to be returned
     loadedData <- list()
     
-    ## Download the requested datasets
-    for (i in seq_along(downloadDatasets$urls)) {
-        temp <- tempfile()
-        download.file(url = downloadDatasets$urls[[i]],
-                      destfile = temp)
-        loadedData[[i]] <- read.delim2(
-                unz(temp, unzip(temp, list = TRUE)$Name[1]),
-                stringsAsFactors = FALSE,
-                check.names = FALSE,
-                strip.white = TRUE,
-                sep="\t",
-                na.strings = c("", " ")
-            )
-        unlink(temp)
-        
-        if (downloadDatasets$datasetnames[[i]] %in% c('RNA transcript tissue',
-                                                      'RNA transcript cell line',
-                                                      'RNA transcript pig brain',
-                                                      'RNA transcript mouse brain')) {
-        loadedData[[i]] <-
-            stats::reshape(
-                loadedData[[i]],
-                direction = "long",
-                varying = list(3:ncol(loadedData[[i]])),
-                v.names = "tpm",
-                timevar = "sample",
-                times = c(colnames(loadedData[[i]][, 3:ncol(loadedData[[i]])]))
-            ) %>%
-            subset(select = -id)
-
-        } 
+    ## Download if version is 'built-in' or 'example'
     
-    ## assign tidy colnames    
-    colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
-
+    if (version %in% c('example', 'built-in')) {
+    
+        message('Only the followings are example/built-in datasets: \n - Normal tissue \n - Pathology \n - Subcellular location \nOther datasets will not be loaded')
+        
+        downloadDatasets <- filter(downloadDatasets, 
+                                   datasetnames %in% c(
+                                       'Normal tissue', 
+                                       'Pathology',
+                                       'Subcellular location'))
+        
+        for (i in names(downloadDatasets$urls)) {
+            loadedData[[i]] <- hpa_histology_data[[i]]
+        }
+        
+    } else if (version == "latest") {
+    
+    ## Download the requested datasets if version is "latest"
+    
+        for (i in seq_along(downloadDatasets$urls)) {
+            temp <- tempfile()
+            download.file(url = downloadDatasets$urls[[i]],
+                          destfile = temp)
+            loadedData[[i]] <- read.delim2(
+                    unz(temp, unzip(temp, list = TRUE)$Name[1]),
+                    stringsAsFactors = FALSE,
+                    check.names = FALSE,
+                    strip.white = TRUE,
+                    sep="\t",
+                    na.strings = c("", " ")
+                )
+            unlink(temp)
+            
+            if (downloadDatasets$datasetnames[[i]] %in% c('RNA transcript tissue',
+                                                          'RNA transcript cell line',
+                                                          'RNA transcript pig brain',
+                                                          'RNA transcript mouse brain')) {
+            loadedData[[i]] <-
+                stats::reshape(
+                    loadedData[[i]],
+                    direction = "long",
+                    varying = list(3:ncol(loadedData[[i]])),
+                    v.names = "tpm",
+                    timevar = "sample",
+                    times = c(colnames(loadedData[[i]][, 3:ncol(loadedData[[i]])]))
+                ) %>%
+                subset(select = -id)
+    
+            } 
+        
+        ## assign tidy colnames    
+        colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
+    
+        }
+        
+        ## convert to tibbles
+        loadedData <- lapply(loadedData, as_tibble)
+        
+        names(loadedData) <- 
+            downloadDatasets$urls %>% 
+            gsub('.tsv.zip|https://www.proteinatlas.org/download/', '', .)
+        
     }
     
-    ## convert to tibbles
-    loadedData <- lapply(loadedData, as_tibble)
-    
-    names(loadedData) <- 
-        downloadDatasets$urls %>% 
-        gsub('.tsv.zip|https://www.proteinatlas.org/download/', '', .)
-
     return(loadedData)
 }
 
