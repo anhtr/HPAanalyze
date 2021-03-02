@@ -77,5 +77,3 @@ saveRDS(CCNB1_parsed, "data/CCNB1_parsed.rds")
 ```
 
 # Copyright
-```{r child = 'data/copyright', eval = TRUE}
-```

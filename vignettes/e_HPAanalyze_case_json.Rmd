@@ -92,5 +92,3 @@ hpaExportJSON(data_subset, fileName = "hpa_data")
 
 
 # Copyright
-```{r child = 'data/copyright', eval = TRUE}
-```

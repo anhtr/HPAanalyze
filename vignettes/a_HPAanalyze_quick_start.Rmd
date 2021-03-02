@@ -133,5 +133,3 @@ To better understand the output, please read the documentation for other `hpaXml
 ```
 
 # Copyright
-```{r child = 'data/copyright'}
-```

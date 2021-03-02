@@ -179,6 +179,3 @@ filter(query_protein_classes_df, name == "Potential drug targets")
 *It is even more impressive when you extract patient's detail of multiple genes using `hpaXmlTissueExpr`. You can match samples from the same patient across multiple antibodies and proteins. However, it will take a little bit more work than the above example, so I will leave it to you to explore these hidden potentials."*
 
 # Copyright
-```{r child = 'data/copyright', eval = TRUE}
-```
-
