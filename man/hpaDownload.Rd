@@ -61,8 +61,9 @@ value:
 \itemize{
   \item \code{'latest'}: Download latest version. Require Internet
   connection.
-  \item \code{'example'} or \code{'built-in'}: Load the built-in dataset
-  from 'HPAanalyze' ('hpa_histology_data').
+  \item \code{'example'} or \code{'built-in'}: Load the built-in histology
+  dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
+  connection.
 }}
 }
 \value{
@@ -80,6 +81,7 @@ very big.
   
   downloadedDataRna <- hpaDownload(downloadList='rna tissue', version='latest')
   summary(downloadedDataRna)
+  
   
 }
 \seealso{
