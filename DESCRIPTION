@@ -7,7 +7,7 @@ Authors@R: person("Anh Nhat", "Tran", email = "trannhatanh89@gmail.com",
                   role = c("aut", "cre"))
 Description: Provide functions for retrieving, exploratory analyzing and 
     visualizing the Human Protein Atlas data.
-Depends: R (>= 4.0.0)
+Depends: R (>= 3.5.0)
 License: GPL-3 + file LICENSE
 RoxygenNote: 7.1.1
 Encoding: UTF-8

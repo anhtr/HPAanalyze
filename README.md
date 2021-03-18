@@ -2,7 +2,6 @@ HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200"/>
 ============================================================================
 
 ![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg)
-
 ![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)
 
 -   **Background:** The Human Protein Atlas program aims to map human

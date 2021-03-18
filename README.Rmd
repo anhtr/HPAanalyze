@@ -26,9 +26,7 @@ knitr::opts_chunk$set(
 
 # HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200"/>
 
-![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg)
-
-![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)
+![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg) ![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)
 
 * **Background:** The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics.
 * **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
