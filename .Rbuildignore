@@ -7,3 +7,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
+^docs$
+^data_raw

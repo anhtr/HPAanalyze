@@ -1,7 +1,10 @@
-HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200" />
-=============================================================================
+HPAanalyze \<img src=‘vignettes/figures/hex.png’ align=“right” height="200
+==========================================================================
 
-[![TravisCI](https://travis-ci.com/trannhatanh89/HPAanalyze.svg?branch=master)](https://travis-ci.com/trannhatanh89/HPAanalyze)
+![R CMD
+Check](https://github.com/anhtr/HPAanalyze/actions/workflows/%20R-CMD-check.yaml/badge.svg)
+
+![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/%20check-bioc.yml/badge.svg)
 
 -   **Background:** The Human Protein Atlas program aims to map human
     proteins via multiple technologies including imaging, proteomics and
@@ -76,7 +79,7 @@ The development version of *HPAanalyze* is available on Github can be
 installed with:
 
 ``` r
-devtools::install_github("trannhatanh89/HPAanalyze")
+devtools::install_github("anhtr/HPAanalyze")
 ```
 
 ### Full dataset import, subsetting and export
@@ -132,7 +135,7 @@ Availability and requirements
 
 -   Project name: HPAanalyze
 -   Project home page:
-    <a href="https://github.com/trannhatanh89/HPAanalyze" class="uri">https://github.com/trannhatanh89/HPAanalyze</a>
+    <a href="https://github.com/anhtr/HPAanalyze" class="uri">https://github.com/anhtr/HPAanalyze</a>
 -   Operating system(s): All platforms where R is available, including
     Windows, Linux, OS X
 -   Programming language: R
@@ -154,10 +157,10 @@ Birmingham.
 Copyright
 =========
 
-**Anh Tran, 2018-2020 **
+**Anh Tran, 2018-2021 **
 
 Please cite: **Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze:
 an R package that facilitates the retrieval and analysis of the Human
 Protein Atlas data. BMC Bioinformatics 20, 463 (2019)
-<a href="doi:10.1186/s12859-019-3059-z" class="uri">doi:10.1186/s12859-019-3059-z</a>
+<a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a>
 **

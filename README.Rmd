@@ -24,9 +24,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200" />
+# HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200
 
-[![TravisCI](https://travis-ci.com/trannhatanh89/HPAanalyze.svg?branch=master)](https://travis-ci.com/trannhatanh89/HPAanalyze)
+![R CMD Check](https://github.com/anhtr/HPAanalyze/actions/workflows/
+R-CMD-check.yaml/badge.svg)
+
+![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/
+check-bioc.yml/badge.svg)
 
 * **Background:** The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics.
 * **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
@@ -58,7 +62,7 @@ BiocManager::install("HPAanalyze")
 The development version of *HPAanalyze* is available on Github can be installed with:
 
 ``` {r eval = FALSE}
-devtools::install_github("trannhatanh89/HPAanalyze")
+devtools::install_github("anhtr/HPAanalyze")
 ```
 
 ### Full dataset import, subsetting and export
@@ -82,7 +86,7 @@ In the first release, *HPAanalyze* includes four functions for data extraction f
 # Availability and requirements
 
 * Project name: HPAanalyze
-* Project home page: https://github.com/trannhatanh89/HPAanalyze
+* Project home page: https://github.com/anhtr/HPAanalyze
 * Operating system(s): All platforms where R is available, including Windows, Linux, OS X
 * Programming language: R
 * Other requirements: R 3.5.0 or higher, and the R packages dplyr, openxlsx, ggplot2, readr, tibble, xml2, reshape2, tidyr, magrittr, stats, utils, hpar, cowplot
