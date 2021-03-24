@@ -44,7 +44,7 @@ hpaVisTissue <- function(data=NULL,
                          targetGene=NULL, 
                          targetTissue=NULL, 
                          targetCellType=NULL,
-                         color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
+                         color=c('#FCFDBF', '#FE9F6D', '#DE4968', '#8C2981'),
                          customTheme=FALSE) {
     
     infoDisp <- FALSE
@@ -171,7 +171,7 @@ hpaVisTissue <- function(data=NULL,
 hpaVisPatho <- function(data=NULL, 
                         targetGene=NULL, 
                         targetCancer=NULL, 
-                        color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
+                        color=c('#FCFDBF', '#FE9F6D', '#DE4968', '#8C2981'),
                         customTheme=FALSE) {
     
     infoDisp <- FALSE
@@ -294,7 +294,7 @@ hpaVisPatho <- function(data=NULL,
 hpaVisSubcell <- function(data=NULL, 
                           targetGene=NULL,
                           reliability = c("enhanced", "supported", "approved", "uncertain"),
-                          color=c('#ffffb2', '#e31a1c'),
+                          color=c('#FCFDBF', '#8C2981'),
                           customTheme=FALSE) {
     
     infoDisp <- FALSE
