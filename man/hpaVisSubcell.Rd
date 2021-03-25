@@ -8,7 +8,7 @@ hpaVisSubcell(
   data = NULL,
   targetGene = NULL,
   reliability = c("enhanced", "supported", "approved", "uncertain"),
-  color = c("#ffffb2", "#e31a1c"),
+  color = c("#FCFDBF", "#8C2981"),
   customTheme = FALSE
 )
 }
@@ -18,7 +18,7 @@ hpaVisSubcell(
 HPA histology data (built-in) by default.}
 
 \item{targetGene}{Vector of strings of HGNC gene symbols. By default it is
-set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN')}. You can also mix
 HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 converted to HGNC gene symbols.}
 

@@ -432,12 +432,7 @@ hpaSubset <- function(data=NULL,
                       targetCellLine=NULL) {
     
     # Check if data is provided or not
-    if (is.null(data)) {
-        message(paste0('No data provided. Use version ', 
-                       hpa_histology_data$metadata$HPAversion,
-                       "."))
-        data = HPAanalyze::hpa_histology_data
-    }
+    data <- is_null_data(data = data)
     
     if('normal_tissue' %in% names(data)) {
         if(!is.null(targetGene)) {
@@ -534,12 +529,7 @@ hpaSubset <- function(data=NULL,
 hpaListParam <- function(data=NULL) {
     
     # Check if data is provided or not
-    if (is.null(data)) {
-        message(paste0('No data provided. Use version ', 
-                       hpa_histology_data$metadata$HPAversion,
-                       "."))
-        data = HPAanalyze::hpa_histology_data
-    }
+    data <- is_null_data(data = data)
     
     availData <- list()
     

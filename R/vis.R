@@ -11,7 +11,7 @@
 #'   \code{hpa_subset()}. Require the \code{normal_tissue} dataset. Use HPA
 #'   histology data (built-in) by default.
 #' @param targetGene Vector of strings of HGNC gene symbols. By default it is
-#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN')}. You can also mix
 #'   HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 #'   converted to HGNC gene symbols.
 #' @param targetTissue Vector of strings of normal tissues. Default to breast.
@@ -40,82 +40,58 @@
 #' @import ggplot2
 #' @export
 
-hpaVisTissue <- function(data=NULL, 
-                         targetGene=NULL, 
-                         targetTissue=NULL, 
-                         targetCellType=NULL,
-                         color=c('#FCFDBF', '#FE9F6D', '#DE4968', '#8C2981'),
-                         customTheme=FALSE) {
+hpaVisTissue <- function(data = NULL,
+                         targetGene = NULL,
+                         targetTissue = NULL,
+                         targetCellType = NULL,
+                         color = c('#FCFDBF', '#FE9F6D', '#DE4968', '#8C2981'),
+                         customTheme = FALSE) {
+
+    # Check if parameters are provided or not
+    data <- is_null_data(data = data)
     
-    infoDisp <- FALSE
+    target_check <- is_null_target(gene = targetGene,
+                                   tissue = targetTissue,
+                                   celltype = targetCellType)
     
-    # Check if data is provided or not
-    if (is.null(data)) {
-        message(paste0('No data provided. Use version ', 
-                       hpa_histology_data$metadata$HPAversion,
-                       "."))
-        data = HPAanalyze::hpa_histology_data
-    }
+    targetGene <- target_check$targetGene
+    targetTissue <- target_check$targetTissue
     
-    # Check if targetGene is provided
-    if (is.null(targetGene)) {
-        message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
-        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
-        infoDisp <- TRUE
-    }
-    
-    # Check if targetTissue is provided
-    if (is.null(targetTissue)) {
-        message('targetTissue variable not specified, default to breast.')
-        targetTissue <- 'breast'
-        infoDisp <- TRUE
-    }
-    
-    # Check if targetCellType is provided
-    if (is.null(targetCellType)) {
-        message('targetCellType variable not specified, visualize all.')
-        targetCellType <- NULL
-        infoDisp <- TRUE
-    }
-    
-    # Show a message if any parameter is not defined
-    if (infoDisp) {
-        message('Use hpaListParam() to list possible values for target variables.')
-    }
-    
-    targetGene <- gene_ensembl_convert(targetGene, "gene")
-    
+    # Create plot dataset with target parameters
     plotData <- data$normal_tissue %>%
         filter(gene %in% targetGene) %>%
         filter(tissue %in% targetTissue)
     
-    if(!is.null(targetCellType)) {
+    if (!is.null(targetCellType)) {
         plotData <- filter(plotData, cell_type %in% targetCellType)
     }
     
-    plotData <- mutate(plotData,
-                       tissue_cell=paste0(tissue, ' / ', cell_type),
-                       level=factor(level, 
-                                    levels=c('High', 'Medium', 
-                                             'Low', 'Not detected')))
+    plotData <- mutate(
+        plotData,
+        tissue_cell = paste0(tissue, ' / ', cell_type),
+        level = factor(level,
+                       levels = c('High', 'Medium', 'Low', 'Not detected'))
+    )
     
-    levelColors <- c('Not detected'=color[1],
-                     'Low'=color[2],
-                     'Medium'=color[3],
-                     'High'=color[4])
+    levelColors <- c(
+        'Not detected' = color[1],
+        'Low' = color[2],
+        'Medium' = color[3],
+        'High' = color[4]
+    )
     
-    plot <- ggplot(plotData, aes(x=gene, y=tissue_cell)) +
-        geom_tile(aes(fill=level)) +
-        scale_x_discrete(limits=targetGene) +
-        scale_fill_manual(values=levelColors)
+    plot <- ggplot(plotData, aes(x = gene, y = tissue_cell)) +
+        geom_tile(aes(fill = level)) +
+        scale_x_discrete(limits = targetGene) +
+        scale_fill_manual(values = levelColors)
     
-    if(!customTheme) {
-        plot <- plot + 
+    if (!customTheme) {
+        plot <- plot +
             ylab('Tissue / Cell') +
             xlab('Genes') +
             theme_minimal() +
             theme(panel.grid = element_blank()) +
-            theme(axis.text.x=element_text(angle=90, hjust=1)) +
+            theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
             coord_equal()
     }
     
@@ -138,7 +114,7 @@ hpaVisTissue <- function(data=NULL,
 #'   \code{hpa_subset()}. Require the \code{pathology} dataset. Use HPA histology
 #'   data (built-in) by default.
 #' @param targetGene Vector of strings of HGNC gene symbols. By default it is
-#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN')}. You can also mix
 #'   HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 #'   converted to HGNC gene symbols.
 #' @param targetCancer Vector of strings of normal tissues. The function will
@@ -168,83 +144,74 @@ hpaVisTissue <- function(data=NULL,
 #' @importFrom stats reshape
 #' @export
 
-hpaVisPatho <- function(data=NULL, 
-                        targetGene=NULL, 
-                        targetCancer=NULL, 
-                        color=c('#FCFDBF', '#FE9F6D', '#DE4968', '#8C2981'),
-                        customTheme=FALSE) {
+hpaVisPatho <- function(data = NULL,
+                        targetGene = NULL,
+                        targetCancer = NULL,
+                        color = c('#FCFDBF', '#FE9F6D', '#DE4968', '#8C2981'),
+                        customTheme = FALSE) {
+    # Check if parameters are provided or not
+    data <- is_null_data(data = data)
+    target_check <- is_null_target(gene = targetGene,
+                                   cancer = targetCancer)
+    targetGene <- target_check$targetGene
     
-    infoDisp <- FALSE
-    
-    # Check if data is provided or not
-    if (is.null(data)) {
-        message(paste0('No data provided. Use version ', 
-                       hpa_histology_data$metadata$HPAversion,
-                       "."))
-        data = HPAanalyze::hpa_histology_data
-    }
-    
-    # Check if targetGene is provided
-    if (is.null(targetGene)) {
-        message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
-        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
-        infoDisp <- TRUE
-    }
-    
-    # Show a message if any parameter is not defined
-    if (infoDisp) {
-        message('Use hpaListParam() to list possible values for target variables.')
-    }
+    # Prepare data for plotting
     
     plotData <- data$pathology %>%
         filter(gene %in% targetGene)
     
-    if(!is.null(targetCancer)) {
+    if (!is.null(targetCancer)) {
         plotData <- filter(plotData, cancer %in% targetCancer)
     }
     
-    targetGene <- gene_ensembl_convert(targetGene, "gene")
-    
     plotData <- plotData %>%
         select(gene, cancer, high, medium, low, not_detected) %>%
-        rename('High'='high', 'Medium'='medium', 
-               'Low'='low', 'Not detected'='not_detected') %>%
+        rename(
+            'High' = 'high',
+            'Medium' = 'medium',
+            'Low' = 'low',
+            'Not detected' = 'not_detected'
+        ) %>%
         ## The old way used tidyr::gather
         # gather(key = "level", value = "patient_count", -gene, -cancer)
         ## The new way uses stats::reshape
         as.data.frame() %>%
-        reshape(direction = "long",
-                varying = list(3:6),
-                v.names = "patient_count",
-                timevar = "level",
-                times = c("High", "Medium", "Low", "Not detected")
+        reshape(
+            direction = "long",
+            varying = list(3:6),
+            v.names = "patient_count",
+            timevar = "level",
+            times = c("High", "Medium", "Low", "Not detected")
         )
     
     #re-level
     plotData$level <- factor(plotData$level,
                              levels = c("High", "Medium", "Low", "Not detected"))
     
-    levelColors <- c('Not detected'=color[1],
-                     'Low'=color[2],
-                     'Medium'=color[3],
-                     'High'=color[4])
+    levelColors <- c(
+        'Not detected' = color[1],
+        'Low' = color[2],
+        'Medium' = color[3],
+        'High' = color[4]
+    )
     
-    plot <- ggplot(plotData, aes(x=gene, y=patient_count, fill=level)) +
-        geom_bar(stat='identity', position='fill') +
-        scale_x_discrete(limits=targetGene) +
-        scale_fill_manual(values=levelColors) +
-        facet_wrap(~ cancer)
+    plot <-
+        ggplot(plotData, aes(x = gene, y = patient_count, fill = level)) +
+        geom_bar(stat = 'identity', position = 'fill') +
+        scale_x_discrete(limits = targetGene) +
+        scale_fill_manual(values = levelColors) +
+        facet_wrap( ~ cancer)
     
-    if(!customTheme) {
-        plot <- plot + 
+    if (!customTheme) {
+        plot <- plot +
             ylab('Patient proportions') +
             xlab('Genes') +
             theme_minimal() +
             theme(panel.grid = element_blank()) +
-            theme(axis.text.x=element_text(angle=90, hjust=1))
+            theme(axis.text.x = element_text(angle = 90, hjust = 1))
     }
     
-    return(plot)       
+    return(plot)
 }
 
 
@@ -260,7 +227,7 @@ hpaVisPatho <- function(data=NULL,
 #'   \code{hpa_subset()}. Require the \code{subcellular_location} dataset. Use
 #'   HPA histology data (built-in) by default.
 #' @param targetGene Vector of strings of HGNC gene symbols. By default it is
-#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+#'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN')}. You can also mix
 #'   HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 #'   converted to HGNC gene symbols.
 #' @param reliability Vector of string indicate which reliability scores you want to plot. The
@@ -291,52 +258,33 @@ hpaVisPatho <- function(data=NULL,
 #' @importFrom tibble as_tibble
 #' @export
 
-hpaVisSubcell <- function(data=NULL, 
-                          targetGene=NULL,
+hpaVisSubcell <- function(data = NULL,
+                          targetGene = NULL,
                           reliability = c("enhanced", "supported", "approved", "uncertain"),
-                          color=c('#FCFDBF', '#8C2981'),
-                          customTheme=FALSE) {
+                          color = c('#FCFDBF', '#8C2981'),
+                          customTheme = FALSE) {
+    # Check if parameters are provided or not
+    data <- is_null_data(data = data)
+    target_check <- is_null_target(gene = targetGene)
+    targetGene <- target_check$targetGene
     
-    infoDisp <- FALSE
-    
-    # Check if data is provided or not
-    if (is.null(data)) {
-        message(paste0('No data provided. Use version ', 
-                       hpa_histology_data$metadata$HPAversion,
-                       "."))
-        data = HPAanalyze::hpa_histology_data
-    }
-    
-    # Check if targetGene is provided
-    if (is.null(targetGene)) {
-        message('targetGene variable not specified, default to TP53, EGFR, CD44, PTEN and IDH1.')
-        targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')
-        infoDisp <- TRUE
-    }
-    
-    # Show a message if any parameter is not defined
-    if (infoDisp) {
-        message('Use hpaListParam() to list possible values for target variables.')
-    }
-    
-    targetGene <- gene_ensembl_convert(targetGene, "gene")
-    
+    # Prepare data for plotting
     plotData <- data$subcellular_location %>%
         filter(gene %in% targetGene) %>%
         mutate(sub_location = NA)
     
-    if ("enhanced" %in% reliability) plotData <- 
-        mutate(plotData, 
-               sub_location =  paste(sub_location, enhanced, sep = ";"))
-    if ("supported" %in% reliability) plotData <- 
-        mutate(plotData, 
-               sub_location =  paste(sub_location, supported, sep = ";"))
-    if ("approved" %in% reliability) plotData <- 
-        mutate(plotData, 
-               sub_location =  paste(sub_location, approved, sep = ";"))
-    if ("uncertain" %in% reliability) plotData <- 
-        mutate(plotData, 
-               sub_location =  paste(sub_location, uncertain, sep = ";"))
+    if ("enhanced" %in% reliability)
+        plotData <- mutate(plotData,
+                           sub_location =  paste(sub_location, enhanced, sep = ";"))
+    if ("supported" %in% reliability)
+        plotData <- mutate(plotData,
+                           sub_location =  paste(sub_location, supported, sep = ";"))
+    if ("approved" %in% reliability)
+        plotData <- mutate(plotData,
+                           sub_location =  paste(sub_location, approved, sep = ";"))
+    if ("uncertain" %in% reliability)
+        plotData <- mutate(plotData,
+                           sub_location =  paste(sub_location, uncertain, sep = ";"))
     
     # plotData <-  plotData %>%
     #     mutate(sub_location=strsplit(sub_location, ';')) %>%
@@ -349,34 +297,77 @@ hpaVisSubcell <- function(data=NULL,
     
     ## Use apply(as_tibble) %>% bind_rows instead of unnest
     plotData <-  plotData %>%
-        mutate(sub_location=strsplit(sub_location, ';')) %>%
+        mutate(sub_location = strsplit(sub_location, ';')) %>%
         apply(MARGIN = 1, FUN = as_tibble) %>% bind_rows() %>%
         select(sub_location, gene) %>%
         filter(sub_location != "NA") %>%
         table() %>%
         as_tibble() %>%
-        mutate(n=factor(n, levels=c('0', '1')))
-
-    levelColors <- c('0'=color[1],
-                     '1'=color[length(color)])
-
-    plot <- ggplot(plotData, aes(x=gene, y=sub_location)) +
-        geom_tile(aes(fill=n), colour="grey50") +
-        scale_x_discrete(limits=targetGene) +
-        scale_fill_manual(values=levelColors,
-                          name="Detected",
-                          breaks = c(0, 1),
-                          labels = c("No", "Yes"))
-
-    if(!customTheme) {
+        mutate(n = factor(n, levels = c('0', '1')))
+    
+    levelColors <- c('0' = color[1],
+                     '1' = color[length(color)])
+    
+    plot <- ggplot(plotData, aes(x = gene, y = sub_location)) +
+        geom_tile(aes(fill = n), colour = "grey50") +
+        scale_x_discrete(limits = targetGene) +
+        scale_fill_manual(
+            values = levelColors,
+            name = "Detected",
+            breaks = c(0, 1),
+            labels = c("No", "Yes")
+        )
+    
+    if (!customTheme) {
         plot <- plot +
             ylab('Subcellular locations') +
             xlab('Genes') +
             theme_minimal() +
             theme(panel.grid = element_blank()) +
-            theme(axis.text.x=element_text(angle=45, hjust=1)) +
+            theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
             coord_equal()
     }
-
+    
     return(plot)
+}
+
+## hpaVis shared child functions================================================
+is_null_target <- function(gene = "",
+                           tissue = "",
+                           celltype = "",
+                           cancer = "") {
+    out <- list()
+    infoDisp <- FALSE
+    
+    if (is.null(gene)) {
+        message('* WARNING: targetGene variable not specified, use example (TP53, EGFR, CD44, PTEN).')
+        out$targetGene <- c('TP53', 'EGFR', 'CD44', 'PTEN')
+        infoDisp <- TRUE
+    } else out$targetGene <- gene_ensembl_convert(gene, "gene")
+    
+    # Check if targetTissue is provided
+    if (is.null(tissue)) {
+        message('* WARNING: targetTissue variable not specified, use example (breast).')
+        out$targetTissue <- 'breast'
+        infoDisp <- TRUE
+    } else out$targetTissue <- tissue
+    
+    # Check if targetCellType is provided
+    if (is.null(celltype)) {
+        message('* WARNING: targetCellType variable not specified, visualize all.')
+        infoDisp <- TRUE
+    }
+    
+    # Check if targetCellType is provided
+    if (is.null(cancer)) {
+        message('* WARNING: targetCancer variable not specified, visualize all.')
+        infoDisp <- TRUE
+    }
+    
+    # Show a message if any parameter is not defined
+    if (infoDisp) {
+        message('>> Use hpaListParam() to list possible values for target variables.')
+    }
+    
+    return(out)
 }
