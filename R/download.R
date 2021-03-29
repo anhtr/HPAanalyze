@@ -392,7 +392,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
 #'   \code{hpaSubset()}
 #' @param targetGene Vector of strings of HGNC gene symbols. It will be used to
 #'   subset every dataset in the list object. You can also mix HGNC gene symbols
-#'   and ensemnl ids (start with ENSG) and they will be converted to HGNC gene
+#'   and ensemnbl ids (start with ENSG) and they will be converted to HGNC gene
 #'   symbols.
 #' @param targetTissue Vector of strings of normal tissues. Will be used to
 #'   subset the \code{normal_tissue} and \code{rna_tissue} dataset.
@@ -433,71 +433,99 @@ hpaSubset <- function(data=NULL,
     
     # Check if data is provided or not
     data <- is_null_data(data = data)
+    if (!is.null(targetGene)) targetGene <- gene_ensembl_convert(targetGene, "gene")
     
-    if('normal_tissue' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$normal_tissue <- 
-                filter(data$normal_tissue, gene %in% targetGene)
+    subsetting <- function(df) {
+        if (!is.null(targetGene) & any(names(df) == "gene")){
+            df <- filter(df, gene %in% targetGene)
         }
         
-        if(!is.null(targetTissue)) {
-            data$normal_tissue <-
-                filter(data$normal_tissue, tissue %in% targetTissue)
+        if(!is.null(targetTissue) & any(names(df) == "tissue")) {
+            df <- filter(df, tissue %in% targetTissue)
         }
         
-        if(!is.null(targetCellType)) {
-            data$normal_tissue <-
-                filter(data$normal_tissue, cell_type %in% targetCellType)
-        }
-    }
-    
-    if('pathology' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$pathology <-
-                filter(data$pathology, gene %in% targetGene)
+        if(!is.null(targetCellType) & any(names(df) == "cell_type")) {
+            df <- filter(df, cell_type %in% targetCellType)
         }
         
-        if(!is.null(targetCancer)) {
-            data$pathology <-
-                filter(data$pathology, cancer %in% targetCancer)
-        }
-    }
-    
-    if('subcellular_location' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$subcellular_location <-
-                filter(data$subcellular_location, gene %in% targetGene)
-        }
-    }
-    
-    if('rna_tissue' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$rna_tissue <-
-                filter(data$rna_tissue, gene %in% targetGene)
+        if(!is.null(targetCancer) & any(names(df) == "cancer")) {
+            df <- filter(df, cancer %in% targetCancer)
         }
         
-        if(!is.null(targetTissue)) {
-            data$rna_tissue <-
-                filter(data$rna_tissue, tissue %in% targetTissue)
-        }        
-    }
-    
-    if('rna_cell_line' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$rna_cell_line <-
-                filter(data$rna_cell_line, gene %in% targetGene)
+        if(!is.null(targetCellLine) & any(names(df) == "cell_line")) {
+            df <- filter(df, cell_line %in% targetCellLine)
         }
         
-        if(!is.null(targetCellLine)) {
-            data$rna_cell_line <-
-                filter(data$rna_cell_line, cell_line %in% targetCellLine)
-        }       
+        return(df)
     }
+    
+    data <- lapply(data, subsetting)
+    
+    # 
+    # if('normal_tissue' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$normal_tissue <- 
+    #             filter(data$normal_tissue, gene %in% targetGene)
+    #     }
+    #     
+    #     if(!is.null(targetTissue)) {
+    #         data$normal_tissue <-
+    #             filter(data$normal_tissue, tissue %in% targetTissue)
+    #     }
+    #     
+    #     if(!is.null(targetCellType)) {
+    #         data$normal_tissue <-
+    #             filter(data$normal_tissue, cell_type %in% targetCellType)
+    #     }
+    # }
+    # 
+    # if('pathology' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$pathology <-
+    #             filter(data$pathology, gene %in% targetGene)
+    #     }
+    #     
+    #     if(!is.null(targetCancer)) {
+    #         data$pathology <-
+    #             filter(data$pathology, cancer %in% targetCancer)
+    #     }
+    # }
+    # 
+    # if('subcellular_location' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$subcellular_location <-
+    #             filter(data$subcellular_location, gene %in% targetGene)
+    #     }
+    # }
+    # 
+    # if('rna_tissue' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$rna_tissue <-
+    #             filter(data$rna_tissue, gene %in% targetGene)
+    #     }
+    #     
+    #     if(!is.null(targetTissue)) {
+    #         data$rna_tissue <-
+    #             filter(data$rna_tissue, tissue %in% targetTissue)
+    #     }        
+    # }
+    # 
+    # if('rna_cell_line' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$rna_cell_line <-
+    #             filter(data$rna_cell_line, gene %in% targetGene)
+    #     }
+    #     
+    #     if(!is.null(targetCellLine)) {
+    #         data$rna_cell_line <-
+    #             filter(data$rna_cell_line, cell_line %in% targetCellLine)
+    #     }       
+    # }
     
     return(data)
 }
