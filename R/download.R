@@ -80,9 +80,6 @@
 #'   downloadedData <- hpaDownload(downloadList='histology', version='example')
 #'   summary(downloadedData)
 #'   
-#'   downloadedDataRna <- hpaDownload(downloadList='rna tissue', version='latest')
-#'   summary(downloadedDataRna)
-#'   
 #'   
 #' @import dplyr
 #' @importFrom utils download.file data read.delim2 unzip

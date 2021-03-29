@@ -79,9 +79,6 @@ very big.
   downloadedData <- hpaDownload(downloadList='histology', version='example')
   summary(downloadedData)
   
-  downloadedDataRna <- hpaDownload(downloadList='rna tissue', version='latest')
-  summary(downloadedDataRna)
-  
   
 }
 \seealso{
