@@ -9,3 +9,4 @@
 ^\.github$
 ^docs$
 ^data_raw
+^CODE_OF_CONDUCT.md
