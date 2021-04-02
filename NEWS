@@ -1,6 +1,7 @@
                        Changes in version 1.9
 * Changes in version 1.9.3
     + Update the default color to be more accessible (based on viridis::magma)
+    + Updated hpaSubset and hpaListParam to work properly with new data
 
 * Changes in version 1.9.2
     + hpaDownload can now download every downloadable datasets from HPA.
