@@ -56,7 +56,7 @@ hpaVis <- function(data=NULL,
                    targetCellType=NULL,
                    targetCancer=NULL,
                    visType=c('Tissue', 'Patho', 'Subcell'),
-                   color=c('#ffffb2', '#fecc5c', '#fd8d3c', '#e31a1c'),
+                   color=c("#FCFDBF", "#FE9F6D", "#DE4968", "#8C2981"),
                    customTheme=FALSE,
                    ...) {
     
