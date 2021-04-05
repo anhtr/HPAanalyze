@@ -1,5 +1,5 @@
 ---
-title: "5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON"
+title: "5. Tutorial: Export Human Protein Atlas (HPA) data as JSON"
 author:
 - name: Anh N. Tran
   affiliation: Northwestern University, Illinois, USA
@@ -12,7 +12,7 @@ output:
         toc_float: true
         number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON"}
+  %\VignetteIndexEntry{"5. Tutorial: Export Human Protein Atlas (HPA) data as JSON"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

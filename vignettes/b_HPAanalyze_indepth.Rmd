@@ -1,10 +1,10 @@
 ---
-title: "2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R"
+title: "2. In-depth: Working with Human Protein Atlas (HPA) data in R with HPAanalyze"
 author:
 - name: Anh N. Tran
   affiliation: Northwestern University, IL, USA
   email: trannhatanh89@gmail.com
-date: 6/7/2019
+date: 4/2/2021
 output: 
     BiocStyle::html_document:
         toc: true
@@ -12,7 +12,7 @@ output:
         toc_float: true
         number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R"}
+  %\VignetteIndexEntry{"2. In-depth: Working with Human Protein Atlas (HPA) data in R with HPAanalyze"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -55,7 +55,7 @@ Data from the HPA are freely available via proteinatlas.org, allowing scientists
 
 ## The different HPA data formats
 
-The Human Protein Atlas project provides data via two main mechanisms: *Full datasets* in the form of downloadable compressed tab-separated files (.tsv) and *individual entries* in XML, RDF and TSV formats. The full downloadable datasets includes normal tissue, pathology (cancer), subcellular location, RNA gene and RNA isoform data. For individual entries, the XML format is the most comprehensive, providing information on the target protein, antibodies, summary for each tissue and detailed data from each sample including clinical data, IHC scoring and image download links.
+The Human Protein Atlas project provides data via two main mechanisms: *Full datasets* in the form of downloadable compressed tab-separated files (.tsv) and *individual entries* in XML, RDF and TSV formats. The full downloadable datasets includes normal tissue, pathology (cancer), subcellular location and RNA expression data. For individual entries, the XML format is the most comprehensive, providing information on the target protein, antibodies, summary for each tissue and detailed data from each sample including clinical data, IHC scoring and image download links.
 
 ## `HPAanalyze` overview
 
@@ -79,14 +79,14 @@ BiocManager::install("HPAanalyze")
 The development version of *HPAanalyze* is available on Github can be installed with:  
   
 ```
-devtools::install_github("trannhatanh89/HPAanalyze")
+devtools::install_github("anhtr/HPAanalyze")
 ```
 
 Please cite: __Tran AN, Dussaq AM, Kennell T, Willey C, Hjelmeland A. _HPAanalyze: An R Package that Facilitates the Retrieval and Analysis of The Human Protein Atlas Data_. bioRxiv 355032; doi: https://doi.org/10.1101/355032 __
 
 # Full dataset import, subsetting and export
 
-The `hpaDownload()` function downloads full datasets from HPA (*specifically, the .tsv format described above*) and imports them into R as a list of tibbles, the standard object of `tidyverse`, which can subsequently be subset with `hpaSubset()` and export into .xmlx files with `hpaExport()`. The standard object allow the imported data to be further processed in a traditional R workflow. The ability to quickly subset and export data gives researchers the option to use other non-R downstream tools, such as GraphPad for creating publication-quality graphics, or share a subset of data containing only proteins of interest.
+The `hpaDownload()` function downloads full datasets from HPA (*specifically, the .tsv format described above*) and imports them into R as a list of tibbles, the standard object of `tidyverse`, which can subsequently be subset with `hpaSubset()` and export into .xlsx files with `hpaExport()`. The standard object allow the imported data to be further processed in a traditional R workflow. The ability to quickly subset and export data gives researchers the option to use other non-R downstream tools, such as GraphPad for creating publication-quality graphics, or share a subset of data containing only proteins of interest.
 
 **You can skip this whole section if you only care about visualization, unless you need a specific version of the HPA datasets, or the RNA expression datasets.**
 
@@ -95,18 +95,15 @@ The `hpaDownload()` function downloads full datasets from HPA (*specifically, th
 This function should be the first thing you use. It give you a list of data frames containing the datasets you specified, which you can then feed into other functions in this package.
 
 ```{r downloadedData, eval=FALSE}
-# this gives you the latest everything, which is nice to keep but not really necessary
+# This should give you the latest of everything, but unless you have a lot of RAM and processing power, I would not recomend it.
 downloadedData <- hpaDownload(downloadList='all')
 summary(downloadedData)
 
 #>                          Length Class  Mode
 #> normal_tissue             6     tbl_df list
 #> pathology                11     tbl_df list
-#> subcellular_location     11     tbl_df list
-#> rna_tissue                5     tbl_df list
-#> rna_cell_line             5     tbl_df list
-#> transcript_rna_tissue     4     tbl_df list
-#> transcript_rna_cell_line  4     tbl_df list
+#> subcellular_location     14     tbl_df list
+#> ...
 ```
 
 ### The "histology" datasets
@@ -115,7 +112,7 @@ Most of the time, you will only need the "histology" datasets, which contain `no
 
 ```{r histology}
 downloadedData <- hpaDownload(downloadList='histology', version='example')
-# version = "example" will load the HPA v18 datasets came with this package. That's sufficient for normal usage, and save you some time.
+# version = "example" will load the built-in dataset. That's sufficient for normal usage, and save you some time.
 ```
 The `normal_tissue` dataset contains information about protein expression profiles in human tissues based on IHC staining. The datasets contain six columns: `ensembl` (Ensembl gene identifier); `gene` (HGNC symbol), `tissue` (tissue name); `cell_type` (annotated cell type); `level` (expression value); `reliability` (the gene reliability of the expression value).
 
@@ -136,75 +133,80 @@ The `subcellular_location` dataset contains information about subcellular locali
 tibble::glimpse(downloadedData$subcellular_location, give.attr=FALSE)
 ```
 
-### The "RNA" datasets
+### The RNA datasets
 
-The `rna_tissue` and `rna_cell_line` datasets contain RNA expression levels of 37 tissues and 64 cell lines based on RNA-seq. These datasets contain four columns each: `ensembl` (Ensembl gene identifier); `gene` (HGNC symbol); `tissue`/`cell_line` (type of sample); `value` + `unit` (expression level measured by transcripts per million).
+HPA provide a large number of RNA expression datasets. More details can be find at https://www.proteinatlas.org/about/download. To see how to download these datasets, please see the help page for `hpaDownload`:
 
-```{r rna1, warning=FALSE, message=FALSE}
-downloadedData <- hpaDownload(downloadList='rna', version='v18')
-
-tibble::glimpse(downloadedData$rna_tissue, give.attr=FALSE)
-```
-```{r rna2, warning=FALSE, message=FALSE}
-tibble::glimpse(downloadedData$rna_cell_line, give.attr=FALSE)
+```{r rna-help, eval = FALSE}
+?hpaDownload
 ```
 
-Similarly, the `transcript_rna_tissue` and `transcript_rna_cell_line` datasets contain RNA isoform levels. These datasets contain four columns each: `ensembl` (Ensembl gene identifier); `transcript` (Ensembl transcript identifier); `tissue`/`cell_line` (type of sample); `value` (expression level measured by transcripts per million). Note that these datasets are significantly larger than others and should only be downloaded when necessary.
+There are shortcuts to download multiple RNA datasets, for example:
 
-```{r isoform1, eval=FALSE}
-downloadedData <- hpaDownload(downloadList='isoform', version='v18')
-# version = "v18" is an example of how you may download different versions of the HPA datasets. Just change the number. Note that not all versions are available from the HPA website.
+```{r rna1, warning=FALSE, message=FALSE, eval = FALSE}
+downloadedData <- hpaDownload(downloadList='rna tissue')
 
-tibble::glimpse(downloadedData$transcript_rna_tissue, give.attr=FALSE)
+tibble::glimpse(downloadedData, give.attr=FALSE)
 
-#> Observations: 27,535,996
-#> Variables: 4
-#> $ ensembl    <chr> "ENSG00000000003", "ENSG00000000003", "ENSG0000000...
-#> $ transcript <chr> "ENST00000373020", "ENST00000494424", "ENST0000049...
-#> $ tissue     <chr> "adipose tissue.V1", "adipose tissue.V1", "adipose...
-#> $ value      <dbl> 27.3577003, 0.0000000, 1.9341500, 1.6059300, 0.000...
+#> List of 4
+#>  $ rna_tissue_consensus: tibble [1,180,464 x 4] (S3: tbl_df/tbl/data.frame)
+#>   ..$ ensembl: chr [1:1180464] "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" ...
+#>   ..$ gene   : chr [1:1180464] "TSPAN6" "TSPAN6" "TSPAN6" "TSPAN6" ...
+#>   ..$ tissue : chr [1:1180464] "adipose tissue" "adrenal gland" "amygdala" "appendix" ...
+#>   ..$ nx     : chr [1:1180464] "27.0" "9.8" "7.0" "4.4" ...
+#>  $ rna_tissue_hpa      : tibble [845,810 x 6] (S3: tbl_df/tbl/data.frame)
+#>   ..$ ensembl: chr [1:845810] "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" ...
+#>   ..$ gene   : chr [1:845810] "TSPAN6" "TSPAN6" "TSPAN6" "TSPAN6" ...
+#>   ..$ tissue : chr [1:845810] "adipose tissue" "adrenal gland" "appendix" "B-cells" ...
+#>   ..$ tpm    : chr [1:845810] "31.5" "26.4" "9.2" "0.1" ...
+#>   ..$ ptpm   : chr [1:845810] "37.7" "32.7" "14.5" "0.2" ...
+#>   ..$ nx     : chr [1:845810] "9.8" "7.6" "2.1" "0.3" ...
+#>  $ rna_tissue_gtex     : tibble [639,744 x 6] (S3: tbl_df/tbl/data.frame)
+#>   ..$ ensembl: chr [1:639744] "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" ...
+#>   ..$ gene   : chr [1:639744] "TSPAN6" "TSPAN6" "TSPAN6" "TSPAN6" ...
+#>   ..$ tissue : chr [1:639744] "adipose tissue" "adrenal gland" "amygdala" "basal ganglia" ...
+#>   ..$ tpm    : chr [1:639744] "27.4" "15.5" "7.3" "7.7" ...
+#>   ..$ ptpm   : chr [1:639744] "34.2" "18.8" "9.0" "9.4" ...
+#>   ..$ nx     : chr [1:639744] "13.4" "9.8" "7.0" "6.6" ...
+#>  $ rna_tissue_fantom   : tibble [797,265 x 6] (S3: tbl_df/tbl/data.frame)
+#>   ..$ ensembl                : chr [1:797265] "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" ...
+#>   ..$ gene                   : chr [1:797265] "TSPAN6" "TSPAN6" "TSPAN6" "TSPAN6" ...
+#>   ..$ tissue                 : chr [1:797265] "adipose tissue" "amygdala" "appendix" "basal ganglia" ...
+#>   ..$ tags_per_million       : chr [1:797265] "60.1" "10.7" "13.5" "16.2" ...
+#>   ..$ scaled_tags_per_million: chr [1:797265] "87.4" "12.4" "17.8" "18.0" ...
+#>   ..$ nx                     : chr [1:797265] "27.0" "3.5" "4.4" "5.5" ...
 ```
-```{r isoform2, eval=FALSE}
-tibble::glimpse(downloadedData$transcript_rna_cell_line, give.attr=FALSE)
 
-#> Observations: 20,972,183
-#> Variables: 4
-#> $ ensembl    <chr> "ENSG00000000003", "ENSG00000000003", "ENSG0000000...
-#> $ transcript <chr> "ENST00000373020", "ENST00000494424", "ENST0000049...
-#> $ cell_line  <chr> "A-431.C35", "A-431.C35", "A-431.C35", "A-431.C35"...
-#> $ value      <dbl> 29.406799, 0.000000, 0.992916, 0.398387, 0.239204,...
-```
 
 ## List available parameter for subsetting with `hpaListParam()`
 
 To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpaListParam()`. The input for this function is the output of `hpaDownload`. 
 
-*If you leave the argument blank, this function will give you the results for version 18.*
+*If you leave the argument blank, this function will give you the results for the built-in datasets.*
 
 ```{r list_param, eval=FALSE}
 ## If you use the output from hpaDownload()
-downloadedData <- hpaDownload(downloadList='all')
+downloadedData <- hpaDownload(downloadList=c("Normal tissue", "Pathology", "RNA HPA tissue", "RNA HPA cell line"))
 str(hpaListParam(downloadedData))
 
-#> List of 6
-#>  $ normal_tissue       : chr [1:58] "adrenal gland" "appendix" "bone marrow" "breast" ...
-#>  $ normal_cell         : chr [1:82] "glandular cells" "lymphoid tissue" "hematopoietic cells" "adipocytes" ...
-#>  $ cancer              : chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...
-#>  $ subcellular_location: chr [1:32] "Cytosol" "Mitochondria" "Aggresome" "Plasma membrane" ...
-#>  $ normal_tissue_rna   : chr [1:37] "adipose tissue" "adrenal gland" "appendix" "bone marrow" ...
-#>  $ cell_line_rna       : chr [1:64] "A-431" "A549" "AF22" "AN3-CA" ...
+# List of 4
+#  $ normal_tissue :List of 2
+#   ..$ tissue   : chr [1:63] "adipose tissue" "adrenal gland" "appendix" "bone marrow" ...
+#   ..$ cell_type: chr [1:120] "adipocytes" "glandular cells" "lymphoid tissue" "hematopoietic cells" ...
+#  $ pathology     :List of 1
+#   ..$ cancer: chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...
+#  $ rna_tissue_hpa:List of 1
+#   ..$ tissue: chr [1:43] "adipose tissue" "adrenal gland" "appendix" "B-cells" ...
+#  $ rna_celline   :List of 1
+#   ..$ cell_line: chr [1:69] "A-431" "A549" "AF22" "AN3-CA" ...
 ```
 
-```{r list_param_2}
-## If you use leave the argument blank
-str(hpaListParam())
-```
 
 ## Subset data with `hpaSubset()`
 
 `hpaSubset()` filters the output of `hpaDownload()` for desirable target genes, tissues, cell types, cancer, and cell lines. The data will be subset only where applicable (i.e. `normal_tissue` will not be subset by *cancer*). The main purpose of `hpaSubset` is to prepare a manageable set of data to be exported. However, this function may also be useful for other data table manipulation purposes. The input for `targetGene` argument is a vector of strings of HGNC symbols.
 
-*If you leave the `data` argument blank, this function will automatically subset the bundled version 18 dataset, which may not contain all of the columns available if you download the data with `hpaDownload()`.*
+*If you leave the `data` argument blank, this function will automatically subset the built-in dataset, which may not contain all of the columns available if you download the data with `hpaDownload()`.*
 
 ```{r subset1, message=FALSE, warning=FALSE}
 downloadedData <- hpaDownload(downloadList='histology', version='example')
@@ -226,7 +228,7 @@ sapply(subsetData, nrow)
 
 
 ## Export data with `hpaExport()`
-As the name suggests, `hpaExport()` exports the output of `hpaSubset()` to one .xlsx file. Each dataset is placed in a separate sheet. More formats such as .csv and .tsv might be added in future release; hence, the `fileType` argument is included.
+As the name suggests, `hpaExport()` exports the output of `hpaSubset()` to one .xlsx file, or multiple .csv or .tsv files. Each dataset is placed in a separate sheet.
 
 ```{r eval=FALSE}
 hpaExport(subsetData, fileName='subset.xlsx', fileType='xlsx')
@@ -240,7 +242,7 @@ The `hpaVis` functions share a common syntax, where the input (`data` argument) 
 
 Currently, the `normal_tissue`, `pathology` and `subcellular_location` data can be visualized, with more functions planned for future releases.
 
-*For all functions in the `hpaVis` family, if you leave the `data` argument blank, they will plot version 18 by default.*
+*For all functions in the `hpaVis` family, if you leave the `data` argument blank, they will plot the built-in datasets by default.*
 
 ```{r visData, echo=FALSE, warning=FALSE, message=FALSE}
 downloadedData <- hpaDownload('histology', 'example')
@@ -251,7 +253,8 @@ downloadedData <- hpaDownload('histology', 'example')
 `hpaVis` will plot all available plots by default. See the quick-start vignette for details.
 
 ```{r hpaVis_eg}
-hpaVis(targetGene = c("GCH1", "PTS", "SPR", "DHFR"),
+hpaVis(downloadedData,
+       targetGene = c("GCH1", "PTS", "SPR", "DHFR"),
        targetTissue = c("cerebellum", "cerebral cortex", "hippocampus"),
        targetCancer = c("glioma"))
 ```
