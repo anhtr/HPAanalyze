@@ -217,7 +217,6 @@ hpaDownload <- function(downloadList = 'histology',
             rna_pig_brain_sample_hpa =
                 c(
                     'ensembl',
-                    'id',
                     'main_region',
                     'subregion',
                     'animal',
@@ -231,7 +230,6 @@ hpaDownload <- function(downloadList = 'histology',
             rna_mouse_brain_sample_hpa =
                 c(
                     'ensembl',
-                    'id',
                     'main_region',
                     'subregion',
                     'animal',
