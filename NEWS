@@ -1,4 +1,9 @@
                        Changes in version 1.9
+* Changes in version 1.9.4
+    + hpaVisPatho can now facet by cancers or genes
+    + Vignettes update
+    + Bug fixes and performance improvements
+
 * Changes in version 1.9.3
     + Update the default color to be more accessible (based on viridis::magma)
     + Updated hpaSubset and hpaListParam to work properly with new data
