@@ -273,18 +273,23 @@ hpaVisSubcell <- function(data = NULL,
         filter(gene %in% targetGene) %>%
         mutate(sub_location = NA)
     
-    if ("enhanced" %in% reliability)
-        plotData <- mutate(plotData,
-                           sub_location =  paste(sub_location, enhanced, sep = ";"))
-    if ("supported" %in% reliability)
-        plotData <- mutate(plotData,
-                           sub_location =  paste(sub_location, supported, sep = ";"))
-    if ("approved" %in% reliability)
-        plotData <- mutate(plotData,
-                           sub_location =  paste(sub_location, approved, sep = ";"))
-    if ("uncertain" %in% reliability)
-        plotData <- mutate(plotData,
-                           sub_location =  paste(sub_location, uncertain, sep = ";"))
+    # if ("enhanced" %in% reliability)
+    #     plotData <- mutate(plotData,
+    #                        sub_location =  paste(sub_location, enhanced, sep = ";"))
+    # if ("supported" %in% reliability)
+    #     plotData <- mutate(plotData,
+    #                        sub_location =  paste(sub_location, supported, sep = ";"))
+    # if ("approved" %in% reliability)
+    #     plotData <- mutate(plotData,
+    #                        sub_location =  paste(sub_location, approved, sep = ";"))
+    # if ("uncertain" %in% reliability)
+    #     plotData <- mutate(plotData,
+    #                        sub_location =  paste(sub_location, uncertain, sep = ";"))
+    
+    for (i in reliability) {
+        plotData <- mutate(plotData, 
+                           sub_location = paste(sub_location, .data[[i]], sep = ";"))
+    }
     
     # plotData <-  plotData %>%
     #     mutate(sub_location=strsplit(sub_location, ';')) %>%
