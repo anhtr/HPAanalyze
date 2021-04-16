@@ -21,6 +21,7 @@ Imports: dplyr,
     gridExtra
 Suggests: knitr,
     rmarkdown,
+    markdown,
     devtools,
     BiocStyle
 VignetteBuilder: knitr
