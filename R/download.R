@@ -37,6 +37,10 @@
 #'     \item \code{'RNA transcript cell line'}
 #'     \item \code{'RNA transcript pig brain'}
 #'     \item \code{'RNA transcript mouse brain'} 
+#'     }
+#'     
+#'   You can also use the following shortcuts:
+#'   \itemize{
 #'     \item \code{'all'}: download everything
 #'     \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology',
 #'     'Subcellular location')}
@@ -329,29 +333,24 @@ hpaDownload <- function(downloadList = 'histology',
     )
     
     ## generate a list of item to download
-    
-    if (downloadList == 'all') {
-        downloadList <- allDatasets$datasetnames
-        
-    } else if (downloadList == 'histology') {
-        downloadList <- allDatasets$datasetnames[1:3]
-        
-    } else if (downloadList == 'rna tissue') {
-        downloadList <- allDatasets$datasetnames[4:7]
-        
-    } else if (downloadList == 'rna cell type') {
-        downloadList <- allDatasets$datasetnames[8:9]
-        
-    } else if (downloadList == 'rna brain region') {
-        downloadList <- allDatasets$datasetnames[10:16]
-        
-    } else if (downloadList == 'rna blood cell') {
-        downloadList <- allDatasets$datasetnames[17:20]
-        
-    } else if (downloadList == 'isoform') {
-        downloadList <- allDatasets$datasetnames[23:26]
-        
+    replace_shortcut <- function(x, shortcut, with) {
+        x <- rep(x, 1 + (length(with) - 1)*(x == shortcut))
+        x[x == shortcut] <- with
+        return(x)
     }
+    
+    downloadList <- downloadList %>%
+        replace_shortcut('all', allDatasets$datasetnames) %>%
+        replace_shortcut('histology', allDatasets$datasetnames[1:3]) %>%
+        replace_shortcut('rna tissue', allDatasets$datasetnames[4:7]) %>%
+        replace_shortcut('rna cell type', allDatasets$datasetnames[8:9]) %>%
+        replace_shortcut('rna brain region', allDatasets$datasetnames[10:16]) %>%
+        replace_shortcut('rna blood cell', allDatasets$datasetnames[17:20]) %>%
+        replace_shortcut('isoform', allDatasets$datasetnames[23:26])
+
+    ## make sure that everything are downloadable, and get downloaded once
+    # downloadList <- unique(downloadList)
+    # downloadList <- downloadList[downloadList %in% allDatasets$datasetnames]
     
     # filter the datasets to download
     downloadDatasets <-

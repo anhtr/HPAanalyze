@@ -36,6 +36,10 @@ Possible value:
   \item \code{'RNA transcript cell line'}
   \item \code{'RNA transcript pig brain'}
   \item \code{'RNA transcript mouse brain'} 
+  }
+  
+You can also use the following shortcuts:
+\itemize{
   \item \code{'all'}: download everything
   \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology',
   'Subcellular location')}
