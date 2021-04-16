@@ -1,4 +1,9 @@
                        Changes in version 1.9
+* Changes in version 1.9.5
+    + hpaVisTissue now plots all tissues by default
+    + hpaDownload shortcuts for downloadList arg can now be combined
+    + Bug fixes and performance improvements
+                       
 * Changes in version 1.9.4
     + hpaVisPatho can now facet by cancers or genes
     + Vignettes update
