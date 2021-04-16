@@ -23,7 +23,7 @@ set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN')}. You can also mix
 HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 converted to HGNC gene symbols.}
 
-\item{targetTissue}{Vector of strings of normal tissues. Default to breast.}
+\item{targetTissue}{Vector of strings of normal tissues. Default to all.}
 
 \item{targetCellType}{Vector of strings of normal cell types. Default to all.}
 

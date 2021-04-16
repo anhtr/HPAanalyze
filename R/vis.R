@@ -14,7 +14,7 @@
 #'   set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN')}. You can also mix
 #'   HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 #'   converted to HGNC gene symbols.
-#' @param targetTissue Vector of strings of normal tissues. Default to breast.
+#' @param targetTissue Vector of strings of normal tissues. Default to all.
 #' @param targetCellType Vector of strings of normal cell types. Default to all.
 #' @param color Vector of 4 colors used to depict different expression levels.
 #' @param customTheme Logical argument. If \code{TRUE}, the function will return
@@ -55,16 +55,13 @@ hpaVisTissue <- function(data = NULL,
                                    celltype = targetCellType)
     
     targetGene <- target_check$targetGene
-    targetTissue <- target_check$targetTissue
+    # targetTissue <- target_check$targetTissue
     
     # Create plot dataset with target parameters
     plotData <- data$normal_tissue %>%
         filter(gene %in% targetGene) %>%
-        filter(tissue %in% targetTissue)
-    
-    if (!is.null(targetCellType)) {
-        plotData <- filter(plotData, cell_type %in% targetCellType)
-    }
+        {if (!is.null(targetTissue)) filter(., tissue %in% targetTissue) else .} %>%
+        {if (!is.null(targetCellType)) filter(., cell_type %in% targetCellType) else .}
     
     plotData <- mutate(
         plotData,
@@ -72,19 +69,19 @@ hpaVisTissue <- function(data = NULL,
         level = factor(level,
                        levels = c('High', 'Medium', 'Low', 'Not detected'))
     )
-    
+
     levelColors <- c(
         'Not detected' = color[1],
         'Low' = color[2],
         'Medium' = color[3],
         'High' = color[4]
     )
-    
+
     plot <- ggplot(plotData, aes(x = gene, y = tissue_cell)) +
         geom_tile(aes(fill = level)) +
         scale_x_discrete(limits = targetGene) +
         scale_fill_manual(values = levelColors)
-    
+
     if (!customTheme) {
         plot <- plot +
             ylab('Tissue / Cell') +
@@ -94,10 +91,8 @@ hpaVisTissue <- function(data = NULL,
             theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
             coord_equal()
     }
-    
-    
-    
-    return(plot)       
+
+    return(plot)
 }
 
 
@@ -357,10 +352,9 @@ is_null_target <- function(gene = "",
     
     # Check if targetTissue is provided
     if (is.null(tissue)) {
-        message('* WARNING: targetTissue variable not specified, use example (breast).')
-        out$targetTissue <- 'breast'
+        message('* WARNING: targetTissue variable not specified, visualize all.')
         infoDisp <- TRUE
-    } else out$targetTissue <- tissue
+    }
     
     # Check if targetCellType is provided
     if (is.null(celltype)) {
