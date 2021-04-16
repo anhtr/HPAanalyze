@@ -42,13 +42,13 @@
 #'     'Subcellular location')}
 #'     \item \code{'rna tissue'}: same as \code{c('RNA consensus tissue', 'RNA
 #'     HPA tissue', 'RNA GTEx tissue', 'RNA FANTOM tissue')}
-#'     \item \code{'rna single cell type'}: same as \code{c('RNA single cell
+#'     \item \code{'rna cell type'}: same as \code{c('RNA single cell
 #'     type', 'RNA single cell type tissue cluster')} 
 #'     \item \code{'rna brain region'}: same as \code{c('RNA GTEx brain region',
 #'     'RNA FANTOM brain region', 'RNA pig brain region', 'RNA pig brain
 #'     subregion sample', 'RNA mouse brain region', 'RNA mouse brain subregion
 #'     sample', 'RNA Allen mouse brain region')}
-#'     \item \code{'rna single cell type'}: same as \code{c('RNA HPA blood
+#'     \item \code{'rna blood cell'}: same as \code{c('RNA HPA blood
 #'     cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
 #'     Schmiedel blood cell')}
 #'     \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA
@@ -339,7 +339,7 @@ hpaDownload <- function(downloadList = 'histology',
     } else if (downloadList == 'rna tissue') {
         downloadList <- allDatasets$datasetnames[4:7]
         
-    } else if (downloadList == 'rna single cell type') {
+    } else if (downloadList == 'rna cell type') {
         downloadList <- allDatasets$datasetnames[8:9]
         
     } else if (downloadList == 'rna brain region') {
