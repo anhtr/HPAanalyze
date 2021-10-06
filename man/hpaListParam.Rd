@@ -22,7 +22,7 @@ hpaListParam(data = NULL)
 
 \item{targetGene}{Vector of strings of HGNC gene symbols. It will be used to
 subset every dataset in the list object. You can also mix HGNC gene symbols
-and ensemnl ids (start with ENSG) and they will be converted to HGNC gene
+and ensemnbl ids (start with ENSG) and they will be converted to HGNC gene
 symbols.}
 
 \item{targetTissue}{Vector of strings of normal tissues. Will be used to

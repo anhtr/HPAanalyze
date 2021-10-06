@@ -36,18 +36,22 @@ Possible value:
   \item \code{'RNA transcript cell line'}
   \item \code{'RNA transcript pig brain'}
   \item \code{'RNA transcript mouse brain'} 
+  }
+  
+You can also use the following shortcuts:
+\itemize{
   \item \code{'all'}: download everything
   \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology',
   'Subcellular location')}
   \item \code{'rna tissue'}: same as \code{c('RNA consensus tissue', 'RNA
   HPA tissue', 'RNA GTEx tissue', 'RNA FANTOM tissue')}
-  \item \code{'rna single cell type'}: same as \code{c('RNA single cell
+  \item \code{'rna cell type'}: same as \code{c('RNA single cell
   type', 'RNA single cell type tissue cluster')} 
   \item \code{'rna brain region'}: same as \code{c('RNA GTEx brain region',
   'RNA FANTOM brain region', 'RNA pig brain region', 'RNA pig brain
   subregion sample', 'RNA mouse brain region', 'RNA mouse brain subregion
   sample', 'RNA Allen mouse brain region')}
-  \item \code{'rna single cell type'}: same as \code{c('RNA HPA blood
+  \item \code{'rna blood cell'}: same as \code{c('RNA HPA blood
   cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
   Schmiedel blood cell')}
   \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA
@@ -78,9 +82,6 @@ very big.
 \examples{
   downloadedData <- hpaDownload(downloadList='histology', version='example')
   summary(downloadedData)
-  
-  downloadedDataRna <- hpaDownload(downloadList='rna tissue', version='latest')
-  summary(downloadedDataRna)
   
   
 }

@@ -9,7 +9,7 @@ hpaVisTissue(
   targetGene = NULL,
   targetTissue = NULL,
   targetCellType = NULL,
-  color = c("#ffffb2", "#fecc5c", "#fd8d3c", "#e31a1c"),
+  color = c("#FCFDBF", "#FE9F6D", "#DE4968", "#8C2981"),
   customTheme = FALSE
 )
 }
@@ -19,11 +19,11 @@ hpaVisTissue(
 histology data (built-in) by default.}
 
 \item{targetGene}{Vector of strings of HGNC gene symbols. By default it is
-set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1')}. You can also mix
+set to \code{c('TP53', 'EGFR', 'CD44', 'PTEN')}. You can also mix
 HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 converted to HGNC gene symbols.}
 
-\item{targetTissue}{Vector of strings of normal tissues. Default to breast.}
+\item{targetTissue}{Vector of strings of normal tissues. Default to all.}
 
 \item{targetCellType}{Vector of strings of normal cell types. Default to all.}
 

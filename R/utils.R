@@ -94,3 +94,17 @@ gene_ensembl_convert <- function(id, convert_to) {
     
     return(id_c)
 }
+
+## Check if built-in data should be used =======================================
+is_null_data <- function(data) {
+    if (is.null(data)) {
+        message(
+            paste0(
+                'No data provided. Use version ',
+                hpa_histology_data$metadata$HPAversion,
+                "."
+            )
+        )
+        data <- HPAanalyze::hpa_histology_data
+    } else data
+}

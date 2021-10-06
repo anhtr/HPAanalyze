@@ -1,10 +1,10 @@
 ---
-title: "1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function"
+title: "1. Quick-start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function with HPAanalyze"
 author:
 - name: Anh N. Tran
   affiliation: Northwestern University, Illinois, USA
   email: trannhatanh89@gmail.com
-date: 6/7/2019
+date: 4/1/2021
 output: 
     BiocStyle::html_document:
         toc: true
@@ -12,7 +12,7 @@ output:
         toc_float: true
         number_sections: true
 vignette: >
-  %\VignetteIndexEntry{"1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function"}
+  %\VignetteIndexEntry{"1. Quick-start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function with HPAanalyze"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -43,7 +43,7 @@ Data from the HPA are freely available via proteinatlas.org, allowing scientists
 
 ## The different HPA data formats
 
-The Human Protein Atlas project provides data via two main mechanisms: *Full datasets* in the form of downloadable compressed tab-separated files (.tsv) and *individual entries* in XML, RDF and TSV formats. The full downloadable datasets includes normal tissue, pathology (cancer), subcellular location, RNA gene and RNA isoform data. For individual entries, the XML format is the most comprehensive, providing information on the target protein, antibodies, summary for each tissue and detailed data from each sample including clinical data, IHC scoring and image download links.
+The Human Protein Atlas project provides data via two main mechanisms: *Full datasets* in the form of downloadable compressed tab-separated files (.tsv) and *individual entries* in XML, RDF and TSV formats. The full downloadable datasets includes normal tissue, pathology (cancer), subcellular location and RNA expression data. For individual entries, the XML format is the most comprehensive, providing information on the target protein, antibodies, summary for each tissue and detailed data from each sample including clinical data, IHC scoring and image download links.
 
 ## `HPAanalyze` overview
 
@@ -64,10 +64,12 @@ Of course, we cannot visualize everything in those big datasets, so some defauts
 ```{r hpaVis_eg2, eval = FALSE}
 hpaVis()
 
-# No data provided. Use version 18.
+# No data provided. Use version ...
 # targetGene variable not specified, default to TP53, RB1, MYC, KRAS and EGFR.
 # targetTissue variable not specified, default to breast.
 # targetCellType variable not specified, visualize all.
+# * WARNING: targetCellType variable not specified, visualize all.
+# >> Use hpaListParam() to list possible values for target variables.
 # targetCancer variable not specified, default to breast cancer
 # Use hpaListParam() to list possible values for target variables.
 

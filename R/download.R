@@ -37,18 +37,22 @@
 #'     \item \code{'RNA transcript cell line'}
 #'     \item \code{'RNA transcript pig brain'}
 #'     \item \code{'RNA transcript mouse brain'} 
+#'     }
+#'     
+#'   You can also use the following shortcuts:
+#'   \itemize{
 #'     \item \code{'all'}: download everything
 #'     \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology',
 #'     'Subcellular location')}
 #'     \item \code{'rna tissue'}: same as \code{c('RNA consensus tissue', 'RNA
 #'     HPA tissue', 'RNA GTEx tissue', 'RNA FANTOM tissue')}
-#'     \item \code{'rna single cell type'}: same as \code{c('RNA single cell
+#'     \item \code{'rna cell type'}: same as \code{c('RNA single cell
 #'     type', 'RNA single cell type tissue cluster')} 
 #'     \item \code{'rna brain region'}: same as \code{c('RNA GTEx brain region',
 #'     'RNA FANTOM brain region', 'RNA pig brain region', 'RNA pig brain
 #'     subregion sample', 'RNA mouse brain region', 'RNA mouse brain subregion
 #'     sample', 'RNA Allen mouse brain region')}
-#'     \item \code{'rna single cell type'}: same as \code{c('RNA HPA blood
+#'     \item \code{'rna blood cell'}: same as \code{c('RNA HPA blood
 #'     cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
 #'     Schmiedel blood cell')}
 #'     \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA
@@ -80,9 +84,6 @@
 #'   downloadedData <- hpaDownload(downloadList='histology', version='example')
 #'   summary(downloadedData)
 #'   
-#'   downloadedDataRna <- hpaDownload(downloadList='rna tissue', version='latest')
-#'   summary(downloadedDataRna)
-#'   
 #'   
 #' @import dplyr
 #' @importFrom utils download.file data read.delim2 unzip
@@ -91,12 +92,12 @@
 #' @export
 #' 
 
-hpaDownload <- function(downloadList='histology', version='latest') {
-
+hpaDownload <- function(downloadList = 'histology',
+                        version = 'latest') {
     ## Create a data frame with information to filter and download datasets
     allDatasets <- tibble(
         datasetnames = c(
-            'Normal tissue', 
+            'Normal tissue',
             'Pathology',
             'Subcellular location',
             'RNA consensus tissue',
@@ -121,189 +122,239 @@ hpaDownload <- function(downloadList='histology', version='latest') {
             'RNA transcript tissue',
             'RNA transcript cell line',
             'RNA transcript pig brain',
-            'RNA transcript mouse brain'),
-    
+            'RNA transcript mouse brain'
+        ),
+        
         tidycols = list(
+            normal_tissue =
+                c(
+                    'ensembl',
+                    'gene',
+                    'tissue',
+                    'cell_type',
+                    'level',
+                    'reliability'
+                ),
             
-            normal_tissue = 
-                c('ensembl', 'gene', 'tissue', 'cell_type', 'level', 'reliability'),
+            pathology =
+                c(
+                    'ensembl',
+                    'gene',
+                    'cancer',
+                    'high',
+                    'medium',
+                    'low',
+                    'not_detected',
+                    'prognostic_favorable',
+                    'unprognostic_favorable',
+                    'prognostic_unfavorable',
+                    'unprognostic_unfavorable'
+                ),
             
-            pathology = 
-                c('ensembl', 'gene', 'cancer', 'high', 
-                  'medium', 'low', 'not_detected', 
-                  'prognostic_favorable', 
-                  'unprognostic_favorable', 
-                  'prognostic_unfavorable', 
-                  'unprognostic_unfavorable'),
+            subcellular_location =
+                c(
+                    'ensembl',
+                    'gene',
+                    'reliability',
+                    'main_location',
+                    'additional_location',
+                    'extracellular_location',
+                    'enhanced',
+                    'supported',
+                    'approved',
+                    'uncertain',
+                    'single_cell_var_intensity',
+                    'single_cell_var_spatial',
+                    'cell_cycle_dependency',
+                    'go_id'
+                ),
             
-            subcellular_location = 
-                c('ensembl', 'gene', 'reliability',
-                  'main_location', 'additional_location', 
-                  'extracellular_location',
-                  'enhanced', 'supported', 'approved', 
-                  'uncertain', 'single_cell_var_intensity', 
-                  'single_cell_var_spatial', 
-                  'cell_cycle_dependency', 'go_id'),
-            
-            rna_tissue_consensus = 
+            rna_tissue_consensus =
                 c('ensembl', 'gene', 'tissue', 'nx'),
             
-            rna_tissue_hpa = 
+            rna_tissue_hpa =
                 c('ensembl', 'gene', 'tissue', 'tpm', 'ptpm', "nx"),
             
-            rna_tissue_gtex = 
+            rna_tissue_gtex =
                 c('ensembl', 'gene', 'tissue', 'tpm', 'ptpm', "nx"),
             
-            rna_tissue_fantom = 
-                c('ensembl', 'gene', 'tissue', 'tags_per_million', 
-                  'scaled_tags_per_million', "nx"),
+            rna_tissue_fantom =
+                c(
+                    'ensembl',
+                    'gene',
+                    'tissue',
+                    'tags_per_million',
+                    'scaled_tags_per_million',
+                    "nx"
+                ),
             
-            rna_single_cell_type = 
+            rna_single_cell_type =
                 c('ensembl', 'gene', 'cell_type', 'nx'),
             
-            rna_single_cell_type_tissue = 
-                c('ensembl', 'gene', 'tissue', 'cluster',
-                  'cell_type', 'read_count', 'ptpm'),
+            rna_single_cell_type_tissue =
+                c(
+                    'ensembl',
+                    'gene',
+                    'tissue',
+                    'cluster',
+                    'cell_type',
+                    'read_count',
+                    'ptpm'
+                ),
             
-            rna_brain_gtex = 
+            rna_brain_gtex =
                 c('ensembl', 'gene', 'brain_region', 'tpm', 'ptpm', 'nx'),
             
-            rna_brain_fantom = 
-                c('ensembl', 'gene', 'brain_region', 'tags_per_million', 
-                  'scaled_tags_per_million', "nx"),
+            rna_brain_fantom =
+                c(
+                    'ensembl',
+                    'gene',
+                    'brain_region',
+                    'tags_per_million',
+                    'scaled_tags_per_million',
+                    "nx"
+                ),
             
-            rna_pig_brain_hpa = 
+            rna_pig_brain_hpa =
                 c('ensembl', 'gene', 'brain_region', 'tpm', 'ptpm', 'nx'),
             
-            rna_pig_brain_sample_hpa = 
-                c('ensembl', 'id', 'main_region', 'subregion',
-                  'animal', 'tpm', 'ptpm'),
+            rna_pig_brain_sample_hpa =
+                c(
+                    'ensembl',
+                    'main_region',
+                    'subregion',
+                    'animal',
+                    'tpm',
+                    'ptpm'
+                ),
             
-            rna_mouse_brain_hpa = 
+            rna_mouse_brain_hpa =
                 c('ensembl', 'gene', 'brain_region', 'tpm', 'ptpm', 'nx'),
             
-            rna_mouse_brain_sample_hpa = 
-                c('ensembl', 'id', 'main_region', 'subregion',
-                  'animal', 'tpm', 'ptpm'),
+            rna_mouse_brain_sample_hpa =
+                c(
+                    'ensembl',
+                    'main_region',
+                    'subregion',
+                    'animal',
+                    'tpm',
+                    'ptpm'
+                ),
             
-            rna_mouse_brain_allen = 
+            rna_mouse_brain_allen =
                 c('ensembl', 'gene', 'brain_region', 'expression_energy'),
             
-            rna_blood_cell = 
+            rna_blood_cell =
                 c('ensembl', 'gene', 'blood_cell', 'tpm', 'ptpm', 'nx'),
             
-            rna_blood_cell_sample = 
+            rna_blood_cell_sample =
                 c('ensembl', 'blood_cell_type', 'donor', 'ptpm', 'nx'),
             
-            rna_blood_cell_monaco = 
+            rna_blood_cell_monaco =
                 c('ensembl', 'gene', 'blood_cell', 'tpm', 'ptpm'),
             
-            rna_blood_cell_schmiedel = 
+            rna_blood_cell_schmiedel =
                 c('ensembl', 'gene', 'blood_cell', 'tpm'),
             
-            rna_celline = 
+            rna_celline =
                 c('ensembl', 'gene', 'cell_line', 'tpm', 'ptpm', "nx"),
             
-            rna_cancer_sample = 
+            rna_cancer_sample =
                 c('ensembl', 'sample', 'cancer', 'fpkm'),
             
-            transcript_rna_tissue = 
+            transcript_rna_tissue =
                 c('ensgid', 'enstid', 'sample', 'tpm'),
             
-            transcript_rna_celline = 
+            transcript_rna_celline =
                 c('ensgid', 'enstid', 'sample', 'tpm'),
             
-            transcript_rna_pigbrain = 
+            transcript_rna_pigbrain =
                 c('ensgid', 'enstid', 'sample', 'tpm'),
             
-            transcript_rna_mousebrain = 
+            transcript_rna_mousebrain =
                 c('ensgid', 'enstid', 'sample', 'tpm')
             
-            ),
+        ),
         
         urls = c(
-            normal_tissue = 
+            normal_tissue =
                 'https://www.proteinatlas.org/download/normal_tissue.tsv.zip',
-            pathology = 
+            pathology =
                 'https://www.proteinatlas.org/download/pathology.tsv.zip',
-            subcellular_location = 
+            subcellular_location =
                 'https://www.proteinatlas.org/download/subcellular_location.tsv.zip',
-            rna_tissue_consensus = 
+            rna_tissue_consensus =
                 'https://www.proteinatlas.org/download/rna_tissue_consensus.tsv.zip',
-            rna_tissue_hpa = 
+            rna_tissue_hpa =
                 'https://www.proteinatlas.org/download/rna_tissue_hpa.tsv.zip',
-            rna_tissue_gtex = 
+            rna_tissue_gtex =
                 'https://www.proteinatlas.org/download/rna_tissue_gtex.tsv.zip',
-            rna_tissue_fantom = 
+            rna_tissue_fantom =
                 'https://www.proteinatlas.org/download/rna_tissue_fantom.tsv.zip',
-            rna_single_cell_type = 
+            rna_single_cell_type =
                 'https://www.proteinatlas.org/download/rna_single_cell_type.tsv.zip',
-            rna_single_cell_type_tissue = 
+            rna_single_cell_type_tissue =
                 'https://www.proteinatlas.org/download/rna_single_cell_type_tissue.tsv.zip',
-            rna_brain_gtex = 
+            rna_brain_gtex =
                 'https://www.proteinatlas.org/download/rna_brain_gtex.tsv.zip',
-            rna_brain_fantom = 
+            rna_brain_fantom =
                 'https://www.proteinatlas.org/download/rna_brain_fantom.tsv.zip',
-            rna_pig_brain_hpa = 
+            rna_pig_brain_hpa =
                 'https://www.proteinatlas.org/download/rna_pig_brain_hpa.tsv.zip',
-            rna_pig_brain_sample_hpa = 
+            rna_pig_brain_sample_hpa =
                 'https://www.proteinatlas.org/download/rna_pig_brain_sample_hpa.tsv.zip',
-            rna_mouse_brain_hpa = 
+            rna_mouse_brain_hpa =
                 'https://www.proteinatlas.org/download/rna_mouse_brain_hpa.tsv.zip',
-            rna_mouse_brain_sample_hpa = 
+            rna_mouse_brain_sample_hpa =
                 'https://www.proteinatlas.org/download/rna_mouse_brain_sample_hpa.tsv.zip',
-            rna_mouse_brain_allen = 
+            rna_mouse_brain_allen =
                 'https://www.proteinatlas.org/download/rna_mouse_brain_allen.tsv.zip',
-            rna_blood_cell = 
+            rna_blood_cell =
                 'https://www.proteinatlas.org/download/rna_blood_cell.tsv.zip',
-            rna_blood_cell_sample = 
+            rna_blood_cell_sample =
                 'https://www.proteinatlas.org/download/rna_blood_cell_sample.tsv.zip',
-            rna_blood_cell_monaco = 
+            rna_blood_cell_monaco =
                 'https://www.proteinatlas.org/download/rna_blood_cell_monaco.tsv.zip',
-            rna_blood_cell_schmiedel = 
+            rna_blood_cell_schmiedel =
                 'https://www.proteinatlas.org/download/rna_blood_cell_schmiedel.tsv.zip',
-            rna_celline = 
+            rna_celline =
                 'https://www.proteinatlas.org/download/rna_celline.tsv.zip',
-            rna_cancer_sample = 
+            rna_cancer_sample =
                 'https://www.proteinatlas.org/download/rna_cancer_sample.tsv.zip',
-            transcript_rna_tissue = 
+            transcript_rna_tissue =
                 'https://www.proteinatlas.org/download/transcript_rna_tissue.tsv.zip',
-            transcript_rna_celline = 
+            transcript_rna_celline =
                 'https://www.proteinatlas.org/download/transcript_rna_celline.tsv.zip',
-            transcript_rna_pigbrain = 
+            transcript_rna_pigbrain =
                 'https://www.proteinatlas.org/download/transcript_rna_pigbrain.tsv.zip',
-            transcript_rna_mousebrain = 
+            transcript_rna_mousebrain =
                 'https://www.proteinatlas.org/download/transcript_rna_mousebrain.tsv.zip'
         )
     )
     
-    ## generate a list of item to download    
+    ## generate a list of item to download
+    replace_shortcut <- function(x, shortcut, with) {
+        x <- rep(x, 1 + (length(with) - 1)*(x == shortcut))
+        x[x == shortcut] <- with
+        return(x)
+    }
     
-    if(downloadList == 'all') {
-        downloadList <- allDatasets$datasetnames
-        
-    } else if(downloadList == 'histology') { 
-        downloadList <- allDatasets$datasetnames[1:3]
-        
-    } else if(downloadList == 'rna tissue') {
-        downloadList <- allDatasets$datasetnames[4:7]
-        
-    } else if(downloadList == 'rna single cell type') {
-        downloadList <- allDatasets$datasetnames[8:9]
-        
-    } else if(downloadList == 'rna brain region') {
-        downloadList <- allDatasets$datasetnames[10:16]
-        
-    } else if(downloadList == 'rna blood cell') {
-        downloadList <- allDatasets$datasetnames[17:20]
-        
-    } else if(downloadList == 'isoform') {
-        downloadList <- allDatasets$datasetnames[23:26]
-        
-    } 
+    downloadList <- downloadList %>%
+        replace_shortcut('all', allDatasets$datasetnames) %>%
+        replace_shortcut('histology', allDatasets$datasetnames[1:3]) %>%
+        replace_shortcut('rna tissue', allDatasets$datasetnames[4:7]) %>%
+        replace_shortcut('rna cell type', allDatasets$datasetnames[8:9]) %>%
+        replace_shortcut('rna brain region', allDatasets$datasetnames[10:16]) %>%
+        replace_shortcut('rna blood cell', allDatasets$datasetnames[17:20]) %>%
+        replace_shortcut('isoform', allDatasets$datasetnames[23:26])
+
+    ## make sure that everything are downloadable, and get downloaded once
+    # downloadList <- unique(downloadList)
+    # downloadList <- downloadList[downloadList %in% allDatasets$datasetnames]
     
     # filter the datasets to download
-    downloadDatasets <- filter(allDatasets, datasetnames %in% downloadList)
+    downloadDatasets <-
+        filter(allDatasets, datasetnames %in% downloadList)
     
     #initiate the list of processed data to be returned
     loadedData <- list()
@@ -311,65 +362,70 @@ hpaDownload <- function(downloadList='histology', version='latest') {
     ## Download if version is 'built-in' or 'example'
     
     if (version %in% c('example', 'built-in')) {
-    
-        message('Only the followings are example/built-in datasets: \n - Normal tissue \n - Pathology \n - Subcellular location \nOther datasets will not be loaded')
+        message(
+            'Only the followings are example/built-in datasets: \n - Normal tissue \n - Pathology \n - Subcellular location \nOther datasets will not be loaded'
+        )
         
-        downloadDatasets <- filter(downloadDatasets, 
-                                   datasetnames %in% c(
-                                       'Normal tissue', 
-                                       'Pathology',
-                                       'Subcellular location'))
+        downloadDatasets <- filter(
+            downloadDatasets,
+            datasetnames %in% c('Normal tissue',
+                                'Pathology',
+                                'Subcellular location')
+        )
         
         for (i in names(downloadDatasets$urls)) {
             loadedData[[i]] <- hpa_histology_data[[i]]
         }
         
     } else if (version == "latest") {
-    
-    ## Download the requested datasets if version is "latest"
-    
+        ## Download the requested datasets if version is "latest"
+        
         for (i in seq_along(downloadDatasets$urls)) {
             temp <- tempfile()
             download.file(url = downloadDatasets$urls[[i]],
                           destfile = temp)
             loadedData[[i]] <- read.delim2(
-                    unz(temp, unzip(temp, list = TRUE)$Name[1]),
-                    stringsAsFactors = FALSE,
-                    check.names = FALSE,
-                    strip.white = TRUE,
-                    sep="\t",
-                    na.strings = c("", " ")
-                )
+                unz(temp, unzip(temp, list = TRUE)$Name[1]),
+                stringsAsFactors = FALSE,
+                check.names = FALSE,
+                strip.white = TRUE,
+                sep = "\t",
+                na.strings = c("", " ")
+            )
             unlink(temp)
             
-            if (downloadDatasets$datasetnames[[i]] %in% c('RNA transcript tissue',
-                                                          'RNA transcript cell line',
-                                                          'RNA transcript pig brain',
-                                                          'RNA transcript mouse brain')) {
-            loadedData[[i]] <-
-                stats::reshape(
-                    loadedData[[i]],
-                    direction = "long",
-                    varying = list(3:ncol(loadedData[[i]])),
-                    v.names = "tpm",
-                    timevar = "sample",
-                    times = c(colnames(loadedData[[i]][, 3:ncol(loadedData[[i]])]))
-                ) %>%
-                subset(select = -id)
-    
-            } 
-        
-        ## assign tidy colnames    
-        colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
-    
+            if (downloadDatasets$datasetnames[[i]] %in% c(
+                'RNA transcript tissue',
+                'RNA transcript cell line',
+                'RNA transcript pig brain',
+                'RNA transcript mouse brain'
+            )) {
+                loadedData[[i]] <-
+                    stats::reshape(
+                        loadedData[[i]],
+                        direction = "long",
+                        varying = list(3:ncol(loadedData[[i]])),
+                        v.names = "tpm",
+                        timevar = "sample",
+                        times = c(colnames(loadedData[[i]][, 3:ncol(loadedData[[i]])]))
+                    ) %>%
+                    subset(select = -id)
+                
+            }
+            
+            ## assign tidy colnames
+            colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
+            
         }
         
         ## convert to tibbles
         loadedData <- lapply(loadedData, as_tibble)
         
-        names(loadedData) <- 
-            downloadDatasets$urls %>% 
-            gsub('.tsv.zip|https://www.proteinatlas.org/download/', '', .)
+        names(loadedData) <-
+            downloadDatasets$urls %>%
+            gsub('.tsv.zip|https://www.proteinatlas.org/download/',
+                 '',
+                 .)
         
     }
     
@@ -392,7 +448,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
 #'   \code{hpaSubset()}
 #' @param targetGene Vector of strings of HGNC gene symbols. It will be used to
 #'   subset every dataset in the list object. You can also mix HGNC gene symbols
-#'   and ensemnl ids (start with ENSG) and they will be converted to HGNC gene
+#'   and ensemnbl ids (start with ENSG) and they will be converted to HGNC gene
 #'   symbols.
 #' @param targetTissue Vector of strings of normal tissues. Will be used to
 #'   subset the \code{normal_tissue} and \code{rna_tissue} dataset.
@@ -407,7 +463,7 @@ hpaDownload <- function(downloadList='histology', version='latest') {
 #'   subsetting, depending on the input data.
 #'
 #' @family downloadable datasets functions
-#' 
+#'
 #' @rdname hpaListParam
 #'
 #' @examples
@@ -424,89 +480,113 @@ hpaDownload <- function(downloadList='histology', version='latest') {
 #' @import dplyr
 #' @export
 
-hpaSubset <- function(data=NULL,
-                      targetGene=NULL,
-                      targetTissue=NULL,
-                      targetCellType=NULL,
-                      targetCancer=NULL,
-                      targetCellLine=NULL) {
-    
+hpaSubset <- function(data = NULL,
+                      targetGene = NULL,
+                      targetTissue = NULL,
+                      targetCellType = NULL,
+                      targetCancer = NULL,
+                      targetCellLine = NULL) {
     # Check if data is provided or not
-    if (is.null(data)) {
-        message(paste0('No data provided. Use version ', 
-                       hpa_histology_data$metadata$HPAversion,
-                       "."))
-        data = HPAanalyze::hpa_histology_data
-    }
+    data <- is_null_data(data = data)
+    if (!is.null(targetGene))
+        targetGene <- gene_ensembl_convert(targetGene, "gene")
     
-    if('normal_tissue' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$normal_tissue <- 
-                filter(data$normal_tissue, gene %in% targetGene)
+    subsetting <- function(df) {
+        if (!is.null(targetGene) & any(names(df) == "gene")) {
+            df <- filter(df, gene %in% targetGene)
         }
         
-        if(!is.null(targetTissue)) {
-            data$normal_tissue <-
-                filter(data$normal_tissue, tissue %in% targetTissue)
+        if (!is.null(targetTissue) & any(names(df) == "tissue")) {
+            df <- filter(df, tissue %in% targetTissue)
         }
         
-        if(!is.null(targetCellType)) {
-            data$normal_tissue <-
-                filter(data$normal_tissue, cell_type %in% targetCellType)
-        }
-    }
-    
-    if('pathology' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$pathology <-
-                filter(data$pathology, gene %in% targetGene)
+        if (!is.null(targetCellType) &
+            any(names(df) == "cell_type")) {
+            df <- filter(df, cell_type %in% targetCellType)
         }
         
-        if(!is.null(targetCancer)) {
-            data$pathology <-
-                filter(data$pathology, cancer %in% targetCancer)
-        }
-    }
-    
-    if('subcellular_location' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$subcellular_location <-
-                filter(data$subcellular_location, gene %in% targetGene)
-        }
-    }
-    
-    if('rna_tissue' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$rna_tissue <-
-                filter(data$rna_tissue, gene %in% targetGene)
+        if (!is.null(targetCancer) & any(names(df) == "cancer")) {
+            df <- filter(df, cancer %in% targetCancer)
         }
         
-        if(!is.null(targetTissue)) {
-            data$rna_tissue <-
-                filter(data$rna_tissue, tissue %in% targetTissue)
-        }        
-    }
-    
-    if('rna_cell_line' %in% names(data)) {
-        if(!is.null(targetGene)) {
-            targetGene <- gene_ensembl_convert(targetGene, "gene")
-            data$rna_cell_line <-
-                filter(data$rna_cell_line, gene %in% targetGene)
+        if (!is.null(targetCellLine) &
+            any(names(df) == "cell_line")) {
+            df <- filter(df, cell_line %in% targetCellLine)
         }
         
-        if(!is.null(targetCellLine)) {
-            data$rna_cell_line <-
-                filter(data$rna_cell_line, cell_line %in% targetCellLine)
-        }       
+        return(df)
     }
+    
+    data <- lapply(data, subsetting)
+    
+    #
+    # if('normal_tissue' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$normal_tissue <-
+    #             filter(data$normal_tissue, gene %in% targetGene)
+    #     }
+    #
+    #     if(!is.null(targetTissue)) {
+    #         data$normal_tissue <-
+    #             filter(data$normal_tissue, tissue %in% targetTissue)
+    #     }
+    #
+    #     if(!is.null(targetCellType)) {
+    #         data$normal_tissue <-
+    #             filter(data$normal_tissue, cell_type %in% targetCellType)
+    #     }
+    # }
+    #
+    # if('pathology' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$pathology <-
+    #             filter(data$pathology, gene %in% targetGene)
+    #     }
+    #
+    #     if(!is.null(targetCancer)) {
+    #         data$pathology <-
+    #             filter(data$pathology, cancer %in% targetCancer)
+    #     }
+    # }
+    #
+    # if('subcellular_location' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$subcellular_location <-
+    #             filter(data$subcellular_location, gene %in% targetGene)
+    #     }
+    # }
+    #
+    # if('rna_tissue' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$rna_tissue <-
+    #             filter(data$rna_tissue, gene %in% targetGene)
+    #     }
+    #
+    #     if(!is.null(targetTissue)) {
+    #         data$rna_tissue <-
+    #             filter(data$rna_tissue, tissue %in% targetTissue)
+    #     }
+    # }
+    #
+    # if('rna_cell_line' %in% names(data)) {
+    #     if(!is.null(targetGene)) {
+    #         targetGene <- gene_ensembl_convert(targetGene, "gene")
+    #         data$rna_cell_line <-
+    #             filter(data$rna_cell_line, gene %in% targetGene)
+    #     }
+    #
+    #     if(!is.null(targetCellLine)) {
+    #         data$rna_cell_line <-
+    #             filter(data$rna_cell_line, cell_line %in% targetCellLine)
+    #     }
+    # }
     
     return(data)
 }
-
 
 #########################
 ## List available data ##
@@ -531,42 +611,53 @@ hpaSubset <- function(data=NULL,
 #' @importFrom stats na.omit
 #' @export
 
-hpaListParam <- function(data=NULL) {
-    
+hpaListParam <- function(data = NULL) {
     # Check if data is provided or not
-    if (is.null(data)) {
-        message(paste0('No data provided. Use version ', 
-                       hpa_histology_data$metadata$HPAversion,
-                       "."))
-        data = HPAanalyze::hpa_histology_data
+    data <- is_null_data(data = data)
+    
+    # Write function for each df, list the param if exist
+    listing <- function(df) {
+        params <- lapply(c(
+            "tissue" = "tissue",
+            "cell_type" = "cell_type",
+            "cancer" = "cancer",
+            "cell_line" = "cell_line"
+        ),
+        function(x)
+            unique(df[[x]]))
+        
+        # Remove empty param list
+        params[lengths(params) != 0]
     }
     
-    availData <- list()
+    availData <- lapply(data, listing)
     
-    if('normal_tissue' %in% names(data)) {
-        availData$normal_tissue <- unique(data$normal_tissue[['tissue']])
-        availData$normal_cell <- unique(data$normal_tissue[['cell_type']])
-    }
+    return(availData[lengths(availData) != 0])
     
-    if('pathology' %in% names(data)) {
-        availData$cancer <- unique(data$pathology[['cancer']])
-    }
+    # if('normal_tissue' %in% names(data)) {
+    #     availData$normal_tissue <- unique(data$normal_tissue[['tissue']])
+    #     availData$normal_cell <- unique(data$normal_tissue[['cell_type']])
+    # }
+    #
+    # if('pathology' %in% names(data)) {
+    #     availData$cancer <- unique(data$pathology[['cancer']])
+    # }
+    #
+    # if('subcellular_location' %in% names(data)) {
+    #     availData$subcellular_location <- unique(data$subcellular_location[['approved']])%>%
+    #         strsplit(';') %>% unlist() %>%
+    #         unique() %>% na.omit() %>% as.vector()
+    # }
+    #
+    # if('rna_tissue' %in% names(data)) {
+    #     availData$normal_tissue_rna <- unique(data$rna_tissue[['tissue']])
+    # }
+    #
+    # if('rna_cell_line' %in% names(data)) {
+    #     availData$cell_line_rna <- unique(data$rna_cell_line[['cell_line']])
+    # }
     
-    if('subcellular_location' %in% names(data)) {
-        availData$subcellular_location <- unique(data$subcellular_location[['approved']])%>%
-            strsplit(';') %>% unlist() %>% 
-            unique() %>% na.omit() %>% as.vector()
-    }
-    
-    if('rna_tissue' %in% names(data)) {
-        availData$normal_tissue_rna <- unique(data$rna_tissue[['tissue']])
-    }
-    
-    if('rna_cell_line' %in% names(data)) {
-        availData$cell_line_rna <- unique(data$rna_cell_line[['cell_line']])
-    }
-    
-    return(availData)
+    # return(availData)
 }
 
 #################
@@ -616,23 +707,23 @@ hpaListParam <- function(data=NULL) {
 #' @importFrom utils write.csv write.table
 #' @export
 
-hpaExport <- function(data, fileName, fileType='xlsx') {
-    if(fileType == 'xlsx') {
+hpaExport <- function(data, fileName, fileType = 'xlsx') {
+    if (fileType == 'xlsx') {
         write.xlsx(data, file = paste0(fileName, ".xlsx"))
     }
     
-    if(fileType == 'csv') {
+    if (fileType == 'csv') {
         for (i in 1:length(data)) {
-            write.csv(data[[i]], 
+            write.csv(data[[i]],
                       file = paste0(fileName, "_", names(data[i]), ".csv"))
         }
     }
     
-    if(fileType == 'tsv') {
+    if (fileType == 'tsv') {
         for (i in 1:length(data)) {
-            write.table(data[[i]], 
-                       file = paste0(fileName, "_", names(data[i]), ".tsv"),
-                       sep = "\t")
+            write.table(data[[i]],
+                        file = paste0(fileName, "_", names(data[i]), ".tsv"),
+                        sep = "\t")
         }
     }
 }

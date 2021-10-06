@@ -1,3 +1,29 @@
+                       Changes in version 1.9
+* Changes in version 1.9.5
+    + hpaVisTissue now plots all tissues by default
+    + hpaDownload shortcuts for downloadList arg can now be combined
+    + Bug fixes and performance improvements
+                       
+* Changes in version 1.9.4
+    + hpaVisPatho can now facet by cancers or genes
+    + Vignettes update
+    + Bug fixes and performance improvements
+
+* Changes in version 1.9.3
+    + Update the default color to be more accessible (based on viridis::magma)
+    + Updated hpaSubset and hpaListParam to work properly with new data
+
+* Changes in version 1.9.2
+    + hpaDownload can now download every downloadable datasets from HPA.
+    + Update built-in data to HPA version 20.1.
+                       
+* Changes in version 1.9.1
+    + Update built-in data to HPA version 20.
+    
+* Changes in version 1.9.0
+    + Starting devel for Bioconductor 3.13
+
+
                        Changes in version 1.5
 * Changes in version 1.5.3
     + Update built-in data to HPA version 19.
