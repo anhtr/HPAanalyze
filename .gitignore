@@ -32,3 +32,4 @@ vignettes/*.pdf
 *.save
 .Rproj.user
 /ignore/
+docs
