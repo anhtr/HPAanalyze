@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,7 +43,6 @@
 <meta property="og:description" content="Download the latest version of HPA datasets and import them in R. It is
 recommended to only download the datasets you need, as some of them may be
 very big." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -57,7 +60,7 @@ very big." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +74,7 @@ very big." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
       </span>
     </div>
 
@@ -79,7 +82,7 @@ very big." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,10 +103,10 @@ very big." />
       <a href="../articles/b_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
     </li>
     <li>
-      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
+      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
     </li>
     <li>
-      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
+      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
     </li>
     <li>
       <a href="../articles/e_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
@@ -118,7 +121,12 @@ very big." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/trannhatanh89/HPAanalyze/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -133,7 +141,7 @@ very big." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download datasets</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/trannhatanh89/HPAanalyze/blob/master/R/download.R'><code>R/download.R</code></a></small>
     <div class="hidden name"><code>hpaDownload.Rd</code></div>
     </div>
 
@@ -143,7 +151,7 @@ recommended to only download the datasets you need, as some of them may be
 very big.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hpaDownload</span>(<span class='kw'>downloadList</span> <span class='kw'>=</span> <span class='st'>"histology"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"latest"</span>)</pre>
+    <pre class="usage"><span class='fu'>hpaDownload</span><span class='op'>(</span>downloadList <span class='op'>=</span> <span class='st'>"histology"</span>, version <span class='op'>=</span> <span class='st'>"latest"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,16 +163,46 @@ Possible value:</p><ul>
 <li><p><code>'Normal tissue'</code></p></li>
 <li><p><code>'Pathology'</code></p></li>
 <li><p><code>'Subcellular location'</code></p></li>
-<li><p><code>'RNA tissue'</code></p></li>
-<li><p><code>'RNA cell line'</code></p></li>
+<li><p><code>'RNA consensus tissue'</code></p></li>
+<li><p><code>'RNA HPA tissue'</code></p></li>
+<li><p><code>'RNA GTEx tissue'</code></p></li>
+<li><p><code>'RNA FANTOM tissue'</code></p></li>
+<li><p><code>'RNA single cell type'</code></p></li>
+<li><p><code>'RNA single cell type tissue cluster'</code></p></li>
+<li><p><code>'RNA GTEx brain region'</code></p></li>
+<li><p><code>'RNA FANTOM brain region'</code></p></li>
+<li><p><code>'RNA pig brain region'</code></p></li>
+<li><p><code>'RNA pig brain subregion sample'</code></p></li>
+<li><p><code>'RNA mouse brain region'</code></p></li>
+<li><p><code>'RNA mouse brain subregion sample'</code></p></li>
+<li><p><code>'RNA Allen mouse brain region'</code></p></li>
+<li><p><code>'RNA HPA blood cell'</code></p></li>
+<li><p><code>'RNA HPA blood cell sample'</code></p></li>
+<li><p><code>'RNA Monaco blood cell'</code></p></li>
+<li><p><code>'RNA Schmiedel blood cell'</code></p></li>
+<li><p><code>'RNA HPA cell line'</code></p></li>
+<li><p><code>'RNA TCGA cancer sample'</code></p></li>
 <li><p><code>'RNA transcript tissue'</code></p></li>
 <li><p><code>'RNA transcript cell line'</code></p></li>
+<li><p><code>'RNA transcript pig brain'</code></p></li>
+<li><p><code>'RNA transcript mouse brain'</code></p></li>
 <li><p><code>'all'</code>: download everything</p></li>
 <li><p><code>'histology'</code>: same as <code><a href='https://rdrr.io/r/base/c.html'>c('Normal tissue', 'Pathology',
   'Subcellular location')</a></code></p></li>
-<li><p><code>'rna'</code>: same as <code><a href='https://rdrr.io/r/base/c.html'>c('RNA tissue', 'RNA cell line')</a></code></p></li>
+<li><p><code>'rna tissue'</code>: same as <code><a href='https://rdrr.io/r/base/c.html'>c('RNA consensus tissue', 'RNA
+  HPA tissue', 'RNA GTEx tissue', 'RNA FANTOM tissue')</a></code></p></li>
+<li><p><code>'rna single cell type'</code>: same as <code><a href='https://rdrr.io/r/base/c.html'>c('RNA single cell
+  type', 'RNA single cell type tissue cluster')</a></code></p></li>
+<li><p><code>'rna brain region'</code>: same as <code><a href='https://rdrr.io/r/base/c.html'>c('RNA GTEx brain region',
+  'RNA FANTOM brain region', 'RNA pig brain region', 'RNA pig brain
+  subregion sample', 'RNA mouse brain region', 'RNA mouse brain subregion
+  sample', 'RNA Allen mouse brain region')</a></code></p></li>
+<li><p><code>'rna single cell type'</code>: same as <code><a href='https://rdrr.io/r/base/c.html'>c('RNA HPA blood
+  cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
+  Schmiedel blood cell')</a></code></p></li>
 <li><p><code>'isoform'</code>: same as <code><a href='https://rdrr.io/r/base/c.html'>c('RNA transcript tissue', 'RNA
-  transcript cell line')</a></code></p></li>
+  transcript cell line', 'RNA transcript pig brain', 'RNA transcript mouse
+  brain')</a></code></p></li>
 </ul><p>See <a href='https://www.proteinatlas.org/about/download'>https://www.proteinatlas.org/about/download</a> for more information.</p></td>
     </tr>
     <tr>
@@ -173,12 +211,9 @@ Possible value:</p><ul>
 value:</p><ul>
 <li><p><code>'latest'</code>: Download latest version. Require Internet
   connection.</p></li>
-<li><p><code>'example'</code>: Load the example dataset from 'HPA
-  analyze' ('hpa_histology_data'). Does not contain rna or
-  isoform data.</p></li>
-<li><p><code>'v?'</code> with '?' is a integer: Download a specific version of
-  the dataset. For example: 'v18' download version 18. Currently support
-  version 17 and above. Require Internet connection.</p></li>
+<li><p><code>'example'</code> or <code>'built-in'</code>: Load the built-in histology
+  dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
+  connection.</p></li>
 </ul></td>
     </tr>
     </table>
@@ -193,25 +228,33 @@ value:</p><ul>
 <code><a href='hpa_histology_data.html'>hpa_histology_data</a></code></p>
 <p>Other downloadable datasets functions: 
 <code><a href='hpaExport.html'>hpaExport</a>()</code>,
-<code><a href='hpaListParam.html'>hpaSubset</a>()</code></p></div>
+<code><a href='hpaSubset.html'>hpaSubset</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='no'>downloadedData</span> <span class='kw'>&lt;-</span> <span class='fu'>hpaDownload</span>(<span class='kw'>downloadList</span><span class='kw'>=</span><span class='st'>'all'</span>, <span class='kw'>version</span><span class='kw'>=</span><span class='st'>'example'</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>downloadedData</span>)</div><div class='output co'>#&gt;                      Length Class  Mode
+    <pre class="examples"><div class='input'>  <span class='va'>downloadedData</span> <span class='op'>&lt;-</span> <span class='fu'>hpaDownload</span><span class='op'>(</span>downloadList<span class='op'>=</span><span class='st'>'histology'</span>, version<span class='op'>=</span><span class='st'>'example'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Only the followings are example/built-in datasets: </span>
+#&gt; <span class='message'> - Normal tissue </span>
+#&gt; <span class='message'> - Pathology </span>
+#&gt; <span class='message'> - Subcellular location </span>
+#&gt; <span class='message'>Other datasets will not be loaded</span></div><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>downloadedData</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                      Length Class  Mode
 #&gt; normal_tissue         6     tbl_df list
 #&gt; pathology            11     tbl_df list
 #&gt; subcellular_location 14     tbl_df list</div><div class='input'>  
+  <span class='va'>downloadedDataRna</span> <span class='op'>&lt;-</span> <span class='fu'>hpaDownload</span><span class='op'>(</span>downloadList<span class='op'>=</span><span class='st'>'rna tissue'</span>, version<span class='op'>=</span><span class='st'>'latest'</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>downloadedDataRna</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                      Length Class  Mode
+#&gt; rna_tissue_consensus 4      tbl_df list
+#&gt; rna_tissue_hpa       6      tbl_df list
+#&gt; rna_tissue_gtex      6      tbl_df list
+#&gt; rna_tissue_fantom    6      tbl_df list</div><div class='input'>  
+  
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -222,7 +265,7 @@ value:</p><ul>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

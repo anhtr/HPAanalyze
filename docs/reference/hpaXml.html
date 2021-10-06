@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -41,7 +45,6 @@ take the input of either one Ensembl gene id or a imported XML object
 resulting from a hpaXmlGet() function call. By default, it will
 extract all information available for HPAanalyze user from the XML file by
 calling every hpaXml function and put all results into a list." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -59,7 +62,7 @@ calling every hpaXml function and put all results into a list." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -73,7 +76,7 @@ calling every hpaXml function and put all results into a list." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
       </span>
     </div>
 
@@ -81,7 +84,7 @@ calling every hpaXml function and put all results into a list." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -102,10 +105,10 @@ calling every hpaXml function and put all results into a list." />
       <a href="../articles/b_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
     </li>
     <li>
-      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
+      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
     </li>
     <li>
-      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
+      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
     </li>
     <li>
       <a href="../articles/e_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
@@ -120,7 +123,12 @@ calling every hpaXml function and put all results into a list." />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/trannhatanh89/HPAanalyze/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -135,7 +143,7 @@ calling every hpaXml function and put all results into a list." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract details about an individual protein from XML file in one function</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/trannhatanh89/HPAanalyze/blob/master/R/one.R'><code>R/one.R</code></a></small>
     <div class="hidden name"><code>hpaXml.Rd</code></div>
     </div>
 
@@ -147,11 +155,11 @@ extract all information available for HPAanalyze user from the XML file by
 calling every hpaXml function and put all results into a list.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hpaXml</span>(
-  <span class='no'>inputXml</span>,
-  <span class='kw'>extractType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ProtClass"</span>, <span class='st'>"TissueExprSum"</span>, <span class='st'>"Antibody"</span>, <span class='st'>"TissueExpr"</span>),
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>hpaXml</span><span class='op'>(</span>
+  <span class='va'>inputXml</span>,
+  extractType <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ProtClass"</span>, <span class='st'>"TissueExprSum"</span>, <span class='st'>"Antibody"</span>, <span class='st'>"TissueExpr"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,57 +200,53 @@ functions for more information.</p></td>
 <code><a href='hpaXmlTissueExpr.html'>hpaXmlTissueExpr</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-  <span class='fu'>hpaXml</span>(<span class='kw'>inputXml</span><span class='kw'>=</span><span class='st'>'ENSG00000131979'</span>, <span class='kw'>extractType</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'ProtClass'</span>, <span class='st'>'TissueExprSum'</span>, <span class='st'>'Antibody'</span>))</div><div class='output co'>#&gt; $ProtClass
-#&gt; <span style='color: #555555;'># A tibble: 11 x 4</span><span>
+    <pre class="examples"><div class='input'> 
+  <span class='fu'>hpaXml</span><span class='op'>(</span>inputXml<span class='op'>=</span><span class='st'>'ENSG00000131979'</span>, extractType<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'ProtClass'</span>, <span class='st'>'TissueExprSum'</span>, <span class='st'>'Antibody'</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ProtClass
+#&gt; <span style='color: #949494;'># A tibble: 11 x 4</span>
 #&gt;    source       id    parent_id name                                            
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                           
-#&gt; </span><span style='color: #555555;'> 1</span><span> </span><span style='color: #BB0000;'>NA</span><span>           Ez    </span><span style='color: #BB0000;'>NA</span><span>        Enzymes                                         
-#&gt; </span><span style='color: #555555;'> 2</span><span> ENZYME       Ec    Ez        ENZYME proteins                                 
-#&gt; </span><span style='color: #555555;'> 3</span><span> ENZYME       Eh    Ec        Hydrolases                                      
-#&gt; </span><span style='color: #555555;'> 4</span><span> HPA          Za    </span><span style='color: #BB0000;'>NA</span><span>        Predicted intracellular proteins                
-#&gt; </span><span style='color: #555555;'> 5</span><span> HPA          Zm    Za        Intracellular proteins predicted by MDM and MDS~
-#&gt; </span><span style='color: #555555;'> 6</span><span> UniProt      Dr    </span><span style='color: #BB0000;'>NA</span><span>        Disease related genes                           
-#&gt; </span><span style='color: #555555;'> 7</span><span> HPA          Pd    </span><span style='color: #BB0000;'>NA</span><span>        Potential drug targets                          
-#&gt; </span><span style='color: #555555;'> 8</span><span> UniProt      Ua    </span><span style='color: #BB0000;'>NA</span><span>        UniProt - Evidence at protein level             
-#&gt; </span><span style='color: #555555;'> 9</span><span> neXtProt     Nx    </span><span style='color: #BB0000;'>NA</span><span>        Mapped to neXtProt                              
-#&gt; </span><span style='color: #555555;'>10</span><span> neXtProt     Na    Nx        neXtProt - Evidence at protein level            
-#&gt; </span><span style='color: #555555;'>11</span><span> Peptideatlas Ep    </span><span style='color: #BB0000;'>NA</span><span>        Protein evidence (Peptideatlas)                 
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                           
+#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #BB0000;'>NA</span>           Ez    <span style='color: #BB0000;'>NA</span>        Enzymes                                         
+#&gt; <span style='color: #BCBCBC;'> 2</span> ENZYME       Ec    Ez        ENZYME proteins                                 
+#&gt; <span style='color: #BCBCBC;'> 3</span> ENZYME       Eh    Ec        Hydrolases                                      
+#&gt; <span style='color: #BCBCBC;'> 4</span> HPA          Za    <span style='color: #BB0000;'>NA</span>        Predicted intracellular proteins                
+#&gt; <span style='color: #BCBCBC;'> 5</span> HPA          Zm    Za        Intracellular proteins predicted by MDM and MDS~
+#&gt; <span style='color: #BCBCBC;'> 6</span> UniProt      Dr    <span style='color: #BB0000;'>NA</span>        Disease related genes                           
+#&gt; <span style='color: #BCBCBC;'> 7</span> HPA          Pd    <span style='color: #BB0000;'>NA</span>        Potential drug targets                          
+#&gt; <span style='color: #BCBCBC;'> 8</span> UniProt      Ua    <span style='color: #BB0000;'>NA</span>        UniProt - Evidence at protein level             
+#&gt; <span style='color: #BCBCBC;'> 9</span> neXtProt     Nx    <span style='color: #BB0000;'>NA</span>        Mapped to neXtProt                              
+#&gt; <span style='color: #BCBCBC;'>10</span> neXtProt     Na    Nx        neXtProt - Evidence at protein level            
+#&gt; <span style='color: #BCBCBC;'>11</span> Peptideatlas Ep    <span style='color: #BB0000;'>NA</span>        Protein evidence (Peptideatlas)                 
 #&gt; 
 #&gt; $TissueExprSum
 #&gt; $TissueExprSum$summary
 #&gt; [1] "Cytoplasmic and nuclear expression in several tissues, most abundant in basal cells of squamous epithelia."
 #&gt; 
 #&gt; $TissueExprSum$img
-#&gt; </span><span style='color: #555555;'># A tibble: 7 x 2</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 7 x 2</span>
 #&gt;   tissue          imageUrl                                                      
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                                         
-#&gt; </span><span style='color: #555555;'>1</span><span> Liver           http://images.proteinatlas.org/28612/64078_A_8_4_rna_selected~
-#&gt; </span><span style='color: #555555;'>2</span><span> Colon           http://images.proteinatlas.org/28612/64078_A_7_3_rna_selected~
-#&gt; </span><span style='color: #555555;'>3</span><span> Kidney          http://images.proteinatlas.org/28612/64078_A_7_5_rna_selected~
-#&gt; </span><span style='color: #555555;'>4</span><span> Testis          http://images.proteinatlas.org/28612/64078_A_4_6_rna_selected~
-#&gt; </span><span style='color: #555555;'>5</span><span> Lymph node      http://images.proteinatlas.org/28612/64078_A_8_8_rna_selected~
-#&gt; </span><span style='color: #555555;'>6</span><span> Cerebral cortex http://images.proteinatlas.org/28612/64078_B_8_5_rna_selected~
-#&gt; </span><span style='color: #555555;'>7</span><span> Vagina          http://images.proteinatlas.org/28612/64078_B_2_2_rna_selected~
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                         
+#&gt; <span style='color: #BCBCBC;'>1</span> Liver           http://images.proteinatlas.org/28612/64078_A_8_4_rna_selected~
+#&gt; <span style='color: #BCBCBC;'>2</span> Colon           http://images.proteinatlas.org/28612/64078_A_7_3_rna_selected~
+#&gt; <span style='color: #BCBCBC;'>3</span> Kidney          http://images.proteinatlas.org/28612/64078_A_7_5_rna_selected~
+#&gt; <span style='color: #BCBCBC;'>4</span> Testis          http://images.proteinatlas.org/28612/64078_A_4_6_rna_selected~
+#&gt; <span style='color: #BCBCBC;'>5</span> Lymph node      http://images.proteinatlas.org/28612/64078_A_8_8_rna_selected~
+#&gt; <span style='color: #BCBCBC;'>6</span> Cerebral cortex http://images.proteinatlas.org/28612/64078_B_8_5_rna_selected~
+#&gt; <span style='color: #BCBCBC;'>7</span> Vagina          http://images.proteinatlas.org/28612/64078_B_2_2_rna_selected~
 #&gt; 
 #&gt; 
 #&gt; $Antibody
-#&gt; </span><span style='color: #555555;'># A tibble: 1 x 4</span><span>
+#&gt; <span style='color: #949494;'># A tibble: 1 x 4</span>
 #&gt;   id        releaseVersion releaseDate RRID       
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      
-#&gt; </span><span style='color: #555555;'>1</span><span> HPA028612 6              2010-03-26  AB_10602135
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>          <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>       <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>      
+#&gt; <span style='color: #BCBCBC;'>1</span> HPA028612 6.0            2010-03-26  AB_10602135
 #&gt; </div><div class='input'>
-</div></span></pre>
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -253,7 +257,7 @@ functions for more information.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
