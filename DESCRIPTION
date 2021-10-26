@@ -1,7 +1,7 @@
 Package: HPAanalyze
 Type: Package
 Title: Retrieve and analyze data from the Human Protein Atlas
-Version: 1.11.1
+Version: 1.12.0
 Date: 2021-10-06
 Authors@R: person("Anh Nhat", "Tran", email = "trannhatanh89@gmail.com",
                   role = c("aut", "cre"))
