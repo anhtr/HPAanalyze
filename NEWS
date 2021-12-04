@@ -1,3 +1,10 @@
+                       Changes in version 1.13
+* Changes in version 1.13.1
+    + Update built-in data to HPA version 21.0.
+
+* Changes in version 1.13.0
+    + Starting devel for Bioconductor 3.15
+                       
                        Changes in version 1.9
 * Changes in version 1.9.5
     + hpaVisTissue now plots all tissues by default
