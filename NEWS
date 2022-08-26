@@ -1,3 +1,10 @@
+                       Changes in version 1.15
+* Changes in version 1.15.1
+    + Update built-in data to HPA version 21.1.
+* Changes in version 1.15.0
+    + Starting devel for Bioconductor 3.16
+
+
                        Changes in version 1.13
 * Changes in version 1.13.1
     + Update built-in data to HPA version 21.0.
