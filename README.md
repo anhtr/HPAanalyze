@@ -1,5 +1,4 @@
-HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200"/>
-============================================================================
+# HPAanalyze <img src="vignettes/figures/hex.png" align="right" height="200px"/>
 
 ![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)
@@ -20,11 +19,9 @@ HPAanalyze <img src='vignettes/figures/hex.png' align="right" height="200"/>
 -   **Citation:** Tran, A.N., Dussaq, A.M., Kennell, T. et
     al. HPAanalyze: an R package that facilitates the retrieval and
     analysis of the Human Protein Atlas data. BMC Bioinformatics 20,
-    463 (2019)
-    <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a>
+    463 (2019) <https://doi.org/10.1186/s12859-019-3059-z>
 
-Background
-----------
+## Background
 
 The Human Protein Atlas (HPA) is a comprehensive resource for
 exploration of human proteome which contains a vast amount of proteomics
@@ -52,8 +49,7 @@ programmatic access of HPA data. Here, we introduce *HPAanalyze*, an R
 package aims to simplify exploratory data analysis from those data, as
 well as provide other complementary functionality to *hpar*.
 
-Overview
---------
+## Overview
 
 *HPAanalyze* is designed to fullfill 3 main tasks: (1) Import,
 subsetting and export downloadable datasets; (2) Visualization of
@@ -111,11 +107,11 @@ datasets.
 
 The `hpaXml` function family import and extract data from individual XML
 entries from HPA. The `hpaXmlGet()` function downloads and imports data
-as “xml\_document”/“xml\_node” object, which can subsequently be
-processed by other `hpaXml` functions. The XML format from HPA contains
-a wealth of information that may not be covered by this package.
-However, users can extract any data of interest from the imported XML
-file using the xml2 package.
+as “xml_document”/“xml_node” object, which can subsequently be processed
+by other `hpaXml` functions. The XML format from HPA contains a wealth
+of information that may not be covered by this package. However, users
+can extract any data of interest from the imported XML file using the
+xml2 package.
 
 In the first release, *HPAanalyze* includes four functions for data
 extraction from HPA XML files: `hpaXmlProtClass()` for protein class
@@ -128,12 +124,10 @@ sample including clinical data and IHC scoring.
 download relevant staining images, with the former function also gives
 the options to automate the downloading process.
 
-Availability and requirements
-=============================
+# Availability and requirements
 
 -   Project name: HPAanalyze
--   Project home page:
-    <a href="https://github.com/anhtr/HPAanalyze" class="uri">https://github.com/anhtr/HPAanalyze</a>
+-   Project home page: <https://github.com/anhtr/HPAanalyze>
 -   Operating system(s): All platforms where R is available, including
     Windows, Linux, OS X
 -   Programming language: R
@@ -144,21 +138,18 @@ Availability and requirements
 -   Any restrictions to use by non-academics: Freely available to
     everyone
 
-Acknowledgements
-================
+# Acknowledgements
 
 We appreciate the support of the National institutes of Health National
 Cancer Institute R01 CA151522 and funds from the Department of Cell,
 Developmental and Integrative Biology at the University of Alabama at
 Birmingham.
 
-Copyright
-=========
+# Copyright
 
-**Anh Tran, 2018-2021 **
+**Anh Tran, 2018-2022**
 
 Please cite: **Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze:
 an R package that facilitates the retrieval and analysis of the Human
 Protein Atlas data. BMC Bioinformatics 20, 463 (2019)
-<a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a>
-**
+<https://doi.org/10.1186/s12859-019-3059-z>**

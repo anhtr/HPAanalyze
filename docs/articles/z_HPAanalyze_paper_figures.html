@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,45 +33,39 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/a_HPAanalyze_quick_start.html">1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function</a>
+      <a href="../articles/a_HPAanalyze_quick_start.html">1. Quick-start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function with HPAanalyze</a>
     </li>
     <li>
-      <a href="../articles/b_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
+      <a href="../articles/b_HPAanalyze_indepth.html">2. In-depth: Working with Human Protein Atlas (HPA) data in R with HPAanalyze</a>
     </li>
     <li>
-      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
+      <a href="../articles/c_HPAanalyze_case_query.html">3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA) queries</a>
     </li>
     <li>
-      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
+      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. Tutorial: Working with Human Protein Atlas (HPA) xml files offline</a>
     </li>
     <li>
-      <a href="../articles/e_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
+      <a href="../articles/e_HPAanalyze_case_json.html">5. Tutorial: Export Human Protein Atlas (HPA) data as JSON</a>
     </li>
     <li>
-      <a href="../articles/f_HPAanalyze_case_images.html">6. HPAanalyze use case: Download histology images from the Human Protein Atlas</a>
+      <a href="../articles/f_HPAanalyze_case_images.html">6. Tutorial: Download histology images from the Human Protein Atlas</a>
     </li>
     <li>
       <a href="../articles/z_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a>
@@ -79,7 +75,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/trannhatanh89/HPAanalyze/">
+  <a href="https://github.com/anhtr/HPAanalyze/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -94,18 +90,20 @@
 
       
 
-      </header><script src="z_HPAanalyze_paper_figures_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>99. Code for figures from HPAanalyze paper</h1>
-                        <h4 class="author">Anh N. Tran</h4>
+                        <h4 data-toc-skip class="author">Anh N.
+Tran</h4>
             <address class="author_afil">
-      Northwestern University, Illinois, USA<br><a class="author_email" href="mailto:#"></a><a href="mailto:trannhatanh89@gmail.com" class="email">trannhatanh89@gmail.com</a>
+      DataGrata
+LLC<br><a class="author_email" href="mailto:#"></a><a href="mailto:trannhatanh89@gmail.com" class="email">trannhatanh89@gmail.com</a>
       </address>
                   
-            <h4 class="date">6/18/2019</h4>
+            <h4 data-toc-skip class="date">6/18/2019</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/trannhatanh89/HPAanalyze/blob/master/vignettes/z_HPAanalyze_paper_figures.Rmd"><code>vignettes/z_HPAanalyze_paper_figures.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/anhtr/HPAanalyze/blob/HEAD/vignettes/z_HPAanalyze_paper_figures.Rmd" class="external-link"><code>vignettes/z_HPAanalyze_paper_figures.Rmd</code></a></small>
       <div class="hidden name"><code>z_HPAanalyze_paper_figures.Rmd</code></div>
 
     </div>
@@ -113,274 +111,276 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocStyle">BiocStyle</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trannhatanh89/HPAanalyze">HPAanalyze</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocStyle" class="external-link">BiocStyle</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/anhtr/HPAanalyze" class="external-link">HPAanalyze</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaDownload.html">hpaDownload</a></span><span class="op">(</span>downloadList <span class="op">=</span> <span class="st">"histology"</span>, 
-                    version <span class="op">=</span> <span class="st">"v18"</span><span class="op">)</span></code></pre></div>
-<div id="figure-2" class="section level1">
-<h1 class="hasAnchor">
-<a href="#figure-2" class="anchor"></a>Figure 2</h1>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaDownload.html">hpaDownload</a></span><span class="op">(</span>downloadList <span class="op">=</span> <span class="st">"histology"</span>, </span>
+<span>                    version <span class="op">=</span> <span class="st">"v18"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="figure-2">Figure 2<a class="anchor" aria-label="anchor" href="#figure-2"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gene_list_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"EGFR"</span>, <span class="st">"CD44"</span>, <span class="st">"PTEN"</span>, <span class="st">"IDH1"</span>, <span class="st">"IDH2"</span>, <span class="st">"CYCS"</span><span class="op">)</span>
-
-<span class="co"># Panel 2A</span>
-<span class="va">tissue_list_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"skin 1"</span>, <span class="st">"cerebellum"</span>, <span class="st">"breast"</span><span class="op">)</span>
-
-<span class="va">plot_2a</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-               targetGene <span class="op">=</span> <span class="va">gene_list_2</span>,
-               targetTissue <span class="op">=</span> <span class="va">tissue_list_2</span>,
-               color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#eff3ff"</span>, <span class="st">"#bdd7e7"</span>,<span class="st">"#6baed6"</span>, <span class="st">"#2171b5"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_2a.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_2a</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span><span class="op">)</span>
-
-<span class="co"># Panel 2B</span>
-<span class="va">cancer_list_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"breast cancer"</span>, <span class="st">"glioma"</span>, <span class="st">"lymphoma"</span>, <span class="st">"prostate cancer"</span><span class="op">)</span>
-
-<span class="va">plot_2b</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-              targetGene <span class="op">=</span> <span class="va">gene_list_2</span>,
-              targetCancer <span class="op">=</span> <span class="va">cancer_list_2</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_2b.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_2b</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span>,
-       width <span class="op">=</span> <span class="fl">7</span>,
-       height <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-
-<span class="co"># Panel 2C</span>
-<span class="va">plot_2c</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisSubcell.html">hpaVisSubcell</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-                targetGene <span class="op">=</span> <span class="va">gene_list_2</span>,
-                color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span><span class="op">)</span>,
-                reliability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"enhanced"</span>, <span class="st">"supported"</span>, <span class="st">"approved"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_2c.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_2c</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">gene_list_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"EGFR"</span>, <span class="st">"CD44"</span>, <span class="st">"PTEN"</span>, <span class="st">"IDH1"</span>, <span class="st">"IDH2"</span>, <span class="st">"CYCS"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 2A</span></span>
+<span><span class="va">tissue_list_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"skin 1"</span>, <span class="st">"cerebellum"</span>, <span class="st">"breast"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_2a</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>               targetGene <span class="op">=</span> <span class="va">gene_list_2</span>,</span>
+<span>               targetTissue <span class="op">=</span> <span class="va">tissue_list_2</span>,</span>
+<span>               color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#eff3ff"</span>, <span class="st">"#bdd7e7"</span>,<span class="st">"#6baed6"</span>, <span class="st">"#2171b5"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_2a.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_2a</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 2B</span></span>
+<span><span class="va">cancer_list_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"breast cancer"</span>, <span class="st">"glioma"</span>, <span class="st">"lymphoma"</span>, <span class="st">"prostate cancer"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_2b</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>              targetGene <span class="op">=</span> <span class="va">gene_list_2</span>,</span>
+<span>              targetCancer <span class="op">=</span> <span class="va">cancer_list_2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_2b.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_2b</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span>,</span>
+<span>       width <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>       height <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 2C</span></span>
+<span><span class="va">plot_2c</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisSubcell.html">hpaVisSubcell</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>                targetGene <span class="op">=</span> <span class="va">gene_list_2</span>,</span>
+<span>                color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span><span class="op">)</span>,</span>
+<span>                reliability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"enhanced"</span>, <span class="st">"supported"</span>, <span class="st">"approved"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_2c.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_2c</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="figure-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#figure-3" class="anchor"></a>Figure 3</h1>
+<div class="section level2">
+<h2 id="figure-3">Figure 3<a class="anchor" aria-label="anchor" href="#figure-3"></a>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gene_list_3</span> <span class="op">&lt;-</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GFAP"</span>, <span class="st">"EGFR"</span>, <span class="st">"PDGFRA"</span>, <span class="st">"PIK3CA"</span>, <span class="st">"PTEN"</span>, <span class="st">"BRAF"</span>, <span class="st">"MDM2"</span>, <span class="st">"MDM4"</span>, <span class="st">"CDK4"</span><span class="op">)</span>
-
-<span class="co"># Panel 3A</span>
-<span class="va">tissue_list_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hippocampus"</span>, <span class="st">"cerebral cortex"</span><span class="op">)</span>
-
-<span class="va">plot_3a</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-               targetGene <span class="op">=</span> <span class="va">gene_list_3</span>,
-               targetTissue <span class="op">=</span> <span class="va">tissue_list_3</span>,
-               color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#eff3ff"</span>, <span class="st">"#bdd7e7"</span>,<span class="st">"#6baed6"</span>, <span class="st">"#2171b5"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_3a.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_3a</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span>,
-       width <span class="op">=</span> <span class="fl">7</span>,
-       height <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-
-<span class="co"># Panel 3B</span>
-<span class="va">plot_3b</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-              targetGene <span class="op">=</span> <span class="va">gene_list_3</span>,
-              targetCancer <span class="op">=</span> <span class="st">"glioma"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_3b.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_3b</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span>,
-       width <span class="op">=</span> <span class="fl">7</span>,
-       height <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-
-<span class="co"># Panel 3C</span>
-<span class="va">gene_list_3c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PTEN"</span>, <span class="st">"H3F3A"</span>, <span class="st">"DAXX"</span>, <span class="st">"PML"</span><span class="op">)</span>
-
-<span class="va">plot_3c</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisSubcell.html">hpaVisSubcell</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-                targetGene <span class="op">=</span> <span class="va">gene_list_3c</span>,
-                color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span><span class="op">)</span>,
-                reliability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"enhanced"</span>, <span class="st">"supported"</span>, <span class="st">"approved"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_3c.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_3c</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span>,
-       width <span class="op">=</span> <span class="fl">4</span>,
-       height <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">gene_list_3</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GFAP"</span>, <span class="st">"EGFR"</span>, <span class="st">"PDGFRA"</span>, <span class="st">"PIK3CA"</span>, <span class="st">"PTEN"</span>, <span class="st">"BRAF"</span>, <span class="st">"MDM2"</span>, <span class="st">"MDM4"</span>, <span class="st">"CDK4"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 3A</span></span>
+<span><span class="va">tissue_list_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hippocampus"</span>, <span class="st">"cerebral cortex"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_3a</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>               targetGene <span class="op">=</span> <span class="va">gene_list_3</span>,</span>
+<span>               targetTissue <span class="op">=</span> <span class="va">tissue_list_3</span>,</span>
+<span>               color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#eff3ff"</span>, <span class="st">"#bdd7e7"</span>,<span class="st">"#6baed6"</span>, <span class="st">"#2171b5"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_3a.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_3a</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span>,</span>
+<span>       width <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>       height <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 3B</span></span>
+<span><span class="va">plot_3b</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>              targetGene <span class="op">=</span> <span class="va">gene_list_3</span>,</span>
+<span>              targetCancer <span class="op">=</span> <span class="st">"glioma"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_3b.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_3b</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span>,</span>
+<span>       width <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>       height <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 3C</span></span>
+<span><span class="va">gene_list_3c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PTEN"</span>, <span class="st">"H3F3A"</span>, <span class="st">"DAXX"</span>, <span class="st">"PML"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_3c</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisSubcell.html">hpaVisSubcell</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>                targetGene <span class="op">=</span> <span class="va">gene_list_3c</span>,</span>
+<span>                color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span><span class="op">)</span>,</span>
+<span>                reliability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"enhanced"</span>, <span class="st">"supported"</span>, <span class="st">"approved"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_3c.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_3c</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span>,</span>
+<span>       width <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>       height <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="figure-4" class="section level1">
-<h1 class="hasAnchor">
-<a href="#figure-4" class="anchor"></a>Figure 4</h1>
+<div class="section level2">
+<h2 id="figure-4">Figure 4<a class="anchor" aria-label="anchor" href="#figure-4"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gene_list_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span><span class="op">)</span>
-
-<span class="co"># Panel 4A</span>
-<span class="va">tissue_list_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hippocampus"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"caudate"</span><span class="op">)</span>
-
-<span class="va">plot_4a</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-               targetGene <span class="op">=</span> <span class="va">gene_list_4</span>,
-               targetTissue <span class="op">=</span> <span class="va">tissue_list_4</span>,
-               color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#eff3ff"</span>, <span class="st">"#bdd7e7"</span>,<span class="st">"#6baed6"</span>, <span class="st">"#2171b5"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_4a.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_4a</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span>,
-       width <span class="op">=</span> <span class="fl">5</span>,
-       height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
-
-<span class="co"># Panel 4B</span>
-<span class="va">plot_4b</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-              targetGene <span class="op">=</span> <span class="va">gene_list_4</span>,
-              targetCancer <span class="op">=</span> <span class="st">"glioma"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_4b.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_4b</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span>,
-       width <span class="op">=</span> <span class="fl">5</span>,
-       height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
-
-<span class="co"># Panel 4C</span>
-<span class="co"># Figure was generated with the GlioVis portal http://gliovis.bioinfo.cnio.es/</span>
-<span class="co"># Accessed: June 19, 2019</span>
-<span class="co">#</span>
-<span class="co"># Plotting:</span>
-<span class="co"># Navigate through tabs: Explore &gt; Survival &gt; Kaplan-Meier &gt; Plot</span>
-<span class="co">#</span>
-<span class="co"># Parameters: </span>
-<span class="co">#    - Dataset: Adult Rembrandt</span>
-<span class="co">#    - Gene: SPR or DHFR</span>
-<span class="co">#    - Histology: All</span>
-<span class="co">#    - Subtype: All</span>
-<span class="co">#    - Cutoff: Median</span>
-<span class="co">#    - Plot options: use default options</span>
-<span class="co">#    - Download: use default options</span>
-<span class="co">#</span>
-<span class="co"># Retrieving plotting data: (same parameters)</span>
-<span class="co"># Navigate through tabs: Explore &gt; Survival &gt; Kaplan-Meier &gt; Plot</span>
-<span class="co"># Buttons: Download &gt; CSV</span>
-
-<span class="co"># Panel 4D</span>
-<span class="va">plot_4d</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/hpaVisSubcell.html">hpaVisSubcell</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-                targetGene <span class="op">=</span> <span class="va">gene_list_4</span>,
-                color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span><span class="op">)</span>,
-                reliability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"enhanced"</span>, <span class="st">"supported"</span>, <span class="st">"approved"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_4d.pdf"</span>,
-       plot <span class="op">=</span> <span class="va">plot_4d</span>,
-       device <span class="op">=</span> <span class="st">"pdf"</span>,
-       width <span class="op">=</span> <span class="fl">4</span>,
-       height <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">gene_list_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GCH1"</span>, <span class="st">"PTS"</span>, <span class="st">"SPR"</span>, <span class="st">"DHFR"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 4A</span></span>
+<span><span class="va">tissue_list_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hippocampus"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"caudate"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_4a</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisTissue.html">hpaVisTissue</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>               targetGene <span class="op">=</span> <span class="va">gene_list_4</span>,</span>
+<span>               targetTissue <span class="op">=</span> <span class="va">tissue_list_4</span>,</span>
+<span>               color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#eff3ff"</span>, <span class="st">"#bdd7e7"</span>,<span class="st">"#6baed6"</span>, <span class="st">"#2171b5"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_4a.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_4a</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span>,</span>
+<span>       width <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>       height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 4B</span></span>
+<span><span class="va">plot_4b</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisPatho.html">hpaVisPatho</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>              targetGene <span class="op">=</span> <span class="va">gene_list_4</span>,</span>
+<span>              targetCancer <span class="op">=</span> <span class="st">"glioma"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_4b.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_4b</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span>,</span>
+<span>       width <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>       height <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Panel 4C</span></span>
+<span><span class="co"># Figure was generated with the GlioVis portal http://gliovis.bioinfo.cnio.es/</span></span>
+<span><span class="co"># Accessed: June 19, 2019</span></span>
+<span><span class="co">#</span></span>
+<span><span class="co"># Plotting:</span></span>
+<span><span class="co"># Navigate through tabs: Explore &gt; Survival &gt; Kaplan-Meier &gt; Plot</span></span>
+<span><span class="co">#</span></span>
+<span><span class="co"># Parameters: </span></span>
+<span><span class="co">#    - Dataset: Adult Rembrandt</span></span>
+<span><span class="co">#    - Gene: SPR or DHFR</span></span>
+<span><span class="co">#    - Histology: All</span></span>
+<span><span class="co">#    - Subtype: All</span></span>
+<span><span class="co">#    - Cutoff: Median</span></span>
+<span><span class="co">#    - Plot options: use default options</span></span>
+<span><span class="co">#    - Download: use default options</span></span>
+<span><span class="co">#</span></span>
+<span><span class="co"># Retrieving plotting data: (same parameters)</span></span>
+<span><span class="co"># Navigate through tabs: Explore &gt; Survival &gt; Kaplan-Meier &gt; Plot</span></span>
+<span><span class="co"># Buttons: Download &gt; CSV</span></span>
+<span></span>
+<span><span class="co"># Panel 4D</span></span>
+<span><span class="va">plot_4d</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/hpaVisSubcell.html">hpaVisSubcell</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>                targetGene <span class="op">=</span> <span class="va">gene_list_4</span>,</span>
+<span>                color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span><span class="op">)</span>,</span>
+<span>                reliability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"enhanced"</span>, <span class="st">"supported"</span>, <span class="st">"approved"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"plot_4d.pdf"</span>,</span>
+<span>       plot <span class="op">=</span> <span class="va">plot_4d</span>,</span>
+<span>       device <span class="op">=</span> <span class="st">"pdf"</span>,</span>
+<span>       width <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>       height <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="figure-5" class="section level1">
-<h1 class="hasAnchor">
-<a href="#figure-5" class="anchor"></a>Figure 5</h1>
+<div class="section level2">
+<h2 id="figure-5">Figure 5<a class="anchor" aria-label="anchor" href="#figure-5"></a>
+</h2>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hpaSubset.html">hpaSubset</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,
-          targetGene <span class="op">=</span> <span class="st">"SLC2A3"</span>,
-          targetTissue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hippocampus"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"caudate"</span><span class="op">)</span>,
-          targetCellType <span class="op">=</span> <span class="st">"glial cells"</span>,
-          targetCancer <span class="op">=</span> <span class="st">"glioma"</span><span class="op">)</span>
-
-<span class="co"># $normal_tissue</span>
-<span class="co"># # A tibble: 3 x 6</span>
-<span class="co">#   ensembl         gene   tissue          cell_type   level        reliability</span>
-<span class="co">#   &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;      </span>
-<span class="co"># 1 ENSG00000059804 SLC2A3 caudate         glial cells Not detected Approved   </span>
-<span class="co"># 2 ENSG00000059804 SLC2A3 cerebral cortex glial cells Not detected Approved   </span>
-<span class="co"># 3 ENSG00000059804 SLC2A3 hippocampus     glial cells Not detected Approved   </span>
-<span class="co"># </span>
-<span class="co"># $pathology</span>
-<span class="co"># # A tibble: 1 x 11</span>
-<span class="co">#   ensembl gene  cancer  high medium   low not_detected prognostic_favo~</span>
-<span class="co">#   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;            &lt;dbl&gt;</span>
-<span class="co"># 1 ENSG00~ SLC2~ glioma     1      2     1            8               NA</span>
-<span class="co"># # ... with 3 more variables: unprognostic_favorable &lt;dbl&gt;,</span>
-<span class="co"># #   prognostic_unfavorable &lt;dbl&gt;, unprognostic_unfavorable &lt;dbl&gt;</span>
-<span class="co"># </span>
-<span class="co"># $subcellular_location</span>
-<span class="co"># # A tibble: 1 x 11</span>
-<span class="co">#   ensembl gene  reliability enhanced supported approved uncertain single_cell_var~</span>
-<span class="co">#   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;           </span>
-<span class="co"># 1 ENSG00~ SLC2~ Approved    NA       NA        Plasma ~ NA        NA              </span>
-<span class="co"># # ... with 3 more variables: single_cell_var_spatial &lt;chr&gt;,</span>
-<span class="co"># #   cell_cycle_dependency &lt;chr&gt;, go_id &lt;chr&gt;</span>
-
-
-<span class="va">SLC2A3xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span><span class="op">(</span><span class="st">"SLC2A3"</span>, version <span class="op">=</span> <span class="st">"v18"</span><span class="op">)</span>
-
-<span class="va">SLC2A3_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody</a></span><span class="op">(</span><span class="va">SLC2A3xml</span><span class="op">)</span>
-<span class="va">SLC2A3_ab</span>
-<span class="co">#   id        releaseDate releaseVersion RRID      </span>
-<span class="co">#   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span>
-<span class="co"># 1 CAB002763 2006-03-13  1.2            NA        </span>
-<span class="co"># 2 HPA006539 2008-02-15  3.1            AB_1078984</span>
-
-<span class="va">SLC2A3_expr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr</a></span><span class="op">(</span><span class="va">SLC2A3xml</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">SLC2A3_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
-<span class="co"># Classes ‘tbl_df’, ‘tbl’ and 'data.frame': 330 obs. of  18 variables:</span>
-<span class="co">#  $ patientId         : chr  "2212" "2374" "2068" "2154" ...</span>
-<span class="co">#  $ age               : chr  "35" "44" "38" "66" ...</span>
-<span class="co">#  $ sex               : chr  "Male" "Female" "Male" "Female" ...</span>
-<span class="co">#  $ staining          : chr  NA NA NA NA ...</span>
-<span class="co">#  $ intensity         : chr  NA NA NA NA ...</span>
-<span class="co">#  $ quantity          : chr  NA NA NA NA ...</span>
-<span class="co">#  $ location          : chr  NA NA NA NA ...</span>
-<span class="co">#  $ imageUrl          : chr  "http://v18.proteinatlas.org/images/2763/6778_B_4_5.jpg" "http://v18.proteinatlas.org/images/2763/6778_B_5_5.jpg" "http://v18.proteinatlas.org/images/2763/6778_A_3_2.jpg" "http://v18.proteinatlas.org/images/2763/6778_A_1_2.jpg" ...</span>
-<span class="co">#  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...</span>
-<span class="co">#  $ snomedCode2       : chr  "T-93000" "T-93000" "T-66000" "T-66000" ...</span>
-<span class="co">#  $ snomedCode3       : chr  NA NA NA NA ...</span>
-<span class="co">#  $ snomedCode4       : chr  NA NA NA NA ...</span>
-<span class="co">#  $ snomedCode5       : chr  NA NA NA NA ...</span>
-<span class="co">#  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...</span>
-<span class="co">#  $ tissueDescription2: chr  "Adrenal gland" "Adrenal gland" "Appendix" "Appendix" ...</span>
-<span class="co">#  $ tissueDescription3: chr  NA NA NA NA ...</span>
-<span class="co">#  $ tissueDescription4: chr  NA NA NA NA ...</span>
-<span class="co">#  $ tissueDescription5: chr  NA NA NA NA ...</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"img"</span><span class="op">)</span>
-
-<span class="va">SLC2A3_norm</span> <span class="op">&lt;-</span>
-  <span class="va">SLC2A3_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">tissueDescription1</span> <span class="op">==</span> <span class="st">"Normal tissue, NOS"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">tissueDescription2</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cerebral cortex"</span>, <span class="st">"Hippocampus"</span>, <span class="st">"Lateral ventricle wall"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">SLC2A3_norm</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">SLC2A3_norm</span><span class="op">$</span><span class="va">imageUrl</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                  destfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"img/"</span>, <span class="va">SLC2A3_ab</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"_"</span>,
-                                    <span class="va">SLC2A3_norm</span><span class="op">$</span><span class="va">patientId</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>, 
-                                    <span class="va">SLC2A3_norm</span><span class="op">$</span><span class="va">tissueDescription2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>, 
-                                    <span class="va">SLC2A3_norm</span><span class="op">$</span><span class="va">staining</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                                    <span class="st">".jpg"</span><span class="op">)</span>,
-                  mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">SLC2A3_glioma</span> <span class="op">&lt;-</span>
-  <span class="va">SLC2A3_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">tissueDescription1</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Glioma, malignant, High grade"</span>, <span class="st">"Glioma, malignant, Low grade"</span>, <span class="st">"Glioma, malignant, NOS"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">SLC2A3_glioma</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">SLC2A3_glioma</span><span class="op">$</span><span class="va">imageUrl</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                  destfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"img/"</span>, <span class="va">SLC2A3_ab</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"_"</span>,
-                                    <span class="va">SLC2A3_glioma</span><span class="op">$</span><span class="va">patientId</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>, 
-                                    <span class="va">SLC2A3_glioma</span><span class="op">$</span><span class="va">tissueDescription1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>, 
-                                    <span class="va">SLC2A3_glioma</span><span class="op">$</span><span class="va">staining</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                                    <span class="st">".jpg"</span><span class="op">)</span>,
-                  mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hpaListParam.html">hpaSubset</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>          targetGene <span class="op">=</span> <span class="st">"SLC2A3"</span>,</span>
+<span>          targetTissue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hippocampus"</span>, <span class="st">"cerebral cortex"</span>, <span class="st">"caudate"</span><span class="op">)</span>,</span>
+<span>          targetCellType <span class="op">=</span> <span class="st">"glial cells"</span>,</span>
+<span>          targetCancer <span class="op">=</span> <span class="st">"glioma"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># $normal_tissue</span></span>
+<span><span class="co"># # A tibble: 3 x 6</span></span>
+<span><span class="co">#   ensembl         gene   tissue          cell_type   level        reliability</span></span>
+<span><span class="co">#   &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;      </span></span>
+<span><span class="co"># 1 ENSG00000059804 SLC2A3 caudate         glial cells Not detected Approved   </span></span>
+<span><span class="co"># 2 ENSG00000059804 SLC2A3 cerebral cortex glial cells Not detected Approved   </span></span>
+<span><span class="co"># 3 ENSG00000059804 SLC2A3 hippocampus     glial cells Not detected Approved   </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># $pathology</span></span>
+<span><span class="co"># # A tibble: 1 x 11</span></span>
+<span><span class="co">#   ensembl gene  cancer  high medium   low not_detected prognostic_favo~</span></span>
+<span><span class="co">#   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;            &lt;dbl&gt;</span></span>
+<span><span class="co"># 1 ENSG00~ SLC2~ glioma     1      2     1            8               NA</span></span>
+<span><span class="co"># # ... with 3 more variables: unprognostic_favorable &lt;dbl&gt;,</span></span>
+<span><span class="co"># #   prognostic_unfavorable &lt;dbl&gt;, unprognostic_unfavorable &lt;dbl&gt;</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># $subcellular_location</span></span>
+<span><span class="co"># # A tibble: 1 x 11</span></span>
+<span><span class="co">#   ensembl gene  reliability enhanced supported approved uncertain single_cell_var~</span></span>
+<span><span class="co">#   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;           </span></span>
+<span><span class="co"># 1 ENSG00~ SLC2~ Approved    NA       NA        Plasma ~ NA        NA              </span></span>
+<span><span class="co"># # ... with 3 more variables: single_cell_var_spatial &lt;chr&gt;,</span></span>
+<span><span class="co"># #   cell_cycle_dependency &lt;chr&gt;, go_id &lt;chr&gt;</span></span>
+<span></span>
+<span></span>
+<span><span class="va">SLC2A3xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span><span class="op">(</span><span class="st">"SLC2A3"</span>, version <span class="op">=</span> <span class="st">"v18"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">SLC2A3_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody</a></span><span class="op">(</span><span class="va">SLC2A3xml</span><span class="op">)</span></span>
+<span><span class="va">SLC2A3_ab</span></span>
+<span><span class="co">#   id        releaseDate releaseVersion RRID      </span></span>
+<span><span class="co">#   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span></span>
+<span><span class="co"># 1 CAB002763 2006-03-13  1.2            NA        </span></span>
+<span><span class="co"># 2 HPA006539 2008-02-15  3.1            AB_1078984</span></span>
+<span></span>
+<span><span class="va">SLC2A3_expr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr</a></span><span class="op">(</span><span class="va">SLC2A3xml</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">SLC2A3_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co"># Classes ‘tbl_df’, ‘tbl’ and 'data.frame': 330 obs. of  18 variables:</span></span>
+<span><span class="co">#  $ patientId         : chr  "2212" "2374" "2068" "2154" ...</span></span>
+<span><span class="co">#  $ age               : chr  "35" "44" "38" "66" ...</span></span>
+<span><span class="co">#  $ sex               : chr  "Male" "Female" "Male" "Female" ...</span></span>
+<span><span class="co">#  $ staining          : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ intensity         : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ quantity          : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ location          : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ imageUrl          : chr  "http://v18.proteinatlas.org/images/2763/6778_B_4_5.jpg" "http://v18.proteinatlas.org/images/2763/6778_B_5_5.jpg" "http://v18.proteinatlas.org/images/2763/6778_A_3_2.jpg" "http://v18.proteinatlas.org/images/2763/6778_A_1_2.jpg" ...</span></span>
+<span><span class="co">#  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...</span></span>
+<span><span class="co">#  $ snomedCode2       : chr  "T-93000" "T-93000" "T-66000" "T-66000" ...</span></span>
+<span><span class="co">#  $ snomedCode3       : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ snomedCode4       : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ snomedCode5       : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...</span></span>
+<span><span class="co">#  $ tissueDescription2: chr  "Adrenal gland" "Adrenal gland" "Appendix" "Appendix" ...</span></span>
+<span><span class="co">#  $ tissueDescription3: chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ tissueDescription4: chr  NA NA NA NA ...</span></span>
+<span><span class="co">#  $ tissueDescription5: chr  NA NA NA NA ...</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"img"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">SLC2A3_norm</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">SLC2A3_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">tissueDescription1</span> <span class="op">==</span> <span class="st">"Normal tissue, NOS"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">tissueDescription2</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Cerebral cortex"</span>, <span class="st">"Hippocampus"</span>, <span class="st">"Lateral ventricle wall"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">SLC2A3_norm</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">SLC2A3_norm</span><span class="op">$</span><span class="va">imageUrl</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
+<span>                  destfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"img/"</span>, <span class="va">SLC2A3_ab</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"_"</span>,</span>
+<span>                                    <span class="va">SLC2A3_norm</span><span class="op">$</span><span class="va">patientId</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>, </span>
+<span>                                    <span class="va">SLC2A3_norm</span><span class="op">$</span><span class="va">tissueDescription2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>, </span>
+<span>                                    <span class="va">SLC2A3_norm</span><span class="op">$</span><span class="va">staining</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
+<span>                                    <span class="st">".jpg"</span><span class="op">)</span>,</span>
+<span>                  mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">SLC2A3_glioma</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">SLC2A3_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">tissueDescription1</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Glioma, malignant, High grade"</span>, <span class="st">"Glioma, malignant, Low grade"</span>, <span class="st">"Glioma, malignant, NOS"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">SLC2A3_glioma</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">SLC2A3_glioma</span><span class="op">$</span><span class="va">imageUrl</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
+<span>                  destfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"img/"</span>, <span class="va">SLC2A3_ab</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"_"</span>,</span>
+<span>                                    <span class="va">SLC2A3_glioma</span><span class="op">$</span><span class="va">patientId</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>, </span>
+<span>                                    <span class="va">SLC2A3_glioma</span><span class="op">$</span><span class="va">tissueDescription1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>, </span>
+<span>                                    <span class="va">SLC2A3_glioma</span><span class="op">$</span><span class="va">staining</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
+<span>                                    <span class="st">".jpg"</span><span class="op">)</span>,</span>
+<span>                  mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
-<div id="copyright" class="section level1">
-<h1 class="hasAnchor">
-<a href="#copyright" class="anchor"></a>Copyright</h1>
-<p><strong>Anh Tran, 2018-2021 </strong></p>
-<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
+<div class="section level2">
+<h2 id="copyright">Copyright<a class="anchor" aria-label="anchor" href="#copyright"></a>
+</h2>
+<p><strong>Anh Tran, 2018-2022 </strong></p>
+<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et
+al. HPAanalyze: an R package that facilitates the retrieval and analysis
+of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="external-link uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
 </div>
   </div>
 
@@ -395,11 +395,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Anh Nhat Tran.</p>
+  <p></p>
+<p>Developed by Anh Nhat Tran.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -407,6 +409,8 @@
 
   
 
+
+  
 
   </body>
 </html>

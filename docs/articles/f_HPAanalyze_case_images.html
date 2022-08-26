@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>6. HPAanalyze use case: Download histology images from the Human Protein Atlas • HPAanalyze</title>
+<title>6. Tutorial: Download histology images from the Human Protein Atlas • HPAanalyze</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="6. HPAanalyze use case: Download histology images from the Human Protein Atlas">
+<script src="../pkgdown.js"></script><meta property="og:title" content="6. Tutorial: Download histology images from the Human Protein Atlas">
 <meta property="og:description" content="HPAanalyze">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,45 +33,39 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/a_HPAanalyze_quick_start.html">1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function</a>
+      <a href="../articles/a_HPAanalyze_quick_start.html">1. Quick-start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function with HPAanalyze</a>
     </li>
     <li>
-      <a href="../articles/b_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
+      <a href="../articles/b_HPAanalyze_indepth.html">2. In-depth: Working with Human Protein Atlas (HPA) data in R with HPAanalyze</a>
     </li>
     <li>
-      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
+      <a href="../articles/c_HPAanalyze_case_query.html">3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA) queries</a>
     </li>
     <li>
-      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
+      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. Tutorial: Working with Human Protein Atlas (HPA) xml files offline</a>
     </li>
     <li>
-      <a href="../articles/e_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
+      <a href="../articles/e_HPAanalyze_case_json.html">5. Tutorial: Export Human Protein Atlas (HPA) data as JSON</a>
     </li>
     <li>
-      <a href="../articles/f_HPAanalyze_case_images.html">6. HPAanalyze use case: Download histology images from the Human Protein Atlas</a>
+      <a href="../articles/f_HPAanalyze_case_images.html">6. Tutorial: Download histology images from the Human Protein Atlas</a>
     </li>
     <li>
       <a href="../articles/z_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a>
@@ -79,7 +75,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/trannhatanh89/HPAanalyze/">
+  <a href="https://github.com/anhtr/HPAanalyze/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -94,18 +90,21 @@
 
       
 
-      </header><script src="f_HPAanalyze_case_images_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>6. HPAanalyze use case: Download histology images from the Human Protein Atlas</h1>
-                        <h4 class="author">Anh N. Tran</h4>
+      <h1 data-toc-skip>6. Tutorial: Download histology images from the
+Human Protein Atlas</h1>
+                        <h4 data-toc-skip class="author">Anh N.
+Tran</h4>
             <address class="author_afil">
-      Northwestern University, Illinois, USA<br><a class="author_email" href="mailto:#"></a><a href="mailto:trannhatanh89@gmail.com" class="email">trannhatanh89@gmail.com</a>
+      DataGrata
+LLC<br><a class="author_email" href="mailto:#"></a><a href="mailto:trannhatanh89@gmail.com" class="email">trannhatanh89@gmail.com</a>
       </address>
                   
-            <h4 class="date">2021-10-06</h4>
+            <h4 data-toc-skip class="date">2022-08-26</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/trannhatanh89/HPAanalyze/blob/master/vignettes/f_HPAanalyze_case_images.Rmd"><code>vignettes/f_HPAanalyze_case_images.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/anhtr/HPAanalyze/blob/HEAD/vignettes/f_HPAanalyze_case_images.Rmd" class="external-link"><code>vignettes/f_HPAanalyze_case_images.Rmd</code></a></small>
       <div class="hidden name"><code>f_HPAanalyze_case_images.Rmd</code></div>
 
     </div>
@@ -113,74 +112,78 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocStyle">BiocStyle</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trannhatanh89/HPAanalyze">HPAanalyze</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
-<div id="the-case" class="section level1">
-<h1 class="hasAnchor">
-<a href="#the-case" class="anchor"></a>The case</h1>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocStyle" class="external-link">BiocStyle</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/anhtr/HPAanalyze" class="external-link">HPAanalyze</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="the-case">The case<a class="anchor" aria-label="anchor" href="#the-case"></a>
+</h2>
+<p>What to do if you want to systematically download images from
+HPA?</p>
 </div>
-<div id="the-solution" class="section level1">
-<h1 class="hasAnchor">
-<a href="#the-solution" class="anchor"></a>The solution</h1>
-<div id="get-the-download-links" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-the-download-links" class="anchor"></a>Get the download links</h2>
+<div class="section level2">
+<h2 id="the-solution">The solution<a class="anchor" aria-label="anchor" href="#the-solution"></a>
+</h2>
+<div class="section level3">
+<h3 id="get-the-download-links">Get the download links<a class="anchor" aria-label="anchor" href="#get-the-download-links"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">CCNB1xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span><span class="op">(</span><span class="st">"ENSG00000134057"</span><span class="op">)</span>
-
-<span class="va">CCNB1_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody</a></span><span class="op">(</span><span class="va">CCNB1xml</span><span class="op">)</span>
-<span class="va">CCNB1_ab</span>
-<span class="co">#&gt; # A tibble: 4 x 4</span>
-<span class="co">#&gt;   id        releaseDate releaseVersion RRID      </span>
-<span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span>
-<span class="co">#&gt; 1 CAB000115 2006-03-13  1.2            &lt;NA&gt;      </span>
-<span class="co">#&gt; 2 CAB003804 2006-10-30  2              AB_562272 </span>
-<span class="co">#&gt; 3 HPA030741 2013-12-05  12             AB_2673586</span>
-<span class="co">#&gt; 4 HPA061448 2016-12-04  16             AB_2684522</span>
-
-<span class="va">CCNB1_expr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr</a></span><span class="op">(</span><span class="va">CCNB1xml</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    331 obs. of  18 variables:</span>
-<span class="co">#&gt;  $ patientId         : chr  "1653" "1721" "1725" "598" ...</span>
-<span class="co">#&gt;  $ age               : chr  "53" "60" "57" "7" ...</span>
-<span class="co">#&gt;  $ sex               : chr  "Male" "Female" "Male" "Male" ...</span>
-<span class="co">#&gt;  $ staining          : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ intensity         : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ quantity          : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ location          : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ imageUrl          : chr  "http://v18.proteinatlas.org/images/115/2043_B_4_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_6_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_5_5.jpg" "http://v18.proteinatlas.org/images/115/2043_A_2_2.jpg" ...</span>
-<span class="co">#&gt;  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...</span>
-<span class="co">#&gt;  $ snomedCode2       : chr  "T-93000" "T-93000" "T-93000" "T-66000" ...</span>
-<span class="co">#&gt;  $ snomedCode3       : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ snomedCode4       : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ snomedCode5       : chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...</span>
-<span class="co">#&gt;  $ tissueDescription2: chr  "Adrenal gland" "Adrenal gland" "Adrenal gland" "Appendix" ...</span>
-<span class="co">#&gt;  $ tissueDescription3: chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ tissueDescription4: chr  NA NA NA NA ...</span>
-<span class="co">#&gt;  $ tissueDescription5: chr  NA NA NA NA ...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">CCNB1xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span><span class="op">(</span><span class="st">"ENSG00000134057"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">CCNB1_ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlAntibody.html">hpaXmlAntibody</a></span><span class="op">(</span><span class="va">CCNB1xml</span><span class="op">)</span></span>
+<span><span class="va">CCNB1_ab</span></span>
+<span><span class="co">#&gt; # A tibble: 4 x 4</span></span>
+<span><span class="co">#&gt;   id        releaseDate releaseVersion RRID      </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt; 1 CAB000115 2006-03-13  1.2            &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt; 2 CAB003804 2006-10-30  2              AB_562272 </span></span>
+<span><span class="co">#&gt; 3 HPA030741 2013-12-05  12             AB_2673586</span></span>
+<span><span class="co">#&gt; 4 HPA061448 2016-12-04  16             AB_2684522</span></span>
+<span></span>
+<span><span class="va">CCNB1_expr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlTissueExpr.html">hpaXmlTissueExpr</a></span><span class="op">(</span><span class="va">CCNB1xml</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Classes 'tbl_df', 'tbl' and 'data.frame':    331 obs. of  18 variables:</span></span>
+<span><span class="co">#&gt;  $ patientId         : chr  "1653" "1721" "1725" "598" ...</span></span>
+<span><span class="co">#&gt;  $ age               : chr  "53" "60" "57" "7" ...</span></span>
+<span><span class="co">#&gt;  $ sex               : chr  "Male" "Female" "Male" "Male" ...</span></span>
+<span><span class="co">#&gt;  $ staining          : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ intensity         : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ quantity          : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ location          : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ imageUrl          : chr  "http://v18.proteinatlas.org/images/115/2043_B_4_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_6_5.jpg" "http://v18.proteinatlas.org/images/115/2043_B_5_5.jpg" "http://v18.proteinatlas.org/images/115/2043_A_2_2.jpg" ...</span></span>
+<span><span class="co">#&gt;  $ snomedCode1       : chr  "M-00100" "M-00100" "M-00100" "M-00100" ...</span></span>
+<span><span class="co">#&gt;  $ snomedCode2       : chr  "T-93000" "T-93000" "T-93000" "T-66000" ...</span></span>
+<span><span class="co">#&gt;  $ snomedCode3       : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ snomedCode4       : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ snomedCode5       : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ tissueDescription1: chr  "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" "Normal tissue, NOS" ...</span></span>
+<span><span class="co">#&gt;  $ tissueDescription2: chr  "Adrenal gland" "Adrenal gland" "Adrenal gland" "Appendix" ...</span></span>
+<span><span class="co">#&gt;  $ tissueDescription3: chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ tissueDescription4: chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ tissueDescription5: chr  NA NA NA NA ...</span></span></code></pre></div>
 </div>
-<div id="download-the-images" class="section level2">
-<h2 class="hasAnchor">
-<a href="#download-the-images" class="anchor"></a>Download the images</h2>
+<div class="section level3">
+<h3 id="download-the-images">Download the images<a class="anchor" aria-label="anchor" href="#download-the-images"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"img"</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">imageUrl</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,
-                  destfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"img/"</span>, <span class="va">CCNB1_ab</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"_"</span>,
-                                    <span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">patientId</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>,
-                                    <span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">tissueDescription2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, 
-                                    <span class="st">".jpg"</span><span class="op">)</span>,
-                  mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"img"</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">imageUrl</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
+<span>                  destfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"img/"</span>, <span class="va">CCNB1_ab</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"_"</span>,</span>
+<span>                                    <span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">patientId</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="st">"_"</span>,</span>
+<span>                                    <span class="va">CCNB1_expr</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">tissueDescription2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, </span>
+<span>                                    <span class="st">".jpg"</span><span class="op">)</span>,</span>
+<span>                  mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
-<div id="copyright" class="section level1">
-<h1 class="hasAnchor">
-<a href="#copyright" class="anchor"></a>Copyright</h1>
-<p><strong>Anh Tran, 2018-2021 </strong></p>
-<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
+<div class="section level2">
+<h2 id="copyright">Copyright<a class="anchor" aria-label="anchor" href="#copyright"></a>
+</h2>
+<p><strong>Anh Tran, 2018-2022 </strong></p>
+<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et
+al. HPAanalyze: an R package that facilitates the retrieval and analysis
+of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="external-link uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
 </div>
   </div>
 
@@ -195,11 +198,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Anh Nhat Tran.</p>
+  <p></p>
+<p>Developed by Anh Nhat Tran.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -207,6 +212,8 @@
 
   
 
+
+  
 
   </body>
 </html>

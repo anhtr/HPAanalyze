@@ -2,7 +2,7 @@
 title: "99. Code for figures from HPAanalyze paper"
 author:
 - name: Anh N. Tran
-  affiliation: Northwestern University, Illinois, USA
+  affiliation: DataGrata LLC
   email: trannhatanh89@gmail.com
 date: 6/18/2019
 output: 

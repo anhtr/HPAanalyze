@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries • HPAanalyze</title>
+<title>3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA) queries • HPAanalyze</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries">
+<script src="../pkgdown.js"></script><meta property="og:title" content="3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA) queries">
 <meta property="og:description" content="HPAanalyze">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,45 +33,39 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">HPAanalyze</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/a_HPAanalyze_quick_start.html">1. HPAanalyze quick start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function</a>
+      <a href="../articles/a_HPAanalyze_quick_start.html">1. Quick-start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function with HPAanalyze</a>
     </li>
     <li>
-      <a href="../articles/b_HPAanalyze_indepth.html">2. HPAanalyze in-depth: Working with Human Protein Atlas (HPA) data in R</a>
+      <a href="../articles/b_HPAanalyze_indepth.html">2. In-depth: Working with Human Protein Atlas (HPA) data in R with HPAanalyze</a>
     </li>
     <li>
-      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. HPAanalyze use case: Working with Human Protein Atlas (HPA) xml files offline</a>
+      <a href="../articles/c_HPAanalyze_case_query.html">3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA) queries</a>
     </li>
     <li>
-      <a href="../articles/c_HPAanalyze_case_query.html">3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</a>
+      <a href="../articles/d_HPAanalyze_case_offline_xml.html">4. Tutorial: Working with Human Protein Atlas (HPA) xml files offline</a>
     </li>
     <li>
-      <a href="../articles/e_HPAanalyze_case_json.html">5. HPAanalyze use case: Export Human Protein Atlas (HPA) data as JSON</a>
+      <a href="../articles/e_HPAanalyze_case_json.html">5. Tutorial: Export Human Protein Atlas (HPA) data as JSON</a>
     </li>
     <li>
-      <a href="../articles/f_HPAanalyze_case_images.html">6. HPAanalyze use case: Download histology images from the Human Protein Atlas</a>
+      <a href="../articles/f_HPAanalyze_case_images.html">6. Tutorial: Download histology images from the Human Protein Atlas</a>
     </li>
     <li>
       <a href="../articles/z_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a>
@@ -79,7 +75,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/trannhatanh89/HPAanalyze/">
+  <a href="https://github.com/anhtr/HPAanalyze/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -94,18 +90,21 @@
 
       
 
-      </header><script src="c_HPAanalyze_case_query_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>3. HPAanalyze use case: Combine with your Human Protein Atlas (HPA) queries</h1>
-                        <h4 class="author">Anh N. Tran</h4>
+      <h1 data-toc-skip>3. Tutorial: Combine HPAanalyze with your Human
+Protein Atlas (HPA) queries</h1>
+                        <h4 data-toc-skip class="author">Anh N.
+Tran</h4>
             <address class="author_afil">
-      Northwestern University, Illinois, USA<br><a class="author_email" href="mailto:#"></a><a href="mailto:trannhatanh89@gmail.com" class="email">trannhatanh89@gmail.com</a>
+      DataGrata
+LLC<br><a class="author_email" href="mailto:#"></a><a href="mailto:trannhatanh89@gmail.com" class="email">trannhatanh89@gmail.com</a>
       </address>
                   
-            <h4 class="date">6/7/2019</h4>
+            <h4 data-toc-skip class="date">6/7/2019</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/trannhatanh89/HPAanalyze/blob/master/vignettes/c_HPAanalyze_case_query.Rmd"><code>vignettes/c_HPAanalyze_case_query.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/anhtr/HPAanalyze/blob/HEAD/vignettes/c_HPAanalyze_case_query.Rmd" class="external-link"><code>vignettes/c_HPAanalyze_case_query.Rmd</code></a></small>
       <div class="hidden name"><code>c_HPAanalyze_case_query.Rmd</code></div>
 
     </div>
@@ -113,27 +112,36 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocStyle">BiocStyle</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trannhatanh89/HPAanalyze">HPAanalyze</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></code></pre></div>
-<div id="the-case" class="section level1">
-<h1 class="hasAnchor">
-<a href="#the-case" class="anchor"></a>The case</h1>
-<p>The Human Protein Atlas web interface provides a powerful way to search using specific parameters. For example, you can find proteins predicted to be secreted, expressed at low level in normal breast tissue and are predictors of poor prognosis in breast cancer. The good news: you can combine the results of your queries with HPAanalyze for easy explanatory data analysis and data retrieval of your proteins of interest. Here is how.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bioconductor/BiocStyle" class="external-link">BiocStyle</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/anhtr/HPAanalyze" class="external-link">HPAanalyze</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="the-case">The case<a class="anchor" aria-label="anchor" href="#the-case"></a>
+</h2>
+<p>The Human Protein Atlas web interface provides a powerful way to
+search using specific parameters. For example, you can find proteins
+predicted to be secreted, expressed at low level in normal breast tissue
+and are predictors of poor prognosis in breast cancer. The good news:
+you can combine the results of your queries with HPAanalyze for easy
+explanatory data analysis and data retrieval of your proteins of
+interest. Here is how.</p>
 </div>
-<div id="the-solution" class="section level1">
-<h1 class="hasAnchor">
-<a href="#the-solution" class="anchor"></a>The solution</h1>
-<div id="create-your-query" class="section level2">
-<h2 class="hasAnchor">
-<a href="#create-your-query" class="anchor"></a>Create your query</h2>
-<p>Have a specific goal in mind. What are you looking for? In this example, I will look for CD markers that have low expression in the cerebral cortex and correlate with unfavorable prognosis in glioma.</p>
+<div class="section level2">
+<h2 id="the-solution">The solution<a class="anchor" aria-label="anchor" href="#the-solution"></a>
+</h2>
+<div class="section level3">
+<h3 id="create-your-query">Create your query<a class="anchor" aria-label="anchor" href="#create-your-query"></a>
+</h3>
+<p>Have a specific goal in mind. What are you looking for? In this
+example, I will look for CD markers that have low expression in the
+cerebral cortex and correlate with unfavorable prognosis in glioma.</p>
 <ol style="list-style-type: decimal">
-<li><p>Visit <a href="https://www.proteinatlas.org/search" class="uri">https://www.proteinatlas.org/search</a>.</p></li>
-<li><p>Build your query. The most intuitive way is to click on the “Fields &gt;&gt;” button and use the drop-down menus.</p></li>
+<li><p>Visit <a href="https://www.proteinatlas.org/search" class="external-link uri">https://www.proteinatlas.org/search</a>.</p></li>
+<li><p>Build your query. The most intuitive way is to click on the
+“Fields &gt;&gt;” button and use the drop-down menus.</p></li>
 </ol>
 <div class="figure">
 <img src="figures/query_fields.png" alt="The 'Fields &gt;&gt;' button." width="100%"><p class="caption">
@@ -146,7 +154,8 @@ Build your query with the drop-down menus.
 </p>
 </div>
 <ol start="3" style="list-style-type: decimal">
-<li>Click “Search”. The website will show you a list of proteins that match your parameters.</li>
+<li>Click “Search”. The website will show you a list of proteins that
+match your parameters.</li>
 </ol>
 <div class="figure">
 <img src="figures/query_search.png" alt="Click the 'Search' button." width="100%"><p class="caption">
@@ -154,7 +163,9 @@ Click the ‘Search’ button.
 </p>
 </div>
 <ol start="4" style="list-style-type: decimal">
-<li>Copy the link to the tsv file that summarizes your search. (Alternatively, you can just add <code>?format=tsv</code> to your search link.)</li>
+<li>Copy the link to the tsv file that summarizes your search.
+(Alternatively, you can just add <code>?format=tsv</code> to your search
+link.)</li>
 </ol>
 <div class="figure">
 <img src="figures/query_tsvlink.png" alt="Copy the link to the tsv file." width="100%"><p class="caption">
@@ -165,108 +176,125 @@ Copy the link to the tsv file.
 <li>Import the tsv file as a data frame as below:</li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## The link to your query tsv</span>
-<span class="va">my_hpa_query</span> <span class="op">&lt;-</span> <span class="st">"https://www.proteinatlas.org/search/protein_class%3ACD+markers+AND+normal_expression%3ACerebral+cortex%3BAny%3BNot+detected%2CLow+AND+prognostic%3AGlioma%3BUnfavourable?format=tsv"</span>
-
-<span class="co">## Create a temporary file as destination for the download</span>
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="st">"query"</span>, fileext<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">".tsv.gz"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co">## Download to the temporary file</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span>url<span class="op">=</span><span class="va">my_hpa_query</span>, destfile <span class="op">=</span> <span class="va">temp</span>, method <span class="op">=</span> <span class="st">"curl"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span>
-
-<span class="co">## read the file into a data frame</span>
-<span class="va">query_df</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span>
-
-<span class="co">## Unlink the temp file</span>
-<span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></code></pre></div>
-<p><strong>Note: If you have problem downloading file in R (step 5), you can workaround by manually download the tsv.gz file from your browser, unzip with 7zip or WinRAR and import the resulting tsv file.</strong></p>
+<code class="sourceCode R"><span><span class="co">## The link to your query tsv</span></span>
+<span><span class="va">my_hpa_query</span> <span class="op">&lt;-</span> <span class="st">"https://www.proteinatlas.org/search/protein_class%3ACD+markers+AND+normal_expression%3ACerebral+cortex%3BAny%3BNot+detected%2CLow+AND+prognostic%3AGlioma%3BUnfavourable?format=tsv"</span></span>
+<span></span>
+<span><span class="co">## Create a temporary file as destination for the download</span></span>
+<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="st">"query"</span>, fileext<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">".tsv.gz"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Download to the temporary file</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span>url<span class="op">=</span><span class="va">my_hpa_query</span>, destfile <span class="op">=</span> <span class="va">temp</span>, method <span class="op">=</span> <span class="st">"curl"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## read the file into a data frame</span></span>
+<span><span class="va">query_df</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_tsv</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Unlink the temp file</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Note: If you have problem downloading file in R (step 5), you
+can workaround by manually download the tsv.gz file from your browser,
+unzip with 7zip or WinRAR and import the resulting tsv
+file.</strong></p>
 <p>You will end up with a data frame that looks like this.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">query_df</span><span class="op">)</span>
-
-<span class="co">#&gt; Observations: 6</span>
-<span class="co">#&gt; Variables: 22</span>
-<span class="co">#&gt; $ Gene                        &lt;chr&gt; "CD81", "NRP1", "PRNP", "SDC1", "THY...</span>
-<span class="co">#&gt; $ `Gene synonym`              &lt;chr&gt; "TAPA-1, TAPA1, TSPAN28", "CD304, NR...</span>
-<span class="co">#&gt; $ Ensembl                     &lt;chr&gt; "ENSG00000110651", "ENSG00000099250"...</span>
-<span class="co">#&gt; $ `Gene description`          &lt;chr&gt; "CD81 molecule", "Neuropilin 1", "Pr...</span>
-<span class="co">#&gt; $ Chromosome                  &lt;dbl&gt; 11, 10, 20, 2, 11, 17</span>
-<span class="co">#&gt; $ Position                    &lt;chr&gt; "2376177-2397419", "33177492-3333626...</span>
-<span class="co">#&gt; $ `Protein class`             &lt;chr&gt; "CD markers, Disease related genes, ...</span>
-<span class="co">#&gt; $ Evidence                    &lt;chr&gt; "Evidence at protein level", "Eviden...</span>
-<span class="co">#&gt; $ Antibody                    &lt;chr&gt; "CAB002507, HPA007234", "CAB004511, ...</span>
-<span class="co">#&gt; $ `Reliability (IH)`          &lt;chr&gt; "Supported", "Approved", "Enhanced",...</span>
-<span class="co">#&gt; $ `Reliability (Mouse Brain)` &lt;lgl&gt; NA, NA, NA, NA, NA, NA</span>
-<span class="co">#&gt; $ `Reliability (IF)`          &lt;chr&gt; "Supported", "Uncertain", "Approved"...</span>
-<span class="co">#&gt; $ `Subcellular location`      &lt;chr&gt; "Plasma membrane", "Mitochondria", "...</span>
-<span class="co">#&gt; $ `Prognostic p-value`        &lt;chr&gt; "Glioma:5.12e-5 (unfavourable), Panc...</span>
-<span class="co">#&gt; $ `RNA cancer category`       &lt;chr&gt; "Expressed in all", "Expressed in al...</span>
-<span class="co">#&gt; $ `RNA tissue category`       &lt;chr&gt; "Expressed in all", "Expressed in al...</span>
-<span class="co">#&gt; $ `RNA TS`                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA</span>
-<span class="co">#&gt; $ `RNA TS TPM`                &lt;chr&gt; NA, NA, NA, "esophagus: 250.7;skin: ...</span>
-<span class="co">#&gt; $ `TPM max in non-specific`   &lt;chr&gt; "seminal vesicle: 2273.0", "placenta...</span>
-<span class="co">#&gt; $ `RNA cell line category`    &lt;chr&gt; "Cell line enhanced", "Cell line enh...</span>
-<span class="co">#&gt; $ `RNA CS`                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA</span>
-<span class="co">#&gt; $ `RNA CS TPM`                &lt;chr&gt; "ASC diff: 2031.3", "U-87 MG: 437.4"...</span></code></pre></div>
-<p>The data frame itself is somewhat informative, and is adequate if you want to see a summary of the data. However, it also provides you with a list of proteins in both “gene name” and “ensembl id” formats which you can use with <code>HPAanalyze</code> functions.</p>
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">query_df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; Observations: 6</span></span>
+<span><span class="co">#&gt; Variables: 22</span></span>
+<span><span class="co">#&gt; $ Gene                        &lt;chr&gt; "CD81", "NRP1", "PRNP", "SDC1", "THY...</span></span>
+<span><span class="co">#&gt; $ `Gene synonym`              &lt;chr&gt; "TAPA-1, TAPA1, TSPAN28", "CD304, NR...</span></span>
+<span><span class="co">#&gt; $ Ensembl                     &lt;chr&gt; "ENSG00000110651", "ENSG00000099250"...</span></span>
+<span><span class="co">#&gt; $ `Gene description`          &lt;chr&gt; "CD81 molecule", "Neuropilin 1", "Pr...</span></span>
+<span><span class="co">#&gt; $ Chromosome                  &lt;dbl&gt; 11, 10, 20, 2, 11, 17</span></span>
+<span><span class="co">#&gt; $ Position                    &lt;chr&gt; "2376177-2397419", "33177492-3333626...</span></span>
+<span><span class="co">#&gt; $ `Protein class`             &lt;chr&gt; "CD markers, Disease related genes, ...</span></span>
+<span><span class="co">#&gt; $ Evidence                    &lt;chr&gt; "Evidence at protein level", "Eviden...</span></span>
+<span><span class="co">#&gt; $ Antibody                    &lt;chr&gt; "CAB002507, HPA007234", "CAB004511, ...</span></span>
+<span><span class="co">#&gt; $ `Reliability (IH)`          &lt;chr&gt; "Supported", "Approved", "Enhanced",...</span></span>
+<span><span class="co">#&gt; $ `Reliability (Mouse Brain)` &lt;lgl&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ `Reliability (IF)`          &lt;chr&gt; "Supported", "Uncertain", "Approved"...</span></span>
+<span><span class="co">#&gt; $ `Subcellular location`      &lt;chr&gt; "Plasma membrane", "Mitochondria", "...</span></span>
+<span><span class="co">#&gt; $ `Prognostic p-value`        &lt;chr&gt; "Glioma:5.12e-5 (unfavourable), Panc...</span></span>
+<span><span class="co">#&gt; $ `RNA cancer category`       &lt;chr&gt; "Expressed in all", "Expressed in al...</span></span>
+<span><span class="co">#&gt; $ `RNA tissue category`       &lt;chr&gt; "Expressed in all", "Expressed in al...</span></span>
+<span><span class="co">#&gt; $ `RNA TS`                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ `RNA TS TPM`                &lt;chr&gt; NA, NA, NA, "esophagus: 250.7;skin: ...</span></span>
+<span><span class="co">#&gt; $ `TPM max in non-specific`   &lt;chr&gt; "seminal vesicle: 2273.0", "placenta...</span></span>
+<span><span class="co">#&gt; $ `RNA cell line category`    &lt;chr&gt; "Cell line enhanced", "Cell line enh...</span></span>
+<span><span class="co">#&gt; $ `RNA CS`                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span><span class="co">#&gt; $ `RNA CS TPM`                &lt;chr&gt; "ASC diff: 2031.3", "U-87 MG: 437.4"...</span></span></code></pre></div>
+<p>The data frame itself is somewhat informative, and is adequate if you
+want to see a summary of the data. However, it also provides you with a
+list of proteins in both “gene name” and “ensembl id” formats which you
+can use with <code>HPAanalyze</code> functions.</p>
 </div>
-<div id="visualization" class="section level2">
-<h2 class="hasAnchor">
-<a href="#visualization" class="anchor"></a>Visualization</h2>
-<p>You can use the gene names in the list to visualize HPA data with the <code>hpaVis</code> function family. No special adjustment is needed.</p>
+<div class="section level3">
+<h3 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
+</h3>
+<p>You can use the gene names in the list to visualize HPA data with the
+<code>hpaVis</code> function family. No special adjustment is
+needed.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## since the query give you the latest HPA version, get the latest datasets to match</span>
-<span class="va">latest_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaDownload.html">hpaDownload</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/hpaVis.html">hpaVis</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">latest_datasets</span>,
-       targetGene <span class="op">=</span> <span class="va">query_df</span><span class="op">$</span><span class="va">Gene</span>,
-       targetTissue <span class="op">=</span> <span class="st">"cerebral cortex"</span>,
-       targetCancer <span class="op">=</span> <span class="st">"glioma"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## since the query give you the latest HPA version, get the latest datasets to match</span></span>
+<span><span class="va">latest_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaDownload.html">hpaDownload</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/hpaVis.html">hpaVis</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">latest_datasets</span>,</span>
+<span>       targetGene <span class="op">=</span> <span class="va">query_df</span><span class="op">$</span><span class="va">Gene</span>,</span>
+<span>       targetTissue <span class="op">=</span> <span class="st">"cerebral cortex"</span>,</span>
+<span>       targetCancer <span class="op">=</span> <span class="st">"glioma"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="figures/query_vis.png"></p>
 </div>
-<div id="xml-extraction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#xml-extraction" class="anchor"></a>XML extraction</h2>
-<p>Similarly, you can extract the information you want from relevant xml files using <code>lapply</code> on the ensembl ids. With some trickery, you can even create a tidy data frame from the extracted information, as shown below. Now you can analyze the way you want.</p>
+<div class="section level3">
+<h3 id="xml-extraction">XML extraction<a class="anchor" aria-label="anchor" href="#xml-extraction"></a>
+</h3>
+<p>Similarly, you can extract the information you want from relevant xml
+files using <code>lapply</code> on the ensembl ids. With some trickery,
+you can even create a tidy data frame from the extracted information, as
+shown below. Now you can analyze the way you want.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Download and import the xml files for proteins of interest</span>
-<span class="va">query_xml_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">query_df</span><span class="op">$</span><span class="va">Ensembl</span>, <span class="va">hpaXmlGet</span><span class="op">)</span>
-
-<span class="co">## Extract protein classes as a list of data frame</span>
-<span class="va">query_protein_classes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">query_xml_list</span>, <span class="va">hpaXmlProtClass</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">query_protein_classes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">query_df</span><span class="op">$</span><span class="va">Gene</span> <span class="co"># name list items</span>
-
-<span class="co">## Turn the list into a data frame</span>
-<span class="va">query_protein_classes_df</span> <span class="op">&lt;-</span> 
-    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span><span class="va">query_protein_classes</span>, name <span class="op">=</span> <span class="st">"protein"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">query_protein_classes_df</span><span class="op">)</span>
-
-<span class="co">#&gt; Observations: 122</span>
-<span class="co">#&gt; Variables: 5</span>
-<span class="co">#&gt; $ protein   &lt;chr&gt; "CD81", "CD81", "CD81", "CD81", "CD81", "CD81", "CD81"...</span>
-<span class="co">#&gt; $ id        &lt;chr&gt; "Cd", "Ja", "Jf", "Ma", "Md", "Me", "Mf", "Mg", "Mh", ...</span>
-<span class="co">#&gt; $ name      &lt;chr&gt; "CD markers", "Transporters", "Accessory Factors Invol...</span>
-<span class="co">#&gt; $ parent_id &lt;chr&gt; NA, NA, "Ja", NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span>
-<span class="co">#&gt; $ source    &lt;chr&gt; "UniProt", "TCDB", "TCDB", "MDM", "MDM", "MEMSAT3", "M...</span>
-
-
-<span class="co">## Which proteins in our list are also potential drug targets?</span>
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">query_protein_classes_df</span>, <span class="va">name</span> <span class="op">==</span> <span class="st">"Potential drug targets"</span><span class="op">)</span>
-
-<span class="co">#&gt; # A tibble: 2 x 5</span>
-<span class="co">#&gt;   protein id    name                   parent_id source</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;                  &lt;chr&gt;     &lt;chr&gt; </span>
-<span class="co">#&gt; 1 CD81    Pd    Potential drug targets &lt;NA&gt;      HPA   </span>
-<span class="co">#&gt; 2 PRNP    Pd    Potential drug targets &lt;NA&gt;      HPA</span></code></pre></div>
-<p><em>It is even more impressive when you extract patient’s detail of multiple genes using <code>hpaXmlTissueExpr</code>. You can match samples from the same patient across multiple antibodies and proteins. However, it will take a little bit more work than the above example, so I will leave it to you to explore these hidden potentials."</em></p>
+<code class="sourceCode R"><span><span class="co">## Download and import the xml files for proteins of interest</span></span>
+<span><span class="va">query_xml_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">query_df</span><span class="op">$</span><span class="va">Ensembl</span>, <span class="va">hpaXmlGet</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Extract protein classes as a list of data frame</span></span>
+<span><span class="va">query_protein_classes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">query_xml_list</span>, <span class="va">hpaXmlProtClass</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">query_protein_classes</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">query_df</span><span class="op">$</span><span class="va">Gene</span> <span class="co"># name list items</span></span>
+<span></span>
+<span><span class="co">## Turn the list into a data frame</span></span>
+<span><span class="va">query_protein_classes_df</span> <span class="op">&lt;-</span> </span>
+<span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">enframe</a></span><span class="op">(</span><span class="va">query_protein_classes</span>, name <span class="op">=</span> <span class="st">"protein"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">query_protein_classes_df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; Observations: 122</span></span>
+<span><span class="co">#&gt; Variables: 5</span></span>
+<span><span class="co">#&gt; $ protein   &lt;chr&gt; "CD81", "CD81", "CD81", "CD81", "CD81", "CD81", "CD81"...</span></span>
+<span><span class="co">#&gt; $ id        &lt;chr&gt; "Cd", "Ja", "Jf", "Ma", "Md", "Me", "Mf", "Mg", "Mh", ...</span></span>
+<span><span class="co">#&gt; $ name      &lt;chr&gt; "CD markers", "Transporters", "Accessory Factors Invol...</span></span>
+<span><span class="co">#&gt; $ parent_id &lt;chr&gt; NA, NA, "Ja", NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, ...</span></span>
+<span><span class="co">#&gt; $ source    &lt;chr&gt; "UniProt", "TCDB", "TCDB", "MDM", "MDM", "MEMSAT3", "M...</span></span>
+<span></span>
+<span></span>
+<span><span class="co">## Which proteins in our list are also potential drug targets?</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">query_protein_classes_df</span>, <span class="va">name</span> <span class="op">==</span> <span class="st">"Potential drug targets"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 2 x 5</span></span>
+<span><span class="co">#&gt;   protein id    name                   parent_id source</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;                  &lt;chr&gt;     &lt;chr&gt; </span></span>
+<span><span class="co">#&gt; 1 CD81    Pd    Potential drug targets &lt;NA&gt;      HPA   </span></span>
+<span><span class="co">#&gt; 2 PRNP    Pd    Potential drug targets &lt;NA&gt;      HPA</span></span></code></pre></div>
+<p><em>It is even more impressive when you extract patient’s detail of
+multiple genes using <code>hpaXmlTissueExpr</code>. You can match
+samples from the same patient across multiple antibodies and proteins.
+However, it will take a little bit more work than the above example, so
+I will leave it to you to explore these hidden potentials.”</em></p>
 </div>
 </div>
-<div id="copyright" class="section level1">
-<h1 class="hasAnchor">
-<a href="#copyright" class="anchor"></a>Copyright</h1>
-<p><strong>Anh Tran, 2018-2021 </strong></p>
-<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
+<div class="section level2">
+<h2 id="copyright">Copyright<a class="anchor" aria-label="anchor" href="#copyright"></a>
+</h2>
+<p><strong>Anh Tran, 2018-2022 </strong></p>
+<p>Please cite: <strong>Tran, A.N., Dussaq, A.M., Kennell, T. et
+al. HPAanalyze: an R package that facilitates the retrieval and analysis
+of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) <a href="https://doi.org/10.1186/s12859-019-3059-z" class="external-link uri">https://doi.org/10.1186/s12859-019-3059-z</a> </strong></p>
 </div>
   </div>
 
@@ -281,11 +309,13 @@ Copy the link to the tsv file.
 
 
       <footer><div class="copyright">
-  <p>Developed by Anh Nhat Tran.</p>
+  <p></p>
+<p>Developed by Anh Nhat Tran.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -293,6 +323,8 @@ Copy the link to the tsv file.
 
   
 
+
+  
 
   </body>
 </html>

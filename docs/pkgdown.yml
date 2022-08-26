@@ -1,13 +1,13 @@
-pandoc: 2.11.4
-pkgdown: 1.6.1
+pandoc: '2.18'
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   a_HPAanalyze_quick_start: a_HPAanalyze_quick_start.html
   b_HPAanalyze_indepth: b_HPAanalyze_indepth.html
-  d_HPAanalyze_case_offline_xml: d_HPAanalyze_case_offline_xml.html
   c_HPAanalyze_case_query: c_HPAanalyze_case_query.html
+  d_HPAanalyze_case_offline_xml: d_HPAanalyze_case_offline_xml.html
   e_HPAanalyze_case_json: e_HPAanalyze_case_json.html
   f_HPAanalyze_case_images: f_HPAanalyze_case_images.html
   z_HPAanalyze_paper_figures: z_HPAanalyze_paper_figures.html
-last_built: 2021-10-06T16:56Z
+last_built: 2022-08-26T15:15Z
 

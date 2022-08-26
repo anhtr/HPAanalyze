@@ -2,7 +2,7 @@
 title: "2. In-depth: Working with Human Protein Atlas (HPA) data in R with HPAanalyze"
 author:
 - name: Anh N. Tran
-  affiliation: Northwestern University, IL, USA
+  affiliation: DataGrata LLC
   email: trannhatanh89@gmail.com
 date: 4/2/2021
 output: 

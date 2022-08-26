@@ -2,7 +2,7 @@
 title: "3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA) queries"
 author:
 - name: Anh N. Tran
-  affiliation: Northwestern University, Illinois, USA
+  affiliation: DataGrata LLC
   email: trannhatanh89@gmail.com
 date: 6/7/2019
 output: 

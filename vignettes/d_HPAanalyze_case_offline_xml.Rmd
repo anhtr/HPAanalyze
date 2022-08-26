@@ -2,7 +2,7 @@
 title: "4. Tutorial: Working with Human Protein Atlas (HPA) xml files offline"
 author:
 - name: Anh N. Tran
-  affiliation: Northwestern University, Illinois, USA
+  affiliation: DataGrata LLC
   email: trannhatanh89@gmail.com
 date: 6/7/2019
 output: 
