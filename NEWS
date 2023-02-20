@@ -2,6 +2,9 @@
 * Changes in version 1.17.0
     + Starting devel for Bioconductor 3.18
 
+* Changes in version 1.17.1
+    + Update built-in data to version 22.0.
+
 
                        Changes in version 1.15
 * Changes in version 1.15.1
