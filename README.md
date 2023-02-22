@@ -147,7 +147,7 @@ Birmingham.
 
 # Copyright
 
-**Anh Tran, 2018-2022**
+**Anh Tran, 2018-2023**
 
 Please cite: **Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze:
 an R package that facilitates the retrieval and analysis of the Human
