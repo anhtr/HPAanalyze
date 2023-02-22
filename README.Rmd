@@ -28,6 +28,8 @@ knitr::opts_chunk$set(
 
 ![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg) ![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)
 
+In Bioconductor: ![platform](https://bioconductor.org/shields/availability/release/HPAanalyze.svg) ![build](https://bioconductor.org/shields/build/release/bioc/HPAanalyze.svg) ![rank](https://bioconductor.org/shields/downloads/release/HPAanalyze.svg) ![dependencies](https://bioconductor.org/shields/dependencies/release/HPAanalyze.svg) ![in bioc](https://bioconductor.org/shields/years-in-bioc/HPAanalyze.svg)
+
 -   **Background:** The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics.
 -   **Results:** `HPAanalyze` is an R package for retreiving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via Github.
 -   **Conclusions:** `HPAanalyze` intergrates into the R workflow via the `tidyverse` philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.\
@@ -39,7 +41,7 @@ The Human Protein Atlas (HPA) is a comprehensive resource for exploration of hum
 
 The program has generated protein expression profiles in human normal tissues with cell type-specific expression patterns, cancer and cell lines via an innovative immunohistochemistry-based approach. These profiles are accompanied by a large collection of high quality histological staining images, annotated with clinical data and quantification. The database also includes classification of protein into both functional classes (such as transcription factors or kinases) and project-related classes (such as candidate genes for cancer). Starting from version 4.0, the HPA includes subcellular location profiles generated based on confocal images of immunofluorescent stained cells. Together, these data provide a detailed picture of protein expression in human cells and tissues, facilitating tissue-based diagnostis and research.
 
-Data from the HPA are freely available via proteinatlas.org, allowing scientists to access and incorporate the data into their research. Previously, the R package *hpar* has been created for fast and easy programmatic access of HPA data. Here, we introduce *HPAanalyze*, an R package aims to simplify exploratory data analysis from those data, as well as provide other complementary functionality to *hpar*.
+Data from the HPA are freely available via proteinatlas.org, allowing scientists to access and incorporate the data into their research. Here, we introduce *HPAanalyze*, an R package aims to simplify exploratory data analysis from those data.
 
 ## Overview
 
@@ -84,10 +86,8 @@ In the first release, *HPAanalyze* includes four functions for data extraction f
 -   Project name: HPAanalyze
 -   Project home page: <https://github.com/anhtr/HPAanalyze>
 -   Operating system(s): All platforms where R is available, including Windows, Linux, OS X
--   Programming language: R
--   Other requirements: R 3.5.0 or higher, and the R packages dplyr, openxlsx, ggplot2, readr, tibble, xml2, reshape2, tidyr, magrittr, stats, utils, hpar, cowplot
+-   Other requirements: R 3.5.0 or higher, and the R packages dplyr, openxlsx, ggplot2, tibble, xml2, stats, utils, gridExtra
 -   License: GPL-3
--   Any restrictions to use by non-academics: Freely available to everyone
 
 # Acknowledgements
 
