@@ -78,6 +78,6 @@ saveRDS(CCNB1_parsed, "data/CCNB1_parsed.rds")
 
 # Copyright
 
-__Anh Tran, 2018-2022 __
+__Anh Tran, 2018-2023 __
 
 Please cite: __Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) https://doi.org/10.1186/s12859-019-3059-z __
