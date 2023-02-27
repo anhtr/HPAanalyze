@@ -3,42 +3,49 @@
 #######################
 
 #' Download datasets
-#' 
+#'
 #' Download the latest version of HPA datasets and import them in R. It is
 #' recommended to only download the datasets you need, as some of them may be
 #' very big.
-#' 
+#'
 #' @param downloadList A vector or string indicate which datasets to download.
 #'   Possible value:
 #'   \itemize{
-#'     \item \code{'Normal tissue'} 
+#'     \item \code{'Normal tissue'}
 #'     \item \code{'Pathology'}
 #'     \item \code{'Subcellular location'}
-#'     \item \code{'RNA consensus tissue'} 
+#'     \item \code{'RNA consensus tissue'}
 #'     \item \code{'RNA HPA tissue'}
 #'     \item \code{'RNA GTEx tissue'}
-#'     \item \code{'RNA FANTOM tissue'} 
+#'     \item \code{'RNA FANTOM tissue'}
 #'     \item \code{'RNA single cell type'}
 #'     \item \code{'RNA single cell type tissue cluster'}
-#'     \item \code{'RNA GTEx brain region'} 
+#'     \item \code{'RNA GTEx brain region'}
 #'     \item \code{'RNA FANTOM brain region'}
 #'     \item \code{'RNA pig brain region'}
-#'     \item \code{'RNA pig brain subregion sample'} 
+#'     \item \code{'RNA pig brain subregion sample'}
 #'     \item \code{'RNA mouse brain region'}
 #'     \item \code{'RNA mouse brain subregion sample'}
-#'     \item \code{'RNA Allen mouse brain region'} 
+#'     \item \code{'RNA Allen mouse brain region'}
+#'     \item \code{'RNA HPA immune cell'}
+#'     \item \code{'RNA HPA immune cell sample'}
+#'     \item \code{'RNA Monaco immune cell'}
+#'     \item \code{'RNA Schmiedel immune cell'}
 #'     \item \code{'RNA HPA blood cell'} (version 21.1)
 #'     \item \code{'RNA HPA blood cell sample'} (version 21.1)
 #'     \item \code{'RNA Monaco blood cell'} (version 21.1)
 #'     \item \code{'RNA Schmiedel blood cell'} (version 21.1)
+#'     \item \code{'RNA HPA cell line cancer'}
 #'     \item \code{'RNA HPA cell line'}
 #'     \item \code{'RNA TCGA cancer sample'}
-#'     \item \code{'RNA transcript tissue'} 
-#'     \item \code{'RNA transcript cell line'}
+#'     \item \code{'RNA transcript tissue'}
+#'     \item \code{'RNA transcript GTEx retina'}
+#'     \item \code{'RNA transcript immune cells'}
+#'     \item \code{'RNA transcript cell line'} (version 21.1)
 #'     \item \code{'RNA transcript pig brain'}
-#'     \item \code{'RNA transcript mouse brain'} 
+#'     \item \code{'RNA transcript mouse brain'}
 #'     }
-#'     
+#'
 #'   You can also use the following shortcuts:
 #'   \itemize{
 #'     \item \code{'all'}: download everything
@@ -47,20 +54,24 @@
 #'     \item \code{'rna tissue'}: same as \code{c('RNA consensus tissue', 'RNA
 #'     HPA tissue', 'RNA GTEx tissue', 'RNA FANTOM tissue')}
 #'     \item \code{'rna cell type'}: same as \code{c('RNA single cell
-#'     type', 'RNA single cell type tissue cluster')} 
+#'     type', 'RNA single cell type tissue cluster')}
 #'     \item \code{'rna brain region'}: same as \code{c('RNA GTEx brain region',
 #'     'RNA FANTOM brain region', 'RNA pig brain region', 'RNA pig brain
 #'     subregion sample', 'RNA mouse brain region', 'RNA mouse brain subregion
 #'     sample', 'RNA Allen mouse brain region')}
+#'     \item \code{'rna immune cell'}: same as \code{c('RNA HPA immune
+#'     cell', 'RNA HPA immune cell sample', 'RNA Monaco immune cell', 'RNA
+#'     Schmiedel immune cell')}
 #'     \item \code{'rna blood cell'}: same as \code{c('RNA HPA blood
 #'     cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
 #'     Schmiedel blood cell')}
-#'     \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA
+#'     \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA 
+#'     transcript GTEx retina', 'RNA transcript immune cells', 'RNA
 #'     transcript cell line', 'RNA transcript pig brain', 'RNA transcript mouse
 #'     brain')}
 #'   }
 #'   See \url{https://www.proteinatlas.org/about/download} for more information.
-#'   
+#'
 #' @param version A string indicate which version to be downloaded. Possible
 #'   value:
 #'   \itemize{
@@ -70,21 +81,19 @@
 #'     dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
 #'     connection.
 #'   }
-#' 
+#'
 #' @family downloadable datasets functions
-#' 
+#'
 #' @return This function will return a list of tibbles corresponding to
 #'   requested datasets.
-#'   
-#' @seealso
-#' \code{\link{hpaDownload}}
-#' \code{\link{hpa_histology_data}}
-#'  
+#'
+#' @seealso \code{\link{hpaDownload}} \code{\link{hpa_histology_data}}
+#'
 #' @examples
 #'   downloadedData <- hpaDownload(downloadList='histology', version='example')
 #'   summary(downloadedData)
-#'   
-#'   
+#'
+#'
 #' @import dplyr
 #' @importFrom utils download.file data read.delim2 unzip
 #' @importFrom stats reshape
@@ -113,21 +122,21 @@ hpaDownload <- function(downloadList = 'histology',
             'RNA mouse brain region',
             'RNA mouse brain subregion sample',
             'RNA Allen mouse brain region',
-            # 'RNA HPA immune cell',
-            # 'RNA HPA immune cell sample',
-            # 'RNA Monaco immune cell',
-            # 'RNA Schmiedel immune cell',
+            'RNA HPA immune cell',
+            'RNA HPA immune cell sample',
+            'RNA Monaco immune cell',
+            'RNA Schmiedel immune cell',
             'RNA HPA blood cell',
             'RNA HPA blood cell sample',
             'RNA Monaco blood cell',
             'RNA Schmiedel blood cell',
-            # 'RNA HPA cell line cancer',
+            'RNA HPA cell line cancer',
             'RNA HPA cell line',
             'RNA TCGA cancer sample',
             'RNA transcript tissue',
-            # 'RNA transcript GTEx retina',
-            # 'RNA transcript immune cells',
-            'RNA transcript cell line',
+            'RNA transcript GTEx retina',
+            'RNA transcript immune cells',
+            'RNA transcript cell line', 
             'RNA transcript pig brain',
             'RNA transcript mouse brain'
         ),
@@ -251,6 +260,18 @@ hpaDownload <- function(downloadList = 'histology',
             rna_mouse_brain_allen =
                 c('ensembl', 'gene', 'brain_region', 'expression_energy'),
             
+            rna_immune_cell =
+                c('ensembl', 'gene', 'immune_cell', 'tpm', 'ptpm', 'ntpm'),
+            
+            rna_immune_cell_sample =
+                c('sample_id', 'donor', 'immune_cell', 'ensembl', 'gene', 'tpm', 'ptpm', 'ntpm'),
+            
+            rna_immune_cell_monaco =
+                c('ensembl', 'gene', 'immune_cell', 'tpm', 'ptpm'),
+            
+            rna_immune_cell_schmiedel =
+                c('ensembl', 'gene', 'immune_cell', 'tpm'),
+            
             rna_blood_cell =
                 c('ensembl', 'gene', 'blood_cell', 'tpm', 'ptpm', 'nx'),
             
@@ -263,13 +284,22 @@ hpaDownload <- function(downloadList = 'histology',
             rna_blood_cell_schmiedel =
                 c('ensembl', 'gene', 'blood_cell', 'tpm'),
             
+            rna_celline_cancer =
+                c('ensembl', 'gene', 'cancer', 'tpm', 'ptpm', "ntpm"),
+            
             rna_celline =
-                c('ensembl', 'gene', 'cell_line', 'tpm', 'ptpm', "nx"),
+                c('ensembl', 'gene', 'cell_line', 'tpm', 'ptpm', "ntpm"),
             
             rna_cancer_sample =
                 c('ensembl', 'sample', 'cancer', 'fpkm'),
             
             transcript_rna_tissue =
+                c('ensgid', 'enstid', 'sample', 'tpm'),
+            
+            transcript_rna_gtexretina =
+                c('ensgid', 'enstid', 'sample', 'tpm'),
+            
+            transcript_rna_immunecells =
                 c('ensgid', 'enstid', 'sample', 'tpm'),
             
             transcript_rna_celline =
@@ -316,6 +346,14 @@ hpaDownload <- function(downloadList = 'histology',
                 'https://www.proteinatlas.org/download/rna_mouse_brain_sample_hpa.tsv.zip',
             rna_mouse_brain_allen =
                 'https://www.proteinatlas.org/download/rna_mouse_brain_allen.tsv.zip',
+            rna_immune_cell =
+                'https://www.proteinatlas.org/download/rna_immune_cell.tsv.zip',
+            rna_immune_cell_sample =
+                'https://www.proteinatlas.org/download/rna_immune_cell_sample.tsv.zip',
+            rna_immune_cell_monaco =
+                'https://www.proteinatlas.org/download/rna_immune_cell_monaco.tsv.zip',
+            rna_immune_cell_schmiedel =
+                'https://www.proteinatlas.org/download/rna_immune_cell_schmiedel.tsv.zip',
             rna_blood_cell =
                 'https://v21.proteinatlas.org/download/rna_blood_cell.tsv.zip',
             rna_blood_cell_sample =
@@ -324,14 +362,20 @@ hpaDownload <- function(downloadList = 'histology',
                 'https://v21.proteinatlas.org/download/rna_blood_cell_monaco.tsv.zip',
             rna_blood_cell_schmiedel =
                 'https://v21.proteinatlas.org/download/rna_blood_cell_schmiedel.tsv.zip',
+            rna_celline_cancer =
+                'https://www.proteinatlas.org/download/rna_celline_cancer.tsv.zip',
             rna_celline =
                 'https://www.proteinatlas.org/download/rna_celline.tsv.zip',
             rna_cancer_sample =
                 'https://www.proteinatlas.org/download/rna_cancer_sample.tsv.zip',
             transcript_rna_tissue =
                 'https://www.proteinatlas.org/download/transcript_rna_tissue.tsv.zip',
+            transcript_rna_gtexretina =
+                'https://www.proteinatlas.org/download/transcript_rna_gtexretina.tsv.zip',
+            transcript_rna_immunecells =
+                'https://www.proteinatlas.org/download/transcript_rna_immunecells.tsv.zip',
             transcript_rna_celline =
-                'https://www.proteinatlas.org/download/transcript_rna_celline.tsv.zip',
+                'https://v21.proteinatlas.org/download/transcript_rna_celline.tsv.zip',
             transcript_rna_pigbrain =
                 'https://www.proteinatlas.org/download/transcript_rna_pigbrain.tsv.zip',
             transcript_rna_mousebrain =
@@ -352,8 +396,9 @@ hpaDownload <- function(downloadList = 'histology',
         replace_shortcut('rna tissue', allDatasets$datasetnames[4:7]) %>%
         replace_shortcut('rna cell type', allDatasets$datasetnames[8:9]) %>%
         replace_shortcut('rna brain region', allDatasets$datasetnames[10:16]) %>%
-        replace_shortcut('rna blood cell', allDatasets$datasetnames[17:20]) %>%
-        replace_shortcut('isoform', allDatasets$datasetnames[23:26])
+        replace_shortcut('rna immune cell', allDatasets$datasetnames[17:20]) %>%
+        replace_shortcut('rna blood cell', allDatasets$datasetnames[21:24]) %>%
+        replace_shortcut('isoform', allDatasets$datasetnames[28:33])
 
     ## make sure that everything are downloadable, and get downloaded once
     # downloadList <- unique(downloadList)
@@ -403,6 +448,8 @@ hpaDownload <- function(downloadList = 'histology',
             
             if (downloadDatasets$datasetnames[[i]] %in% c(
                 'RNA transcript tissue',
+                'RNA transcript GTEx retina',
+                'RNA transcript immune cells',
                 'RNA transcript cell line',
                 'RNA transcript pig brain',
                 'RNA transcript mouse brain'
@@ -430,7 +477,7 @@ hpaDownload <- function(downloadList = 'histology',
         
         names(loadedData) <-
             downloadDatasets$urls %>%
-            gsub('.tsv.zip|https://www.proteinatlas.org/download/',
+            gsub('.tsv.zip|https://www.proteinatlas.org/download/|https://v21.proteinatlas.org/download/',
                  '',
                  .)
         
