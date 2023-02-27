@@ -27,10 +27,10 @@
 #'     \item \code{'RNA mouse brain region'}
 #'     \item \code{'RNA mouse brain subregion sample'}
 #'     \item \code{'RNA Allen mouse brain region'} 
-#'     \item \code{'RNA HPA blood cell'}
-#'     \item \code{'RNA HPA blood cell sample'}
-#'     \item \code{'RNA Monaco blood cell'} 
-#'     \item \code{'RNA Schmiedel blood cell'}
+#'     \item \code{'RNA HPA blood cell'} (version 21.1)
+#'     \item \code{'RNA HPA blood cell sample'} (version 21.1)
+#'     \item \code{'RNA Monaco blood cell'} (version 21.1)
+#'     \item \code{'RNA Schmiedel blood cell'} (version 21.1)
 #'     \item \code{'RNA HPA cell line'}
 #'     \item \code{'RNA TCGA cancer sample'}
 #'     \item \code{'RNA transcript tissue'} 
@@ -113,13 +113,20 @@ hpaDownload <- function(downloadList = 'histology',
             'RNA mouse brain region',
             'RNA mouse brain subregion sample',
             'RNA Allen mouse brain region',
+            # 'RNA HPA immune cell',
+            # 'RNA HPA immune cell sample',
+            # 'RNA Monaco immune cell',
+            # 'RNA Schmiedel immune cell',
             'RNA HPA blood cell',
             'RNA HPA blood cell sample',
             'RNA Monaco blood cell',
             'RNA Schmiedel blood cell',
+            # 'RNA HPA cell line cancer',
             'RNA HPA cell line',
             'RNA TCGA cancer sample',
             'RNA transcript tissue',
+            # 'RNA transcript GTEx retina',
+            # 'RNA transcript immune cells',
             'RNA transcript cell line',
             'RNA transcript pig brain',
             'RNA transcript mouse brain'
@@ -284,7 +291,7 @@ hpaDownload <- function(downloadList = 'histology',
             subcellular_location =
                 'https://www.proteinatlas.org/download/subcellular_location.tsv.zip',
             rna_tissue_consensus =
-                'https://www.proteinatlas.org/download/rna_tissue_consensus.tsv.zip',
+                'https://www.proteinatlas.org/download/subcellular_location.tsv.zip',
             rna_tissue_hpa =
                 'https://www.proteinatlas.org/download/rna_tissue_hpa.tsv.zip',
             rna_tissue_gtex =
@@ -310,13 +317,13 @@ hpaDownload <- function(downloadList = 'histology',
             rna_mouse_brain_allen =
                 'https://www.proteinatlas.org/download/rna_mouse_brain_allen.tsv.zip',
             rna_blood_cell =
-                'https://www.proteinatlas.org/download/rna_blood_cell.tsv.zip',
+                'https://v21.proteinatlas.org/download/rna_blood_cell.tsv.zip',
             rna_blood_cell_sample =
-                'https://www.proteinatlas.org/download/rna_blood_cell_sample.tsv.zip',
+                'https://v21.proteinatlas.org/download/rna_blood_cell_sample.tsv.zip',
             rna_blood_cell_monaco =
-                'https://www.proteinatlas.org/download/rna_blood_cell_monaco.tsv.zip',
+                'https://v21.proteinatlas.org/download/rna_blood_cell_monaco.tsv.zip',
             rna_blood_cell_schmiedel =
-                'https://www.proteinatlas.org/download/rna_blood_cell_schmiedel.tsv.zip',
+                'https://v21.proteinatlas.org/download/rna_blood_cell_schmiedel.tsv.zip',
             rna_celline =
                 'https://www.proteinatlas.org/download/rna_celline.tsv.zip',
             rna_cancer_sample =

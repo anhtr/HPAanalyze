@@ -26,10 +26,10 @@ Possible value:
   \item \code{'RNA mouse brain region'}
   \item \code{'RNA mouse brain subregion sample'}
   \item \code{'RNA Allen mouse brain region'} 
-  \item \code{'RNA HPA blood cell'}
-  \item \code{'RNA HPA blood cell sample'}
-  \item \code{'RNA Monaco blood cell'} 
-  \item \code{'RNA Schmiedel blood cell'}
+  \item \code{'RNA HPA blood cell'} (version 21.1)
+  \item \code{'RNA HPA blood cell sample'} (version 21.1)
+  \item \code{'RNA Monaco blood cell'} (version 21.1)
+  \item \code{'RNA Schmiedel blood cell'} (version 21.1)
   \item \code{'RNA HPA cell line'}
   \item \code{'RNA TCGA cancer sample'}
   \item \code{'RNA transcript tissue'} 
