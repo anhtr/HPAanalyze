@@ -24,7 +24,9 @@ This function return an object of class \code{"xml_document"
 }
 \description{
 Download and import individual xml file for a specified protein. This
-function calls \code{xml2::read_xml()} under the hood.
+function calls \code{xml2::read_xml()} under the hood.  It is important to
+note that the data that HPA provides on their website and through xml files
+are not one-to-one equivalents.
 }
 \examples{
 \dontrun{
