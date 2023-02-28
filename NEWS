@@ -4,7 +4,7 @@
 
 * Changes in version 1.17.1
     + Update built-in data to version 22.0.
-    
+
 * Changes in version 1.17.2
     + Update HPA download to correctly download new version 22.0 data.
     + Update documentation.
