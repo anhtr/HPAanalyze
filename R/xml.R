@@ -5,7 +5,9 @@
 #' Download and import xml file
 #'
 #' Download and import individual xml file for a specified protein. This
-#' function calls \code{xml2::read_xml()} under the hood.
+#' function calls \code{xml2::read_xml()} under the hood.  It is important to
+#' note that the data that HPA provides on their website and through xml files
+#' are not one-to-one equivalents.
 #'
 #' @param targetEnsemblId A string of one ensembl ID, start with ENSG. For
 #'   example \code{'ENSG00000131979'}. You can also use HGNC gene symbol and it
@@ -54,7 +56,8 @@ hpaXmlGet <- function(targetEnsemblId, version = 'latest') {
 #' Extract protein classes
 #' 
 #' Extract protein class information from imported xml document resulted from
-#' \code{hpaXmlGet()}.
+#' \code{hpaXmlGet()}.  It is important to note that the data that HPA provides
+#' on their website and through xml files are not one-to-one equivalents.
 #' 
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
@@ -95,7 +98,9 @@ hpaXmlProtClass <- function(importedXml) {
 #' Extract tissue expression and download images
 #'
 #' Extract tissue expression information and url to download images from
-#' imported xml document resulted from \code{hpaXmlGet()}.
+#' imported xml document resulted from \code{hpaXmlGet()}.  It is important to
+#' note that the data that HPA provides on their website and through xml files
+#' are not one-to-one equivalents.
 #'
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
@@ -159,7 +164,9 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 
 #' Extract antibody information
 #'
-#' Extract information about the antibodies used for a specific protein.
+#' Extract information about the antibodies used for a specific protein.  It is
+#' important to note that the data that HPA provides on their website and
+#' through xml files are not one-to-one equivalents.
 #'
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.
@@ -198,7 +205,10 @@ hpaXmlAntibody <- function(importedXml) {
 #' Extract tissue expression details
 #'
 #' Extract tissue expression information for each sample and url to download
-#' images from imported xml document resulted from \code{hpaXmlGet()}.
+#' images from imported xml document resulted from \code{hpaXmlGet()}. It is
+#' important to note that the data that HPA provides on their website and
+#' through xml files are not one-to-one equivalents. For example, xml files
+#' usually only provide one of the two histology image for each patient.
 #'
 #' @param importedXml Input an xml document object resulted from a
 #'   \code{hpaXmlGet()} call.

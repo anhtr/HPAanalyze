@@ -16,7 +16,9 @@ This function returns a tibble of 4 columns, containing information
   releaseDate, releaseVersion, and RRID.
 }
 \description{
-Extract information about the antibodies used for a specific protein.
+Extract information about the antibodies used for a specific protein.  It is
+important to note that the data that HPA provides on their website and
+through xml files are not one-to-one equivalents.
 }
 \examples{
 \dontrun{

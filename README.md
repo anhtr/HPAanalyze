@@ -3,6 +3,14 @@
 ![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)
 
+In Bioconductor:
+![platform](https://bioconductor.org/shields/availability/release/HPAanalyze.svg)
+![build](https://bioconductor.org/shields/build/release/bioc/HPAanalyze.svg)
+![rank](https://bioconductor.org/shields/downloads/release/HPAanalyze.svg)
+![dependencies](https://bioconductor.org/shields/dependencies/release/HPAanalyze.svg)
+![in
+bioc](https://bioconductor.org/shields/years-in-bioc/HPAanalyze.svg)
+
 -   **Background:** The Human Protein Atlas program aims to map human
     proteins via multiple technologies including imaging, proteomics and
     transcriptomics.
@@ -43,11 +51,9 @@ expression in human cells and tissues, facilitating tissue-based
 diagnostis and research.
 
 Data from the HPA are freely available via proteinatlas.org, allowing
-scientists to access and incorporate the data into their research.
-Previously, the R package *hpar* has been created for fast and easy
-programmatic access of HPA data. Here, we introduce *HPAanalyze*, an R
-package aims to simplify exploratory data analysis from those data, as
-well as provide other complementary functionality to *hpar*.
+scientists to access and incorporate the data into their research. Here,
+we introduce *HPAanalyze*, an R package aims to simplify exploratory
+data analysis from those data.
 
 ## Overview
 
@@ -130,13 +136,9 @@ the options to automate the downloading process.
 -   Project home page: <https://github.com/anhtr/HPAanalyze>
 -   Operating system(s): All platforms where R is available, including
     Windows, Linux, OS X
--   Programming language: R
 -   Other requirements: R 3.5.0 or higher, and the R packages dplyr,
-    openxlsx, ggplot2, readr, tibble, xml2, reshape2, tidyr, magrittr,
-    stats, utils, hpar, cowplot
+    openxlsx, ggplot2, tibble, xml2, stats, utils, gridExtra
 -   License: GPL-3
--   Any restrictions to use by non-academics: Freely available to
-    everyone
 
 # Acknowledgements
 

@@ -21,7 +21,9 @@ This function return a list consists of a summary string, which is a
 }
 \description{
 Extract tissue expression information and url to download images from
-imported xml document resulted from \code{hpaXmlGet()}.
+imported xml document resulted from \code{hpaXmlGet()}.  It is important to
+note that the data that HPA provides on their website and through xml files
+are not one-to-one equivalents.
 }
 \examples{
 \dontrun{

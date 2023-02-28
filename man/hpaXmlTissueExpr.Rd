@@ -21,7 +21,10 @@ This function returns a list of tibbles, each for an antibody. Each
 }
 \description{
 Extract tissue expression information for each sample and url to download
-images from imported xml document resulted from \code{hpaXmlGet()}.
+images from imported xml document resulted from \code{hpaXmlGet()}. It is
+important to note that the data that HPA provides on their website and
+through xml files are not one-to-one equivalents. For example, xml files
+usually only provide one of the two histology image for each patient.
 }
 \examples{
 \dontrun{

@@ -15,7 +15,8 @@ This function return a tibble of 4 columns.
 }
 \description{
 Extract protein class information from imported xml document resulted from
-\code{hpaXmlGet()}.
+\code{hpaXmlGet()}.  It is important to note that the data that HPA provides
+on their website and through xml files are not one-to-one equivalents.
 }
 \examples{
 \dontrun{
