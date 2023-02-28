@@ -74,8 +74,9 @@ hpaDownload(downloadList = "histology", version = "latest")
 \item{version}{A string indicate which version to be downloaded. Possible
 value:
 \itemize{
-  \item \code{'latest'}: Download latest version. Require Internet
-  connection.
+  \item \code{'latest'}: Download latest version. Certain legacy datasets
+  will be downloaded with the highest version available. Require Internet
+  connection. This is the default option.
   \item \code{'example'} or \code{'built-in'}: Load the built-in histology
   dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
   connection.
@@ -91,9 +92,8 @@ recommended to only download the datasets you need, as some of them may be
 very big.
 }
 \examples{
-  downloadedData <- hpaDownload(downloadList='histology', version='example')
-  summary(downloadedData)
-
+  histologyData <- hpaDownload(downloadList='histology', version='example')
+  # tissueTranscriptData <- hpaDownload('RNA transcript tissue')
 
 }
 \seealso{
