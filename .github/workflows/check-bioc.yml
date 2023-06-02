@@ -22,9 +22,9 @@
 
 on:
   push:
-    branches: [main, master, dev]
+    branches: [devel]
   pull_request:
-    branches: [main, master, dev]
+    branches: [devel]
 
 name: Bioconductor Check
 
