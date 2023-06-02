@@ -321,7 +321,7 @@ hpaDownload <- function(downloadList = 'histology',
             subcellular_location =
                 'https://www.proteinatlas.org/download/subcellular_location.tsv.zip',
             rna_tissue_consensus =
-                'https://www.proteinatlas.org/download/subcellular_location.tsv.zip',
+                'https://www.proteinatlas.org/download/rna_tissue_consensus.tsv.zip',
             rna_tissue_hpa =
                 'https://www.proteinatlas.org/download/rna_tissue_hpa.tsv.zip',
             rna_tissue_gtex =

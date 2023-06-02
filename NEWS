@@ -1,6 +1,12 @@
+                       Changes in version 1.19
+* Changes in version 1.19.0
+    + Starting devel for Bioconductor 3.18
+* Changes in version 1.19.1
+    + Bug fix: Correct url for rna_tissue_consensus
+
                        Changes in version 1.17
 * Changes in version 1.17.0
-    + Starting devel for Bioconductor 3.18
+    + Starting devel for Bioconductor 3.17
 
 * Changes in version 1.17.1
     + Update built-in data to version 22.0.
