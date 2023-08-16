@@ -1,0 +1,35 @@
+version,version_number,table,link
+23,23,Normal tissue,https://v23.proteinatlas.org/download/normal_tissue.tsv.zip
+23,23,Pathology,https://v23.proteinatlas.org/download/pathology.tsv.zip
+23,23,Subcellular location ,https://v23.proteinatlas.org/download/subcellular_location.tsv.zip
+23,23,RNA consensus tissue,https://v23.proteinatlas.org/download/rna_tissue_consensus.tsv.zip
+23,23,RNA HPA tissue,https://v23.proteinatlas.org/download/rna_tissue_hpa.tsv.zip
+23,23,RNA HPA brain,https://v23.proteinatlas.org/download/rna_brain_hpa.tsv.zip
+23,23,RNA HPA PFC brain,https://v23.proteinatlas.org/download/rna_pfc_brain_hpa.tsv.zip
+23,23,RNA GTEx tissue,https://v23.proteinatlas.org/download/rna_tissue_gtex.tsv.zip
+23,23,RNA FANTOM tissue,https://v23.proteinatlas.org/download/rna_tissue_fantom.tsv.zip
+23,23,RNA single cell type,https://v23.proteinatlas.org/download/rna_single_cell_type.tsv.zip
+23,23,RNA single cell type tissue cluster,https://v23.proteinatlas.org/download/rna_single_cell_type_tissue.tsv.zip
+23,23,RNA single cell type tissue cluster description,https://v23.proteinatlas.org/download/rna_single_cell_cluster_description.tsv.zip
+23,23,RNA single cell read count,https://v23.proteinatlas.org/download/rna_single_cell_read_count.zip
+23,23,RNA GTEx brain region,https://v23.proteinatlas.org/download/rna_brain_gtex.tsv.zip
+23,23,RNA FANTOM brain region,https://v23.proteinatlas.org/download/rna_brain_fantom.tsv.zip
+23,23,RNA pig brain region,https://v23.proteinatlas.org/download/rna_pig_brain_hpa.tsv.zip
+23,23,RNA pig brain subregion sample,https://v23.proteinatlas.org/download/rna_pig_brain_sample_hpa.tsv.zip
+23,23,RNA mouse brain region,https://v23.proteinatlas.org/download/rna_mouse_brain_hpa.tsv.zip
+23,23,RNA mouse brain subregion sample,https://v23.proteinatlas.org/download/rna_mouse_brain_sample_hpa.tsv.zip
+23,23,RNA Allen mouse brain region,https://v23.proteinatlas.org/download/rna_mouse_brain_allen.tsv.zip
+23,23,RNA HPA immune cell,https://v23.proteinatlas.org/download/rna_immune_cell.tsv.zip
+23,23,RNA HPA immune cell sample,https://v23.proteinatlas.org/download/rna_immune_cell_sample.tsv.zip
+23,23,RNA Monaco immune cell,https://v23.proteinatlas.org/download/rna_immune_cell_monaco.tsv.zip
+23,23,RNA Schmiedel immune cell,https://v23.proteinatlas.org/download/rna_immune_cell_schmiedel.tsv.zip
+23,23,RNA HPA cell line cancer,https://v23.proteinatlas.org/download/rna_celline_cancer.tsv.zip
+23,23,RNA HPA cell line,https://v23.proteinatlas.org/download/rna_celline.tsv.zip
+23,23,RNA HPA cell line description,https://v23.proteinatlas.org/download/rna_celline_description.tsv.zip
+23,23,RNA TCGA cancer sample,https://v23.proteinatlas.org/download/rna_cancer_sample.tsv.zip
+23,23,RNA isoform tissue,https://v23.proteinatlas.org/download/transcript_rna_tissue.tsv.zip
+23,23,RNA isoform brain,https://v23.proteinatlas.org/download/transcript_rna_brain.tsv.zip
+23,23,RNA isoform gtex retina,https://v23.proteinatlas.org/download/transcript_rna_gtexretina.tsv.zip
+23,23,RNA isoform immune cells,https://v23.proteinatlas.org/download/transcript_rna_immunecells.tsv.zip
+23,23,RNA isoform pig brain,https://v23.proteinatlas.org/download/transcript_rna_pigbrain.tsv.zip
+23,23,RNA isoform mouse brain,https://v23.proteinatlas.org/download/transcript_rna_mousebrain.tsv.zip
