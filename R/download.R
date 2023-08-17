@@ -173,7 +173,7 @@ hpaDownload <- function(downloadList = 'histology',
         
         loadedData <- hpa_histology_data
         
-    } else if (version == "latest") {
+    } else {
         ## Download the requested datasets if version is "latest"
         
         for (i in seq_along(downloadDatasets$link)) {
