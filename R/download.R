@@ -171,16 +171,7 @@ hpaDownload <- function(downloadList = 'histology',
             'Only the followings are example/built-in datasets: \n - Normal tissue \n - Pathology \n - Subcellular location \nOther datasets will not be loaded'
         )
         
-        downloadDatasets <- filter(
-            downloadDatasets,
-            table %in% c('Normal tissue',
-                         'Pathology',
-                         'Subcellular location')
-        )
-        
-        for (i in names(downloadDatasets$link)) {
-            loadedData[[i]] <- hpa_histology_data[[i]]
-        }
+        loadedData <- hpa_histology_data
         
     } else if (version == "latest") {
         ## Download the requested datasets if version is "latest"
