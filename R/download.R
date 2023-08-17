@@ -221,7 +221,7 @@ hpaDownload <- function(downloadList = 'histology',
         
         names(loadedData) <-
             downloadDatasets$link %>%
-            gsub('.tsv.zip|https://www.proteinatlas.org/download/|https://v21.proteinatlas.org/download/',
+            gsub('.tsv.zip|https://.*.proteinatlas.org/download/',
                  '',
                  .)
     }
