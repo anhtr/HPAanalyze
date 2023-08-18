@@ -9,42 +9,15 @@
 #' very big.
 #'
 #' @param downloadList A vector or string indicate which datasets to download.
-#'   Possible value:
+#'   Common values:
 #'   \itemize{
 #'     \item \code{'Normal tissue'}
 #'     \item \code{'Pathology'}
 #'     \item \code{'Subcellular location'}
-#'     \item \code{'RNA consensus tissue'}
-#'     \item \code{'RNA HPA tissue'}
-#'     \item \code{'RNA GTEx tissue'}
-#'     \item \code{'RNA FANTOM tissue'}
-#'     \item \code{'RNA single cell type'}
-#'     \item \code{'RNA single cell type tissue cluster'}
-#'     \item \code{'RNA GTEx brain region'}
-#'     \item \code{'RNA FANTOM brain region'}
-#'     \item \code{'RNA pig brain region'}
-#'     \item \code{'RNA pig brain subregion sample'}
-#'     \item \code{'RNA mouse brain region'}
-#'     \item \code{'RNA mouse brain subregion sample'}
-#'     \item \code{'RNA Allen mouse brain region'}
-#'     \item \code{'RNA HPA immune cell'}
-#'     \item \code{'RNA HPA immune cell sample'}
-#'     \item \code{'RNA Monaco immune cell'}
-#'     \item \code{'RNA Schmiedel immune cell'}
-#'     \item \code{'RNA HPA blood cell'} (version 21.1)
-#'     \item \code{'RNA HPA blood cell sample'} (version 21.1)
-#'     \item \code{'RNA Monaco blood cell'} (version 21.1)
-#'     \item \code{'RNA Schmiedel blood cell'} (version 21.1)
-#'     \item \code{'RNA HPA cell line cancer'}
-#'     \item \code{'RNA HPA cell line'}
-#'     \item \code{'RNA TCGA cancer sample'}
-#'     \item \code{'RNA transcript tissue'}
-#'     \item \code{'RNA transcript GTEx retina'}
-#'     \item \code{'RNA transcript immune cells'}
-#'     \item \code{'RNA transcript cell line'} (version 21.1)
-#'     \item \code{'RNA transcript pig brain'}
-#'     \item \code{'RNA transcript mouse brain'}
 #'     }
+#'   For the full list of possible values for a specific version, set
+#'   downloadList as NULL: \code{hpaDownload(downloadList = NULL, version =
+#'   <version>)}
 #'
 #'   You can also use the following shortcuts:
 #'   \itemize{
@@ -103,6 +76,7 @@
 
 hpaDownload <- function(downloadList = 'histology',
                         version = 'latest') {
+    
     ## set longer time out
     op <- options(timeout = 10000)
     on.exit(options(op))
@@ -114,7 +88,7 @@ hpaDownload <- function(downloadList = 'histology',
         return(x)
     }
     
-    downloadList <- downloadList %>%
+    downloadListClean <- downloadList %>%
         replace_shortcut('all', hpa_download_list$table) %>%
         replace_shortcut('histology', 
                          c('Normal tissue',
@@ -159,7 +133,7 @@ hpaDownload <- function(downloadList = 'histology',
     downloadDatasets <-
         hpa_download_list %>%
         filter(version == {{version}}) %>%
-        filter(table %in% downloadList)
+        filter(table %in% downloadListClean)
     
     #initiate the list of processed data to be returned
     loadedData <- list()
@@ -224,6 +198,13 @@ hpaDownload <- function(downloadList = 'histology',
             gsub('.tsv.zip|https://.*.proteinatlas.org/download/',
                  '',
                  .)
+    }
+    
+    ## list table if downloadList is NULL
+    if(is.null(downloadList)) {
+        loadedData <- hpa_download_list %>%
+            filter(version == {{version}}) %>%
+            pull(table)
     }
     
     return(loadedData)
