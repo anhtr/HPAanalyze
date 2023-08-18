@@ -56,6 +56,10 @@
 #'     connection.
 #'   }
 #'
+#' @param tidyNames TRUE or FALSE. Indicate if 'Normal tissue', 'Pathology',
+#'   'Subcellular location' should be renamed with tidy column names. Default is
+#'   TRUE for backward compatibility reasons.
+#'
 #' @family downloadable datasets functions
 #'
 #' @return This function will return a list of tibbles corresponding to
@@ -75,7 +79,8 @@
 #' 
 
 hpaDownload <- function(downloadList = 'histology',
-                        version = 'latest') {
+                        version = 'latest',
+                        tidyNames = TRUE) {
     
     ## set longer time out
     op <- options(timeout = 10000)
@@ -200,13 +205,35 @@ hpaDownload <- function(downloadList = 'histology',
                  .)
     }
     
+    ## rename histology dataframes with tidy colnames
+    if(isTRUE(tidyNames)) {
+        if(!is.null(loadedData$normal_tissue)) {
+            colnames(loadedData$normal_tissue) <-
+                c("ensembl", "gene", "tissue", "cell_type", "level", "reliability")
+        }
+        if(!is.null(loadedData$pathology)) {
+            colnames(loadedData$pathology) <-
+                c("ensembl", "gene", "cancer", "high", "medium", "low",
+                  "not_detected", "prognostic_favorable", "unprognostic_favorable",
+                  "prognostic_unfavorable", "unprognostic_unfavorable")
+        }
+        if(!is.null(loadedData$subcellular_location)) {
+            colnames(loadedData$subcellular_location) <-
+                c("ensembl", "gene", "reliability", "main_location", 
+                  "additional_location", "extracellular_location", "enhanced", 
+                  "supported", "approved", "uncertain", "single_cell_var_intensity",
+                  "single_cell_var_spatial","cell_cycle_dependency", "go_id")
+        }
+    }
+    
+    
     ## list table if downloadList is NULL
     if(is.null(downloadList)) {
         loadedData <- hpa_download_list %>%
             filter(version == {{version}}) %>%
             pull(table)
     }
-    
+
     return(loadedData)
 }
 
