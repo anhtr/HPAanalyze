@@ -65,9 +65,9 @@
 #'     \item \code{'rna blood cell'}: same as \code{c('RNA HPA blood
 #'     cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
 #'     Schmiedel blood cell')}
-#'     \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA 
-#'     transcript GTEx retina', 'RNA transcript immune cells', 'RNA
-#'     transcript cell line', 'RNA transcript pig brain', 'RNA transcript mouse
+#'     \item \code{'isoform'}: same as \code{c('RNA isoform tissue', 'RNA
+#'     isoform GTEx retina', 'RNA isoform immune cells', 'RNA
+#'     isoform cell line', 'RNA isoform pig brain', 'RNA isoform mouse
 #'     brain')}
 #'   }
 #'   See \url{https://www.proteinatlas.org/about/download} for more information.
@@ -117,7 +117,7 @@ hpaDownload <- function(downloadList = 'histology',
     downloadList <- downloadList %>%
         replace_shortcut('all', hpa_download_list$table) %>%
         replace_shortcut('histology', 
-                         c('Normal tissue', 
+                         c('Normal tissue',
                            'Pathology', 
                            'Subcellular location')) %>%
         replace_shortcut('rna tissue', 
@@ -147,12 +147,12 @@ hpaDownload <- function(downloadList = 'histology',
                            'RNA Monaco blood cell', 
                            'RNA Schmiedel blood cell')) %>%
         replace_shortcut('isoform', 
-                         c('RNA transcript tissue', 
-                           'RNA transcript GTEx retina', 
-                           'RNA transcript immune cells', 
-                           'RNA transcript cell line', 
-                           'RNA transcript pig brain', 
-                           'RNA transcript mouse brain'))
+                         c('RNA isoform tissue', 
+                           'RNA isoform GTEx retina', 
+                           'RNA isoform immune cells', 
+                           'RNA isoform cell line', 
+                           'RNA isoform pig brain', 
+                           'RNA isoform mouse brain'))
     
 
     # filter the datasets to download
@@ -174,8 +174,8 @@ hpaDownload <- function(downloadList = 'histology',
         loadedData <- hpa_histology_data
         
     } else {
-        ## Download the requested datasets if version is "latest"
         
+        ## download for any version that's not example/built-in
         for (i in seq_along(downloadDatasets$link)) {
             temp <- tempfile()
             download.file(url = downloadDatasets$link[[i]],
@@ -190,26 +190,26 @@ hpaDownload <- function(downloadList = 'histology',
             )
             unlink(temp)
             
-            if (downloadDatasets$table[[i]] %in% c(
-                'RNA transcript tissue',
-                'RNA transcript GTEx retina',
-                'RNA transcript immune cells',
-                'RNA transcript cell line',
-                'RNA transcript pig brain',
-                'RNA transcript mouse brain'
-            )) {
-                loadedData[[i]] <-
-                    stats::reshape(
-                        loadedData[[i]],
-                        direction = "long",
-                        varying = list(3:ncol(loadedData[[i]])),
-                        v.names = "tpm",
-                        timevar = "sample",
-                        times = c(colnames(loadedData[[i]][, 3:ncol(loadedData[[i]])]))
-                    ) %>%
-                    subset(select = -id)
-                
-            }
+            # if (downloadDatasets$table[[i]] %in% c(
+            #     'RNA transcript tissue',
+            #     'RNA transcript GTEx retina',
+            #     'RNA transcript immune cells',
+            #     'RNA transcript cell line',
+            #     'RNA transcript pig brain',
+            #     'RNA transcript mouse brain'
+            # )) {
+            #     loadedData[[i]] <-
+            #         stats::reshape(
+            #             loadedData[[i]],
+            #             direction = "long",
+            #             varying = list(3:ncol(loadedData[[i]])),
+            #             v.names = "tpm",
+            #             timevar = "sample",
+            #             times = c(colnames(loadedData[[i]][, 3:ncol(loadedData[[i]])]))
+            #         ) %>%
+            #         subset(select = -id)
+            #     
+            # }
             
             ## assign tidy colnames
             # colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
