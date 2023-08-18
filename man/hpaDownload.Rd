@@ -4,46 +4,19 @@
 \alias{hpaDownload}
 \title{Download datasets}
 \usage{
-hpaDownload(downloadList = "histology", version = "latest")
+hpaDownload(downloadList = "histology", version = "latest", tidyNames = TRUE)
 }
 \arguments{
 \item{downloadList}{A vector or string indicate which datasets to download.
-  Possible value:
+  Common values:
   \itemize{
     \item \code{'Normal tissue'}
     \item \code{'Pathology'}
     \item \code{'Subcellular location'}
-    \item \code{'RNA consensus tissue'}
-    \item \code{'RNA HPA tissue'}
-    \item \code{'RNA GTEx tissue'}
-    \item \code{'RNA FANTOM tissue'}
-    \item \code{'RNA single cell type'}
-    \item \code{'RNA single cell type tissue cluster'}
-    \item \code{'RNA GTEx brain region'}
-    \item \code{'RNA FANTOM brain region'}
-    \item \code{'RNA pig brain region'}
-    \item \code{'RNA pig brain subregion sample'}
-    \item \code{'RNA mouse brain region'}
-    \item \code{'RNA mouse brain subregion sample'}
-    \item \code{'RNA Allen mouse brain region'}
-    \item \code{'RNA HPA immune cell'}
-    \item \code{'RNA HPA immune cell sample'}
-    \item \code{'RNA Monaco immune cell'}
-    \item \code{'RNA Schmiedel immune cell'}
-    \item \code{'RNA HPA blood cell'} (version 21.1)
-    \item \code{'RNA HPA blood cell sample'} (version 21.1)
-    \item \code{'RNA Monaco blood cell'} (version 21.1)
-    \item \code{'RNA Schmiedel blood cell'} (version 21.1)
-    \item \code{'RNA HPA cell line cancer'}
-    \item \code{'RNA HPA cell line'}
-    \item \code{'RNA TCGA cancer sample'}
-    \item \code{'RNA transcript tissue'}
-    \item \code{'RNA transcript GTEx retina'}
-    \item \code{'RNA transcript immune cells'}
-    \item \code{'RNA transcript cell line'} (version 21.1)
-    \item \code{'RNA transcript pig brain'}
-    \item \code{'RNA transcript mouse brain'}
     }
+  For the full list of possible values for a specific version, set
+  downloadList as NULL: \code{hpaDownload(downloadList = NULL, version =
+  <version>)}
 
   You can also use the following shortcuts:
   \itemize{
@@ -64,9 +37,9 @@ hpaDownload(downloadList = "histology", version = "latest")
     \item \code{'rna blood cell'}: same as \code{c('RNA HPA blood
     cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
     Schmiedel blood cell')}
-    \item \code{'isoform'}: same as \code{c('RNA transcript tissue', 'RNA 
-    transcript GTEx retina', 'RNA transcript immune cells', 'RNA
-    transcript cell line', 'RNA transcript pig brain', 'RNA transcript mouse
+    \item \code{'isoform'}: same as \code{c('RNA isoform tissue', 'RNA
+    isoform GTEx retina', 'RNA isoform immune cells', 'RNA
+    isoform cell line', 'RNA isoform pig brain', 'RNA isoform mouse
     brain')}
   }
   See \url{https://www.proteinatlas.org/about/download} for more information.}
@@ -81,6 +54,10 @@ value:
   dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
   connection.
 }}
+
+\item{tidyNames}{TRUE or FALSE. Indicate if 'Normal tissue', 'Pathology',
+'Subcellular location' should be renamed with tidy column names. Default is
+TRUE for backward compatibility reasons.}
 }
 \value{
 This function will return a list of tibbles corresponding to

@@ -1,10 +1,11 @@
 library(HPAanalyze)
 hpa_histology_data <- hpaDownload(downloadList = "histology")
 
-hpa_histology_data$metadata <- list(HPAversion = "22.0",
-                                    Ensemblversion = "103.38",
+hpa_histology_data$metadata <- list(HPAversion = "23.0",
+                                    Ensemblversion = "109",
                                     date = Sys.time(),
-                                    packageVersion = "1.16.0")
+                                    packageVersion = "1.19.1")
 
 usethis::use_data(hpa_histology_data, internal = FALSE, overwrite = TRUE)
+
 
