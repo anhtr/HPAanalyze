@@ -80,9 +80,9 @@ v24,24,Cell line - RNA expression - comparison,https://v24.proteinatlas.org/down
 v24,24,Cell line - RNA expression - RNA cell line analysis,https://v24.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
 v24,24,Cell line - RNA expression - RNA gene clustering,https://v24.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
 v24,24,Interaction - Protein-protein interaction,https://v24.proteinatlas.org/download/tsv/interaction_consensus.tsv.zip
-latest,24,Normal tissue,https://v24.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
-latest,24,Pathology,https://v24.proteinatlas.org/download/tsv/cancer_data.tsv.zip
-latest,24,Subcellular location ,https://v24.proteinatlas.org/download/tsv/subcellular_location.tsv.zip
+latest,24,normal_tissue,https://v24.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
+latest,24,pathology,https://v24.proteinatlas.org/download/tsv/cancer_data.tsv.zip
+latest,24,subcellular_location ,https://v24.proteinatlas.org/download/tsv/subcellular_location.tsv.zip
 latest,24,Tissue - Protein expression (IHC),https://v24.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
 latest,24,Tissue - RNA expression (consensus),https://v24.proteinatlas.org/download/tsv/rna_tissue_consensus.tsv.zip
 latest,24,Tissue - RNA expression (HPA),https://v24.proteinatlas.org/download/tsv/rna_tissue_hpa.tsv.zip

@@ -11,9 +11,9 @@
 #' @param downloadList A vector or string indicate which datasets to download.
 #'   Common values:
 #'   \itemize{
-#'     \item \code{'Normal tissue'}
-#'     \item \code{'Pathology'}
-#'     \item \code{'Subcellular location'}
+#'     \item \code{'normal_tissue'}
+#'     \item \code{'pathology'}
+#'     \item \code{'subcellular_location'}
 #'     }
 #'   For the full list of possible values for a specific version, set
 #'   downloadList as NULL: \code{hpaDownload(downloadList = NULL, version =
@@ -22,26 +22,8 @@
 #'   You can also use the following shortcuts:
 #'   \itemize{
 #'     \item \code{'all'}: download everything
-#'     \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology',
-#'     'Subcellular location')}
-#'     \item \code{'rna tissue'}: same as \code{c('RNA consensus tissue', 'RNA
-#'     HPA tissue', 'RNA GTEx tissue', 'RNA FANTOM tissue')}
-#'     \item \code{'rna cell type'}: same as \code{c('RNA single cell
-#'     type', 'RNA single cell type tissue cluster')}
-#'     \item \code{'rna brain region'}: same as \code{c('RNA GTEx brain region',
-#'     'RNA FANTOM brain region', 'RNA pig brain region', 'RNA pig brain
-#'     subregion sample', 'RNA mouse brain region', 'RNA mouse brain subregion
-#'     sample', 'RNA Allen mouse brain region')}
-#'     \item \code{'rna immune cell'}: same as \code{c('RNA HPA immune
-#'     cell', 'RNA HPA immune cell sample', 'RNA Monaco immune cell', 'RNA
-#'     Schmiedel immune cell')}
-#'     \item \code{'rna blood cell'}: same as \code{c('RNA HPA blood
-#'     cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
-#'     Schmiedel blood cell')}
-#'     \item \code{'isoform'}: same as \code{c('RNA isoform tissue', 'RNA
-#'     isoform GTEx retina', 'RNA isoform immune cells', 'RNA
-#'     isoform cell line', 'RNA isoform pig brain', 'RNA isoform mouse
-#'     brain')}
+#'     \item \code{'histology'}: same as \code{c('normal_tissue', 'pathology',
+#'     'subcellular_location')}
 #'   }
 #'   See \url{https://www.proteinatlas.org/about/download} for more information.
 #'
@@ -85,7 +67,7 @@ hpaDownload <- function(downloadList = 'histology',
     ## set longer time out
     op <- options(timeout = 10000)
     on.exit(options(op))
-
+    
     ## generate a list of item to download
     replace_shortcut <- function(x, shortcut, with) {
         x <- rep(x, 1 + (length(with) - 1)*(x == shortcut))
@@ -96,44 +78,11 @@ hpaDownload <- function(downloadList = 'histology',
     downloadListClean <- downloadList %>%
         replace_shortcut('all', hpa_download_list$table) %>%
         replace_shortcut('histology', 
-                         c('Normal tissue',
-                           'Pathology', 
-                           'Subcellular location')) %>%
-        replace_shortcut('rna tissue', 
-                         c('RNA consensus tissue', 
-                           'RNA HPA tissue', 
-                           'RNA GTEx tissue', 
-                           'RNA FANTOM tissue')) %>%
-        replace_shortcut('rna cell type', 
-                         c('RNA single cell type', 
-                           'RNA single cell type tissue cluster')) %>%
-        replace_shortcut('rna brain region', 
-                         c('RNA GTEx brain region',
-                           'RNA FANTOM brain region', 
-                           'RNA pig brain region', 
-                           'RNA pig brain subregion sample', 
-                           'RNA mouse brain region', 
-                           'RNA mouse brain subregion sample', 
-                           'RNA Allen mouse brain region')) %>%
-        replace_shortcut('rna immune cell', 
-                         c('RNA HPA immunecell', 
-                           'RNA HPA immune cell sample', 
-                           'RNA Monaco immune cell', 
-                           'RNA Schmiedel immune cell')) %>%
-        replace_shortcut('rna blood cell', 
-                         c('RNA HPA blood cell', 
-                           'RNA HPA blood cell sample', 
-                           'RNA Monaco blood cell', 
-                           'RNA Schmiedel blood cell')) %>%
-        replace_shortcut('isoform', 
-                         c('RNA isoform tissue', 
-                           'RNA isoform GTEx retina', 
-                           'RNA isoform immune cells', 
-                           'RNA isoform cell line', 
-                           'RNA isoform pig brain', 
-                           'RNA isoform mouse brain'))
+                         c('normal_tissue',
+                           'pathology', 
+                           'subcellular_location'))
     
-
+    
     # filter the datasets to download
     downloadDatasets <-
         hpa_download_list %>%
@@ -168,61 +117,59 @@ hpaDownload <- function(downloadList = 'histology',
                 na.strings = c("", " ")
             )
             unlink(temp)
-            
-            # if (downloadDatasets$table[[i]] %in% c(
-            #     'RNA transcript tissue',
-            #     'RNA transcript GTEx retina',
-            #     'RNA transcript immune cells',
-            #     'RNA transcript cell line',
-            #     'RNA transcript pig brain',
-            #     'RNA transcript mouse brain'
-            # )) {
-            #     loadedData[[i]] <-
-            #         stats::reshape(
-            #             loadedData[[i]],
-            #             direction = "long",
-            #             varying = list(3:ncol(loadedData[[i]])),
-            #             v.names = "tpm",
-            #             timevar = "sample",
-            #             times = c(colnames(loadedData[[i]][, 3:ncol(loadedData[[i]])]))
-            #         ) %>%
-            #         subset(select = -id)
-            #     
-            # }
-            
-            ## assign tidy colnames
-            # colnames(loadedData[[i]]) <- downloadDatasets$tidycols[[i]]
-            
         }
         
         ## convert to tibbles
         loadedData <- lapply(loadedData, as_tibble)
         
-        names(loadedData) <-
-            downloadDatasets$link %>%
-            gsub('.tsv.zip|https://.*.proteinatlas.org/download/',
-                 '',
-                 .)
-    }
-    
-    ## rename histology dataframes with tidy colnames
-    if(isTRUE(tidyNames)) {
+        names(loadedData) <- downloadDatasets$table
+        
+        
+        
+        ## rename histology dataframes with tidy colnames
         if(!is.null(loadedData$normal_tissue)) {
-            colnames(loadedData$normal_tissue) <-
-                c("ensembl", "gene", "tissue", "cell_type", "level", "reliability")
+            loadedData$normal_tissue <- loadedData$normal_tissue |>
+                select(
+                    ensembl = Gene,
+                    gene = `Gene name`,
+                    tissue = Tissue,
+                    cell_type = `Cell type`,
+                    level = Level,
+                    reliability = Reliability
+                )
         }
+        
         if(!is.null(loadedData$pathology)) {
-            colnames(loadedData$pathology) <-
-                c("ensembl", "gene", "cancer", "high", "medium", "low",
-                  "not_detected", "prognostic_favorable", "unprognostic_favorable",
-                  "prognostic_unfavorable", "unprognostic_unfavorable")
+            loadedData$pathology <- loadedData$pathology |>
+                select(
+                    ensembl = Gene,
+                    gene = `Gene name`,
+                    cancer = Cancer,
+                    high = High,
+                    medium = Medium,
+                    low = Low,
+                    not_detected = `Not detected`
+                )
         }
+        
         if(!is.null(loadedData$subcellular_location)) {
-            colnames(loadedData$subcellular_location) <-
-                c("ensembl", "gene", "reliability", "main_location", 
-                  "additional_location", "extracellular_location", "enhanced", 
-                  "supported", "approved", "uncertain", "single_cell_var_intensity",
-                  "single_cell_var_spatial","cell_cycle_dependency", "go_id")
+            loadedData$subcellular_location <- loadedData$subcellular_location |>
+                select(
+                    ensembl = Gene,
+                    gene = `Gene name`,
+                    reliability = Reliability,
+                    main_location = `Main location`,
+                    additional_location = `Additional location`,
+                    extracellular_location = `Extracellular location`,
+                    enhanced = Enhanced,
+                    supported = Supported,
+                    approved = Approved,
+                    uncertain = Uncertain,
+                    single_cell_var_intensity = `Single-cell variation intensity`,
+                    single_cell_var_spatial = `Single-cell variation spatial`,
+                    cell_cycle_dependency = `Cell cycle dependency`,
+                    go_id = `GO id`
+                )
         }
     }
     
@@ -233,7 +180,7 @@ hpaDownload <- function(downloadList = 'histology',
             filter(version == {{version}}) %>%
             pull(table)
     }
-
+    
     return(loadedData)
 }
 
