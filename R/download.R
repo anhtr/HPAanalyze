@@ -21,7 +21,7 @@
 #'
 #'   You can also use the following shortcuts:
 #'   \itemize{
-#'     \item \code{'all'}: download everything
+#'     \item \code{'all'}: download everything (not recommended!!!)
 #'     \item \code{'histology'}: same as \code{c('normal_tissue', 'pathology',
 #'     'subcellular_location')}
 #'   }
@@ -37,10 +37,6 @@
 #'     dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
 #'     connection.
 #'   }
-#'
-#' @param tidyNames TRUE or FALSE. Indicate if 'Normal tissue', 'Pathology',
-#'   'Subcellular location' should be renamed with tidy column names. Default is
-#'   TRUE for backward compatibility reasons.
 #'
 #' @family downloadable datasets functions
 #'
@@ -61,8 +57,7 @@
 #' 
 
 hpaDownload <- function(downloadList = 'histology',
-                        version = 'latest',
-                        tidyNames = TRUE) {
+                        version = 'latest') {
     
     ## set longer time out
     op <- options(timeout = 10000)
