@@ -4,15 +4,15 @@
 \alias{hpaDownload}
 \title{Download datasets}
 \usage{
-hpaDownload(downloadList = "histology", version = "latest", tidyNames = TRUE)
+hpaDownload(downloadList = "histology", version = "latest")
 }
 \arguments{
 \item{downloadList}{A vector or string indicate which datasets to download.
   Common values:
   \itemize{
-    \item \code{'Normal tissue'}
-    \item \code{'Pathology'}
-    \item \code{'Subcellular location'}
+    \item \code{'normal_tissue'}
+    \item \code{'pathology'}
+    \item \code{'subcellular_location'}
     }
   For the full list of possible values for a specific version, set
   downloadList as NULL: \code{hpaDownload(downloadList = NULL, version =
@@ -20,27 +20,9 @@ hpaDownload(downloadList = "histology", version = "latest", tidyNames = TRUE)
 
   You can also use the following shortcuts:
   \itemize{
-    \item \code{'all'}: download everything
-    \item \code{'histology'}: same as \code{c('Normal tissue', 'Pathology',
-    'Subcellular location')}
-    \item \code{'rna tissue'}: same as \code{c('RNA consensus tissue', 'RNA
-    HPA tissue', 'RNA GTEx tissue', 'RNA FANTOM tissue')}
-    \item \code{'rna cell type'}: same as \code{c('RNA single cell
-    type', 'RNA single cell type tissue cluster')}
-    \item \code{'rna brain region'}: same as \code{c('RNA GTEx brain region',
-    'RNA FANTOM brain region', 'RNA pig brain region', 'RNA pig brain
-    subregion sample', 'RNA mouse brain region', 'RNA mouse brain subregion
-    sample', 'RNA Allen mouse brain region')}
-    \item \code{'rna immune cell'}: same as \code{c('RNA HPA immune
-    cell', 'RNA HPA immune cell sample', 'RNA Monaco immune cell', 'RNA
-    Schmiedel immune cell')}
-    \item \code{'rna blood cell'}: same as \code{c('RNA HPA blood
-    cell', 'RNA HPA blood cell sample', 'RNA Monaco blood cell', 'RNA
-    Schmiedel blood cell')}
-    \item \code{'isoform'}: same as \code{c('RNA isoform tissue', 'RNA
-    isoform GTEx retina', 'RNA isoform immune cells', 'RNA
-    isoform cell line', 'RNA isoform pig brain', 'RNA isoform mouse
-    brain')}
+    \item \code{'all'}: download everything (not recommended!!!)
+    \item \code{'histology'}: same as \code{c('normal_tissue', 'pathology',
+    'subcellular_location')}
   }
   See \url{https://www.proteinatlas.org/about/download} for more information.}
 
@@ -54,10 +36,6 @@ value:
   dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
   connection.
 }}
-
-\item{tidyNames}{TRUE or FALSE. Indicate if 'Normal tissue', 'Pathology',
-'Subcellular location' should be renamed with tidy column names. Default is
-TRUE for backward compatibility reasons.}
 }
 \value{
 This function will return a list of tibbles corresponding to

@@ -20,11 +20,11 @@
 #'   HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 #'   converted to HGNC gene symbols.
 #' @param targetTissue Vector of strings of normal tissue names. By default it
-#'   is set to \code{"breast"}.
+#'   is set to the first available.
 #' @param targetCellType Vector of strings of normal cell types. By default
 #'   inludes all available cell types in the target tissues.
 #' @param targetCancer Vector of strings of normal tissues. By default it
-#'   is set to \code{"breast cancer"}.
+#'   is set to the first available.
 #' @param visType Vector of strings indicating which plots will be generated.
 #'   Currently available values are \code{"all"}, \code{"Tissue"},
 #'   \code{"Patho"}, \code{"Cancer"}, \code{"Subcell"}.
@@ -87,8 +87,8 @@ hpaVis <- function(data=NULL,
     # Make tissue plot
     if ('Tissue' %in% visType) {
         if (is.null(targetTissue)) {
-            message('targetTissue variable not specified, default to breast.')
-            targetTissue <- 'breast'
+            message('targetTissue variable not specified, default to first available.')
+            targetTissue <- data$normal_tissue$tissue[1]
             infoDisp <- TRUE
         }
         
@@ -109,8 +109,8 @@ hpaVis <- function(data=NULL,
     # Make cancer plot
     if ('Patho' %in% visType | 'Cancer' %in% visType) {
         if (is.null(targetCancer)) {
-            message('targetCancer variable not specified, default to breast cancer')
-            targetCancer <- 'breast cancer'
+            message('targetCancer variable not specified, default to first available')
+            targetCancer <- data$pathology$cancer[1]
             infoDisp <- TRUE
         }
         
