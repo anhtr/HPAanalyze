@@ -4,7 +4,7 @@ author:
 - name: Anh N. Tran
   affiliation: DataGrata LLC
   email: trannhatanh89@gmail.com
-date: 4/2/2021
+date: 5/27/2025
 output: 
     BiocStyle::html_document:
         toc: true
@@ -133,60 +133,23 @@ The `subcellular_location` dataset contains information about subcellular locali
 tibble::glimpse(downloadedData$subcellular_location, give.attr=FALSE)
 ```
 
-### The RNA datasets
+### Other datasets
 
-HPA provide a large number of RNA expression datasets. More details can be find at https://www.proteinatlas.org/about/download. To see how to download these datasets, please see the help page for `hpaDownload`:
+HPA provide a large number of other datasets. More details can be find at https://www.proteinatlas.org/about/download. To see how to download these datasets, please see the help page for `hpaDownload`:
 
 ```{r rna-help, eval = FALSE}
 ?hpaDownload
 ```
 
-There are shortcuts to download multiple RNA datasets, for example:
-
-```{r rna1, warning=FALSE, message=FALSE, eval = FALSE}
-downloadedData <- hpaDownload(downloadList='rna tissue')
-
-tibble::glimpse(downloadedData, give.attr=FALSE)
-
-#> List of 4
-#>  $ rna_tissue_consensus: tibble [1,180,464 x 4] (S3: tbl_df/tbl/data.frame)
-#>   ..$ ensembl: chr [1:1180464] "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" ...
-#>   ..$ gene   : chr [1:1180464] "TSPAN6" "TSPAN6" "TSPAN6" "TSPAN6" ...
-#>   ..$ tissue : chr [1:1180464] "adipose tissue" "adrenal gland" "amygdala" "appendix" ...
-#>   ..$ nx     : chr [1:1180464] "27.0" "9.8" "7.0" "4.4" ...
-#>  $ rna_tissue_hpa      : tibble [845,810 x 6] (S3: tbl_df/tbl/data.frame)
-#>   ..$ ensembl: chr [1:845810] "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" ...
-#>   ..$ gene   : chr [1:845810] "TSPAN6" "TSPAN6" "TSPAN6" "TSPAN6" ...
-#>   ..$ tissue : chr [1:845810] "adipose tissue" "adrenal gland" "appendix" "B-cells" ...
-#>   ..$ tpm    : chr [1:845810] "31.5" "26.4" "9.2" "0.1" ...
-#>   ..$ ptpm   : chr [1:845810] "37.7" "32.7" "14.5" "0.2" ...
-#>   ..$ nx     : chr [1:845810] "9.8" "7.6" "2.1" "0.3" ...
-#>  $ rna_tissue_gtex     : tibble [639,744 x 6] (S3: tbl_df/tbl/data.frame)
-#>   ..$ ensembl: chr [1:639744] "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" ...
-#>   ..$ gene   : chr [1:639744] "TSPAN6" "TSPAN6" "TSPAN6" "TSPAN6" ...
-#>   ..$ tissue : chr [1:639744] "adipose tissue" "adrenal gland" "amygdala" "basal ganglia" ...
-#>   ..$ tpm    : chr [1:639744] "27.4" "15.5" "7.3" "7.7" ...
-#>   ..$ ptpm   : chr [1:639744] "34.2" "18.8" "9.0" "9.4" ...
-#>   ..$ nx     : chr [1:639744] "13.4" "9.8" "7.0" "6.6" ...
-#>  $ rna_tissue_fantom   : tibble [797,265 x 6] (S3: tbl_df/tbl/data.frame)
-#>   ..$ ensembl                : chr [1:797265] "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" "ENSG00000000003" ...
-#>   ..$ gene                   : chr [1:797265] "TSPAN6" "TSPAN6" "TSPAN6" "TSPAN6" ...
-#>   ..$ tissue                 : chr [1:797265] "adipose tissue" "amygdala" "appendix" "basal ganglia" ...
-#>   ..$ tags_per_million       : chr [1:797265] "60.1" "10.7" "13.5" "16.2" ...
-#>   ..$ scaled_tags_per_million: chr [1:797265] "87.4" "12.4" "17.8" "18.0" ...
-#>   ..$ nx                     : chr [1:797265] "27.0" "3.5" "4.4" "5.5" ...
-```
-
-
 ## List available parameter for subsetting with `hpaListParam()`
 
-To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpaListParam()`. The input for this function is the output of `hpaDownload`. 
+To see what parameters are available for subsequent subsetting/visualizing, HPAanalyze includes the function `hpaListParam()`. The input for this function is the output of `hpaDownload`. This function will only work with normal_tissue, pathology and subcellular_location datasets.
 
 *If you leave the argument blank, this function will give you the results for the built-in datasets.*
 
 ```{r list_param, eval=FALSE}
 ## If you use the output from hpaDownload()
-downloadedData <- hpaDownload(downloadList=c("Normal tissue", "Pathology", "RNA HPA tissue", "RNA HPA cell line"))
+downloadedData <- hpaDownload(downloadList=c("normal_tissue", "pathology"))
 str(hpaListParam(downloadedData))
 
 # List of 4
@@ -206,10 +169,12 @@ str(hpaListParam(downloadedData))
 
 `hpaSubset()` filters the output of `hpaDownload()` for desirable target genes, tissues, cell types, cancer, and cell lines. The data will be subset only where applicable (i.e. `normal_tissue` will not be subset by *cancer*). The main purpose of `hpaSubset` is to prepare a manageable set of data to be exported. However, this function may also be useful for other data table manipulation purposes. The input for `targetGene` argument is a vector of strings of HGNC symbols.
 
+This function will only work with normal_tissue, pathology and subcellular_location datasets.
+
 *If you leave the `data` argument blank, this function will automatically subset the built-in dataset, which may not contain all of the columns available if you download the data with `hpaDownload()`.*
 
 ```{r subset1, message=FALSE, warning=FALSE}
-downloadedData <- hpaDownload(downloadList='histology', version='example')
+downloadedData <- hpaDownload(downloadList='histology', version='v23')
 sapply(downloadedData, nrow)
 ```
 ```{r subset2, message=FALSE, warning=FALSE}
@@ -470,6 +435,6 @@ We appreciate the support of the National institutes of Health National Cancer I
 
 # Copyright
 
-__Anh Tran, 2018-2023 __
+__Anh Tran, 2018-2025 __
 
 Please cite: __Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data. BMC Bioinformatics 20, 463 (2019) https://doi.org/10.1186/s12859-019-3059-z __
