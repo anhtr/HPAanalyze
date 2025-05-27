@@ -1,4 +1,7 @@
 version,version_number,table,link
+v23,23,normal_tissue,https://v23.proteinatlas.org/download/normal_tissue.tsv.zip
+v23,23,pathology,https://v23.proteinatlas.org/download/pathology.tsv.zip
+v23,23,subcellular_location ,https://v23.proteinatlas.org/download/subcellular_location.tsv.zip
 v23,23,Normal tissue,https://v23.proteinatlas.org/download/normal_tissue.tsv.zip
 v23,23,Pathology,https://v23.proteinatlas.org/download/pathology.tsv.zip
 v23,23,Subcellular location ,https://v23.proteinatlas.org/download/subcellular_location.tsv.zip
