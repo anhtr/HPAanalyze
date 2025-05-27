@@ -27,13 +27,13 @@ HGNC gene symbols and ensemnl ids (start with ENSG) and they will be
 converted to HGNC gene symbols.}
 
 \item{targetTissue}{Vector of strings of normal tissue names. By default it
-is set to \code{"breast"}.}
+is set to the first available.}
 
 \item{targetCellType}{Vector of strings of normal cell types. By default
 inludes all available cell types in the target tissues.}
 
 \item{targetCancer}{Vector of strings of normal tissues. By default it
-is set to \code{"breast cancer"}.}
+is set to the first available.}
 
 \item{visType}{Vector of strings indicating which plots will be generated.
 Currently available values are \code{"all"}, \code{"Tissue"},
