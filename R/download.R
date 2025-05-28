@@ -241,41 +241,53 @@ hpaSubset <- function(data = NULL,
                       targetCellType = NULL,
                       targetCancer = NULL,
                       targetCellLine = NULL) {
-    # Check if data is provided or not
+    
+    # Ensure the input data is valid (e.g., not NULL or improperly formatted)
     data <- is_null_data(data = data)
+    
+    # If gene names are provided, convert them to the standard format using a helper function
     if (!is.null(targetGene))
         targetGene <- gene_ensembl_convert(targetGene, "gene")
     
+    # Define a sub-function to apply filtering based on the target criteria
     subsetting <- function(df) {
+        
+        # Filter by gene names if the 'gene' column exists and targetGene is specified
         if (!is.null(targetGene) & any(names(df) == "gene")) {
             df <- filter(df, gene %in% targetGene)
         }
         
+        # Filter by tissue type if the 'tissue' column exists and targetTissue is specified
         if (!is.null(targetTissue) & any(names(df) == "tissue")) {
             df <- filter(df, tissue %in% targetTissue)
         }
         
-        if (!is.null(targetCellType) &
-            any(names(df) == "cell_type")) {
+        # Filter by cell type if the 'cell_type' column exists and targetCellType is specified
+        if (!is.null(targetCellType) & any(names(df) == "cell_type")) {
             df <- filter(df, cell_type %in% targetCellType)
         }
         
+        # Filter by cancer type if the 'cancer' column exists and targetCancer is specified
         if (!is.null(targetCancer) & any(names(df) == "cancer")) {
             df <- filter(df, cancer %in% targetCancer)
         }
         
-        if (!is.null(targetCellLine) &
-            any(names(df) == "cell_line")) {
+        # Filter by cell line if the 'cell_line' column exists and targetCellLine is specified
+        if (!is.null(targetCellLine) & any(names(df) == "cell_line")) {
             df <- filter(df, cell_line %in% targetCellLine)
         }
         
+        # Return the filtered dataframe
         return(df)
     }
     
+    # Apply the subsetting function to each dataset in the list (if multiple datasets provided)
     data <- lapply(data, subsetting)
     
+    # Return the filtered data (a list of dataframes or tibbles)
     return(data)
 }
+
 
 #########################
 ## List available data ##
@@ -303,28 +315,29 @@ hpaSubset <- function(data = NULL,
 #' @export
 
 hpaListParam <- function(data = NULL) {
-    # Check if data is provided or not
+    # Ensure input data is valid and standardized
     data <- is_null_data(data = data)
     
-    # Write function for each df, list the param if exist
+    # Define a helper function to extract available parameters from each dataset
     listing <- function(df) {
+        # Attempt to extract unique values for each of the possible filter parameters
         params <- lapply(c(
             "tissue" = "tissue",
             "cell_type" = "cell_type",
             "cancer" = "cancer",
             "cell_line" = "cell_line"
-        ),
-        function(x)
-            unique(df[[x]]))
+        ), function(x)
+            unique(df[[x]]))  # Get unique values for the column, if it exists
         
-        # Remove empty param list
+        # Remove any parameters that returned NULL (i.e., don't exist in this dataset)
         params[lengths(params) != 0]
     }
     
+    # Apply the listing function to each dataset in the list
     availData <- lapply(data, listing)
     
+    # Remove entries from the result where no parameters were found (empty lists)
     return(availData[lengths(availData) != 0])
-    
 }
 
 #################
@@ -375,22 +388,30 @@ hpaListParam <- function(data = NULL) {
 #' @export
 
 hpaExport <- function(data, fileName, fileType = 'xlsx') {
+    # If the user specifies Excel format
     if (fileType == 'xlsx') {
+        # Save all datasets in a single Excel file with multiple sheets
         write.xlsx(data, file = paste0(fileName, ".xlsx"))
     }
     
+    # If the user specifies CSV format
     if (fileType == 'csv') {
+        # Loop through each dataset in the list
         for (i in 1:length(data)) {
+            # Save each dataset as a separate .csv file
             write.csv(data[[i]],
                       file = paste0(fileName, "_", names(data[i]), ".csv"))
         }
     }
     
+    # If the user specifies TSV format
     if (fileType == 'tsv') {
+        # Loop through each dataset in the list
         for (i in 1:length(data)) {
+            # Save each dataset as a separate .tsv file
             write.table(data[[i]],
                         file = paste0(fileName, "_", names(data[i]), ".tsv"),
-                        sep = "\t")
+                        sep = "\t")  # Use tab separator for TSV
         }
     }
 }
