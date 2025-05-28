@@ -19,18 +19,16 @@ Extract protein class information from imported xml document resulted from
 on their website and through xml files are not one-to-one equivalents.
 }
 \examples{
-\dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
   hpaXmlProtClass(GCH1xml)
-}
 
 }
 \seealso{
 Other xml functions: 
+\code{\link{hpaXml}()},
 \code{\link{hpaXmlAntibody}()},
 \code{\link{hpaXmlGet}()},
-\code{\link{hpaXmlTissueExprSum}()},
 \code{\link{hpaXmlTissueExpr}()},
-\code{\link{hpaXml}()}
+\code{\link{hpaXmlTissueExprSum}()}
 }
 \concept{xml functions}

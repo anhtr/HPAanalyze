@@ -26,18 +26,16 @@ note that the data that HPA provides on their website and through xml files
 are not one-to-one equivalents.
 }
 \examples{
-\dontrun{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
   hpaXmlTissueExprSum(GCH1xml)
-}
 
 }
 \seealso{
 Other xml functions: 
+\code{\link{hpaXml}()},
 \code{\link{hpaXmlAntibody}()},
 \code{\link{hpaXmlGet}()},
 \code{\link{hpaXmlProtClass}()},
-\code{\link{hpaXmlTissueExpr}()},
-\code{\link{hpaXml}()}
+\code{\link{hpaXmlTissueExpr}()}
 }
 \concept{xml functions}

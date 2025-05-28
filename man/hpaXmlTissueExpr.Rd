@@ -27,7 +27,7 @@ through xml files are not one-to-one equivalents. For example, xml files
 usually only provide one of the two histology image for each patient.
 }
 \examples{
-\dontrun{
+\donttest{
   GCH1xml <- hpaXmlGet('ENSG00000131979')
   hpaXmlTissueExpr(GCH1xml)
 }
@@ -35,10 +35,10 @@ usually only provide one of the two histology image for each patient.
 }
 \seealso{
 Other xml functions: 
+\code{\link{hpaXml}()},
 \code{\link{hpaXmlAntibody}()},
 \code{\link{hpaXmlGet}()},
 \code{\link{hpaXmlProtClass}()},
-\code{\link{hpaXmlTissueExprSum}()},
-\code{\link{hpaXml}()}
+\code{\link{hpaXmlTissueExprSum}()}
 }
 \concept{xml functions}
