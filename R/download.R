@@ -30,12 +30,15 @@
 #' @param version A string indicate which version to be downloaded. Possible
 #'   value:
 #'   \itemize{
-#'     \item \code{'latest'}: Download latest version. Certain legacy datasets
-#'     will be downloaded with the highest version available. Require Internet
-#'     connection. This is the default option.
+#'     \item \code{'latest'}: Download latest version. Due to the constantly
+#'     changing nature of the API, this will download the latest version known
+#'     to work with this package. Require Internet connection. This is the
+#'     default option.
 #'     \item \code{'example'} or \code{'built-in'}: Load the built-in histology
 #'     dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
 #'     connection.
+#'     \item \code{'v23'}: version 23
+#'     \item \code{'v24'}: version 24
 #'   }
 #'
 #' @family downloadable datasets functions
@@ -59,17 +62,18 @@
 hpaDownload <- function(downloadList = 'histology',
                         version = 'latest') {
     
-    ## set longer time out
+    # Set a longer timeout for downloads
     op <- options(timeout = 10000)
-    on.exit(options(op))
+    on.exit(options(op))  # Restore previous timeout when function exits
     
-    ## generate a list of item to download
+    # Helper function to replace shortcut names with full item list
     replace_shortcut <- function(x, shortcut, with) {
-        x <- rep(x, 1 + (length(with) - 1)*(x == shortcut))
-        x[x == shortcut] <- with
+        x <- rep(x, 1 + (length(with) - 1)*(x == shortcut))  # expand shortcut if matched
+        x[x == shortcut] <- with  # replace shortcut with full names
         return(x)
     }
     
+    # Process the input download list to expand 'all' and 'histology' shortcuts
     downloadListClean <- downloadList %>%
         replace_shortcut('all', hpa_download_list$table) %>%
         replace_shortcut('histology', 
@@ -77,32 +81,32 @@ hpaDownload <- function(downloadList = 'histology',
                            'pathology', 
                            'subcellular_location'))
     
-    
-    # filter the datasets to download
+    # Filter dataset metadata for the requested version and tables
     downloadDatasets <-
         hpa_download_list %>%
         filter(version == {{version}}) %>%
         filter(table %in% downloadListClean)
     
-    #initiate the list of processed data to be returned
+    # Initialize list to store loaded data
     loadedData <- list()
     
-    ## Download if version is 'built-in' or 'example'
-    
+    # Handle example or built-in datasets
     if (version %in% c('example', 'built-in')) {
         message(
             'Only the followings are example/built-in datasets: \n - Normal tissue \n - Pathology \n - Subcellular location \nOther datasets will not be loaded'
         )
         
+        # Load pre-packaged example data
         loadedData <- hpa_histology_data
         
     } else {
-        
-        ## download for any version that's not example/built-in
+        # For other versions, download and read the datasets
         for (i in seq_along(downloadDatasets$link)) {
-            temp <- tempfile()
+            temp <- tempfile()  # Create a temporary file
             download.file(url = downloadDatasets$link[[i]],
-                          destfile = temp)
+                          destfile = temp)  # Download file
+            
+            # Extract and read the first file in the zip archive
             loadedData[[i]] <- read.delim2(
                 unz(temp, unzip(temp, list = TRUE)$Name[1]),
                 stringsAsFactors = FALSE,
@@ -111,17 +115,17 @@ hpaDownload <- function(downloadList = 'histology',
                 sep = "\t",
                 na.strings = c("", " ")
             )
-            unlink(temp)
+            
+            unlink(temp)  # Remove the temporary file
         }
         
-        ## convert to tibbles
+        # Convert all loaded data frames to tibbles
         loadedData <- lapply(loadedData, as_tibble)
         
+        # Assign proper names to each dataset in the list
         names(loadedData) <- downloadDatasets$table
         
-        
-        
-        ## rename histology dataframes with tidy colnames
+        # If the 'normal_tissue' dataset exists, rename and select key columns
         if(!is.null(loadedData$normal_tissue)) {
             loadedData$normal_tissue <- loadedData$normal_tissue %>%
                 select(
@@ -134,6 +138,7 @@ hpaDownload <- function(downloadList = 'histology',
                 )
         }
         
+        # If the 'pathology' dataset exists, rename and select key columns
         if(!is.null(loadedData$pathology)) {
             loadedData$pathology <- loadedData$pathology %>%
                 select(
@@ -147,6 +152,7 @@ hpaDownload <- function(downloadList = 'histology',
                 )
         }
         
+        # If the 'subcellular_location' dataset exists, rename and select key columns
         if(!is.null(loadedData$subcellular_location)) {
             loadedData$subcellular_location <- loadedData$subcellular_location %>%
                 select(
@@ -168,14 +174,14 @@ hpaDownload <- function(downloadList = 'histology',
         }
     }
     
-    
-    ## list table if downloadList is NULL
+    # If downloadList = NULL, return available table names
     if(is.null(downloadList)) {
         loadedData <- hpa_download_list %>%
             filter(version == {{version}}) %>%
             pull(table)
     }
     
+    # Return the loaded data or available table names
     return(loadedData)
 }
 

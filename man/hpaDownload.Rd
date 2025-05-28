@@ -29,12 +29,15 @@ hpaDownload(downloadList = "histology", version = "latest")
 \item{version}{A string indicate which version to be downloaded. Possible
 value:
 \itemize{
-  \item \code{'latest'}: Download latest version. Certain legacy datasets
-  will be downloaded with the highest version available. Require Internet
-  connection. This is the default option.
+  \item \code{'latest'}: Download latest version. Due to the constantly
+  changing nature of the API, this will download the latest version known
+  to work with this package. Require Internet connection. This is the
+  default option.
   \item \code{'example'} or \code{'built-in'}: Load the built-in histology
   dataset from 'HPAanalyze' ('hpa_histology_data'). Do not require internet
   connection.
+  \item \code{'v23'}: version 23
+  \item \code{'v24'}: version 24
 }}
 }
 \value{
