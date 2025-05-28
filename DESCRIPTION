@@ -32,3 +32,4 @@ biocViews:
     Software
 URL: https://github.com/anhtr/HPAanalyze
 BugReports: https://github.com/anhtr/HPAanalyze/issues
+LazyData: true
