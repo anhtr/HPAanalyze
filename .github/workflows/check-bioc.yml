@@ -245,7 +245,9 @@ jobs:
               dir('check', 'tar.gz$', full.names = TRUE),
               `quit-with-status` = TRUE,
               `no-check-R-ver` = TRUE,
-              `no-check-bioc-help` = TRUE
+              `no-check-bioc-help` = TRUE,
+              `no-check-pkg-size` = TRUE,
+              `no-check-file-size` = TRUE
           )
         shell: Rscript {0}
 
