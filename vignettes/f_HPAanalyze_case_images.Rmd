@@ -6,11 +6,9 @@ author:
   email: trannhatanh89@gmail.com
 date: "`r Sys.Date()`"
 output: 
-    BiocStyle::html_document:
-        # toc: true
-        # toc_depth: 2
-        # toc_float: true
-        number_sections: true
+    rmarkdown::html_vignette:
+        fig_width: 8
+        fig_height: 6
 vignette: >
   %\VignetteIndexEntry{"6. Tutorial: Download histology images from the Human Protein Atlas"}
   %\VignetteEngine{knitr::rmarkdown}
@@ -33,12 +31,12 @@ library(HPAanalyze)
 library(dplyr)
 ```
 
-# The case 
+## The case 
 What to do if you want to systematically download images from HPA?
 
-# The solution
+## The solution
 
-## Get the download links
+### Get the download links
 
 ```{r}
 CCNB1xml <- hpaXmlGet("ENSG00000134057")
@@ -76,7 +74,7 @@ str(CCNB1_expr[[1]])
 #>  $ tissueDescription5: chr  NA NA NA NA ...
 ```
 
-## Download the images
+### Download the images
 
 ```{r eval=FALSE}
 dir.create("img")
@@ -91,13 +89,13 @@ for (i in 1:nrow(CCNB1_expr[[1]])) {
 }
 ```
 
-## Notes
+### Notes
 
 While the HPA website displays two images for many of the samples, this method only provides one. 
 
 If you wish to filter the results by tissueDescription or snomedCode, it's important to note that the value you are searching for may be present in any of the columns. To address this, you can use the `filter_all(any_vars())` function from the `dplyr` package.
 
-# Copyright
+## Copyright
 
 __Anh Tran, 2018-2025 __
 

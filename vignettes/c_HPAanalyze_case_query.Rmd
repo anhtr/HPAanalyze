@@ -6,11 +6,9 @@ author:
   email: trannhatanh89@gmail.com
 date: 5/27/2025
 output: 
-    BiocStyle::html_document:
-        # toc: true
-        # toc_depth: 2
-        # toc_float: true
-        number_sections: true
+    rmarkdown::html_vignette:
+        fig_width: 8
+        fig_height: 6
 vignette: >
   %\VignetteIndexEntry{"3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA) queries"}
   %\VignetteEngine{knitr::rmarkdown}
@@ -37,13 +35,13 @@ library(readr)
 library(tidyr)
 ```
 
-# The case 
+## The case 
 
 The Human Protein Atlas web interface provides a powerful way to search using specific parameters. For example, you can find proteins predicted to be secreted, expressed at low level in normal breast tissue and are predictors of poor prognosis in breast cancer. The good news: you can combine the results of your queries with HPAanalyze for easy explanatory data analysis and data retrieval of your proteins of interest. Here is how.
 
-# The solution
+## The solution
 
-## Create your query
+### Create your query
 
 Have a specific goal in mind. What are you looking for? In this example, I will look for CD markers that have low expression in the cerebral cortex and correlate with unfavorable prognosis in glioma.
 
@@ -124,7 +122,7 @@ tibble::glimpse(query_df)
 
 The data frame itself is somewhat informative, and is adequate if you want to see a summary of the data. However, it also provides you with a list of proteins in both "gene name" and "ensembl id" formats which you can use with `HPAanalyze` functions.
 
-## Visualization
+### Visualization
 
 You can use the gene names in the list to visualize HPA data with the `hpaVis` function family. No special adjustment is needed.
 
@@ -139,7 +137,7 @@ hpaVis(data = latest_datasets,
 ```
 ![](figures/query_vis.png)
 
-## XML extraction
+### XML extraction
 
 Similarly, you can extract the information you want from relevant xml files using `lapply` on the ensembl ids. With some trickery, you can even create a tidy data frame from the extracted information, as shown below. Now you can analyze the way you want.
 
@@ -178,7 +176,7 @@ filter(query_protein_classes_df, name == "Potential drug targets")
 
 *It is even more impressive when you extract patient's detail of multiple genes using `hpaXmlTissueExpr`. You can match samples from the same patient across multiple antibodies and proteins. However, it will take a little bit more work than the above example, so I will leave it to you to explore these hidden potentials."*
 
-# Copyright
+## Copyright
 
 __Anh Tran, 2018-2025 __
 
