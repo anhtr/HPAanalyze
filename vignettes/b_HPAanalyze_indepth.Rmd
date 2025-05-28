@@ -7,9 +7,9 @@ author:
 date: 5/27/2025
 output: 
     BiocStyle::html_document:
-        toc: true
-        toc_depth: 2
-        toc_float: true
+        # toc: true
+        # toc_depth: 2
+        # toc_float: true
         number_sections: true
 vignette: >
   %\VignetteIndexEntry{"2. In-depth: Working with Human Protein Atlas (HPA) data in R with HPAanalyze"}
@@ -179,7 +179,7 @@ sapply(downloadedData, nrow)
 ```
 ```{r subset2, message=FALSE, warning=FALSE}
 geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
-tissueList <- c('breast', 'cerebellum', 'skin 1')
+tissueList <- c('Breast', 'Cerebellum', 'Skin 1')
 cancerList <- c('breast cancer', 'glioma', 'melanoma')
 cellLineList <- c('A-431', 'A549', 'AF22', 'AN3-CA')
 
@@ -220,7 +220,7 @@ downloadedData <- hpaDownload('histology', 'example')
 ```{r hpaVis_eg}
 hpaVis(downloadedData,
        targetGene = c("GCH1", "PTS", "SPR", "DHFR"),
-       targetTissue = c("cerebellum", "cerebral cortex", "hippocampus"),
+       targetTissue = c("Cerebellum", "Cerebral cortex", "Hippocampus"),
        targetCancer = c("glioma"))
 ```
 
@@ -230,7 +230,7 @@ hpaVis(downloadedData,
 
 ```{r visTissue}
 geneList <- c('TP53', 'EGFR', 'CD44', 'PTEN', 'IDH1', 'IDH2', 'CYCS')
-tissueList <- c('breast', 'cerebellum', 'skin 1')
+tissueList <- c('Breast', 'Cerebellum', 'Skin 1')
 
 hpaVisTissue(downloadedData,
              targetGene=geneList,

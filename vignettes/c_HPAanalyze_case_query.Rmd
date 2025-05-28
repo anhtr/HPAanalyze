@@ -6,11 +6,7 @@ author:
   email: trannhatanh89@gmail.com
 date: 5/27/2025
 output: 
-    BiocStyle::html_document:
-        toc: true
-        toc_depth: 2
-        toc_float: true
-        number_sections: true
+    BiocStyle::pdf_document
 vignette: >
   %\VignetteIndexEntry{"3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA) queries"}
   %\VignetteEngine{knitr::rmarkdown}

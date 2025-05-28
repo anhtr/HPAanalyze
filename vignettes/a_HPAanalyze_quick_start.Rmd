@@ -7,9 +7,9 @@ author:
 date: 5/27/2025
 output: 
     BiocStyle::html_document:
-        toc: true
-        toc_depth: 2
-        toc_float: true
+        # toc: true
+        # toc_depth: 2
+        # toc_float: true
         number_sections: true
 vignette: >
   %\VignetteIndexEntry{"1. Quick-start guide: Acquire and visualize the Human Protein Atlas (HPA) data in one function with HPAanalyze"}
@@ -55,7 +55,7 @@ Currently, this is available for the normal tissue, pathology (cancers) and subc
 
 ```{r hpaVis_eg}
 hpaVis(targetGene = c("GCH1", "PTS", "SPR", "DHFR"),
-       targetTissue = c("cerebellum", "cerebral cortex", "hippocampus"),
+       targetTissue = c("Cerebellum", "Cerebral cortex", "Hippocampus"),
        targetCancer = c("glioma"))
 ```
 

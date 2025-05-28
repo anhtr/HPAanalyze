@@ -6,11 +6,7 @@ author:
   email: trannhatanh89@gmail.com
 date: 6/18/2019
 output: 
-    BiocStyle::html_document:
-        toc: true
-        toc_depth: 2
-        toc_float: true
-        number_sections: true
+    BiocStyle::pdf_document
 vignette: >
   %\VignetteIndexEntry{"99. Code for figures from HPAanalyze paper"}
   %\VignetteEngine{knitr::rmarkdown}
