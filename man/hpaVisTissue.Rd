@@ -54,8 +54,8 @@ types.
 }
 \seealso{
 Other visualization functions: 
+\code{\link{hpaVis}()},
 \code{\link{hpaVisPatho}()},
-\code{\link{hpaVisSubcell}()},
-\code{\link{hpaVis}()}
+\code{\link{hpaVisSubcell}()}
 }
 \concept{visualization functions}

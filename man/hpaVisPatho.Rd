@@ -55,8 +55,8 @@ Visualize the expression of genes of interest in each cancer.
 }
 \seealso{
 Other visualization functions: 
+\code{\link{hpaVis}()},
 \code{\link{hpaVisSubcell}()},
-\code{\link{hpaVisTissue}()},
-\code{\link{hpaVis}()}
+\code{\link{hpaVisTissue}()}
 }
 \concept{visualization functions}

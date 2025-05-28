@@ -2,14 +2,14 @@ Package: HPAanalyze
 Type: Package
 Title: Retrieve and analyze data from the Human Protein Atlas
 Date: 2023-06-02
-Version: 1.19.1
+Version: 1.26.1
 Authors@R: person("Anh Nhat", "Tran", email = "trannhatanh89@gmail.com",
                   role = c("aut", "cre"))
 Description: Provide functions for retrieving, exploratory analyzing and 
     visualizing the Human Protein Atlas data.
 Depends: R (>= 3.5.0)
 License: GPL-3 + file LICENSE
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 Imports: dplyr,
     openxlsx,
@@ -25,7 +25,6 @@ Suggests: knitr,
     devtools,
     BiocStyle
 VignetteBuilder: knitr
-LazyData: true
 biocViews:
     Proteomics,
     CellBiology,

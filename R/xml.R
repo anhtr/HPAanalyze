@@ -26,9 +26,7 @@
 #' @family xml functions
 #'
 #' @examples
-#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
-#' }
 #'
 #' @importFrom xml2 read_xml
 #' @importFrom utils download.file
@@ -67,10 +65,8 @@ hpaXmlGet <- function(targetEnsemblId, version = 'latest') {
 #' @family xml functions
 #' 
 #' @examples
-#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlProtClass(GCH1xml)
-#' }
 #' 
 #' @importFrom xml2 xml_find_all xml_attrs
 #' @importFrom tibble as_tibble
@@ -115,10 +111,8 @@ hpaXmlProtClass <- function(importedXml) {
 #' @family xml functions
 #'
 #' @examples
-#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlTissueExprSum(GCH1xml)
-#' }
 #'
 #' @importFrom xml2 xml_find_all xml_find_first xml_text
 #' @import dplyr
@@ -178,10 +172,8 @@ hpaXmlTissueExprSum <- function(importedXml, downloadImg=FALSE) {
 #' @family xml functions
 #'
 #' @examples
-#' \dontrun{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlAntibody(GCH1xml)
-#' }
 #'
 #' @importFrom xml2 xml_find_all xml_attrs
 #' @import dplyr
@@ -224,7 +216,7 @@ hpaXmlAntibody <- function(importedXml) {
 #' @family xml functions
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   GCH1xml <- hpaXmlGet('ENSG00000131979')
 #'   hpaXmlTissueExpr(GCH1xml)
 #' }

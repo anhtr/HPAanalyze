@@ -46,7 +46,7 @@ Other xml functions:
 \code{\link{hpaXmlAntibody}()},
 \code{\link{hpaXmlGet}()},
 \code{\link{hpaXmlProtClass}()},
-\code{\link{hpaXmlTissueExprSum}()},
-\code{\link{hpaXmlTissueExpr}()}
+\code{\link{hpaXmlTissueExpr}()},
+\code{\link{hpaXmlTissueExprSum}()}
 }
 \concept{xml functions}
