@@ -29,6 +29,6 @@ biocViews:
     CellBiology,
     Visualization,
     Software
-URL: https://github.com/anhtr/HPAanalyze
+URL: https://github.com/anhtr/HPAanalyze, https://anhtr.github.io/HPAanalyze/
 BugReports: https://github.com/anhtr/HPAanalyze/issues
 LazyData: true
