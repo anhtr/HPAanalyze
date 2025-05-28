@@ -123,7 +123,7 @@ hpaDownload <- function(downloadList = 'histology',
         
         ## rename histology dataframes with tidy colnames
         if(!is.null(loadedData$normal_tissue)) {
-            loadedData$normal_tissue <- loadedData$normal_tissue |>
+            loadedData$normal_tissue <- loadedData$normal_tissue %>%
                 select(
                     ensembl = Gene,
                     gene = `Gene name`,
@@ -135,7 +135,7 @@ hpaDownload <- function(downloadList = 'histology',
         }
         
         if(!is.null(loadedData$pathology)) {
-            loadedData$pathology <- loadedData$pathology |>
+            loadedData$pathology <- loadedData$pathology %>%
                 select(
                     ensembl = Gene,
                     gene = `Gene name`,
@@ -148,7 +148,7 @@ hpaDownload <- function(downloadList = 'histology',
         }
         
         if(!is.null(loadedData$subcellular_location)) {
-            loadedData$subcellular_location <- loadedData$subcellular_location |>
+            loadedData$subcellular_location <- loadedData$subcellular_location %>%
                 select(
                     ensembl = Gene,
                     gene = `Gene name`,
