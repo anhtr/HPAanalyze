@@ -1,3 +1,14 @@
+                       Changes in version 1.27
+* Changes in version 1.27.1
+    + Rework hpaDownload for more resilience against changing APIs.
+    + Update function documentations
+    + Update built-in data and internal gene name lookup table to v24.0
+    + Small bug fixes.
+* Changes in version 1.27.2
+    + Update vignettes
+    + Optimize package size
+    + Better code comments on download and vis functions
+
                        Changes in version 1.19
 * Changes in version 1.19.0
     + Starting devel for Bioconductor 3.18
