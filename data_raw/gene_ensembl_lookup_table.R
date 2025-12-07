@@ -5,8 +5,6 @@ unlink(temp)
 
 lookup_df <- dplyr::select(query_df, "gene" = Gene, "ensembl" = Ensembl)
 
-usethis::use_data(lookup_df,  internal = TRUE, overwrite = TRUE)
-
 # gene_ensembl_convert <- function(id, convert_to) {
 #     id_c <- id
 #     warn <- FALSE
