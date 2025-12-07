@@ -81,48 +81,93 @@ v24,24,Cell line - RNA expression - comparison,https://v24.proteinatlas.org/down
 v24,24,Cell line - RNA expression - RNA cell line analysis,https://v24.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
 v24,24,Cell line - RNA expression - RNA gene clustering,https://v24.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
 v24,24,Interaction - Protein-protein interaction,https://v24.proteinatlas.org/download/tsv/interaction_consensus.tsv.zip
-latest,24,normal_tissue,https://v24.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
-latest,24,pathology,https://v24.proteinatlas.org/download/tsv/cancer_data.tsv.zip
-latest,24,subcellular_location ,https://v24.proteinatlas.org/download/tsv/subcellular_location.tsv.zip
-latest,24,Tissue - Protein expression (IHC),https://v24.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
-latest,24,Tissue - RNA expression (consensus),https://v24.proteinatlas.org/download/tsv/rna_tissue_consensus.tsv.zip
-latest,24,Tissue - RNA expression (HPA),https://v24.proteinatlas.org/download/tsv/rna_tissue_hpa.tsv.zip
-latest,24,Tissue - RNA expression (GTEx),https://v24.proteinatlas.org/download/tsv/rna_tissue_gtex.tsv.zip
-latest,24,Tissue - RNA expression (FANTOM),https://v24.proteinatlas.org/download/tsv/rna_tissue_fantom.tsv.zip
-latest,24,Tissue - RNA expression (HPA) - transcript,https://v24.proteinatlas.org/download/tsv/transcript_rna_tissue.tsv.zip
-latest,24,Brain - RNA expression (HPA) - brain regions,https://v24.proteinatlas.org/download/tsv/rna_brain_region_hpa.tsv.zip
-latest,24,Brain - RNA expression (HPA) - brain subregion,https://v24.proteinatlas.org/download/tsv/rna_brain_hpa.tsv.zip
-latest,24,Brain - RNA expression (HPA) - brain sample,https://v24.proteinatlas.org/download/tsv/transcript_rna_brain.tsv.zip
-latest,24,Brain - RNA expression (GTEx) - brain regions,https://v24.proteinatlas.org/download/tsv/rna_brain_gtex.tsv.zip
-latest,24,Brain - RNA expression (GTEx) - retina samples,https://v24.proteinatlas.org/download/tsv/transcript_rna_gtexretina.tsv.zip
-latest,24,Brain - RNA expression (FANTOM) - brain regions,https://v24.proteinatlas.org/download/tsv/rna_brain_fantom.tsv.zip
-latest,24,Brain - RNA expression (pfc) - prefrontal cortex (pfc) subregions,https://v24.proteinatlas.org/download/tsv/rna_pfc_brain_hpa.tsv.zip
-latest,24,Brain - RNA expression (HPA pig) - brain regions,https://v24.proteinatlas.org/download/tsv/rna_pig_brain_hpa.tsv.zip
-latest,24,Brain - RNA expression (HPA pig) - brain samples,https://v24.proteinatlas.org/download/tsv/transcript_rna_pigbrain.tsv.zip
-latest,24,Brain - RNA expression (HPA mouse) - brain regions,https://v24.proteinatlas.org/download/tsv/rna_mouse_brain_hpa.tsv.zip
-latest,24,Brain - RNA expression (HPA mouse) - brain samples,https://v24.proteinatlas.org/download/tsv/rna_mouse_brain_sample_hpa.tsv.zip
-latest,24,Brain - RNA expression (Allen mouse) - brain regions,https://v24.proteinatlas.org/download/tsv/rna_mouse_brain_allen.tsv.zip
-latest,24,Brain - RNA gene clustering - brain subregions,https://v24.proteinatlas.org/download/tsv/rna_brain_hpa.tsv.zip
-latest,24,Single cell type - RNA expression - clusters,https://v24.proteinatlas.org/download/tsv/rna_single_cell_cluster.tsv.zip
-latest,24,Single cell type - RNA expression - cell types,https://v24.proteinatlas.org/download/tsv/rna_single_cell_type.tsv.zip
-latest,24,Single nuclei brain - RNA expression - clusters,https://v24.proteinatlas.org/download/tsv/rna_single_nuclei_cluster_type.tsv.zip
-latest,24,Single nuclei brain - RNA expression - cluster types,https://v24.proteinatlas.org/download/tsv/rna_single_nuclei_cluster_type.tsv.zip
-latest,24,Immune cell - RNA expression (HPA) - RNAseq 19 cells,https://v24.proteinatlas.org/download/tsv/rna_immune_cell.tsv.zip
-latest,24,Immune cell - RNA expression (HPA) - RNAseq 18 cells,https://v24.proteinatlas.org/download/tsv/rna_immune_cell.tsv.zip
-latest,24,Immune cell - RNA expression (HPA) - RNAseq 109 samples,https://v24.proteinatlas.org/download/tsv/rna_immune_cell_sample.tsv.zip
-latest,24,Immune cell - RNA expression (HPA) - transcript level 109 samples,https://v24.proteinatlas.org/download/tsv/transcript_rna_immunecells.tsv.zip
-latest,24,Immune cell - RNA expression (Monaco),https://v24.proteinatlas.org/download/tsv/rna_immune_cell_monaco.tsv.zip
-latest,24,Immune cell - RNA expression (Schmiedel),https://v24.proteinatlas.org/download/tsv/rna_immune_cell_schmiedel.tsv.zip
-latest,24,Subcellular - Protein location,https://v24.proteinatlas.org/download/tsv/subcellular_location.tsv.zip
-latest,24,Cancer - Prognostic data,https://v24.proteinatlas.org/download/tsv/cancer_prognostic_data.tsv.zip
-latest,24,Cancer - Protein expression (IHC),https://v24.proteinatlas.org/download/tsv/cancer_data.tsv.zip
-latest,24,Cancer - Protein expression (CPTAC MS),https://v24.proteinatlas.org/download/tsv/cancer_cptac.tsv.zip
-latest,24,Blood disease - Protein expression,https://v24.proteinatlas.org/download/tsv/blood_pea_disease_de.tsv.zip
-latest,24,Blood protein - Protein concentration - immunoassays,https://v24.proteinatlas.org/download/tsv/blood_immunoassay_concentration.tsv.zip
-latest,24,Blood protein - Protein concentration - mass spectrometry,https://v24.proteinatlas.org/download/tsv/blood_ms_concentration.tsv.zip
-latest,24,Cell line - RNA expression - cell lines,https://v24.proteinatlas.org/download/tsv/rna_celline.tsv.zip
-latest,24,Cell line - RNA expression - cell line groups,https://v24.proteinatlas.org/download/tsv/rna_cell_line_cancer.tsv.zip
-latest,24,Cell line - RNA expression - comparison,https://v24.proteinatlas.org/download/tsv/rna_cell_line_tcga_comparison.tsv.zip
-latest,24,Cell line - RNA expression - RNA cell line analysis,https://v24.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
-latest,24,Cell line - RNA expression - RNA gene clustering,https://v24.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
-latest,24,Interaction - Protein-protein interaction,https://v24.proteinatlas.org/download/tsv/interaction_consensus.tsv.zip
+v25,25,normal_tissue,https://v25.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
+v25,25,pathology,https://v25.proteinatlas.org/download/tsv/cancer_data.tsv.zip
+v25,25,subcellular_location ,https://v25.proteinatlas.org/download/tsv/subcellular_location.tsv.zip
+v25,25,Tissue - Protein expression (IHC),https://v25.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
+v25,25,Tissue - RNA expression (consensus),https://v25.proteinatlas.org/download/tsv/rna_tissue_consensus.tsv.zip
+v25,25,Tissue - RNA expression (HPA),https://v25.proteinatlas.org/download/tsv/rna_tissue_hpa.tsv.zip
+v25,25,Tissue - RNA expression (GTEx),https://v25.proteinatlas.org/download/tsv/rna_tissue_gtex.tsv.zip
+v25,25,Tissue - RNA expression (FANTOM),https://v25.proteinatlas.org/download/tsv/rna_tissue_fantom.tsv.zip
+v25,25,Tissue - RNA expression (HPA) - transcript,https://v25.proteinatlas.org/download/tsv/transcript_rna_tissue.tsv.zip
+v25,25,Brain - RNA expression (HPA) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_brain_region_hpa.tsv.zip
+v25,25,Brain - RNA expression (HPA) - brain subregion,https://v25.proteinatlas.org/download/tsv/rna_brain_hpa.tsv.zip
+v25,25,Brain - RNA expression (HPA) - brain sample,https://v25.proteinatlas.org/download/tsv/transcript_rna_brain.tsv.zip
+v25,25,Brain - RNA expression (GTEx) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_brain_gtex.tsv.zip
+v25,25,Brain - RNA expression (GTEx) - retina samples,https://v25.proteinatlas.org/download/tsv/transcript_rna_gtexretina.tsv.zip
+v25,25,Brain - RNA expression (FANTOM) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_brain_fantom.tsv.zip
+v25,25,Brain - RNA expression (pfc) - prefrontal cortex (pfc) subregions,https://v25.proteinatlas.org/download/tsv/rna_pfc_brain_hpa.tsv.zip
+v25,25,Brain - RNA expression (HPA pig) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_pig_brain_hpa.tsv.zip
+v25,25,Brain - RNA expression (HPA pig) - brain samples,https://v25.proteinatlas.org/download/tsv/transcript_rna_pigbrain.tsv.zip
+v25,25,Brain - RNA expression (HPA mouse) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_mouse_brain_hpa.tsv.zip
+v25,25,Brain - RNA expression (HPA mouse) - brain samples,https://v25.proteinatlas.org/download/tsv/rna_mouse_brain_sample_hpa.tsv.zip
+v25,25,Brain - RNA expression (Allen mouse) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_mouse_brain_allen.tsv.zip
+v25,25,Brain - RNA gene clustering - brain subregions,https://v25.proteinatlas.org/download/tsv/rna_brain_hpa.tsv.zip
+v25,25,Single cell type - RNA expression - clusters,https://v25.proteinatlas.org/download/tsv/rna_single_cell_cluster.tsv.zip
+v25,25,Single cell type - RNA expression - cell types,https://v25.proteinatlas.org/download/tsv/rna_single_cell_type.tsv.zip
+v25,25,Single nuclei brain - RNA expression - clusters,https://v25.proteinatlas.org/download/tsv/rna_single_nuclei_cluster_type.tsv.zip
+v25,25,Single nuclei brain - RNA expression - cluster types,https://v25.proteinatlas.org/download/tsv/rna_single_nuclei_cluster_type.tsv.zip
+v25,25,Immune cell - RNA expression (HPA) - RNAseq 19 cells,https://v25.proteinatlas.org/download/tsv/rna_immune_cell.tsv.zip
+v25,25,Immune cell - RNA expression (HPA) - RNAseq 18 cells,https://v25.proteinatlas.org/download/tsv/rna_immune_cell.tsv.zip
+v25,25,Immune cell - RNA expression (HPA) - RNAseq 109 samples,https://v25.proteinatlas.org/download/tsv/rna_immune_cell_sample.tsv.zip
+v25,25,Immune cell - RNA expression (HPA) - transcript level 109 samples,https://v25.proteinatlas.org/download/tsv/transcript_rna_immunecells.tsv.zip
+v25,25,Immune cell - RNA expression (Monaco),https://v25.proteinatlas.org/download/tsv/rna_immune_cell_monaco.tsv.zip
+v25,25,Immune cell - RNA expression (Schmiedel),https://v25.proteinatlas.org/download/tsv/rna_immune_cell_schmiedel.tsv.zip
+v25,25,Subcellular - Protein location,https://v25.proteinatlas.org/download/tsv/subcellular_location.tsv.zip
+v25,25,Cancer - Prognostic data,https://v25.proteinatlas.org/download/tsv/cancer_prognostic_data.tsv.zip
+v25,25,Cancer - Protein expression (IHC),https://v25.proteinatlas.org/download/tsv/cancer_data.tsv.zip
+v25,25,Cancer - Protein expression (CPTAC MS),https://v25.proteinatlas.org/download/tsv/cancer_cptac.tsv.zip
+v25,25,Blood disease - Protein expression,https://v25.proteinatlas.org/download/tsv/blood_pea_disease_de.tsv.zip
+v25,25,Blood protein - Protein concentration - immunoassays,https://v25.proteinatlas.org/download/tsv/blood_immunoassay_concentration.tsv.zip
+v25,25,Blood protein - Protein concentration - mass spectrometry,https://v25.proteinatlas.org/download/tsv/blood_ms_concentration.tsv.zip
+v25,25,Cell line - RNA expression - cell lines,https://v25.proteinatlas.org/download/tsv/rna_celline.tsv.zip
+v25,25,Cell line - RNA expression - cell line groups,https://v25.proteinatlas.org/download/tsv/rna_cell_line_cancer.tsv.zip
+v25,25,Cell line - RNA expression - comparison,https://v25.proteinatlas.org/download/tsv/rna_cell_line_tcga_comparison.tsv.zip
+v25,25,Cell line - RNA expression - RNA cell line analysis,https://v25.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
+v25,25,Cell line - RNA expression - RNA gene clustering,https://v25.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
+v25,25,Interaction - Protein-protein interaction,https://v25.proteinatlas.org/download/tsv/interaction_consensus.tsv.zip
+latest,25,normal_tissue,https://v25.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
+latest,25,pathology,https://v25.proteinatlas.org/download/tsv/cancer_data.tsv.zip
+latest,25,subcellular_location ,https://v25.proteinatlas.org/download/tsv/subcellular_location.tsv.zip
+latest,25,Tissue - Protein expression (IHC),https://v25.proteinatlas.org/download/tsv/normal_ihc_data.tsv.zip
+latest,25,Tissue - RNA expression (consensus),https://v25.proteinatlas.org/download/tsv/rna_tissue_consensus.tsv.zip
+latest,25,Tissue - RNA expression (HPA),https://v25.proteinatlas.org/download/tsv/rna_tissue_hpa.tsv.zip
+latest,25,Tissue - RNA expression (GTEx),https://v25.proteinatlas.org/download/tsv/rna_tissue_gtex.tsv.zip
+latest,25,Tissue - RNA expression (FANTOM),https://v25.proteinatlas.org/download/tsv/rna_tissue_fantom.tsv.zip
+latest,25,Tissue - RNA expression (HPA) - transcript,https://v25.proteinatlas.org/download/tsv/transcript_rna_tissue.tsv.zip
+latest,25,Brain - RNA expression (HPA) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_brain_region_hpa.tsv.zip
+latest,25,Brain - RNA expression (HPA) - brain subregion,https://v25.proteinatlas.org/download/tsv/rna_brain_hpa.tsv.zip
+latest,25,Brain - RNA expression (HPA) - brain sample,https://v25.proteinatlas.org/download/tsv/transcript_rna_brain.tsv.zip
+latest,25,Brain - RNA expression (GTEx) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_brain_gtex.tsv.zip
+latest,25,Brain - RNA expression (GTEx) - retina samples,https://v25.proteinatlas.org/download/tsv/transcript_rna_gtexretina.tsv.zip
+latest,25,Brain - RNA expression (FANTOM) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_brain_fantom.tsv.zip
+latest,25,Brain - RNA expression (pfc) - prefrontal cortex (pfc) subregions,https://v25.proteinatlas.org/download/tsv/rna_pfc_brain_hpa.tsv.zip
+latest,25,Brain - RNA expression (HPA pig) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_pig_brain_hpa.tsv.zip
+latest,25,Brain - RNA expression (HPA pig) - brain samples,https://v25.proteinatlas.org/download/tsv/transcript_rna_pigbrain.tsv.zip
+latest,25,Brain - RNA expression (HPA mouse) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_mouse_brain_hpa.tsv.zip
+latest,25,Brain - RNA expression (HPA mouse) - brain samples,https://v25.proteinatlas.org/download/tsv/rna_mouse_brain_sample_hpa.tsv.zip
+latest,25,Brain - RNA expression (Allen mouse) - brain regions,https://v25.proteinatlas.org/download/tsv/rna_mouse_brain_allen.tsv.zip
+latest,25,Brain - RNA gene clustering - brain subregions,https://v25.proteinatlas.org/download/tsv/rna_brain_hpa.tsv.zip
+latest,25,Single cell type - RNA expression - clusters,https://v25.proteinatlas.org/download/tsv/rna_single_cell_cluster.tsv.zip
+latest,25,Single cell type - RNA expression - cell types,https://v25.proteinatlas.org/download/tsv/rna_single_cell_type.tsv.zip
+latest,25,Single nuclei brain - RNA expression - clusters,https://v25.proteinatlas.org/download/tsv/rna_single_nuclei_cluster_type.tsv.zip
+latest,25,Single nuclei brain - RNA expression - cluster types,https://v25.proteinatlas.org/download/tsv/rna_single_nuclei_cluster_type.tsv.zip
+latest,25,Immune cell - RNA expression (HPA) - RNAseq 19 cells,https://v25.proteinatlas.org/download/tsv/rna_immune_cell.tsv.zip
+latest,25,Immune cell - RNA expression (HPA) - RNAseq 18 cells,https://v25.proteinatlas.org/download/tsv/rna_immune_cell.tsv.zip
+latest,25,Immune cell - RNA expression (HPA) - RNAseq 109 samples,https://v25.proteinatlas.org/download/tsv/rna_immune_cell_sample.tsv.zip
+latest,25,Immune cell - RNA expression (HPA) - transcript level 109 samples,https://v25.proteinatlas.org/download/tsv/transcript_rna_immunecells.tsv.zip
+latest,25,Immune cell - RNA expression (Monaco),https://v25.proteinatlas.org/download/tsv/rna_immune_cell_monaco.tsv.zip
+latest,25,Immune cell - RNA expression (Schmiedel),https://v25.proteinatlas.org/download/tsv/rna_immune_cell_schmiedel.tsv.zip
+latest,25,Subcellular - Protein location,https://v25.proteinatlas.org/download/tsv/subcellular_location.tsv.zip
+latest,25,Cancer - Prognostic data,https://v25.proteinatlas.org/download/tsv/cancer_prognostic_data.tsv.zip
+latest,25,Cancer - Protein expression (IHC),https://v25.proteinatlas.org/download/tsv/cancer_data.tsv.zip
+latest,25,Cancer - Protein expression (CPTAC MS),https://v25.proteinatlas.org/download/tsv/cancer_cptac.tsv.zip
+latest,25,Blood disease - Protein expression,https://v25.proteinatlas.org/download/tsv/blood_pea_disease_de.tsv.zip
+latest,25,Blood protein - Protein concentration - immunoassays,https://v25.proteinatlas.org/download/tsv/blood_immunoassay_concentration.tsv.zip
+latest,25,Blood protein - Protein concentration - mass spectrometry,https://v25.proteinatlas.org/download/tsv/blood_ms_concentration.tsv.zip
+latest,25,Cell line - RNA expression - cell lines,https://v25.proteinatlas.org/download/tsv/rna_celline.tsv.zip
+latest,25,Cell line - RNA expression - cell line groups,https://v25.proteinatlas.org/download/tsv/rna_cell_line_cancer.tsv.zip
+latest,25,Cell line - RNA expression - comparison,https://v25.proteinatlas.org/download/tsv/rna_cell_line_tcga_comparison.tsv.zip
+latest,25,Cell line - RNA expression - RNA cell line analysis,https://v25.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
+latest,25,Cell line - RNA expression - RNA gene clustering,https://v25.proteinatlas.org/download/tsv/cell_line_analysis_data.tsv.zip
+latest,25,Interaction - Protein-protein interaction,https://v25.proteinatlas.org/download/tsv/interaction_consensus.tsv.zip
