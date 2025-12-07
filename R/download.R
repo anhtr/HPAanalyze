@@ -63,127 +63,146 @@ hpaDownload <- function(downloadList = 'histology',
                         version = 'latest') {
     
     # Set a longer timeout for downloads
-    op <- options(timeout = 10000)
-    on.exit(options(op))  # Restore previous timeout when function exits
+    .set_download_timeout(10000)
     
-    # Helper function to replace shortcut names with full item list
-    replace_shortcut <- function(x, shortcut, with) {
-        x <- rep(x, 1 + (length(with) - 1)*(x == shortcut))  # expand shortcut if matched
-        x[x == shortcut] <- with  # replace shortcut with full names
-        return(x)
+    # If downloadList is NULL, return available table names for the version
+    if (is.null(downloadList)) {
+        table_names <- hpa_download_list %>%
+            filter(version == !!version) %>%
+            pull(table)
+        return(table_names)
     }
     
-    # Process the input download list to expand 'all' and 'histology' shortcuts
-    downloadListClean <- downloadList %>%
-        replace_shortcut('all', hpa_download_list$table) %>%
-        replace_shortcut('histology', 
-                         c('normal_tissue',
-                           'pathology', 
-                           'subcellular_location'))
+    # Expand download shortcuts
+    downloadListClean <- .expand_download_list(downloadList, hpa_download_list)
     
-    # Filter dataset metadata for the requested version and tables
-    downloadDatasets <-
-        hpa_download_list %>%
-        filter(version == {{version}}) %>%
-        filter(table %in% downloadListClean)
+    # Filter metadata for datasets to download
+    downloadDatasets <- .filter_metadata(hpa_download_list, downloadListClean, version)
     
-    # Initialize list to store loaded data
     loadedData <- list()
     
-    # Handle example or built-in datasets
+    # Example/built-in version returns example dataset
     if (version %in% c('example', 'built-in')) {
         message(
             'Only the followings are example/built-in datasets: \n - Normal tissue \n - Pathology \n - Subcellular location \nOther datasets will not be loaded'
         )
-        
-        # Load pre-packaged example data
         loadedData <- hpa_histology_data
-        
     } else {
-        # For other versions, download and read the datasets
+        # Download for each dataset link
         for (i in seq_along(downloadDatasets$link)) {
-            temp <- tempfile()  # Create a temporary file
-            download.file(url = downloadDatasets$link[[i]],
-                          destfile = temp)  # Download file
-            
-            # Extract and read the first file in the zip archive
-            loadedData[[i]] <- read.delim2(
-                unz(temp, unzip(temp, list = TRUE)$Name[1]),
-                stringsAsFactors = FALSE,
-                check.names = FALSE,
-                strip.white = TRUE,
-                sep = "\t",
-                na.strings = c("", " ")
-            )
-            
-            unlink(temp)  # Remove the temporary file
+            loadedData[[i]] <- .download_and_import_dataset(downloadDatasets$link[[i]])
         }
-        
-        # Convert all loaded data frames to tibbles
-        loadedData <- lapply(loadedData, as_tibble)
-        
-        # Assign proper names to each dataset in the list
+        loadedData <- .list_to_tibble(loadedData)
         names(loadedData) <- downloadDatasets$table
-        
-        # If the 'normal_tissue' dataset exists, rename and select key columns
-        if(!is.null(loadedData$normal_tissue)) {
-            loadedData$normal_tissue <- loadedData$normal_tissue %>%
-                select(
-                    ensembl = Gene,
-                    gene = `Gene name`,
-                    tissue = Tissue,
-                    cell_type = `Cell type`,
-                    level = Level,
-                    reliability = Reliability
-                )
-        }
-        
-        # If the 'pathology' dataset exists, rename and select key columns
-        if(!is.null(loadedData$pathology)) {
-            loadedData$pathology <- loadedData$pathology %>%
-                select(
-                    ensembl = Gene,
-                    gene = `Gene name`,
-                    cancer = Cancer,
-                    high = High,
-                    medium = Medium,
-                    low = Low,
-                    not_detected = `Not detected`
-                )
-        }
-        
-        # If the 'subcellular_location' dataset exists, rename and select key columns
-        if(!is.null(loadedData$subcellular_location)) {
-            loadedData$subcellular_location <- loadedData$subcellular_location %>%
-                select(
-                    ensembl = Gene,
-                    gene = `Gene name`,
-                    reliability = Reliability,
-                    main_location = `Main location`,
-                    additional_location = `Additional location`,
-                    extracellular_location = `Extracellular location`,
-                    enhanced = Enhanced,
-                    supported = Supported,
-                    approved = Approved,
-                    uncertain = Uncertain,
-                    single_cell_var_intensity = `Single-cell variation intensity`,
-                    single_cell_var_spatial = `Single-cell variation spatial`,
-                    cell_cycle_dependency = `Cell cycle dependency`,
-                    go_id = `GO id`
-                )
-        }
+        loadedData <- .clean_datasets(loadedData)
     }
     
-    # If downloadList = NULL, return available table names
-    if(is.null(downloadList)) {
-        loadedData <- hpa_download_list %>%
-            filter(version == {{version}}) %>%
-            pull(table)
-    }
-    
-    # Return the loaded data or available table names
     return(loadedData)
 }
+
+# Helper function to set timeout
+.set_download_timeout <- function(timeout = 10000) {
+    op <- options(timeout = timeout)
+    on.exit(options(op), add = TRUE)
+    invisible(op)
+}
+
+# Helper function to replace shortcut names with full item list
+.replace_shortcut <- function(x, shortcut, with) {
+    x <- rep(x, 1 + (length(with) - 1)*(x == shortcut))
+    x[x == shortcut] <- with
+    return(x)
+}
+
+# Helper to expand download list
+.expand_download_list <- function(downloadList, hpa_download_list) {
+    downloadList %>%
+        .replace_shortcut('all', hpa_download_list$table) %>%
+        .replace_shortcut('histology',
+                          c('normal_tissue',
+                            'pathology',
+                            'subcellular_location'))
+}
+
+# Helper function to filter dataset metadata for requested version and tables
+.filter_metadata <- function(hpa_download_list, downloadListClean, version) {
+    hpa_download_list %>%
+        filter(version == !!version) %>%
+        filter(table %in% downloadListClean)
+}
+
+# Helper to download and import a single dataset from URL (zip)
+.download_and_import_dataset <- function(url) {
+    temp <- tempfile()
+    download.file(url = url, destfile = temp)
+    firstfile <- unzip(temp, list = TRUE)$Name[1]
+    dat <- read.delim2(
+        unz(temp, firstfile),
+        stringsAsFactors = FALSE,
+        check.names = FALSE,
+        strip.white = TRUE,
+        sep = "\t",
+        na.strings = c("", " ")
+    )
+    unlink(temp)
+    return(dat)
+}
+
+# Helper to convert all data frames in a list to tibbles
+.list_to_tibble <- function(data_list) {
+    lapply(data_list, as_tibble)
+}
+
+# Helper to assign or rename columns for datasets
+.clean_datasets <- function(loadedData) {
+    # For normal tissue
+    if (!is.null(loadedData$normal_tissue)) {
+        loadedData$normal_tissue <- loadedData$normal_tissue %>%
+            select(
+                ensembl = Gene,
+                gene = `Gene name`,
+                tissue = Tissue,
+                cell_type = `Cell type`,
+                level = Level,
+                reliability = Reliability
+            )
+    }
+    # For pathology
+    if (!is.null(loadedData$pathology)) {
+        loadedData$pathology <- loadedData$pathology %>%
+            select(
+                ensembl = Gene,
+                gene = `Gene name`,
+                cancer = Cancer,
+                high = High,
+                medium = Medium,
+                low = Low,
+                not_detected = `Not detected`
+            )
+    }
+    # For subcellular_location
+    if (!is.null(loadedData$subcellular_location)) {
+        loadedData$subcellular_location <- loadedData$subcellular_location %>%
+            select(
+                ensembl = Gene,
+                gene = `Gene name`,
+                reliability = Reliability,
+                main_location = `Main location`,
+                additional_location = `Additional location`,
+                extracellular_location = `Extracellular location`,
+                enhanced = Enhanced,
+                supported = Supported,
+                approved = Approved,
+                uncertain = Uncertain,
+                single_cell_var_intensity = `Single-cell variation intensity`,
+                single_cell_var_spatial = `Single-cell variation spatial`,
+                cell_cycle_dependency = `Cell cycle dependency`,
+                go_id = `GO id`
+            )
+    }
+    loadedData
+}
+
 
 #################
 ## Subset data ##
