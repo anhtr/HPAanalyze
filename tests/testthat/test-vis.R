@@ -56,6 +56,31 @@ test_that("hpaVis with a single visType returns the matching hpaVis* output", {
     expect_s3_class(plot, "ggplot")
 })
 
+test_that("hpaVisTissue and hpaVisSubcell do not lock the panel to a fixed aspect ratio", {
+    # coord_equal()/coord_fixed() forces the panel's physical aspect ratio to
+    # match its data range, which can shrink the panel to a sliver and leave
+    # axis text looking oversized when the plot is embedded in a container
+    # whose shape doesn't match (e.g. one cell of hpaVis()'s gridExtra
+    # layout). Plain CoordCartesian lets the panel fill whatever space it is
+    # given instead.
+    tissuePlot <- suppressMessages(
+        hpaVisTissue(
+            data = hpa_histology_data,
+            targetGene = c("TP53", "EGFR"),
+            targetTissue = "Breast"
+        )
+    )
+    expect_false(inherits(tissuePlot$coordinates, "CoordFixed"))
+
+    subcellPlot <- suppressMessages(
+        hpaVisSubcell(
+            data = hpa_histology_data,
+            targetGene = c("TP53", "EGFR")
+        )
+    )
+    expect_false(inherits(subcellPlot$coordinates, "CoordFixed"))
+})
+
 test_that("customTheme=TRUE returns a barebone ggplot without the default theming", {
     plot <- suppressMessages(
         hpaVisTissue(

@@ -88,8 +88,7 @@ hpaVisTissue <- function(data = NULL,
             xlab('Genes') +
             theme_minimal() +
             theme(panel.grid = element_blank()) +
-            theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-            coord_equal()
+            theme(axis.text.x = element_text(angle = 90, hjust = 1))
     }
 
     return(plot)
@@ -306,8 +305,7 @@ hpaVisSubcell <- function(data = NULL,
             xlab('Genes') +
             theme_minimal() +
             theme(panel.grid = element_blank()) +
-            theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-            coord_equal()
+            theme(axis.text.x = element_text(angle = 45, hjust = 1))
     }
     
     return(plot)
