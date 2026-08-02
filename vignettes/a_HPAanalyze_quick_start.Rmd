@@ -50,7 +50,7 @@ The Human Protein Atlas project provides data via two main mechanisms: *Full dat
 
 Currently, this is available for the normal tissue, pathology (cancers) and subcellular location datasets. The fastest and easiest way is to use the defaults of `hpaVis`.
 
-```{r hpaVis_eg}
+```{r hpaVis_eg, fig.width=10, fig.height=8}
 hpaVis(targetGene = c("GCH1", "PTS", "SPR", "DHFR"),
        targetTissue = c("Cerebellum", "Cerebral cortex", "Hippocampus"),
        targetCancer = c("glioma"))
