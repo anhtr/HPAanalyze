@@ -1,5 +1,6 @@
 test_that("hpaDownload with downloadList=NULL lists available table names", {
-    tableNames <- hpaDownload(downloadList = NULL, version = "v25")
+    latestVersion <- paste0("v", max(hpa_download_list$version_number))
+    tableNames <- hpaDownload(downloadList = NULL, version = latestVersion)
     expect_type(tableNames, "character")
     expect_true(all(c("normal_tissue", "pathology", "subcellular_location") %in% tableNames))
 })
