@@ -64,7 +64,11 @@ test_that("hpaVisTissue and hpaVisSubcell render square tiles by default", {
             targetTissue = "Breast"
         )
     )
-    expect_s3_class(tissuePlot$coordinates, "CoordFixed")
+    # Check the public `ratio` argument coord_equal()/coord_fixed() is built
+    # from, rather than the internal S3 class name it currently produces -
+    # the latter isn't part of ggplot2's documented contract and has already
+    # changed across ggplot2 major versions.
+    expect_equal(tissuePlot$coordinates$ratio, 1)
 
     subcellPlot <- suppressMessages(
         hpaVisSubcell(
@@ -72,7 +76,7 @@ test_that("hpaVisTissue and hpaVisSubcell render square tiles by default", {
             targetGene = c("TP53", "EGFR")
         )
     )
-    expect_s3_class(subcellPlot$coordinates, "CoordFixed")
+    expect_equal(subcellPlot$coordinates$ratio, 1)
 })
 
 test_that("customTheme=TRUE returns a barebone ggplot without the default theming", {
