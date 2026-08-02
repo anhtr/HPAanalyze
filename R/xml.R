@@ -286,24 +286,3 @@ patient_nodes_to_tibble <- function(patientNodes) {
     
     return(result)
 }
-
-## Melt a list into a data frame =============================================
-# @importFrom tidyr spread unnest
-
-# list_to_df <- function(listfordf){
-#     
-#     df <- list(list.element = listfordf)
-#     class(df) <- c("tbl_df", "data.frame")
-#     attr(df, "row.names") <- .set_row_names(length(listfordf))
-#     
-#     if (!is.null(names(listfordf))) {
-#         df$name <- names(listfordf)
-#     }
-#     
-#     df <- df %>% 
-#         spread(key = 'name', value = 'list.element') %>% 
-#         unnest() %>% 
-#         unnest()
-#     
-#     return(df)
-# }

@@ -27,7 +27,6 @@ knitr::opts_chunk$set(
 ```
 
 ```{r library}
-library(BiocStyle)
 library(HPAanalyze)
 library(tibble)
 library(dplyr)
@@ -215,7 +214,7 @@ downloadedData <- hpaDownload('histology', 'example')
 
 `hpaVis` will plot all available plots by default. See the quick-start vignette for details.
 
-```{r hpaVis_eg}
+```{r hpaVis_eg, fig.width=10, fig.height=8}
 hpaVis(downloadedData,
        targetGene = c("GCH1", "PTS", "SPR", "DHFR"),
        targetTissue = c("Cerebellum", "Cerebral cortex", "Hippocampus"),

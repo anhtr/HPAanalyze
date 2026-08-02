@@ -272,35 +272,12 @@ hpaVisSubcell <- function(data = NULL,
     plotData <- data$subcellular_location %>%
         filter(gene %in% targetGene) %>%
         mutate(sub_location = NA)
-    
-    # if ("enhanced" %in% reliability)
-    #     plotData <- mutate(plotData,
-    #                        sub_location =  paste(sub_location, enhanced, sep = ";"))
-    # if ("supported" %in% reliability)
-    #     plotData <- mutate(plotData,
-    #                        sub_location =  paste(sub_location, supported, sep = ";"))
-    # if ("approved" %in% reliability)
-    #     plotData <- mutate(plotData,
-    #                        sub_location =  paste(sub_location, approved, sep = ";"))
-    # if ("uncertain" %in% reliability)
-    #     plotData <- mutate(plotData,
-    #                        sub_location =  paste(sub_location, uncertain, sep = ";"))
-    
+
     for (i in reliability) {
-        plotData <- mutate(plotData, 
+        plotData <- mutate(plotData,
                            sub_location = paste(sub_location, .data[[i]], sep = ";"))
     }
-    
-    # plotData <-  plotData %>%
-    #     mutate(sub_location=strsplit(sub_location, ';')) %>%
-    #     tidyr::unnest(sub_location) %>%
-    #     select(sub_location, gene) %>%
-    #     filter(sub_location != "NA") %>%
-    #     table() %>%
-    #     as_tibble() %>%
-    #     mutate(n=factor(n, levels=c('0', '1')))
-    
-    ## Use apply(as_tibble) %>% bind_rows instead of unnest
+
     plotData <-  plotData %>%
         mutate(sub_location = strsplit(sub_location, ';')) %>%
         apply(MARGIN = 1, FUN = as_tibble) %>% bind_rows() %>%
