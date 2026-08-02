@@ -15,16 +15,6 @@ named_vector_list_to_tibble <- function(x) {
     }
     
     # process tibble_x into final product
-    ## the old way used tidyr::spread
-    # tibble_x <- tibble_x %>%
-    #     # remove the NA row resulted from defining tibble_x
-    #     filter(!is.na(index)) %>%
-    #     # spead tibble_x into tidy format
-    #     spread(attr, value) %>%
-    #     # remove the index column
-    #     select(-index)
-    
-    ## the new way used stats::reshape
     tibble_x <- tibble_x %>%
         # remove the NA row resulted from defining tibble_x
         filter(!is.na(index)) %>%

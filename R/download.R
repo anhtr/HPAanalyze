@@ -416,7 +416,7 @@ hpaExport <- function(data, fileName, fileType = 'xlsx') {
     # If the user specifies CSV format
     if (fileType == 'csv') {
         # Loop through each dataset in the list
-        for (i in 1:length(data)) {
+        for (i in seq_along(data)) {
             # Save each dataset as a separate .csv file
             write.csv(data[[i]],
                       file = paste0(fileName, "_", names(data[i]), ".csv"))
@@ -426,7 +426,7 @@ hpaExport <- function(data, fileName, fileType = 'xlsx') {
     # If the user specifies TSV format
     if (fileType == 'tsv') {
         # Loop through each dataset in the list
-        for (i in 1:length(data)) {
+        for (i in seq_along(data)) {
             # Save each dataset as a separate .tsv file
             write.table(data[[i]],
                         file = paste0(fileName, "_", names(data[i]), ".tsv"),
