@@ -86,6 +86,9 @@ test_that("customTheme=TRUE returns a barebone ggplot without the default themin
     )
     expect_s3_class(plot, "ggplot")
     # the default (non-barebone) theme relabels the y axis to "Tissue / Cell";
-    # customTheme=TRUE should leave ggplot2's automatic label untouched
-    expect_equal(plot$labels$y, "tissue_cell")
+    # customTheme=TRUE should leave that relabeling off. (Not asserting the
+    # exact automatic label ggplot2 falls back to instead, since whether it's
+    # populated eagerly or only at build time is a ggplot2-version-dependent
+    # implementation detail, not something this package controls.)
+    expect_false(identical(plot$labels$y, "Tissue / Cell"))
 })
