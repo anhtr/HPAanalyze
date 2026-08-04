@@ -43,6 +43,20 @@ test_that("is_null_data passes through non-NULL data unchanged", {
     expect_identical(out, dummy)
 })
 
+test_that(".build_search_url constructs the expected url", {
+    expect_equal(
+        .build_search_url(search = "TP53", columns = c("g", "gs")),
+        "https://www.proteinatlas.org/api/search_download.php?search=TP53&format=tsv&columns=g,gs&compress=no"
+    )
+})
+
+test_that(".build_search_url url-encodes reserved characters in the search term", {
+    expect_equal(
+        .build_search_url(search = "protein_class:CD markers", columns = "g"),
+        "https://www.proteinatlas.org/api/search_download.php?search=protein_class%3ACD%20markers&format=tsv&columns=g&compress=no"
+    )
+})
+
 test_that("named_vector_list_to_tibble reshapes a list of named vectors", {
     x <- list(
         c(a = "1", b = "2"),
