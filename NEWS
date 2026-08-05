@@ -7,6 +7,8 @@
     + Add hpaXmlParse() to generically parse an entire imported xml document
       (based on the proteinatlas.xsd schema) into a flat, joinable list of
       tibbles, and a new vignette documenting it.
+    + Add a new vignette documenting hpaSearch(), and cover hpaSearch() and
+      hpaXmlParse() in the quick-start and in-depth vignettes.
     + Add testthat unit tests and clean up internal code.
     + Various BiocCheck and continuous integration fixes.
 
