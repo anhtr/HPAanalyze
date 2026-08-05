@@ -8,8 +8,7 @@ In Bioconductor:
 [![build](https://bioconductor.org/shields/build/release/bioc/HPAanalyze.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/HPAanalyze)
 [![rank](https://bioconductor.org/shields/downloads/release/HPAanalyze.svg)](https://bioconductor.org/packages/stats/bioc/HPAanalyze/)
 [![dependencies](https://bioconductor.org/shields/dependencies/release/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#since)
-[![in
-bioc](https://bioconductor.org/shields/years-in-bioc/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#since)
+[![in bioc](https://bioconductor.org/shields/years-in-bioc/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#since)
 
 -   **Background:** The Human Protein Atlas program aims to map human
     proteins via multiple technologies including imaging, proteomics and
