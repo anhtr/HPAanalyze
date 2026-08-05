@@ -1,4 +1,7 @@
                        Changes in version 1.31
+* Changes in version 1.31.2
+    + Update built-in data and internal gene name lookup table to HPA
+      version 25.1.
 * Changes in version 1.31.1
     + Add hpaSearch() to query the HPA search API.
     + Add hpaXmlParse() to generically parse an entire imported xml document
