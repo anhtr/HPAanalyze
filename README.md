@@ -1,15 +1,14 @@
 # HPAanalyze <img src="vignettes/figures/hex.png" align="right" height="200px"/>
 
-![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg)
-![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)
+[![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml)
+[![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml)
 
 In Bioconductor:
-![platform](https://bioconductor.org/shields/availability/release/HPAanalyze.svg)
-![build](https://bioconductor.org/shields/build/release/bioc/HPAanalyze.svg)
-![rank](https://bioconductor.org/shields/downloads/release/HPAanalyze.svg)
-![dependencies](https://bioconductor.org/shields/dependencies/release/HPAanalyze.svg)
-![in
-bioc](https://bioconductor.org/shields/years-in-bioc/HPAanalyze.svg)
+[![platform](https://bioconductor.org/shields/availability/release/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#archives)
+[![build](https://bioconductor.org/shields/build/release/bioc/HPAanalyze.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/HPAanalyze)
+[![rank](https://bioconductor.org/shields/downloads/release/HPAanalyze.svg)](https://bioconductor.org/packages/stats/bioc/HPAanalyze/)
+[![dependencies](https://bioconductor.org/shields/dependencies/release/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#since)
+[![in bioc](https://bioconductor.org/shields/years-in-bioc/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#since)
 
 -   **Background:** The Human Protein Atlas program aims to map human
     proteins via multiple technologies including imaging, proteomics and
@@ -130,6 +129,19 @@ sample including clinical data and IHC scoring.
 download relevant staining images, with the former function also gives
 the options to automate the downloading process.
 
+`hpaXmlParse()` complements the `hpaXml` family by generically parsing an
+entire imported XML document into a flat, joinable list of tibbles based on
+the full HPA XML schema, rather than extracting one specific piece of
+information at a time.
+
+### Searching HPA
+
+`hpaSearch()` queries the [HPA search
+API](https://www.proteinatlas.org/search) directly, letting users look up
+genes and retrieve arbitrary result columns (such as gene synonyms,
+Ensembl ids, or expression summaries) without first downloading a full
+dataset.
+
 # Availability and requirements
 
 -   Project name: HPAanalyze
@@ -149,7 +161,7 @@ Birmingham.
 
 # Copyright
 
-**Anh Tran, 2018-2025**
+**Anh Tran, 2018-2026**
 
 Please cite: **Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze:
 an R package that facilitates the retrieval and analysis of the Human

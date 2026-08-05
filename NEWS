@@ -1,8 +1,16 @@
-                       Changes in version 1.29
-* Changes in version 1.29.2
+                       Changes in version 1.31
+* Changes in version 1.31.2
+    + Update built-in data and internal gene name lookup table to HPA
+      version 25.1.
+* Changes in version 1.31.1
+    + Add hpaSearch() to query the HPA search API.
     + Add hpaXmlParse() to generically parse an entire imported xml document
       (based on the proteinatlas.xsd schema) into a flat, joinable list of
       tibbles, and a new vignette documenting it.
+    + Add testthat unit tests and clean up internal code.
+    + Various BiocCheck and continuous integration fixes.
+
+                       Changes in version 1.29
 * Changes in version 1.29.1
     + Update built-in data and internal gene name lookup table to v25.0
 

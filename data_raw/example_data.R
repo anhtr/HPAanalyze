@@ -1,7 +1,7 @@
 library(HPAanalyze)
 hpa_histology_data <- hpaDownload(downloadList = "histology")
 
-hpa_histology_data$metadata <- list(HPAversion = "25.0",
+hpa_histology_data$metadata <- list(HPAversion = "25.1",
                                     Ensemblversion = "109",
                                     date = Sys.time())
 
