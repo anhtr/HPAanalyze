@@ -45,6 +45,7 @@ calling every hpaXml function and put all results into a list.
 Other xml functions: 
 \code{\link{hpaXmlAntibody}()},
 \code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlParse}()},
 \code{\link{hpaXmlProtClass}()},
 \code{\link{hpaXmlTissueExpr}()},
 \code{\link{hpaXmlTissueExprSum}()}

@@ -36,6 +36,7 @@ are not one-to-one equivalents.
 Other xml functions: 
 \code{\link{hpaXml}()},
 \code{\link{hpaXmlAntibody}()},
+\code{\link{hpaXmlParse}()},
 \code{\link{hpaXmlProtClass}()},
 \code{\link{hpaXmlTissueExpr}()},
 \code{\link{hpaXmlTissueExprSum}()}
