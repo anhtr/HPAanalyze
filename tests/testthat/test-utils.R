@@ -43,6 +43,14 @@ test_that("is_null_data passes through non-NULL data unchanged", {
     expect_identical(out, dummy)
 })
 
+test_that(".normalize_columns splits, trims, and drops empty entries", {
+    expect_equal(.normalize_columns(c("g", "gs")), c("g", "gs"))
+    expect_equal(.normalize_columns("g,gs,eg"), c("g", "gs", "eg"))
+    expect_equal(.normalize_columns("g, gs , eg"), c("g", "gs", "eg"))
+    expect_equal(.normalize_columns("g,,gs"), c("g", "gs"))
+    expect_equal(.normalize_columns(""), character(0))
+})
+
 test_that(".build_search_url constructs the expected url", {
     expect_equal(
         .build_search_url(search = "TP53", columns = c("g", "gs")),

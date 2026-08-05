@@ -49,7 +49,7 @@ hpaSearch <- function(search,
                       columns = c('g', 'gs', 'eg'),
                       exact = FALSE) {
 
-    columns <- unlist(strsplit(columns, ","))
+    columns <- .normalize_columns(columns)
 
     if (exact && !("g" %in% columns)) {
         stop("exact = TRUE requires 'g' (gene name) to be included in columns.")
@@ -57,15 +57,18 @@ hpaSearch <- function(search,
 
     url <- .build_search_url(search = search, columns = columns)
 
+    .set_download_timeout(10000)
+
     temp <- tempfile(fileext = ".tsv")
+    on.exit(unlink(temp), add = TRUE)
     download.file(url = url, destfile = temp, mode = "wb")
     dat <- read.delim(
         temp,
         stringsAsFactors = FALSE,
         check.names = FALSE,
+        strip.white = TRUE,
         na.strings = c("", " ")
     )
-    unlink(temp)
 
     dat <- as_tibble(dat)
 

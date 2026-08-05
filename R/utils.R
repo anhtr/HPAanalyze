@@ -47,6 +47,14 @@ version_to_xml_url <- function(id, vers) {
     return(paste0('https://', vers, '.proteinatlas.org/', id, '.xml'))
 }
 
+## Normalize columns argument for the search API ================================
+
+.normalize_columns <- function(columns) {
+    columns <- unlist(strsplit(columns, ","))
+    columns <- trimws(columns)
+    columns[nzchar(columns)]
+}
+
 ## Generate url to query the HPA search API ====================================
 
 #' @importFrom utils URLencode
