@@ -47,6 +47,31 @@ version_to_xml_url <- function(id, vers) {
     return(paste0('https://', vers, '.proteinatlas.org/', id, '.xml'))
 }
 
+## Normalize columns argument for the search API ================================
+
+.normalize_columns <- function(columns) {
+    columns <- unlist(strsplit(columns, ","))
+    columns <- trimws(columns)
+    columns[nzchar(columns)]
+}
+
+## Generate url to query the HPA search API ====================================
+
+#' @importFrom utils URLencode
+
+.build_search_url <- function(search, columns) {
+    search_enc <- URLencode(search, reserved = TRUE)
+    columns_str <- paste(columns, collapse = ",")
+
+    paste0(
+        "https://www.proteinatlas.org/api/search_download.php?",
+        "search=", search_enc,
+        "&format=tsv",
+        "&columns=", columns_str,
+        "&compress=no"
+    )
+}
+
 ## Convert between ensembl id and gene name ===================================
 
 gene_ensembl_convert <- function(id, convert_to) {
