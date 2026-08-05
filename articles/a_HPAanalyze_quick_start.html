@@ -40,6 +40,7 @@
     <li><a class="dropdown-item" href="../articles/e_HPAanalyze_case_json.html">5. Tutorial: Export Human Protein Atlas (HPA) data as JSON</a></li>
     <li><a class="dropdown-item" href="../articles/f_HPAanalyze_case_images.html">6. Tutorial: Download histology images from the Human Protein Atlas</a></li>
     <li><a class="dropdown-item" href="../articles/g_HPAanalyze_case_relational_xml.html">7. Tutorial: Parse an entire HPA xml file into relational tibbles with hpaXmlParse()</a></li>
+    <li><a class="dropdown-item" href="../articles/h_HPAanalyze_case_search.html">8. Tutorial: Search the Human Protein Atlas from R with hpaSearch()</a></li>
     <li><a class="dropdown-item" href="../articles/z_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a></li>
   </ul>
 </li>
@@ -203,6 +204,28 @@ available.</p>
 <span><span class="co">#&gt;   ..$ cancer: chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...</span></span></code></pre>
 </div>
 <div class="section level2">
+<h2 id="search-hpa-for-genes-of-interest">Search HPA for genes of interest<a class="anchor" aria-label="anchor" href="#search-hpa-for-genes-of-interest"></a>
+</h2>
+<p>If you don’t already have a list of genes to visualize,
+<code><a href="../reference/hpaSearch.html">hpaSearch()</a></code> queries the <a href="https://www.proteinatlas.org/search" class="external-link">HPA search API</a> directly
+from R and returns the matches as a tibble – equivalent to searching on
+the website and downloading the resulting tsv file, but without leaving
+R.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hpaSearch.html">hpaSearch</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"TP53"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"g"</span>, <span class="st">"gs"</span>, <span class="st">"eg"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 1 x 3</span></span>
+<span><span class="co">#&gt;   Gene  `Gene synonym` Ensembl</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 TP53  LFS1, p53      ENSG00000141510</span></span></code></pre></div>
+<p><code>search</code> can also be an advanced field query (protein
+class, expression pattern, prognostic association, etc.), using the same
+syntax as the website’s “Fields &gt;&gt;” query builder. See the <a href="h_HPAanalyze_case_search.html">“Search the Human Protein Atlas
+with hpaSearch()”</a> vignette for a full tutorial, including how to
+feed the results straight into <code>hpaVis</code> and the
+<code>hpaXml</code> functions below.</p>
+</div>
+<div class="section level2">
 <h2 id="acquiring-individual-sample-data-from-the-human-protein-atlas">Acquiring individual sample data from the Human Protein Atlas<a class="anchor" aria-label="anchor" href="#acquiring-individual-sample-data-from-the-human-protein-atlas"></a>
 </h2>
 <p>HPA provide data in two different formats: the more convenient
@@ -216,7 +239,7 @@ this.</p>
 <p>The easiest way is to use the umbrella <code><a href="../reference/hpaXml.html">hpaXml()</a></code>
 function. Please note that at the moment this function only accept
 Ensembl gene id.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">EGFR</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXml.html">hpaXml</a></span><span class="op">(</span>inputXml<span class="op">=</span><span class="st">'ENSG00000146648'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">EGFR</span><span class="op">)</span></span>
 <span></span>
@@ -238,12 +261,22 @@ not support extraction of that data.</p>
 <p>To better understand the output, please read the documentation for
 other <code>hpaXml</code> functions, which was called under the hood by
 <code><a href="../reference/hpaXml.html">hpaXml()</a></code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">?</span><span class="va">hpaXmlGet</span> <span class="co"># import the xml file as "xml_document"</span></span>
 <span><span class="op">?</span><span class="va">hpaXmlProtClass</span></span>
 <span><span class="op">?</span><span class="va">hpaXmlTissueExprSum</span></span>
 <span><span class="op">?</span><span class="va">hpaXmlAntibody</span></span>
 <span><span class="op">?</span><span class="va">hpaXmlTissueExpr</span></span></code></pre></div>
+<p>The functions above each extract one specific, hand-picked piece of
+information. <code><a href="../reference/hpaXmlParse.html">hpaXmlParse()</a></code> instead generically parses the
+entire imported xml document into a flat list of joinable tibbles, so
+nothing gets left out even as HPA adds new sections to the schema. See
+the <a href="g_HPAanalyze_case_relational_xml.html">“Parse an entire HPA
+xml file into relational tibbles”</a> vignette for details.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">EGFRxml</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlGet.html">hpaXmlGet</a></span><span class="op">(</span><span class="st">'ENSG00000146648'</span><span class="op">)</span></span>
+<span><span class="va">EGFR_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hpaXmlParse.html">hpaXmlParse</a></span><span class="op">(</span><span class="va">EGFRxml</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">EGFR_all</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="copyright">Copyright<a class="anchor" aria-label="anchor" href="#copyright"></a>

@@ -146,6 +146,33 @@ hpaListParam()
     #>  $ pathology    :List of 1
     #>   ..$ cancer: chr [1:20] "breast cancer" "carcinoid" "cervical cancer" "colorectal cancer" ...
 
+## Search HPA for genes of interest
+
+If you don’t already have a list of genes to visualize,
+[`hpaSearch()`](https://anhtr.github.io/HPAanalyze/reference/hpaSearch.md)
+queries the [HPA search API](https://www.proteinatlas.org/search)
+directly from R and returns the matches as a tibble – equivalent to
+searching on the website and downloading the resulting tsv file, but
+without leaving R.
+
+``` r
+
+hpaSearch(search = "TP53", columns = c("g", "gs", "eg"))
+
+#> # A tibble: 1 x 3
+#>   Gene  `Gene synonym` Ensembl
+#>   <chr> <chr>          <chr>
+#> 1 TP53  LFS1, p53      ENSG00000141510
+```
+
+`search` can also be an advanced field query (protein class, expression
+pattern, prognostic association, etc.), using the same syntax as the
+website’s “Fields \>\>” query builder. See the [“Search the Human
+Protein Atlas with
+hpaSearch()”](https://anhtr.github.io/HPAanalyze/articles/h_HPAanalyze_case_search.md)
+vignette for a full tutorial, including how to feed the results straight
+into `hpaVis` and the `hpaXml` functions below.
+
 ## Acquiring individual sample data from the Human Protein Atlas
 
 HPA provide data in two different formats: the more convenient
@@ -195,6 +222,23 @@ To better understand the output, please read the documentation for other
 ?hpaXmlTissueExprSum
 ?hpaXmlAntibody
 ?hpaXmlTissueExpr
+```
+
+The functions above each extract one specific, hand-picked piece of
+information.
+[`hpaXmlParse()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlParse.md)
+instead generically parses the entire imported xml document into a flat
+list of joinable tibbles, so nothing gets left out even as HPA adds new
+sections to the schema. See the [“Parse an entire HPA xml file into
+relational
+tibbles”](https://anhtr.github.io/HPAanalyze/articles/g_HPAanalyze_case_relational_xml.md)
+vignette for details.
+
+``` r
+
+EGFRxml <- hpaXmlGet('ENSG00000146648')
+EGFR_all <- hpaXmlParse(EGFRxml)
+names(EGFR_all)
 ```
 
 ## Copyright

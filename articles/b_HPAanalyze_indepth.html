@@ -40,6 +40,7 @@
     <li><a class="dropdown-item" href="../articles/e_HPAanalyze_case_json.html">5. Tutorial: Export Human Protein Atlas (HPA) data as JSON</a></li>
     <li><a class="dropdown-item" href="../articles/f_HPAanalyze_case_images.html">6. Tutorial: Download histology images from the Human Protein Atlas</a></li>
     <li><a class="dropdown-item" href="../articles/g_HPAanalyze_case_relational_xml.html">7. Tutorial: Parse an entire HPA xml file into relational tibbles with hpaXmlParse()</a></li>
+    <li><a class="dropdown-item" href="../articles/h_HPAanalyze_case_search.html">8. Tutorial: Search the Human Protein Atlas from R with hpaSearch()</a></li>
     <li><a class="dropdown-item" href="../articles/z_HPAanalyze_paper_figures.html">99. Code for figures from HPAanalyze paper</a></li>
   </ul>
 </li>
@@ -662,6 +663,41 @@ file into relational tibbles”</a> vignette for details.</p>
 </div>
 </div>
 <div class="section level2">
+<h2 id="searching-hpa-data">Searching HPA data<a class="anchor" aria-label="anchor" href="#searching-hpa-data"></a>
+</h2>
+<p><code><a href="../reference/hpaSearch.html">hpaSearch()</a></code> queries the <a href="https://www.proteinatlas.org/search" class="external-link">HPA search API</a> directly
+from R, equivalent to searching at proteinatlas.org and downloading the
+resulting tsv file, but without leaving R. It’s a convenient way to find
+genes of interest – by name or by an advanced field query – before
+feeding them into the rest of <code>HPAanalyze</code>.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hpaSearch.html">hpaSearch</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"TP53"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"g"</span>, <span class="st">"gs"</span>, <span class="st">"eg"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 1 x 3</span></span>
+<span><span class="co">#&gt;   Gene  `Gene synonym` Ensembl</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 TP53  LFS1, p53      ENSG00000141510</span></span></code></pre></div>
+<p>By default, the HPA search itself always matches partial and related
+terms (e.g. searching <code>"TP53"</code> also returns
+<code>"TP53BP1"</code> and other related genes); set
+<code>exact = TRUE</code> to filter the result down to rows whose
+<code>Gene</code> column is an exact match. <code><a href="../reference/hpaSearch.html">hpaSearch()</a></code>
+also accepts the same advanced field query syntax used by the website’s
+“Fields &gt;&gt;” query builder:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hpaSearch.html">hpaSearch</a></span><span class="op">(</span></span>
+<span>  search <span class="op">=</span> <span class="st">"protein_class:CD markers AND normal_expression:Cerebral cortex;Any;Not detected,Low"</span>,</span>
+<span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"g"</span>, <span class="st">"gs"</span>, <span class="st">"eg"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>See <a href="https://www.proteinatlas.org/about/help/dataaccess" class="external-link uri">https://www.proteinatlas.org/about/help/dataaccess</a> for
+the full list of column codes and query syntax, the <a href="c_HPAanalyze_case_query.html">“Combine HPAanalyze with your HPA
+queries”</a> vignette for the equivalent manual/browser-based workflow,
+and the <a href="h_HPAanalyze_case_search.html">“Search the Human
+Protein Atlas with hpaSearch()”</a> vignette for a full tutorial,
+including how to feed the results straight into <code>hpaVis</code> and
+the <code>hpaXml</code> functions.</p>
+</div>
+<div class="section level2">
 <h2 id="compatibility-with-hpar-bioconductor-package">Compatibility with <code>hpar</code> Bioconductor package<a class="anchor" aria-label="anchor" href="#compatibility-with-hpar-bioconductor-package"></a>
 </h2>
 <table class="table">
@@ -718,6 +754,13 @@ functions</td>
 <td align="right">Histology image</td>
 <td align="left">View by loading browser page</td>
 <td align="left">Extract links via <code>hpaXml</code> functions</td>
+</tr>
+<tr class="odd">
+<td align="right">Search</td>
+<td align="left">N/A</td>
+<td align="left">Query the HPA search API via
+<code><a href="../reference/hpaSearch.html">hpaSearch()</a></code>
+</td>
 </tr>
 </tbody>
 </table>

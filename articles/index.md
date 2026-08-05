@@ -18,5 +18,7 @@
 - [7. Tutorial: Parse an entire HPA xml file into relational tibbles
   with
   hpaXmlParse()](https://anhtr.github.io/HPAanalyze/articles/g_HPAanalyze_case_relational_xml.md):
+- [8. Tutorial: Search the Human Protein Atlas from R with
+  hpaSearch()](https://anhtr.github.io/HPAanalyze/articles/h_HPAanalyze_case_search.md):
 - [99. Code for figures from HPAanalyze
   paper](https://anhtr.github.io/HPAanalyze/articles/z_HPAanalyze_paper_figures.md):

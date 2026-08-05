@@ -651,6 +651,51 @@ EGFR_all <- hpaXmlParse(EGFRxml)
 names(EGFR_all)
 ```
 
+## Searching HPA data
+
+[`hpaSearch()`](https://anhtr.github.io/HPAanalyze/reference/hpaSearch.md)
+queries the [HPA search API](https://www.proteinatlas.org/search)
+directly from R, equivalent to searching at proteinatlas.org and
+downloading the resulting tsv file, but without leaving R. It’s a
+convenient way to find genes of interest – by name or by an advanced
+field query – before feeding them into the rest of `HPAanalyze`.
+
+``` r
+
+hpaSearch(search = "TP53", columns = c("g", "gs", "eg"))
+
+#> # A tibble: 1 x 3
+#>   Gene  `Gene synonym` Ensembl
+#>   <chr> <chr>          <chr>
+#> 1 TP53  LFS1, p53      ENSG00000141510
+```
+
+By default, the HPA search itself always matches partial and related
+terms (e.g. searching `"TP53"` also returns `"TP53BP1"` and other
+related genes); set `exact = TRUE` to filter the result down to rows
+whose `Gene` column is an exact match.
+[`hpaSearch()`](https://anhtr.github.io/HPAanalyze/reference/hpaSearch.md)
+also accepts the same advanced field query syntax used by the website’s
+“Fields \>\>” query builder:
+
+``` r
+
+hpaSearch(
+  search = "protein_class:CD markers AND normal_expression:Cerebral cortex;Any;Not detected,Low",
+  columns = c("g", "gs", "eg")
+)
+```
+
+See <https://www.proteinatlas.org/about/help/dataaccess> for the full
+list of column codes and query syntax, the [“Combine HPAanalyze with
+your HPA
+queries”](https://anhtr.github.io/HPAanalyze/articles/c_HPAanalyze_case_query.md)
+vignette for the equivalent manual/browser-based workflow, and the
+[“Search the Human Protein Atlas with
+hpaSearch()”](https://anhtr.github.io/HPAanalyze/articles/h_HPAanalyze_case_search.md)
+vignette for a full tutorial, including how to feed the results straight
+into `hpaVis` and the `hpaXml` functions.
+
 ## Compatibility with `hpar` Bioconductor package
 
 | Functionality | hpar | HPAanalyze |
@@ -663,6 +708,7 @@ names(EGFR_all)
 | Visualization | N/A | Exploratory via `hpaVis` functions |
 | XML | N/A | Download and import via `hpaXml` functions |
 | Histology image | View by loading browser page | Extract links via `hpaXml` functions |
+| Search | N/A | Query the HPA search API via [`hpaSearch()`](https://anhtr.github.io/HPAanalyze/reference/hpaSearch.md) |
 
 (#tab:table) Complementary functionality between hpar and HPAanalyze
 {.table}
