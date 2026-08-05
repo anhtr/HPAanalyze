@@ -394,11 +394,13 @@ patient_nodes_to_tibble <- function(patientNodes) {
 # Recursively flatten one xml node into `tables`, a flat named list of
 # tibbles keyed by tag name (or "<parentTag>_<tag>" for leaf/property-style
 # repeated elements, since the same tag can mean different things under
-# different parents, e.g. tissueCell_level vs patient_level). Every table
-# gets a surrogate key column "<tag>_id"; every row also gets a foreign key
-# column "<parentTag>_id" pointing back at the row it came from, so the
-# resulting tables can be joined like a small relational database instead of
-# nested many levels deep.
+# different parents, e.g. tissueCell_level vs patient_level). Every row gets
+# a foreign key column "<parentTag>_id" pointing back at the row it came
+# from, so the resulting tables can be joined like a small relational
+# database instead of nested many levels deep. Entity tables additionally get
+# a surrogate key column "<tag>_id", since their own rows are referenced by
+# children further down; leaf/property tables are never referenced, so they
+# carry the parent's foreign key only.
 
 .xml_flatten_node <- function(node, tag, tables, counters,
                               fkCol = NULL, fkVal = NULL) {
@@ -482,25 +484,35 @@ patient_nodes_to_tibble <- function(patientNodes) {
 #' normalizes it into a flat, single-level named list of tibbles, similar to a
 #' small relational database extracted from the xml file.
 #'
-#' Every returned tibble has a surrogate key column named
-#' \code{"<name>_id"}, and every row also carries a foreign key column
-#' \code{"<parent>_id"} pointing back at the row (in another tibble) it
-#' belongs to. For example, rows in \code{result$tissueCell} carry a
-#' \code{data_id} that matches the \code{data_id} of their parent row in
-#' \code{result$data}, and \code{result$tissueCell_level} rows carry a
-#' \code{tissueCell_id} pointing back at \code{result$tissueCell}. Since some
-#' xml tags are reused with different meaning under different parents (for
-#' example \code{level} means staining intensity under \code{tissueCell} but
-#' RNA abundance under \code{data}), such leaf/property-style elements are
-#' named \code{"<parent>_<tag>"} (e.g. \code{tissueCell_level},
-#' \code{patient_location}); bigger nested entities (\code{image},
-#' \code{data}, \code{patient}, \code{antibody}, ...) keep their plain tag
-#' name since they represent the same kind of record wherever they occur, and
-#' are already disambiguated by their own foreign key columns. Regardless of
-#' tag name, an element's own text content (if any) is always held in a
-#' column literally named \code{"value"} (xml attributes keep their own
-#' names as columns), so e.g. \code{result$tissueCell_cellType$value} holds
-#' the cell type name.
+#' Every row, except the single top-level \code{result$entry} row, carries a
+#' foreign key column named \code{"<parent>_id"} pointing back at the row (in
+#' another tibble) it belongs to. For example, rows in
+#' \code{result$tissueCell} carry a \code{data_id} that matches the
+#' \code{data_id} of their parent row in \code{result$data}, and
+#' \code{result$tissueCell_level} rows carry a \code{tissueCell_id} pointing
+#' back at \code{result$tissueCell}.
+#'
+#' Two kinds of tibble are produced. Tibbles for nested entities
+#' (\code{entry}, \code{data}, \code{patient}, \code{image},
+#' \code{antibody}, ...) keep their plain tag name, since they represent the
+#' same kind of record wherever they occur, and additionally have a surrogate
+#' key column named \code{"<name>_id"} that their own children point at.
+#' Tibbles for leaf/property-style elements are instead named
+#' \code{"<parent>_<tag>"} (e.g. \code{tissueCell_level},
+#' \code{patient_location}), because some xml tags are reused with different
+#' meaning under different parents (for example \code{level} means staining
+#' intensity under \code{tissueCell} but RNA abundance under \code{data});
+#' nothing refers back to their rows, so they carry the parent's foreign key
+#' only and have no surrogate key of their own.
+#'
+#' In a leaf/property tibble, the element's own text content is held in a
+#' column literally named \code{"value"} and its xml attributes keep their
+#' own names as columns, so e.g. \code{result$tissueCell_cellType$value}
+#' holds the cell type name. A leaf element that the schema guarantees can
+#' never repeat gets no tibble at all and is merged into its parent's row
+#' instead: its text content becomes a column named after the tag (e.g.
+#' \code{result$entry$name}, \code{result$data$tissue}) and any attributes
+#' become columns named \code{"<tag>_<attribute>"}.
 #'
 #' Because the function is driven entirely by the xml structure itself
 #' (whether an xml tag is, per the schema, allowed to occur more than once)

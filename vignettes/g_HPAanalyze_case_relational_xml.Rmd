@@ -91,9 +91,10 @@ CCNB1$entry
 
 Unlike a straight translation of the xml tree into nested R lists (which, for this schema, would mean digging 6-7 levels deep to reach a single value), `hpaXmlParse()` normalizes everything into a **flat, single-level list of tibbles** -- similar to a small relational database extracted from the xml file:
 
-* Every tibble has a surrogate key column named `"<name>_id"`.
-* Every row also carries a foreign key column `"<parent>_id"` pointing back at the row (in another tibble) it belongs to.
-* An element's own text content, when present, is always held in a column literally named `value` (its xml attributes keep their own names as columns).
+* Every row, except the single top-level `entry` row, carries a foreign key column `"<parent>_id"` pointing back at the row (in another tibble) it belongs to.
+* Tibbles for nested entities (`entry`, `data`, `patient`, `image`, `antibody`, ...) additionally have a surrogate key column `"<name>_id"`, which is what their own children point at. Tibbles for leaf/property elements (`tissueCell_level`, `patient_location`, ...) are never referenced by anything, so they carry the parent's foreign key only.
+* In a leaf/property tibble, the element's text content sits in a column literally named `value`, and its xml attributes keep their own names as columns.
+* A leaf element that the schema guarantees can never repeat gets no tibble of its own: it is merged into its parent's row, with its text content in a column named after the tag (that's why `CCNB1$entry` has a `name` column rather than a separate `entry_name` table) and any attributes in columns named `"<tag>_<attribute>"`.
 
 For example, `CCNB1$tissueCell` rows carry a `data_id` that matches the `data_id` of their parent row in `CCNB1$data`, and `CCNB1$tissueCell_level` rows carry a `tissueCell_id` pointing back at `CCNB1$tissueCell`:
 
