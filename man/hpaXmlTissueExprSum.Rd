@@ -35,6 +35,7 @@ Other xml functions:
 \code{\link{hpaXml}()},
 \code{\link{hpaXmlAntibody}()},
 \code{\link{hpaXmlGet}()},
+\code{\link{hpaXmlParse}()},
 \code{\link{hpaXmlProtClass}()},
 \code{\link{hpaXmlTissueExpr}()}
 }

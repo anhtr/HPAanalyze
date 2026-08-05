@@ -411,6 +411,15 @@ tissueExpression[[1]]
 
 `hpaTissueExprSum` and `hpaTissueExpr` provide download links to download relevant staining images, with the former function also gives the options to automate the downloading process.
 
+### Parse everything with `hpaXmlParse()`
+
+The functions above each extract one specific, hand-picked piece of information. The xml files also contain other data these functions don't cover (RNA expression, protein structure predictions, single-cell type expression, and more, with new sections added by HPA on almost every release). `hpaXmlParse()` generically parses the entire imported xml document, based on the schema at <https://www.proteinatlas.org/download/proteinatlas.xsd>, into a flat list of joinable tibbles. See the ["Parse an entire HPA xml file into relational tibbles"](g_HPAanalyze_case_relational_xml.html) vignette for details.
+
+```{r XmlParse, eval=FALSE}
+EGFR_all <- hpaXmlParse(EGFRxml)
+names(EGFR_all)
+```
+
 ## Compatibility with `hpar` Bioconductor package
 
 Functionality| hpar                            | HPAanalyze 

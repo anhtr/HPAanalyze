@@ -65,6 +65,12 @@ hpaXmlAntibody(CCNB1xml)
 hpaXmlTissueExpr(CCNB1xml)
 ```
 
+If you want everything the xml file contains rather than one specific piece of information, use `hpaXmlParse()` instead -- see the ["Parse an entire HPA xml file into relational tibbles"](g_HPAanalyze_case_relational_xml.html) vignette.
+
+```{r}
+CCNB1_all <- hpaXmlParse(CCNB1xml)
+```
+
 ### Save your parsed objects
 
 It is recommended that you save your parsed objects for reproducibility. Unlike the `xml_document` object, these parsed objects are just regular R lists of standard vectors or data frames. You can save them just as usual.
