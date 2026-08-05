@@ -1,0 +1,16 @@
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
+articles:
+  a_HPAanalyze_quick_start: a_HPAanalyze_quick_start.html
+  b_HPAanalyze_indepth: b_HPAanalyze_indepth.html
+  c_HPAanalyze_case_query: c_HPAanalyze_case_query.html
+  d_HPAanalyze_case_offline_xml: d_HPAanalyze_case_offline_xml.html
+  e_HPAanalyze_case_json: e_HPAanalyze_case_json.html
+  f_HPAanalyze_case_images: f_HPAanalyze_case_images.html
+  g_HPAanalyze_case_relational_xml: g_HPAanalyze_case_relational_xml.html
+  z_HPAanalyze_paper_figures: z_HPAanalyze_paper_figures.html
+last_built: 2026-08-05T21:06Z
+urls:
+  reference: https://anhtr.github.io/HPAanalyze/reference
+  article: https://anhtr.github.io/HPAanalyze/articles

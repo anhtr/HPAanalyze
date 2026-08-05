@@ -1,0 +1,249 @@
+# HPAanalyze ![](articles/figures/hex.png)
+
+[![R-CMD-check](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anhtr/HPAanalyze/actions/workflows/R-CMD-check.yaml)
+[![BioCcheck](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml/badge.svg)](https://github.com/anhtr/HPAanalyze/actions/workflows/check-bioc.yml)
+
+In Bioconductor:
+[![platform](https://bioconductor.org/shields/availability/release/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#archives)
+[![build](https://bioconductor.org/shields/build/release/bioc/HPAanalyze.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/HPAanalyze)
+[![rank](https://bioconductor.org/shields/downloads/release/HPAanalyze.svg)](https://bioconductor.org/packages/stats/bioc/HPAanalyze/)
+[![dependencies](https://bioconductor.org/shields/dependencies/release/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#since)
+[![in
+bioc](https://bioconductor.org/shields/years-in-bioc/HPAanalyze.svg)](https://bioconductor.org/packages/release/bioc/html/HPAanalyze.html#since)
+
+- **Background:** The Human Protein Atlas program aims to map human
+  proteins via multiple technologies including imaging, proteomics and
+  transcriptomics.
+- **Results:** `HPAanalyze` is an R package for retreiving and
+  performing exploratory data analysis from HPA. It provides
+  functionality for importing data tables and xml files from HPA,
+  exporting and visualizing data, as well as download all staining
+  images of interest. The package is free, open source, and available
+  via Github.
+- **Conclusions:** `HPAanalyze` intergrates into the R workflow via the
+  `tidyverse` philosophy and data structures, and can be used in
+  combination with Bioconductor packages for easy analysis of HPA
+  data.  
+- **Citation:** Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze:
+  an R package that facilitates the retrieval and analysis of the Human
+  Protein Atlas data. BMC Bioinformatics 20, 463 (2019)
+  <https://doi.org/10.1186/s12859-019-3059-z>
+
+## Background
+
+The Human Protein Atlas (HPA) is a comprehensive resource for
+exploration of human proteome which contains a vast amount of proteomics
+and transcriptomics data generated from antibody-based tissue
+micro-array profiling and RNA deep-sequencing.
+
+The program has generated protein expression profiles in human normal
+tissues with cell type-specific expression patterns, cancer and cell
+lines via an innovative immunohistochemistry-based approach. These
+profiles are accompanied by a large collection of high quality
+histological staining images, annotated with clinical data and
+quantification. The database also includes classification of protein
+into both functional classes (such as transcription factors or kinases)
+and project-related classes (such as candidate genes for cancer).
+Starting from version 4.0, the HPA includes subcellular location
+profiles generated based on confocal images of immunofluorescent stained
+cells. Together, these data provide a detailed picture of protein
+expression in human cells and tissues, facilitating tissue-based
+diagnostis and research.
+
+Data from the HPA are freely available via proteinatlas.org, allowing
+scientists to access and incorporate the data into their research. Here,
+we introduce *HPAanalyze*, an R package aims to simplify exploratory
+data analysis from those data.
+
+## Overview
+
+*HPAanalyze* is designed to fullfill 3 main tasks: (1) Import,
+subsetting and export downloadable datasets; (2) Visualization of
+downloadable datasets for exploratory analysis; and (3) Working with the
+individual XML files. This package aims to serve researchers with little
+programming experience, but also allow power users to use the imported
+data as desired.
+
+### Obtaining *HPAanalyze*
+
+The stable version of *HPAanalyze* should be downloaded from
+Bioconductor:
+
+``` r
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("HPAanalyze")
+```
+
+The development version of *HPAanalyze* is available on Github can be
+installed with:
+
+``` r
+
+devtools::install_github("anhtr/HPAanalyze")
+```
+
+### Full dataset import, subsetting and export
+
+The
+[`hpaDownload()`](https://anhtr.github.io/HPAanalyze/reference/hpaDownload.md)
+function downloads full datasets from HPA and imports them into R as a
+list of tibbles, the standard object of *tidyverse*, which can
+subsequently be subset with
+[`hpaSubset()`](https://anhtr.github.io/HPAanalyze/reference/hpaListParam.md)
+and export into .xmlx files with
+[`hpaExport()`](https://anhtr.github.io/HPAanalyze/reference/hpaExport.md).
+The standard object allow the imported data to be further processed in a
+traditional R workflow. The ability to quickly subset and export data
+gives researchers the option to use other non-R downstream tools, such
+as GraphPad for creating publication-quality graphics, or share a subset
+of data containing only proteins of interest.
+
+### Visualization
+
+The `hpaVis` function family take the output of
+[`hpaDownload()`](https://anhtr.github.io/HPAanalyze/reference/hpaDownload.md)
+(or
+[`hpaSubset()`](https://anhtr.github.io/HPAanalyze/reference/hpaListParam.md))
+provides quick visualization of the data, with the intention of aiding
+exploratory analysis. Nevertheless, the standard `ggplot` object output
+of these functions give users the option to further customize the plots
+for publication. All `hpaVis` functions share the same syntax for
+arguments: subsetting, specifying colors and opting to use custom
+themes.
+
+The first release of the *HPAanalyze* package includes three functions:
+[`hpaVisTissue()`](https://anhtr.github.io/HPAanalyze/reference/hpaVisTissue.md)
+for the *normal tissue*,
+[`hpaVisPatho()`](https://anhtr.github.io/HPAanalyze/reference/hpaVisPatho.md)
+for the *pathology/cancer*, and
+[`hpaVisSubcell()`](https://anhtr.github.io/HPAanalyze/reference/hpaVisSubcell.md)
+for the *subcellular location* datasets.
+
+### Individual xml import and image downloading
+
+The `hpaXml` function family import and extract data from individual XML
+entries from HPA. The
+[`hpaXmlGet()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlGet.md)
+function downloads and imports data as “xml_document”/“xml_node” object,
+which can subsequently be processed by other `hpaXml` functions. The XML
+format from HPA contains a wealth of information that may not be covered
+by this package. However, users can extract any data of interest from
+the imported XML file using the xml2 package.
+
+In the first release, *HPAanalyze* includes four functions for data
+extraction from HPA XML files:
+[`hpaXmlProtClass()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlProtClass.md)
+for protein class information, `hpaTissueExprSum()` for summary of
+protein expression in tissue,
+[`hpaXmlAntibody()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlAntibody.md)
+for a list of antibody used to stain for the protein of interest, and
+`hpaTissueExpr()` for a detailed data from each sample including
+clinical data and IHC scoring.
+
+`hpaTissueExprSum` and `hpaTissueExpr` provide download links to
+download relevant staining images, with the former function also gives
+the options to automate the downloading process.
+
+[`hpaXmlParse()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlParse.md)
+complements the `hpaXml` family by generically parsing an entire
+imported XML document into a flat, joinable list of tibbles based on the
+full HPA XML schema, rather than extracting one specific piece of
+information at a time.
+
+### Searching HPA
+
+[`hpaSearch()`](https://anhtr.github.io/HPAanalyze/reference/hpaSearch.md)
+queries the [HPA search API](https://www.proteinatlas.org/search)
+directly, letting users look up genes and retrieve arbitrary result
+columns (such as gene synonyms, Ensembl ids, or expression summaries)
+without first downloading a full dataset.
+
+# Availability and requirements
+
+- Project name: HPAanalyze
+- Project home page: <https://github.com/anhtr/HPAanalyze>
+- Operating system(s): All platforms where R is available, including
+  Windows, Linux, OS X
+- Other requirements: R 3.5.0 or higher, and the R packages dplyr,
+  openxlsx, ggplot2, tibble, xml2, stats, utils, gridExtra
+- License: GPL-3
+
+# Acknowledgements
+
+We appreciate the support of the National institutes of Health National
+Cancer Institute R01 CA151522 and funds from the Department of Cell,
+Developmental and Integrative Biology at the University of Alabama at
+Birmingham.
+
+# Copyright
+
+**Anh Tran, 2018-2026**
+
+Please cite: **Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze:
+an R package that facilitates the retrieval and analysis of the Human
+Protein Atlas data. BMC Bioinformatics 20, 463 (2019)
+<https://doi.org/10.1186/s12859-019-3059-z>**
+
+# Package index
+
+## All functions
+
+- [`hpaDownload()`](https://anhtr.github.io/HPAanalyze/reference/hpaDownload.md)
+  : Download datasets
+- [`hpaExport()`](https://anhtr.github.io/HPAanalyze/reference/hpaExport.md)
+  : Export the subset data
+- [`hpaSubset()`](https://anhtr.github.io/HPAanalyze/reference/hpaListParam.md)
+  [`hpaListParam()`](https://anhtr.github.io/HPAanalyze/reference/hpaListParam.md)
+  : Subset downloaded data
+- [`hpaSearch()`](https://anhtr.github.io/HPAanalyze/reference/hpaSearch.md)
+  : Search the Human Protein Atlas
+- [`hpaVis()`](https://anhtr.github.io/HPAanalyze/reference/hpaVis.md) :
+  Visualize data in one function
+- [`hpaVisPatho()`](https://anhtr.github.io/HPAanalyze/reference/hpaVisPatho.md)
+  : Visualize pathology data
+- [`hpaVisSubcell()`](https://anhtr.github.io/HPAanalyze/reference/hpaVisSubcell.md)
+  : Visualize subcellular location data
+- [`hpaVisTissue()`](https://anhtr.github.io/HPAanalyze/reference/hpaVisTissue.md)
+  : Visualize tissue data
+- [`hpaXml()`](https://anhtr.github.io/HPAanalyze/reference/hpaXml.md) :
+  Extract details about an individual protein from XML file in one
+  function
+- [`hpaXmlAntibody()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlAntibody.md)
+  : Extract antibody information
+- [`hpaXmlGet()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlGet.md)
+  : Download and import xml file
+- [`hpaXmlParse()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlParse.md)
+  : Parse an entire imported xml document into a list of tibbles
+- [`hpaXmlProtClass()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlProtClass.md)
+  : Extract protein classes
+- [`hpaXmlTissueExpr()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlTissueExpr.md)
+  : Extract tissue expression details
+- [`hpaXmlTissueExprSum()`](https://anhtr.github.io/HPAanalyze/reference/hpaXmlTissueExprSum.md)
+  : Extract tissue expression and download images
+- [`hpa_histology_data`](https://anhtr.github.io/HPAanalyze/reference/hpa_histology_data.md)
+  : HPA histology dataset
+
+# Articles
+
+### All vignettes
+
+- [1. Quick-start guide: Acquire and visualize the Human Protein Atlas
+  (HPA) data in one function with
+  HPAanalyze](https://anhtr.github.io/HPAanalyze/articles/a_HPAanalyze_quick_start.md):
+- [2. In-depth: Working with Human Protein Atlas (HPA) data in R with
+  HPAanalyze](https://anhtr.github.io/HPAanalyze/articles/b_HPAanalyze_indepth.md):
+- [3. Tutorial: Combine HPAanalyze with your Human Protein Atlas (HPA)
+  queries](https://anhtr.github.io/HPAanalyze/articles/c_HPAanalyze_case_query.md):
+- [4. Tutorial: Working with Human Protein Atlas (HPA) xml files
+  offline](https://anhtr.github.io/HPAanalyze/articles/d_HPAanalyze_case_offline_xml.md):
+- [5. Tutorial: Export Human Protein Atlas (HPA) data as
+  JSON](https://anhtr.github.io/HPAanalyze/articles/e_HPAanalyze_case_json.md):
+- [6. Tutorial: Download histology images from the Human Protein
+  Atlas](https://anhtr.github.io/HPAanalyze/articles/f_HPAanalyze_case_images.md):
+- [7. Tutorial: Parse an entire HPA xml file into relational tibbles
+  with
+  hpaXmlParse()](https://anhtr.github.io/HPAanalyze/articles/g_HPAanalyze_case_relational_xml.md):
+- [99. Code for figures from HPAanalyze
+  paper](https://anhtr.github.io/HPAanalyze/articles/z_HPAanalyze_paper_figures.md):

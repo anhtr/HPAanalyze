@@ -1,0 +1,26 @@
+# Authors and Citation
+
+## Authors
+
+- **Anh Nhat Tran**. Author, maintainer.
+
+## Citation
+
+Source:
+[`inst/CITATION`](https://github.com/anhtr/HPAanalyze/blob/devel/inst/CITATION)
+
+Tran, A.N., Dussaq, A.M., Kennell, T. et al. HPAanalyze: an R package
+that facilitates the retrieval and analysis of the Human Protein Atlas
+data. BMC Bioinformatics 20, 463 (2019) doi:10.1186/s12859-019-3059-z
+
+    @Article{,
+      title = {HPAanalyze: an R package that facilitates the retrieval and analysis of the Human Protein Atlas data},
+      author = {Anh Nhat Tran and Alex M. Dussaq and Timothy {Kennell Jr} and Christopher D. Willey and Anita B. Hjelmeland},
+      organization = {University of Alabama at Birmingham},
+      address = {Birmingham, Alabama},
+      year = {2019},
+      doi = {10.1186/s12859-019-3059-z},
+      journal = {BMC Bioinformatics},
+      publisher = {Springer Nature},
+      abstract = {Background: The Human Protein Atlas program aims to map human proteins via multiple technologies including imaging, proteomics and transcriptomics. Access of the HPA data is mainly via web-based interface allowing view of individual proteins, which may not be optimal for data analysis of a gene set, or automatic retrieval of original images. Results: HPAanalyze is an R package for retrieving and performing exploratory data analysis from HPA. It provides functionality for importing data tables and xml files from HPA, exporting and visualizing data, as well as download all staining images of interest. The package is free, open source, and available via GitHub. Conclusions: HPAanalyze intergrates into the R workflow via the tidyverse philosophy and data structures, and can be used in combination with Bioconductor packages for easy analysis of HPA data.},
+    }
